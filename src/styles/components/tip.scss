@@ -1,0 +1,21 @@
+$tip-prefix-cls: "#{$css-prefix}tip";
+
+.#{$tip-prefix-cls} {
+  padding: 8px 16px;
+  border-radius: $border-radius-base;
+  margin: 20px 0;
+  code {
+    background-color: hsla(0, 0%, 100%, 0.7);
+    color: #445368;
+  }
+}
+
+.#{$tip-prefix-cls}--default {
+  background-color: #ecf8ff;
+  border-left: 5px solid $primary-color;
+}
+
+.#{$tip-prefix-cls}--warning {
+  background-color: #fff6f7;
+  border-left: 5px solid $danger-color;
+}
