@@ -3,27 +3,48 @@
     <nav>
       <p>基础组件</p>
       <ul>
-        <li><router-link to="/HelloWorld">HelloWorld</router-link></li>
-        <li><router-link to="/affix">Affix</router-link></li>
-        <li><router-link to="/backtop">Backtop</router-link></li>
+        <li>
+          <router-link to="/HelloWorld">HelloWorld</router-link>
+        </li>
+        <li>
+          <router-link to="/affix">Affix</router-link>
+        </li>
+        <li>
+          <router-link to="/anchor">Anchor</router-link>
+        </li>
+        <li>
+          <router-link to="/backtop">Backtop</router-link>
+        </li>
         <li>
           <router-link to="/breadcrumb">Breadcrumb</router-link>
         </li>
-        <li><router-link to="/chartsentrance">ChartsEntrance</router-link></li>
-        <li><router-link to="/hamburger">Hamburger</router-link></li>
-        <li><router-link to="/list">List</router-link></li>
+        <li>
+          <router-link to="/chartsentrance">ChartsEntrance</router-link>
+        </li>
+        <li>
+          <router-link to="/hamburger">Hamburger</router-link>
+        </li>
+        <li>
+          <router-link to="/list">List</router-link>
+        </li>
         <li>
           <router-link to="/multipleselection">MultipleSelection</router-link>
         </li>
         <li>
           <router-link to="/pagination">Pagination</router-link>
         </li>
-        <li><router-link to="/screenfull">Screenfull</router-link></li>
-        <li><router-link to="/svgicon">SvgIcon</router-link></li>
+        <li>
+          <router-link to="/screenfull">Screenfull</router-link>
+        </li>
+        <li>
+          <router-link to="/svgicon">SvgIcon</router-link>
+        </li>
         <li>
           <router-link to="/tabletreecolumn">TableTreeColumn</router-link>
         </li>
-        <li><router-link to="/tip">Tip</router-link></li>
+        <li>
+          <router-link to="/tip">Tip</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

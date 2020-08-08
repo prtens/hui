@@ -25,6 +25,7 @@ module.exports = {
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     semi: "off",
     quotes: "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "vue/no-use-v-if-with-v-for": "off"
   }
 };

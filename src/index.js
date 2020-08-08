@@ -1,4 +1,6 @@
 import Affix from "./components/affix";
+import Anchor from "./components/anchor";
+import AnchorLink from "./components/anchor-link";
 import BackTop from "./components/back-top";
 import Breadcrumb from "./components/breadcrumb";
 import ChartsEntrance from "./components/charts-entrance";
@@ -16,6 +18,8 @@ const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
 const components = [
   Affix,
+  Anchor,
+  AnchorLink,
   BackTop,
   Breadcrumb,
   ChartsEntrance,
