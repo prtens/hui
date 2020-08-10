@@ -11,6 +11,7 @@ import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
 import TableTreeColumn from "./components/table-tree-column";
+import TimeStepSelection from "./components/time-step-selection";
 import Tip from "./components/tip";
 import locale from "./locale/index";
 
@@ -32,6 +33,7 @@ const components = [
   Screenfull,
   SvgIcon,
   TableTreeColumn,
+  TimeStepSelection,
   Tip
 ];
 

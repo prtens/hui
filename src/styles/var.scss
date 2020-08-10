@@ -35,6 +35,16 @@ $padding-xs: 8px; // small items
 $border-color-base: #dcdee2; // outside
 $border-color-split: #e8eaec; // inside
 
+// Button
+$btn-height-base: 32px;
+$btn-height-large: 40px;
+$btn-height-small: 24px;
+
+$btn-primary: $primary-color;
+$btn-primary-color: #fff;
+
+$btn-duration: 0.25s;
+
 // Z-index
 $zindex-affix: 10;
 
@@ -56,3 +66,5 @@ $list-item-padding: $padding-sm 0;
 $list-item-meta-margin-bottom: $padding-md;
 $list-item-meta-avatar-margin-right: $padding-md;
 $list-item-meta-title-margin-bottom: $padding-sm;
+
+// time-step-selection

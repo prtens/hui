@@ -2,6 +2,6 @@
 echo ">>>>>> start push <<<<<<"
 echo " ====== 当前分支 ====== "
 
-branch = git branch
+branch= git branch
 
 echo $branch

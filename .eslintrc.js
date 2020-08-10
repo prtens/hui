@@ -26,6 +26,12 @@ module.exports = {
     semi: "off",
     quotes: "off",
     "space-before-function-paren": "off",
+    "no-unreachable": "off",
+    "one-var": "off",
+    indent: "off",
+    "no-redeclare": "off",
+    "no-unused-expressions": "off",
+    "no-sequences": "off",
     "vue/no-use-v-if-with-v-for": "off"
   }
 };

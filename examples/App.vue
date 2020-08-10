@@ -55,7 +55,7 @@
           <router-link to="/duration">时段折扣</router-link>
         </li>
         <li>
-          <router-link to="/hour">时段选择</router-link>
+          <router-link to="/timestepselection">时段选择</router-link>
         </li>
       </ul>
     </nav>

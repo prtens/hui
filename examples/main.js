@@ -78,6 +78,11 @@ const router = new VueRouter({
     {
       path: "/tip",
       component: resolve => require(["./routers/tip.vue"], resolve)
+    },
+    {
+      path: "/timestepselection",
+      component: resolve =>
+        require(["./routers/time-step-selection.vue"], resolve)
     }
   ]
 });
