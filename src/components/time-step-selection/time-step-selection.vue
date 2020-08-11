@@ -10,11 +10,10 @@
           <span>时间段</span>
           <a
             href="javascript:;"
-            class="btn"
+            class="btn btn-small"
             :class="item.selected ? 'btn-primary' : ''"
             @click="toggleAll({ pIndex: k })"
-            >{{ item.name }}</a
-          >
+          >{{ item.name }}</a>
         </li>
 
         <li
@@ -47,15 +46,21 @@
         </li>
 
         <li class="hn-time-setp-picker__item milestone">
-          <span class="line-select-not"
-            ><span class="line-top-number-not">24</span></span
-          >
+          <span class="line-select-not"><span class="line-top-number-not">24</span></span>
         </li>
       </ul>
     </div>
     <div class="hn-time-setp-picker__footer">
-      <a href="javascript:;" class="btn btn-primary" @click="add">保存为模板</a>
-      <a @click="clearAll" href="javascript:;" class="btn clear">清空</a>
+      <a
+        href="javascript:;"
+        class="btn btn-primary btn-small"
+        @click="add"
+      >保存为模板</a>
+      <a
+        @click="clearAll"
+        href="javascript:;"
+        class="btn btn-small clear"
+      >清空</a>
       <span class="fr reminder">蓝色为已选投放时段</span>
     </div>
   </div>
@@ -107,15 +112,15 @@ export default {
       var t = converse(this.tmp);
       var h = [12345, 67];
       var i = {};
-      t.forEach(function(r) {
-        (r.week + "").split("").forEach(function(e) {
-          i[e] = (r.times || []).map(function(r) {
+      t.forEach(function (r) {
+        (r.week + "").split("").forEach(function (e) {
+          i[e] = (r.times || []).map(function (r) {
             return r + "";
           });
         });
       });
 
-      var n = function() {
+      var n = function () {
         for (var r = [], e = 0; e < 24; e++) {
           r.push({
             index: e,
@@ -127,12 +132,12 @@ export default {
         return r;
       };
 
-      var o = h.map(function(r, e) {
+      var o = h.map(function (r, e) {
         r = (r + "").split("");
         var s = i[r[0]] || [];
         var t = n();
         return (
-          t.forEach(function(r) {
+          t.forEach(function (r) {
             r.selected = s.indexOf(r.index + "") > -1;
           }),
           {
@@ -148,7 +153,7 @@ export default {
     },
     sync(r) {
       return (
-        r.forEach(function(r) {
+        r.forEach(function (r) {
           for (var e = r.hours, s = !0, t = 0; t < e.length; t++) {
             var c = e[t],
               d = e[t - 1],
@@ -156,7 +161,7 @@ export default {
             (c.firstSelected = !1),
               (c.endSelected = !1),
               c.selected &&
-                (((d && !d.selected) || !d) && (c.firstSelected = !0),
+              (((d && !d.selected) || !d) && (c.firstSelected = !0),
                 ((a && !a.selected) || !a) && (c.endSelected = !0)),
               (s = s && c.selected);
           }
@@ -169,7 +174,7 @@ export default {
       var e = this.periods;
       var s = e[r.pIndex];
       var t = !s.selected;
-      s.hours.forEach(function(r) {
+      s.hours.forEach(function (r) {
         r.selected = t;
       });
 
@@ -185,14 +190,14 @@ export default {
       e.toggle(d, a, h);
       var i = t.parent(".hn-time-setp-picker__items").find("[data-hour]");
       return (
-        i.on("mouseenter.drag", function(r) {
+        i.on("mouseenter.drag", function (r) {
           r.preventDefault();
           var s = $(r.currentTarget);
           e.toggle(s.data("period"), s.data("hour"), h);
         }),
         $(document.body)
           .off("mouseup.drag")
-          .on("mouseup.drag", function(r) {
+          .on("mouseup.drag", function (r) {
             i.off("mouseenter.drag");
           }),
         r.preventDefault()
@@ -210,7 +215,7 @@ export default {
       var i = r.currentTarget.parentElement.querySelectorAll("[data-hour]");
       for (var s = 0; s < i.length; s++) {
         var aaa = i[s];
-        aaa.onmouseenter = function(r) {
+        aaa.onmouseenter = function (r) {
           console.log("进入");
           r.preventDefault();
           r.cancelBubble = false;
@@ -221,7 +226,7 @@ export default {
             h
           );
         };
-        aaa.onmouseup = function(r, that = aaa) {
+        aaa.onmouseup = function (r, that = aaa) {
           console.log("松开");
           // console.log(that.onmouseenter)
           r.preventDefault();
@@ -237,27 +242,27 @@ export default {
     },
     clearAll() {
       var e = this.periods;
-      e.forEach(function(r) {
-        r.hours.forEach(function(r) {
+      e.forEach(function (r) {
+        r.hours.forEach(function (r) {
           r.selected = !1;
         });
       });
       this.periods = this.sync(e);
     },
-    __l: function() {
+    __l: function () {
       var e = this.val();
       this.tmpPeriods = e;
     },
-    val: function() {
+    val: function () {
       var r = this.periods;
       var e = [];
       return (
-        r.forEach(function(r) {
+        r.forEach(function (r) {
           var s = [];
-          r.hours.forEach(function(r) {
+          r.hours.forEach(function (r) {
             r.selected && s.push(r.index);
           }),
-            r.weeks.forEach(function(r) {
+            r.weeks.forEach(function (r) {
               e.push({
                 week: r,
                 name: a[r],

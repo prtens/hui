@@ -1,6 +1,7 @@
 import Affix from "./components/affix";
 import Anchor from "./components/anchor";
 import AnchorLink from "./components/anchor-link";
+import AreaSelection from "./components/area-selection";
 import BackTop from "./components/back-top";
 import Breadcrumb from "./components/breadcrumb";
 import ChartsEntrance from "./components/charts-entrance";
@@ -11,6 +12,7 @@ import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
 import TableTreeColumn from "./components/table-tree-column";
+import TimeStepDiscount from "./components/time-step-discount";
 import TimeStepSelection from "./components/time-step-selection";
 import Tip from "./components/tip";
 import locale from "./locale/index";
@@ -21,6 +23,7 @@ const components = [
   Affix,
   Anchor,
   AnchorLink,
+  AreaSelection,
   BackTop,
   Breadcrumb,
   ChartsEntrance,
@@ -33,6 +36,7 @@ const components = [
   Screenfull,
   SvgIcon,
   TableTreeColumn,
+  TimeStepDiscount,
   TimeStepSelection,
   Tip
 ];

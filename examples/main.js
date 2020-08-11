@@ -14,6 +14,7 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(hui);
 Vue.use(Element, {
+  size: "small",
   locale: zhLang
 });
 
@@ -83,6 +84,15 @@ const router = new VueRouter({
       path: "/timestepselection",
       component: resolve =>
         require(["./routers/time-step-selection.vue"], resolve)
+    },
+    {
+      path: "/areaselection",
+      component: resolve => require(["./routers/area-selection.vue"], resolve)
+    },
+    {
+      path: "/timestepdiscount",
+      component: resolve =>
+        require(["./routers/time-step-discount.vue"], resolve)
     }
   ]
 });

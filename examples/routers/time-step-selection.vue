@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 60%">
     <time-step-selection :tmp.sync="tmp" />
   </div>
 </template>

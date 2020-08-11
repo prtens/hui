@@ -1,0 +1,46 @@
+$area-selection-prefix-cls: "#{$css-prefix}area-selection";
+
+.#{$area-selection-prefix-cls} {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #fafafa;
+  border-radius: $border-radius-base;
+  &__search {
+    margin-bottom: 10px;
+  }
+  &__content {
+    margin-bottom: 15px;
+    .check-all {
+      height: 42px;
+      line-height: 42px;
+    }
+    .by {
+      width: 25px;
+      line-height: 42px;
+      font-size: 14px;
+      color: #999;
+      font-weight: 700;
+      font-family: Tahoma;
+    }
+    .bm {
+      line-height: 42px;
+      .ah {
+        font-size: 12px;
+        font-weight: 700;
+        font-family: Tahoma;
+        color: #333;
+      }
+      .ae {
+        color: #5a5e66;
+      }
+      .feedsb-ae {
+        padding: 5px 0;
+        border-radius: 4px;
+        transition: all 0.25s;
+      }
+      .feedsb-af {
+        background-color: #eff2fb;
+      }
+    }
+  }
+}

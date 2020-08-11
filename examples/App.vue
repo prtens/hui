@@ -49,10 +49,10 @@
       <p>业务组件</p>
       <ul>
         <li>
-          <router-link to="/area">选择地域</router-link>
+          <router-link to="/areaselection">选择地域</router-link>
         </li>
         <li>
-          <router-link to="/duration">时段折扣</router-link>
+          <router-link to="/timestepdiscount">时段折扣</router-link>
         </li>
         <li>
           <router-link to="/timestepselection">时段选择</router-link>
