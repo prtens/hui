@@ -23,10 +23,6 @@ const router = new VueRouter({
   mode: "history",
   routes: [
     {
-      path: "/HelloWorld",
-      component: resolve => require(["./routers/HelloWorld.vue"], resolve)
-    },
-    {
       path: "/affix",
       component: resolve => require(["./routers/affix.vue"], resolve)
     },

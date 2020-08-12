@@ -4,58 +4,55 @@
       <p>基础组件</p>
       <ul>
         <li>
-          <router-link to="/HelloWorld">HelloWorld</router-link>
+          <router-link to="/affix">Affix 图钉</router-link>
         </li>
         <li>
-          <router-link to="/affix">Affix</router-link>
+          <router-link to="/anchor">Anchor 锚点</router-link>
         </li>
         <li>
-          <router-link to="/anchor">Anchor</router-link>
+          <router-link to="/backtop">Backtop 返回顶部</router-link>
         </li>
         <li>
-          <router-link to="/backtop">Backtop</router-link>
+          <router-link to="/breadcrumb">Breadcrumb 面包屑</router-link>
         </li>
         <li>
-          <router-link to="/breadcrumb">Breadcrumb</router-link>
+          <router-link to="/chartsentrance">ChartsEntrance 图标</router-link>
         </li>
         <li>
-          <router-link to="/chartsentrance">ChartsEntrance</router-link>
+          <router-link to="/hamburger">Hamburger 面包屑</router-link>
         </li>
         <li>
-          <router-link to="/hamburger">Hamburger</router-link>
+          <router-link to="/list">List 列表</router-link>
         </li>
         <li>
-          <router-link to="/list">List</router-link>
+          <router-link to="/multipleselection">MultipleSelection 选择器全选</router-link>
         </li>
         <li>
-          <router-link to="/multipleselection">MultipleSelection</router-link>
+          <router-link to="/pagination">Pagination 分页</router-link>
         </li>
         <li>
-          <router-link to="/pagination">Pagination</router-link>
+          <router-link to="/screenfull">Screenfull 全屏</router-link>
         </li>
         <li>
-          <router-link to="/screenfull">Screenfull</router-link>
+          <router-link to="/svgicon">SvgIcon 图片</router-link>
         </li>
         <li>
-          <router-link to="/svgicon">SvgIcon</router-link>
+          <router-link to="/tabletreecolumn">TableTreeColumn 表格树</router-link>
         </li>
         <li>
-          <router-link to="/tabletreecolumn">TableTreeColumn</router-link>
-        </li>
-        <li>
-          <router-link to="/tip">Tip</router-link>
+          <router-link to="/tip">Tip 小贴士</router-link>
         </li>
       </ul>
       <p>业务组件</p>
       <ul>
         <li>
-          <router-link to="/areaselection">选择地域</router-link>
+          <router-link to="/areaselection">area 选择地域</router-link>
         </li>
         <li>
-          <router-link to="/timestepdiscount">时段折扣</router-link>
+          <router-link to="/timestepdiscount">duration 时段折扣</router-link>
         </li>
         <li>
-          <router-link to="/timestepselection">时段选择</router-link>
+          <router-link to="/timestepselection">hour 时段选择</router-link>
         </li>
       </ul>
     </nav>
