@@ -7,7 +7,7 @@
         key: 'id',
         label: 'label'
       }"
-      @method="handleChange"
+      @on-change="handleChange"
     />
   </div>
 </template>

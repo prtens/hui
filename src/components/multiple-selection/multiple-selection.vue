@@ -119,7 +119,7 @@ export default {
       // 储存当前最后的结果 作为下次的老数据
       this.oldOptions[0] = this.values;
 
-      this.$emit("method", this.values);
+      this.$emit("on-change", this.values);
     }
   }
 };
