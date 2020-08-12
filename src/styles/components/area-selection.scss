@@ -1,46 +1,123 @@
 $area-selection-prefix-cls: "#{$css-prefix}area-selection";
 
+$area-height: 42px;
+
 .#{$area-selection-prefix-cls} {
-  margin-top: 20px;
-  padding: 16px;
-  background-color: #fafafa;
-  border-radius: $border-radius-base;
-  &__search {
-    margin-bottom: 10px;
+  .area-search-box {
+    display: block;
+    width: 300px;
+    margin-bottom: 12px;
   }
-  &__content {
-    margin-bottom: 15px;
-    .check-all {
-      height: 42px;
-      line-height: 42px;
+
+  .provinces {
+    .province {
+      position: relative;
+      float: left;
+      min-width: 16.6%;
+      height: $area-height;
+      .province-label {
+        position: absolute;
+        float: left;
+        min-width: 98px;
+        padding-right: 16px;
+        line-height: $area-height;
+        white-space: nowrap;
+        .name {
+          display: inline-block;
+          position: relative;
+          padding-right: 26px;
+          border-radius: 4px;
+          transition: all 0.25s;
+          &.highlight {
+            background-color: #dfe8ff;
+          }
+          .province-count {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 24px;
+            height: $area-height;
+            line-height: $area-height;
+            margin-top: 0 - $area-height / 2;
+            text-align: left;
+            font-size: 12px;
+            font-weight: bold;
+          }
+        }
+        .province-arrow {
+          position: absolute;
+          top: 0;
+          right: 4px;
+          width: 20px;
+          height: $area-height;
+          line-height: $area-height;
+          text-align: center;
+          font-size: 22px;
+          color: #ccc;
+          cursor: pointer;
+          transition: all 0.25s;
+          user-select: none;
+          &.province-expand {
+            right: 2px;
+            transform: rotate(180deg);
+          }
+        }
+      }
+      .cities {
+        position: absolute;
+        top: $area-height;
+        left: -72px;
+        z-index: 99;
+        width: 240px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #fff;
+        .city {
+          float: left;
+          width: 48%;
+          height: 32px;
+          margin-right: 2%;
+          line-height: 32px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
     }
-    .by {
+  }
+
+  .all {
+    height: $area-height;
+    line-height: $area-height;
+  }
+
+  .area {
+    position: relative;
+    padding-left: 25px;
+    .area-name {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 25px;
-      line-height: 42px;
+      height: 100%;
+      line-height: $area-height;
       font-size: 14px;
       color: #999;
-      font-weight: 700;
-      font-family: Tahoma;
+      font-weight: bold;
+      font-family: "Tahoma";
     }
-    .bm {
-      line-height: 42px;
-      .ah {
-        font-size: 12px;
-        font-weight: 700;
-        font-family: Tahoma;
-        color: #333;
-      }
-      .ae {
-        color: #5a5e66;
-      }
-      .feedsb-ae {
-        padding: 5px 0;
-        border-radius: 4px;
-        transition: all 0.25s;
-      }
-      .feedsb-af {
-        background-color: #eff2fb;
-      }
+  }
+
+  .area-half {
+    float: left;
+    width: 50%;
+    .province {
+      width: 33%;
+      min-width: calc(12 * 6 + 28px);
     }
+  }
+
+  .clearfix {
+    @include clearfix();
   }
 }

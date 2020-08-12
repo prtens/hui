@@ -1,229 +1,312 @@
 <template>
   <div
-    class="hn-time-step-discount"
     :style="{width: `${maxWidth}px`}"
+    class="duration-wrapper"
   >
-    <div class="feedsn-cP">
-      <!--移动弹窗-->
-      <div
-        v-show="hoverInfo.show"
-        :style="{top: `${hoverInfo.top}px`, left: `${hoverInfo.left}px`}"
-        class="feedsn-cR mx-shadow"
-      >
-        <div class="mb5">{{ hoverInfo.week }}</div>
-        <div class="mb5">
-          <strong>{{ hoverInfo.time }}</strong>
-        </div>
-        <div>
-          <strong>{{ hoverInfo.discount }}</strong>%折扣
-        </div>
-      </div>
-      <!--选中块-->
-      <div
-        v-show="maskInfo.show"
-        :style="{top: `${maskInfo.top}px`, left: `${maskInfo.left}px`, width: `${maskInfo.width}px`, height: `${maskInfo.height}px`}"
-        class="feedsn-cQ"
-      ></div>
-      <!--选中弹窗-->
-      <div
-        v-show="settingInfo.show"
-        :style="{top: `${settingInfo.top}px`, left: `${settingInfo.left}px`}"
-        class="feedsn-cS mx-shadow"
-      >
-        <div class="feedsn-cT">
-          <div class="mb10">
-            <span>{{ settingInfo.week }}</span>：<strong class="ml5">{{ settingInfo.time }}</strong>
-          </div>
-          <div class="mb5">
-            <el-radio-group
-              v-model="settingInfo.type"
-              @change="changeSettingType"
-            >
-              <el-row class="mb20">
-                <el-radio
-                  :label="1"
-                  style="margin-right: 5px"
-                >自定义:</el-radio>
-                <el-input-number
-                  controls-position="right"
-                  :min="30"
-                  :max="250"
-                  label="请输入内容"
-                  :disabled="settingInfo.disabled"
-                  v-model="settingInfo.discount"
-                >
-                </el-input-number>
-              </el-row>
-              <el-row class="mb20">
-                <el-radio :label="2">无折扣</el-radio>
-              </el-row>
-              <el-row class="mb20">
-                <el-radio :label="3">不投放</el-radio>
-              </el-row>
-            </el-radio-group>
-          </div>
-        </div>
-        <div class="feedsn-cU">
-          <el-button
-            type="primary"
-            @click="submitSetting"
-          >确定</el-button>
-          <el-button
-            type="primary"
-            plain
-            @click="cancelSetting"
-          >取消</el-button>
-        </div>
-      </div>
-
-      <!--时段块-->
-      <el-row
-        class="feedsn-cF"
-        :id="`${viewId}_duration`"
-        :style="{width: `${maxWidth}px`}"
-      >
-        <ul
-          class="feedsn-cG fl"
-          :style="{width: `${boxWidth * multiple}px`}"
-        >
-          <li
-            class="feedsn-cH"
-            :style="{height: `${headerHeight + 1}px`, lineHeight: `${headerHeight}px`}"
-          >星期</li>
-          <li
-            class="feedsn-cH"
-            :style="{height: `${boxHeight}px`, lineHeight: `${boxHeight}px`}"
-            v-for="(week, key) in weeks"
-            :key="key"
-          >{{ week }}
-          </li>
-        </ul>
-        <div
-          class="feedsn-cI fl"
-          :style="{width: `${boxWidth * rowNum - 2}px`}"
-        >
-          <ul class="feedsn-cJ">
-            <li
-              class="feedsn-cK"
-              :style="{width: `${boxWidth * (rowNum / 4) - 1.5}px`, height: `${headerHeight / 2}px`, lineHeight: `${headerHeight / 2}px`}"
-              v-for="(range, key) in ranges"
-              :key="key"
-            >{{ range }}
-            </li>
-          </ul>
-          <ul class="feedsn-cL">
-            <li
-              class="feedsn-cM"
-              :style="{width: `${boxWidth * multiple - 1.1}px`, height: `${headerHeight / 2}px`, lineHeight: `${headerHeight / 2}px`}"
-              v-for="(C, key) in 24"
-              :key="C"
-            >{{ key }}
-            </li>
-          </ul>
-          <ul class="feedsn-cN">
-            <li
-              :id="viewId"
-              class="feedsn-cO fl"
-              :style="{width: `${boxWidth - 1.1}px`, height: `${boxHeight}px`, backgroundColor: `${boxZone.bg}`}"
-              v-for="(boxZone, key) of boxZones"
-              :key="key"
-              @click="clickOutside(key)"
-              @mousedown="select($event, key)"
-              @mouseover="showTip(key)"
-              @mouseout="hideTip(key)"
-            ></li>
-          </ul>
-        </div>
-      </el-row>
-    </div>
-    <!--清空、重置 等提示信息-->
-    <el-row
-      :gutter="20"
-      class="reset-empty"
+    <!-- 鼠标hover提示浮层 -->
+    <div
+      v-show="hoverInfo.show"
+      :style="{top: `${hoverInfo.top}px`, left: `${hoverInfo.left}px`}"
+      class="discount-hover mx-shadow"
     >
-      <el-col :span="10">
+      <div>{{hoverInfo.week}}</div>
+      <div><strong>{{hoverInfo.time}}</strong></div>
+      <div><strong>{{ hoverInfo.discount }}</strong>%折扣</div>
+    </div>
+
+    <!-- 选择区域遮罩浮层 -->
+    <div
+      v-show="maskInfo.show"
+      :style="{top: `${maskInfo.top}px`, left: `${maskInfo.left}px`, height: `${maskInfo.height}px`, width: `${maskInfo.width}px`}"
+      class="discount-mask"
+    >
+    </div>
+
+    <!-- 选中区域设置浮层 -->
+    <div
+      v-if="settingInfo.show"
+      :style="{top: `${settingInfo.top}`, left: `${settingInfo.left}px`}"
+      class="discount-setting mx-shadow"
+    >
+      <div class="setting-content">
+        <div class="mb10">
+          <span>{{settingInfo.week}}</span>：
+          <strong class="ml5">{{settingInfo.time}}</strong>
+        </div>
+        <div class="mb10">
+          <el-radio-group v-model="settingInfo.type">
+            <div
+              class="mb10"
+              v-for="(sItem, key) of settingList"
+              :key="key"
+            >
+              <div v-if="(sItem.value === 1)">
+                <el-radio :label="+sItem.value">{{ sItem.text }}</el-radio>
+                <el-input
+                  class="w150"
+                  v-if="(settingInfo.type == sItem.value)"
+                  v-model="settingInfo.discount"
+                  placeholder="请输入折扣"
+                >
+                  <template slot="append">%</template>
+                </el-input>
+              </div>
+              <div v-else>
+                <el-radio :label="sItem.value">{{ sItem.text }}</el-radio>
+              </div>
+            </div>
+          </el-radio-group>
+        </div>
+
+      </div>
+      <div class="setting-footer">
         <el-button
           type="primary"
           plain
-          @click="clear"
-        >清空</el-button>
+          @click="submitSetting"
+        >确定</el-button>
         <el-button
           type="primary"
           plain
-          @click="reset"
-        >重置</el-button>
-      </el-col>
-      <el-col
-        :span="14"
-        class="notify"
+          @click="cancelSetting"
+        >取消</el-button>
+      </div>
+    </div>
+
+    <!-- 区域选择 -->
+    <div
+      class="duration clearfix"
+      :id="`${viewId}_duration`"
+      :style="{width: `${maxWidth}px`}"
+    >
+      <ul
+        class="week fl"
+        :style="{width: `${boxWidth * multiple}px`}"
       >
-        <span
-          class="ce"
-          style="background-color: rgba(97,199,242,0.7)"
-        ></span>
-        <span class="color-c">30-100%</span>
-        <span
-          class="ce"
-          style="background-color: rgba(77,166,255,0.7)"
-        ></span>
-        <span class="color-c">100-200%</span>
-        <span
-          class="ce"
-          style="background-color: rgba(134,115,230,0.7)"
-        ></span>
-        <span class="color-c">200-250%</span>
-        <i class="fa fa-bell-o"></i>
-        <span>可以拖拽鼠标选择投放时段</span>
-      </el-col>
-    </el-row>
+        <li
+          class="week-item"
+          :style="{height: `${headerHeight + 1}px`, lineHeight: `${headerHeight}px`}"
+        >星期</li>
+        <li
+          class="week-item"
+          :style="{height: `${boxHeight}px`, lineHeight: `${boxHeight}px`}"
+          v-for="(week, key) in weeks"
+          :key="key"
+        >{{ week }}</li>
+      </ul>
+      <div
+        class="content fl"
+        :style="{width: `${boxWidth*rowNum}px`}"
+      >
+        <ul class="range clearfix">
+          <li
+            class="range-item"
+            :style="{width: `${(boxWidth*(rowNum/4))}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
+            v-for="(range, key) in ranges"
+            :key="key"
+          >{{range}}</li>
+        </ul>
+        <ul class="time clearfix">
+          <li
+            class="time-item"
+            :style="{width: `${(boxWidth*multiple)}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
+            v-for="(C, i) in 24"
+            :key="C"
+          >{{i}}</li>
+        </ul>
+        <ul class="boxzone clearfix">
+          <li
+            class="box fl"
+            :style="{width: `${boxWidth}px`, height: `${boxHeight}px`, 'background-color': `${zone.bg}`}"
+            v-for="(zone, key) of boxZones"
+            :key="key"
+            @click="clickOutside(zone.index)"
+            @mousedown="select($event, key)"
+            @mouseover="showTip(key)"
+            @mouseout="hideTip(key)"
+          ></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt10 pb10 clearfix">
+      <el-button
+        type="primary"
+        plain
+        @click="clear"
+      >清空</el-button>
+      <el-button
+        type="primary"
+        plain
+        @click="reset"
+      >重置</el-button>
+
+      <span class="fr lh28 color-c">
+        <template v-for="(dot, key) of dots">
+          <span :key="key">
+            <span
+              class="circle"
+              :style="{'background-color': `${dot.value}`}"
+            ></span>
+            <span class="font-tahoma bold color-c mr15">{{dot.text}}</span>
+          </span>
+        </template>
+        <i class="mc-iconfont displacement-2">&#xe705;</i>
+        <span class="mr10">可以拖拽鼠标选择投放时段</span>
+      </span>
+
+    </div>
   </div>
 </template>
 
 <script type="text/babel">
-import { formatWeek, discountArray2Report, report2Array, getDuration } from '../../utils/discount'
+import $ from "jquery"
+import ColorMap from './colors';
+
+const Data = {
+  none: '0;0;0;0;0;0;0',
+  def: '00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100'
+}
 
 export default {
   name: "TimeStepDiscount",
   props: {
-    item: {
-      type: Object,
-      require: true
-    },
-    query: {
-      type: Object,
-      default() {
-        return {}
-      }
+    // 单个格子宽度
+    boxWidth: {
+      type: Number,
+      default: 32
     },
     viewId: {
       type: String,
-      default: 'hn-time-step-discount'
+      default: "time-step-discount"
     },
-    multiple: {
-      type: Number,
-      default: 1
+    half: {
+      type: Boolean,
+      default: false
     },
-    maxWidth: {
-      type: Number,
-      default: 850
+    selected: {
+      type: String,
+      default: ""
+    },
+    bizCode: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      wrapper: `${this.viewId}_duration`,
+      wrapper: "",
+      discountColorMap: {},
+      dots: [],
+      timeDiscount: "",
       weeks: ['一', '二', '三', '四', '五', '六', '日'],
       ranges: ['00:00 - 06:00', '06:00 - 12:00', '12:00 - 18:00', '18:00 - 24:00'],
-      rowNum: 0,
-      columnNum: 7,
-      headerHeight: 60,
-      boxWidth: 0,
-      boxHeight: 41,
-      boxLength: 0,
+      multiple: false, // 以一小时算一格还是半小时算一格 1半小时，2一小时
+      maxWidth: 0,
+      rowNum: 0, // 一行有多少个格子
+      columnNum: 0, // 一列有多少个格子
+      headerHeight: 60, // 头部内容高度（+border1）
+      boxHeight: 40, // 单个格子高度
+      boxLength: 0, // 格子总数
       boxZones: [],
+      valid: '', // 整体校验
+      // 选择区域遮罩浮层
+      maskInfo: {},
+      settingList: [],
+      // 选中区域设置浮层
+      settingInfo: {},
+      // 鼠标hover提示浮层
+      hoverInfo: {},
       hoverTimeout: 0,
-      hideTimeout: 0,
-      maskInfo: {
-        show: !1,
+      hideTimeout: 0
+    };
+  },
+  watch: {
+
+  },
+  mounted() {
+    this.init()
+
+    $(document.body).off('mousemove.duration');
+    $(document.body).off('mouseup.duration');
+    clearTimeout(this.hoverTimeout);
+    clearTimeout(this.hideTimeout);
+
+    this.render()
+  },
+  methods: {
+    init() {
+      let half = (/^true$/i).test(this.half),
+        timeDiscount = this.selected || Data.none,
+        gap = 24,
+        columnNum = 7, // 一列有多少个格子
+        multiple = half ? 2 : 1; // 倍数
+
+      let colorMap = ColorMap[this.bizCode] || ColorMap.def;
+      let discountColorMap = {};
+      for (let i = 0; i <= 250; i++) {
+        discountColorMap[i] = '#ffffff';
+        for (let k in colorMap) {
+          let range = k.substring(1, k.length - 1).split(',');
+          let rangeMin = range[0];
+          let rangeMax = range[1];
+          if (i >= rangeMin && i < rangeMax) {
+            discountColorMap[i] = colorMap[k];
+            break;
+          }
+        }
+      }
+
+      // 提示渐变点
+      this.dots = [{
+        text: '30-100%',
+        value: discountColorMap[65]
+      }, {
+        text: '100-200%',
+        value: discountColorMap[150]
+      }, {
+        text: '200-250%',
+        value: discountColorMap[225]
+      }]
+
+      // 支持的折扣设置选项
+      this.settingList = [
+        {
+          text: '自定义',
+          value: 1
+        },
+        {
+          text: '无折扣',
+          value: 2
+        }, {
+          text: '不投放',
+          value: 3
+        }
+      ]
+
+      // 单格宽度
+      let boxWidth = +this.boxWidth;
+      if (!boxWidth) {
+        boxWidth = half ? 18 : 32;
+      }
+      let maxWidth = boxWidth * (25 * multiple);
+      let rowNum = gap * multiple;
+      let boxLength = rowNum * columnNum;
+
+      this.discountColorMap = discountColorMap
+      this.timeDiscount = timeDiscount
+      this.weeks = ['一', '二', '三', '四', '五', '六', '日']
+      this.ranges = ['00:00 - 06:00', '06:00 - 12:00', '12:00 - 18:00', '18:00 - 24:00']
+      this.multiple = multiple // 以一小时算一格还是半小时算一格 1半小时，2一小时
+      this.maxWidth = maxWidth // 容器整体宽度
+      this.rowNum = rowNum // 一行有多少个格子
+      this.columnNum = columnNum // 一列有多少个格子
+      this.headerHeight = 60 // 头部内容高度（+border1）
+      this.boxWidth = boxWidth // 单个格子宽度
+      this.boxHeight = 40 // 单个格子高度
+      this.boxLength = boxLength // 格子总数
+      this.boxZones = this.getBoxzone(boxLength)
+      this.maskInfo = { // 选择区域遮罩浮层
+        show: false,
         left: 0,
         top: 0,
         width: 0,
@@ -233,333 +316,457 @@ export default {
         startColumn: 0,
         endColumn: 0,
         selectedZones: []
-      },
-      settingInfo: { show: !1, week: '', time: '', discount: '', type: 1, disabled: false },
-      hoverInfo: { show: !1, left: 0, top: 0, week: '', time: '', discount: '' },
-      template: {
-        closeShow: false,
+      }
+      this.settingInfo = { // 选中区域设置浮层
         show: false,
-        name: ''
+        week: '',
+        time: '',
+        discount: '',
+        type: this.settingList[0].value
       }
-    };
-  },
-  watch: {
-    item: {
-      handler(val, oldVal) {
-        this.initialCommon()
-        this.initial(val)
+      this.hoverInfo = { // 鼠标hover提示浮层
+        show: false,
+        left: 0,
+        top: 0,
+        week: '',
+        time: '',
+        discount: ''
       }
     },
-    boxZones: {
-      handler(val, oldVal) {
-        let e = val.map(function (e) {
-          return e.discount
-        })
-        let t = discountArray2Report(this.columnNum, this.rowNum, this.multiple, e)
-        this.$emit('transformPeriod', t)
-      },
-      deep: true
-    },
-    'template.name': {
-      handler(val, oldVal) {
-        this.$emit('changeTemplateName', {
-          name: val,
-          type: 'launchPeriod'
-        })
-      }
-    }
-  },
-  mounted() {
-    this.initialCommon()
-    this.initial(this.item)
-  },
-  methods: {
-    initialCommon() {
-      this.rowNum = 24 * this.multiple
-      this.boxWidth = this.maxWidth / (25 * this.multiple)
-      this.boxLength = 7 * this.rowNum
-
-      let t = []
-      for (let s = 0; s < this.boxLength; s++) {
-        t.push({ index: s, bg: 'rgba(97,199,242,0.4)', discount: 100 })
-      }
-      this.boxZones = t
-    },
-    initial(row) {
-      if (!row.id) {
-        if (this.query.campaignId === undefined) {
-          this.template = {
-            closeShow: true,
-            show: false,
-            name: ''
-          }
-        } else {
-          this.template = {
-            closeShow: true,
-            show: false,
-            name: ''
-          }
-        }
-      } else {
-        this.template = {
-          closeShow: false,
-          show: true,
-          name: row.name
-        }
+    render() {
+      let that = this
+      let { timeDiscount, boxLength } = that;
+      let array = that.report2Array(timeDiscount);
+      for (let i = 0; i < boxLength; i++) {
+        that.setBoxDiscount(i, array[i]);
       }
 
-      // 问题 第一次mounted 的时候  row 还没初始化完 会报错
-      if (row.model !== undefined && row.model.length !== 0) {
-        for (let e = this, t = row.model, s = e.boxLength, o = report2Array(this.rowNum, this.multiple, t), r = 0; r < s; r++) this.setBoxDiscount(r, o[r])
+      this.wrapper = $('#' + this.viewId + '_duration');
+    },
+    /**
+     * 提交格式转化为数组，半小时一格
+     * 00:00-24:00:100;
+     * 00:00-01:00:100,01:00-14:00:120,14:00-21:00:70,21:00-24:00:200;
+     * 00:00-24:00:100......
+     */
+    report2Array(report) {
+      let array = [];
+      let that = this;
+      let { rowNum, multiple } = that;
+
+      let arr = report.split(';'); // ;分隔天的内容
+      for (let i = 0, aLen = arr.length; i < aLen; i++) {
+        let list = arr[i].split(','); // ,分隔一天内时段的内容
+        for (let j = 0, lLen = list.length; j < lLen; j++) {
+          if (list[j] === '0') { // 该日下全部不投放
+            continue;
+          }
+          let darray = list[j].match(/(\d{2}):(\d{2})-(\d{2}):(\d{2}):(\d+)/);
+          // for (let t = 1; t <= 5; t++) {
+          //     darray[t] = parseInt(darray[t]);
+          // }
+          // 00:00-24:00:100
+          // 分解成['00:00-24:00:100', '00', '00', '24', '00', '100']
+          // i表示星期几，第几行
+          let start = parseInt(darray[1]) * multiple + rowNum * i;
+          if (darray[2] === '30') {
+            start++;
+          }
+          let end = parseInt(darray[3]) * multiple + rowNum * i;
+          if (darray[4] === '30') {
+            end++;
+          }
+
+          let discount = parseInt(darray[5]);
+
+          for (let index = start; index <= end - 1; index++) {
+            array[index] = discount;
+          }
+        }
+      }
+      return array;
+    },
+    /**
+     * 将时段设置成对应的折扣值及颜色
+     */
+    setBoxDiscount(index, discount) {
+      let that = this;
+      discount = parseInt(discount) || 0;
+
+      let { discountColorMap, boxZones } = that;
+
+      boxZones[index] = {
+        index: index,
+        bg: discountColorMap[discount],
+        discount: discount
       }
     },
+
+    /**
+     * 时段选择
+     */
+    select(downEvent) {
+      downEvent.preventDefault();
+
+      let that = this;
+      let { hoverInfo, settingInfo, maskInfo, boxWidth, multiple, headerHeight } = this;
+      hoverInfo.show = false;
+      settingInfo.show = false;
+
+      let wrapper = that.wrapper;
+      let { left: wrapperLeft, top: wrapperTop } = wrapper.offset();
+      let startX = downEvent.pageX - wrapperLeft;
+      let startY = downEvent.pageY - wrapperTop;
+
+      $(document.body).off('mousemove.duration')
+        .on('mousemove.duration', function (moveEvent) {
+          moveEvent.preventDefault();
+
+          let diffX = moveEvent.pageX - wrapperLeft;
+          let diffY = moveEvent.pageY - wrapperTop;
+          let endX = Math.min(diffX, wrapper.outerWidth());
+          let endY = Math.min(diffY, wrapper.outerHeight());
+
+          let left = Math.max(boxWidth * multiple, Math.min(startX, endX)),
+            top = Math.max(headerHeight, Math.min(startY, endY));
+          maskInfo.left = left
+          maskInfo.top = top + 1
+          maskInfo.width = Math.max(startX, endX) - left
+          maskInfo.height = Math.max(startY, endY) - top
+          maskInfo.show = true
+        });
+
+      $(document.body).off('mouseup.duration')
+        .on('mouseup.duration', function (upEvent) {
+          if (!maskInfo.show) {
+            return;
+          }
+
+          upEvent.preventDefault();
+          $(document.body).off('mousemove.duration');
+
+          that.selectEnd();
+          $(document.body).off('mouseup.duration');
+        });
+    },
+
+    selectEnd() {
+      let that = this;
+      let { maskInfo, headerHeight, boxHeight, boxWidth, multiple, columnNum, rowNum } = that;
+
+      // 从0开始
+      let row1 = parseInt((maskInfo.top - headerHeight) / boxHeight);
+      let row2 = parseInt((maskInfo.height + maskInfo.top - headerHeight) / boxHeight);
+      let column1 = parseInt((maskInfo.left - boxWidth * multiple) / boxWidth);
+      let column2 = parseInt((maskInfo.width + maskInfo.left - boxWidth * multiple) / boxWidth);
+      let startRow = Math.max(0, row1);
+      let endRow = Math.min(columnNum - 1, row2);
+      let startColumn = Math.max(0, column1);
+      let endColumn = Math.min(rowNum - 1, column2);
+
+      let selected = [];
+      for (let i = startRow; i <= endRow; i++) {
+        for (let j = startColumn; j <= endColumn; j++) {
+          selected.push(i * rowNum + j);
+        }
+      }
+
+      maskInfo.selectedZones = selected
+      maskInfo.startRow = startRow
+      maskInfo.endRow = endRow
+      maskInfo.startColumn = startColumn
+      maskInfo.endColumn = endColumn
+      maskInfo.left = boxWidth * multiple + startColumn * boxWidth
+      maskInfo.top = headerHeight + startRow * boxHeight + 1
+      maskInfo.width = (endColumn - startColumn + 1) * boxWidth
+      maskInfo.height = (endRow - startRow + 1) * boxHeight
+      maskInfo.show = true
+
+      that.showSetting();
+    },
+
+    /**
+     * 选中情况下点击其他区域隐藏选中区域
+     */
     clickOutside(index) {
-      let t = +index
-      let s = this.maskInfo
-      !s.show || (s.show && s.selectedZones.indexOf(t) > -1) || this.cancelSetting()
-    },
-    select(e) {
-      e.preventDefault()
-      const _this = this
-      let hoverInfo = _this.hoverInfo
-      let settingInfo = _this.settingInfo
-      let maskInfo = _this.maskInfo
-      let boxWidth = _this.boxWidth
-      let multiple = _this.multiple
-      let headerHeight = _this.headerHeight
-      let boxHeight = _this.boxHeight
-      let columnNum = _this.columnNum
-      let rowNum = _this.rowNum
-
-      hoverInfo.show = !1
-      settingInfo.show = !1
-      let el = document.getElementById(_this.wrapper)
-      let l = el.offsetLeft
-      let f = el.offsetTop
-      let u = e.layerX - l
-      let p = e.layerY - f
-
-      el.onmousemove = (e) => {
-        // 鼠标移动
-        e.preventDefault()
-        let s = e.layerX - l
-        let h = e.layerY - f
-        let g = Math.min(s, el.offsetWidth)
-        let m = Math.min(h, el.offsetHeight)
-        let b = Math.max(boxWidth * multiple, Math.min(u, g))
-        let v = Math.max(headerHeight, Math.min(p, m))
-
-        maskInfo.left = b
-        maskInfo.top = v + 1
-        maskInfo.width = Math.max(u, g) - b
-        maskInfo.height = Math.max(p, m) - v
-        maskInfo.show = !0
+      let that = this;
+      let { maskInfo } = that;
+      if (!maskInfo.show ||
+        (maskInfo.show && maskInfo.selectedZones.indexOf(index) > -1)) {
+        return;
       }
-      document.onmouseup = function (e, eThis = _this) {
-        // 松开鼠标
-        if (maskInfo.show) {
-          e.preventDefault()
 
-          let c = parseInt((maskInfo.top - headerHeight) / boxHeight)
-          let l = parseInt((maskInfo.height + maskInfo.top - headerHeight) / boxHeight)
-          let f = parseInt((maskInfo.left - boxWidth * multiple) / boxWidth)
-          let u = parseInt((maskInfo.width + maskInfo.left - boxWidth * multiple) / boxWidth)
-          let p = Math.max(0, c)
-          let h = Math.min(columnNum - 1, l)
-          let g = Math.max(0, f)
-          let m = Math.min(rowNum - 1, u)
+      event.preventDefault();
+      $(document.body).off('mousemove.duration');
+      $(document.body).off('mouseup.duration');
+      $(document.body).off('click.duration');
+      that.cancelSetting();
+    },
 
-          let b = []
-          for (let v = p; v <= h; v++) for (let x = g; x <= m; x++) b.push(v * rowNum + x)
-          maskInfo.selectedZones = b
-          maskInfo.startRow = p
-          maskInfo.endRow = h
-          maskInfo.startColumn = g
-          maskInfo.endColumn = m
-          maskInfo.left = boxWidth * multiple + g * boxWidth
-          maskInfo.top = headerHeight + p * boxHeight + 1 + p * 1
-          maskInfo.width = (m - g + 1) * boxWidth
-          maskInfo.height = (h - p + 1) * (boxHeight + 1)
-          maskInfo.show = !0
+    submitSetting() {
+      let that = this;
+      let { settingList, settingInfo, maskInfo } = that;
+      let discount = 0;
+      let valid = true;
 
-          // 选中弹窗 settingInfo
-          eThis.showSetting()
+      switch (+settingInfo.type) {
+        case 1: // 自定义
+          // valid = that.isValid();
+          discount = settingInfo.discount;
+          break;
+        case 2: // 无折扣
+          discount = 100;
+          break;
+        case 3: // 不投放
+          discount = 0;
+          break;
+      }
 
-          el.onmousemove = null
-          document.onmouseup = null
-        }
+      if (!valid) {
+        return;
+      }
+
+      settingInfo.show = false;
+      settingInfo.type = settingList[0].value;
+      maskInfo.show = false;
+
+      for (let i = 0; i < maskInfo.selectedZones.length; i++) {
+        that.setBoxDiscount(maskInfo.selectedZones[i], discount);
       }
     },
+
+    cancelSetting() {
+      let that = this;
+      let { settingList, settingInfo, maskInfo } = that;
+
+      maskInfo.show = false;
+      settingInfo.show = false;
+      settingInfo.type = settingList[0].value;
+      console.log(maskInfo)
+    },
+
     showSetting() {
-      let e = ''
-      let s = this.settingInfo
-      let o = this.maskInfo
-      let r = this.boxZones
-      let n = o.startRow
-      let i = o.endRow
-      if (n !== i) {
-        e = formatWeek(n) + ' - ' + formatWeek(i)
+      let that = this;
+      let { settingInfo, maskInfo, boxZones } = that;
+
+      let startweek = maskInfo.startRow + 1;
+      let endweek = maskInfo.endRow + 1;
+
+      let week;
+      if (startweek !== endweek) {
+        week = that.formatweek(startweek) + ' - ' + that.formatweek(endweek);
       } else {
-        e = formatWeek(n)
+        week = that.formatweek(startweek);
       }
-      s.week = e
-      s.time = getDuration(this.rowNum, this.multiple, o.startColumn, o.endColumn + 1, '%s - %s')
+      settingInfo.week = week;
+      settingInfo.time = that.getDuration(maskInfo.startColumn, maskInfo.endColumn + 1, '%s - %s');
 
-      let a
-      let d = o.selectedZones
-      let c = !0
-      for (let l = 0; l < d.length; l++) {
-        let f = r[d[l]].discount
-        if (!f || (a && f !== a)) {
-          c = !1
-          break
+      let selectedZones = maskInfo.selectedZones;
+      let lastDiscount;
+      let isSame = true;
+      for (let i = 0; i < selectedZones.length; i++) {
+        let index = selectedZones[i];
+        let tempDiscount = boxZones[index].discount;
+        if (!tempDiscount || (lastDiscount && tempDiscount !== lastDiscount)) {
+          isSame = false;
+          break;
         }
-        a = f
+        lastDiscount = tempDiscount;
+      }
+      settingInfo.discount = isSame ? lastDiscount : '';
+
+      let settingInfoWidth = 260;
+      let settingInfoHeight = 238;
+      let wrapperWdith = that.wrapper.outerWidth();
+      let wrapperHeight = that.wrapper.outerHeight();
+
+      let left = (maskInfo.left + maskInfo.width / 2);
+      if (left + settingInfoWidth > wrapperWdith) {
+        left -= settingInfoWidth;
+      }
+      let top = (maskInfo.top + maskInfo.height / 2);
+      if (top + settingInfoHeight > wrapperHeight + 100) {
+        top -= settingInfoHeight;
       }
 
-      s.discount = c ? a : ''
-      let u = document.getElementById(this.wrapper).offsetWidth
-      let p = document.getElementById(this.wrapper).offsetHeight
-      let h = o.left + o.width / 2
-      h + 260 > u && (h -= 260)
-      let g = o.top + o.height / 2
-      g + 238 > p + 100 && (g -= 238)
-      s.left = h
-      s.top = g
-      s.show = !0
-      s.type = 1
-      s.disabled = false
+      settingInfo.left = left
+      settingInfo.top = top
+      settingInfo.show = true
     },
+
+    /**
+     * 鼠标hover时段tip
+     */
     showTip(index) {
-      clearTimeout(this.hoverTimeout)
-      clearTimeout(this.hideTimeout)
-      if (!this.maskInfo.show && !this.settingInfo.show) {
-        this.hoverTimeout = setTimeout(() => {
-          let o = parseInt(index)
-          let r = this.boxWidth + (o % this.rowNum + 1) * this.boxWidth
-          let f = this.headerHeight + (parseInt(o / this.rowNum) + 1) * this.boxHeight
-          let u = formatWeek(parseInt(o / this.rowNum))
-          let p = getDuration(this.rowNum, this.multiple, o, o + 1, '%s - %s')
-          let h = this.boxZones[o].discount
-          this.hoverInfo = {
-            left: r,
-            top: f,
-            week: u,
-            time: p,
-            discount: h,
-            show: !0
-          }
-        }, 200)
+      let that = this;
+      clearTimeout(that.hoverTimeout);
+      clearTimeout(that.hideTimeout);
+      let { maskInfo, settingInfo, boxWidth, boxHeight, headerHeight, rowNum, hoverInfo, boxZones } = that;
+      if (maskInfo.show || settingInfo.show) {
+        return;
       }
+
+      that.hoverTimeout = setTimeout(() => {
+        index = parseInt(index);
+
+        let left = boxWidth + (index % rowNum + 1) * boxWidth;
+        let top = headerHeight + (parseInt(index / rowNum) + 1) * boxHeight;
+        let week = that.formatweek(parseInt(index / rowNum) + 1);
+        let time = that.getDuration(index, index + 1, '%s - %s');
+        let discount = boxZones[index].discount;
+
+        hoverInfo.left = left
+        hoverInfo.top = top
+        hoverInfo.week = week
+        hoverInfo.time = time
+        hoverInfo.discount = discount
+        hoverInfo.show = true
+      }, 200);
     },
-    hideTip(index) {
-      clearTimeout(this.hoverTimeout)
-      clearTimeout(this.hideTimeout)
-      this.hideTimeout = setTimeout(() => {
-        this.hoverInfo.show = !1
+
+    hideTip() {
+      let that = this;
+      clearTimeout(that.hoverTimeout);
+      clearTimeout(that.hideTimeout);
+      let { maskInfo, settingInfo, hoverInfo } = that;
+      if (maskInfo.show || settingInfo.show) {
+        return;
+      }
+
+      that.hideTimeout = setTimeout(() => {
+        hoverInfo.show = false;
       }, 200)
     },
-    clear() {
-      for (let t = this.boxLength, s = 0; s < t; s++) this.setBoxDiscount(s, 0)
-    },
+
+    /**
+     * 重置
+     */
     reset() {
-      for (let t = this.boxLength, s = 0; s < t; s++) this.setBoxDiscount(s, 100)
-    },
-    changeSettingType(val) {
-      let disable = false
-      if (val !== 1) {
-        disable = true
+      let that = this;
+      let boxLength = that.boxLength;
+      for (let i = 0; i < boxLength; i++) {
+        that.setBoxDiscount(i, 100);
       }
-      this.settingInfo.disabled = disable
     },
-    submitSetting() {
-      let t = this.settingInfo
-      let s = this.maskInfo
-      let o = 0
-      let r = !0
 
-      switch (+t.type) {
-        case 1:
-          r = true
-          o = t.discount
-          break
-        case 2:
-          o = 100
-          break
-        case 3:
-          o = 0
-      }
-      if (r) {
-        t.show = !1
-        t.type = 1
-        s.show = !1
-        s.show = !1
-        for (let n = 0; n < s.selectedZones.length; n++) this.setBoxDiscount(s.selectedZones[n], o)
+    /**
+     * 清空
+     */
+    clear() {
+      let that = this;
+      let boxLength = that.boxLength;
+      for (let i = 0; i < boxLength; i++) {
+        that.setBoxDiscount(i, 0);
       }
     },
-    cancelSetting() {
-      let t = this.settingInfo
-      let s = this.maskInfo
-      s.show = !1
-      t.show = !1
-      t.type = 1
-      t.disabled = false
-    },
-    setBoxDiscount(e, t) {
-      t = parseInt(t) || 0
-      let s = this.getColorMap()[t]
-      let o = this.boxZones
-      o[e].bg = s
-      o[e].discount = t
-    },
-    getColorMap() {
-      let t = {
-        '[0,1)': '#ffffff',
-        '[30,40)': 'rgba(97,199,242,0.05)',
-        '[40,50)': 'rgba(97,199,242,0.1)',
-        '[50,60)': 'rgba(97,199,242,0.15)',
-        '[60,70)': 'rgba(97,199,242,0.2)',
-        '[70,80)': 'rgba(97,199,242,0.25)',
-        '[80,90)': 'rgba(97,199,242,0.3)',
-        '[90,100)': 'rgba(97,199,242,0.35)',
-        '[100,101)': 'rgba(97,199,242,0.4)',
-        '[101,110)': 'rgba(77,166,255,0.15)',
-        '[110,120)': 'rgba(77,166,255,0.2)',
-        '[120,130)': 'rgba(77,166,255,0.25)',
-        '[130,140)': 'rgba(77,166,255,0.3)',
-        '[140,150)': 'rgba(77,166,255,0.35)',
-        '[150,160)': 'rgba(77,166,255,0.4)',
-        '[160,170)': 'rgba(77,166,255,0.45)',
-        '[170,180)': 'rgba(77,166,255,0.5)',
-        '[180,190)': 'rgba(77,166,255,0.55)',
-        '[190,200)': 'rgba(77,166,255,0.6)',
-        '[200,210)': 'rgba(134,115,230,0.3)',
-        '[210,220)': 'rgba(134,115,230,0.35)',
-        '[220,230)': 'rgba(134,115,230,0.4)',
-        '[230,240)': 'rgba(134,115,230,0.45)',
-        '[240,250)': 'rgba(134,115,230,0.5)',
-        '[250,251)': 'rgba(134,115,230,0.55)'
-      }
-      let s = []
 
-      for (let o = 0; o <= 250; o++) {
-        for (let r in t) {
-          let n = r.substring(1, r.length - 1).split(',')
-          let i = n[0]
-          let a = n[1]
-          if (o >= i && o < a) {
-            s[o] = t[r]
-            break
+    array2Report(array) {
+      let that = this;
+      let { columnNum, rowNum, multiple } = that;
+
+      let result = [];
+      for (let row = 0; row < columnNum; row++) {
+        result[row] = 0;
+        let rowDatas = [];
+        for (let column = 0; column < rowNum; column++) {
+          let index = row * rowNum + column;
+          let discount = array[index];
+          if (!discount) {
+            continue;
+          }
+
+          let last = rowDatas[rowDatas.length - 1];
+          if (last && last.discount === discount && last.end === column) {
+            last.end = column + 1;
           } else {
-            s[o] = '#ffffff'
+            rowDatas.push({
+              start: column,
+              end: column + 1,
+              discount: discount
+            })
           }
         }
+        let rowStrs = rowDatas.map(r => {
+          return that.getDuration(r.start, r.end) + ':' + r.discount;
+        })
+        if (rowStrs && rowStrs.length > 0) {
+          result[row] = rowStrs.join(',');
+        }
       }
-      return s
+      return result.join(';');
     },
-    handleConfirm() {
-      this.$emit('saveTemplate', 'launchPeriod')
+
+    val() {
+      let that = this;
+      let { boxZones } = that;
+      let discounts = boxZones.map(zone => {
+        return zone.discount;
+      })
+      return that.array2Report(discounts);
+    },
+
+    /**
+     * 包含校验
+     */
+    submit() {
+      let val = this.val();
+      if (val === Data.none) {
+        return {
+          ok: false
+        }
+      } else {
+        return {
+          ok: true,
+          val: val
+        }
+      }
+    },
+
+    formatweek(week) {
+      return '星期' + ['日', '一', '二', '三', '四', '五', '六'][week % 7];
+    },
+
+    getDuration(start, end, format) {
+      let rowNum = this.rowNum;
+      let startStr = this.getTimeFromNum(start);
+      let endStr = '';
+      if (end % rowNum === 0) {
+        endStr = '24:00';
+      } else {
+        endStr = this.getTimeFromNum(end);
+      }
+      let str = startStr + '-' + endStr;
+      if (format) {
+        str = format.replace('%s', startStr).replace('%s', endStr);
+      }
+      return str;
+    },
+
+    getTimeFromNum(num) {
+      let that = this;
+      let { rowNum, multiple } = that;
+      let h = Math.floor((num % rowNum) / multiple);
+      if ((h + '').length === 1) {
+        h = '0' + h;
+      }
+      let m = ((num % rowNum) % multiple === 1) ? '30' : '00';
+      return h + ':' + m;
+    },
+
+    getBoxzone(boxLength) {
+      let boxzone = []; // 可选择范围
+      for (let i = 0; i < boxLength; i++) {
+        boxzone.push({
+          index: i,
+          bg: '#ffffff',
+          discount: 0
+        })
+      };
+
+      return boxzone;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped></style>

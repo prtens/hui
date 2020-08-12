@@ -1,485 +1,404 @@
 <template>
-  <div
-    class="hn-area-selection"
-    :style="{width: `${maxWidth}px`}"
-  >
-    <el-row class="hn-area-selection__search">
-      <el-col :span="6">
-        <el-input
-          v-model.trim="searchName"
-          @input="handleSearchChange"
-          @keyup.13.native="handleKeyUp"
-          minlength="2"
-          maxlength="10"
-          prefix-icon="el-icon-search"
-          placeholder="省份/城市"
-        ></el-input>
-      </el-col>
-    </el-row>
+  <div class="hn-area-selection">
+    <div class="area-search-box">
+      <el-input
+        :placeholder="placeholder"
+        prefix-icon="el-icon-search"
+        v-model="searchName"
+        @keyup.13.native="search"
+      >
+      </el-input>
+    </div>
 
-    <!--常用地域-->
-    <el-row class="hn-area-selection__content">
-      <el-row class="check-all">
-        <el-checkbox
-          :indeterminate="commonArea.isIndeterminate"
-          v-model="commonArea.checkedAllBoolean"
-          @change="handleCheckedAllChange($event, 'commonArea')"
-        >全选 - 常用地域</el-checkbox>
-      </el-row>
-
-      <el-row :gutter="20">
-        <el-col
-          :span="12"
-          v-for="(mxArea, key) of mxAreas"
-          :key="key"
-        >
-          <el-checkbox-group v-model="commonArea.checkedCities">
-            <template v-for="(area, aKey) of mxArea">
-              <el-row :key="aKey">
-                <el-col
-                  class="by"
-                  :span="2"
-                >
-                  <span>{{ area.name }}</span>
-                </el-col>
-                <el-col :span="22">
-                  <el-checkbox
-                    class="bm"
-                    v-for="(provinces, pKey) in area.provinces"
-                    :label="provinces.id"
-                    :key="pKey"
-                    @change="handleCheckedProvinceChange(`${key+','+aKey+','+pKey}`, 'commonArea')"
-                  >
-                    <span
-                      class="feedsb-ae"
-                      :class="provinces.classShow ? 'feedsb-af' : ''"
-                    >{{ provinces.name }}</span>
-                    <template v-if="provinces.hasOwnProperty('cities')">
-                      <span
-                        class="ah"
-                        v-if="provinces.hasOwnProperty('checkedSum') && provinces.checkedSum > 0"
-                      >({{ provinces.checkedSum }})</span>
-                      <el-popover
-                        v-model="provinces.show"
-                        placement="right"
-                        width="300"
-                        trigger="click"
-                      >
-                        <el-checkbox
-                          style="line-height: 2.4"
-                          v-for="(city, cKey) in provinces.cities"
-                          :label="city.id"
-                          :key="cKey"
-                          @change="handleCheckedCityChange(`${key+','+aKey+','+pKey+','+cKey}`, city.id, 'commonArea')"
-                        >
-                          <span
-                            class="feedsb-ae"
-                            :class="city.classShow ? 'feedsb-af' : ''"
-                          >{{ city.name }}</span>
-                        </el-checkbox>
-                        <el-button
-                          class="ae"
-                          slot="reference"
-                          type="text"
-                        >
-                          <i class="el-icon-arrow-down"></i>
-                        </el-button>
-                      </el-popover>
-                    </template>
-                  </el-checkbox>
-                </el-col>
-              </el-row>
-            </template>
-          </el-checkbox-group>
-        </el-col>
-      </el-row>
-    </el-row>
-
-    <!--非常用地域-->
-    <el-row class="hn-area-selection__content">
-      <el-row class="check-all">
-        <el-checkbox
-          :indeterminate="otherArea.isIndeterminate"
-          v-model="otherArea.checkedAllBoolean"
-          @change="handleCheckedAllChange($event, 'otherArea')"
-        >全选 - 非常用地域</el-checkbox>
-      </el-row>
-
-      <el-row>
-        <el-checkbox-group v-model="otherArea.checkedCities">
+    <div
+      class="mb10"
+      v-for="(type, typeIndex) of types"
+      :key="typeIndex"
+    >
+      <div class="all">
+        <label class="cursor-pointer">
           <el-checkbox
-            v-for="(commonUse, key) in mxOtherAreas"
-            :label="commonUse.id"
-            :key="key"
-            @change="handleCheckedProvinceChange(key, 'otherArea')"
-          >
-            <span
-              class="feedsb-ae"
-              :class="commonUse.classShow ? 'feedsb-af' : ''"
-            >{{ commonUse.name }}</span>
-            <template v-if="commonUse.hasOwnProperty('cities')">
-              <span
-                class="ah"
-                v-if="commonUse.hasOwnProperty('checkedSum') && commonUse.checkedSum > 0"
-              >({{ commonUse.checkedSum }})</span>
-              <el-popover
-                v-model="commonUse.show"
-                placement="right"
-                width="300"
-                trigger="click"
-              >
-                <el-checkbox
-                  style="line-height: 2.4"
-                  v-for="(city, cKey) in commonUse.cities"
-                  :label="city.id"
-                  :key="cKey"
-                  @change="handleCheckedCityChange(`${key+','+cKey}`, city.id, 'otherArea')"
-                >
-                  <span
-                    class="feedsb-ae"
-                    :class="city.classShow ? 'feedsb-af' : ''"
-                  >{{ city.name }}</span>
-                </el-checkbox>
-                <el-button
-                  class="ae"
-                  slot="reference"
-                  type="text"
-                >
-                  <i class="el-icon-arrow-down"></i>
-                </el-button>
-              </el-popover>
-            </template>
-          </el-checkbox>
-        </el-checkbox-group>
-      </el-row>
-    </el-row>
+            v-model="type.checked"
+            @change="changeAll(typeIndex)"
+          ></el-checkbox>
+          <span class="ml5">全选 - {{type.name}}</span>
+        </label>
+      </div>
 
+      <div class="clearfix">
+        <div
+          :class="type.half ? 'area-half' : ''"
+          v-for="(group,groupIndex) of type.groups"
+          :key="groupIndex"
+        >
+          <div
+            v-for="(area,areaIndex) of group"
+            :key="areaIndex"
+          >
+            <div class="area">
+              <div
+                class="area-name"
+                v-if="area.name"
+              >{{area.name}}</div>
+              <div class="provinces clearfix">
+                <div
+                  class="province"
+                  v-for="(province,provinceIndex) of area.provinces"
+                  :key="provinceIndex"
+                  :style="{'min-width': (!type.half ? (100/lineNumber)*(province.lineNumberMulti || 1) : '' )}"
+                >
+                  <label class="province-label cursor-pointer clearfix">
+                    <el-checkbox
+                      v-model="province.checked"
+                      @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
+                    ></el-checkbox>
+                    <span :class="`name${province.highlight ? highlight : ''}`">{{province.name}}
+                      <span
+                        class="province-count"
+                        v-if="province.hasCity && (province.count > 0)"
+                      >
+                        ({{province.count}})</span>
+                    </span>
+                    <template v-if="province.hasCity">
+                      <i
+                        :class="`el-icon-arrow-down province-arrow ${province.hasCity && (province.id == showProvinceId) ? 'province-expand' : ''}`"
+                        @click="toggleCity({province:province.id})"
+                      ></i>
+                    </template>
+                  </label>
+                  <div
+                    :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
+                    class="cities mx-shadow clearfix"
+                  >
+                    <label
+                      class="city cursor-pointer"
+                      v-for="(city, cityIndex) of province.cities"
+                      :key="cityIndex"
+                    >
+                      <el-checkbox
+                        v-model="city.checked"
+                        @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
+                      ></el-checkbox>
+                      <span :class="`name ${city.highlight? 'highlight' : ''}`">{{city.name}}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/babel">
-import { MX_AREA as mxArea } from '../../utils/area'
+import { deepClone } from '../../utils/util'
+import * as Atds from './data'
 
 export default {
   name: "AreaSelection",
   props: {
-    maxWidth: {
-      type: Number,
-      default: 850
-    },
-    item: {
-      type: Object,
-      require: true
-    },
-    query: {
-      type: Object,
+    selected: {
+      type: Array,
       default() {
-        return {}
+        return [];
       }
+    },
+    // 是否可选城市
+    city: {
+      type: Boolean,
+      default: true
+    },
+    data: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    // 单行显示个数
+    lineNumber: {
+      type: Number,
+      default: 6
     }
   },
   data() {
     return {
-      mxAreas: [
-        mxArea['commonUse'].slice(0, 7),
-        mxArea['commonUse'].slice(7, 14)
-      ],
-      mxOtherAreas: mxArea['rarelyUse'],
-      checkedCity: {
-        commonArea: [],
-        otherArea: []
-      },
-      searchName: '',
-      commonArea: {
-        allIds: [],
-        isIndeterminate: false,
-        checkedAllBoolean: false,
-        checkedCities: []
-      },
-      otherArea: {
-        allIds: [],
-        isIndeterminate: false,
-        checkedAllBoolean: false,
-        checkedCities: []
-      },
-      template: {
-        closeShow: false,
-        show: false,
-        name: ''
-      }
+      types: [],
+      cityVisible: false,
+      placeholder: '',
+      showProvinceId: -1,
+      searchName: ''
     };
   },
-  watch: {
-    item: {
-      handler(val, oldVal) {
-        this.initialCommon()
-        this.initial(val)
-      }
-    },
-    'commonArea.checkedCities': {
-      handler(val, oldVal) {
-        this.checkedCity.commonArea = val
-        this.watchCheckedCities(val, 'commonArea')
-        this.areaCheckedFilter(val, 'commonArea')
-      }
-    },
-    'otherArea.checkedCities': {
-      handler(val, oldVal) {
-        this.checkedCity.otherArea = val
-        this.watchCheckedCities(val, 'otherArea')
-        this.areaCheckedFilter(val, 'otherArea')
-      }
-    },
-    checkedCity: {
-      handler(val, oldVal) {
-        this.$emit('transformPeriod', val)
-      },
-      deep: true
-    },
-    'template.name': {
-      handler(val, oldVal) {
-        this.$emit('changeTemplateName', {
-          name: val,
-          type: 'launchArea'
-        })
-      }
-    }
-  },
-  created() { },
+
   mounted() {
-    this.initialCommon()
-    this.initial(this.item)
+    this.init()
   },
   methods: {
-    initialCommon() {
-      let getIds = (array) => {
-        const res = []
-        array.forEach(items => {
-          res.push(items.id)
-          if (items.hasOwnProperty('cities')) {
-            items.cities.forEach((city) => {
-              res.push(city.id)
+    init() {
+      let that = this
+      let selected = (that.selected || []).map(id => {
+        return +id;
+      });
+      let cityVisible = (/^true$/i).test(that.city);
+
+      let data = (that.data.length === 0) ? [] : deepClone(that.data),
+        types = [];
+
+      if (data.length === 0) {
+        let commonAreas = deepClone(Atds.default.commonAreas),
+          commonAllChecked = true,
+          lastProvinces = deepClone(Atds.default.lastProvinces),
+          lastAllChecked = true;
+
+        commonAreas.forEach(area => {
+          area.provinces.forEach(province => {
+            that.initProvince(province, selected, cityVisible);
+            commonAllChecked = commonAllChecked && province.checked;
+          })
+        })
+
+        lastProvinces.forEach(province => {
+          that.initProvince(province, selected, cityVisible);
+          lastAllChecked = lastAllChecked && province.checked;
+        })
+
+        types = [
+          {
+            name: '常用地域',
+            id: 'more',
+            half: true,
+            checked: commonAllChecked,
+            groups: [commonAreas.splice(0, 7), commonAreas]
+          },
+          {
+            name: '非常用地域',
+            id: 'less',
+            checked: lastAllChecked,
+            groups: [
+              [{
+                provinces: lastProvinces
+              }]
+            ]
+          }]
+      } else {
+        // 自定义数据
+        types = data.map((item, index) => {
+          let allChecked = true;
+          let provinces = item.provinces;
+          provinces.forEach((province, pi) => {
+            if (pi === provinces.length - 1) {
+              // 可能出现数据超长的情况，最后一个数据特殊处理下
+              let remainder = provinces.length % that.lineNumber;
+              province.lineNumberMulti = (remainder > 0) ? (that.lineNumber - remainder + 1) : 1;
+            }
+            that.initProvince(province, selected, cityVisible);
+            allChecked = allChecked && province.checked;
+          })
+
+          return {
+            name: item.name,
+            id: index,
+            checked: allChecked,
+            groups: [
+              [{
+                provinces: item.provinces
+              }]
+            ]
+          }
+        })
+      }
+
+      that.types = types
+      that.cityVisible = cityVisible
+      that.placeholder = '省份' + (cityVisible ? '/城市' : '')
+    },
+
+    toggleCity(event) {
+      let that = this;
+      let { province: provinceId } = event,
+        oldProvince = that.showProvinceId;
+
+      if (provinceId === oldProvince) {
+        that.showProvinceId = -1
+      } else {
+        that.showProvinceId = provinceId
+      }
+
+      console.log(that.showProvinceId)
+    },
+
+    changeAll(typeIndex) {
+      let that = this;
+      let { types } = that;
+      let type = types[typeIndex];
+      let checked = type.checked;
+      type.groups.forEach(group => {
+        group.forEach(area => {
+          area.provinces.forEach(province => {
+            let cities = province.cities;
+            province.checked = checked;
+            cities.forEach(city => {
+              city.checked = checked;
             })
-          }
-        })
-        return res
-      }
-      let commonUseIds = []
-      mxArea['commonUse'].forEach(items => {
-        let temps = getIds(items.provinces)
-        temps.forEach(id => {
-          commonUseIds.push(id)
+
+            province.count = checked ? cities.length : 0;
+          })
         })
       })
-      this.commonArea.allIds = commonUseIds
 
-      let otherAreaIds = getIds(this.mxOtherAreas)
-      this.otherArea.allIds = otherAreaIds
+      that.fire();
     },
-    initial(row) {
-      if (!row.id) {
-        if (this.query.campaignId === undefined) {
-          this.commonArea.checkedCities = this.commonArea.allIds
-          this.otherArea.checkedCities = []
 
-          this.template = {
-            closeShow: true,
-            show: false,
-            name: ''
-          }
+    changeOne(event) {
+      let that = this;
+
+      let { checked, typeIndex, province: provinceId, city: cityId } = event;
+      let types = that.types;
+      let type = types[typeIndex]
+
+      let allChecked = true;
+      type.groups.forEach(group => {
+        group.forEach(area => {
+          area.provinces.forEach(province => {
+            if (province.id === provinceId) {
+              let cities = province.cities;
+
+              if (cityId) {
+                // 选择城市
+                let count = 0;
+                cities.forEach(city => {
+                  if (city.id === cityId) {
+                    city.checked = checked;
+                  }
+                  if (city.checked) {
+                    count++;
+                  }
+                })
+                province.checked = (count > 0) && (count === cities.length);
+                province.count = count;
+              } else {
+                // 选择省
+                province.checked = checked;
+                province.count = checked ? cities.length : 0;
+                cities.forEach(city => {
+                  city.checked = checked;
+                })
+              }
+            }
+            allChecked = allChecked && province.checked;
+          })
+        })
+      })
+      types[typeIndex].checked = allChecked;
+      that.fire();
+    },
+
+    fire() {
+      let that = this;
+      let selected = that.getSelected();
+      let values = selected.map(item => item.id);
+      let aa = {
+        selected,
+        values
+      }
+      this.$emit("on-change", selected, values);
+    },
+
+    initProvince(province, selected, cityVisible) {
+      // province 省的id被选中了，则其全部城市id不传
+      // for example 1 = (2 + 3 + ... + 18)
+      province.checked = (selected.indexOf(+province.id) > -1);
+
+      let count = 0;
+      province.cities = province.cities || [];
+      province.cities.forEach(city => {
+        if (province.checked) {
+          city.checked = true;
         } else {
-          if (row.model.length !== 0) {
-            this.commonArea.checkedCities = row.model.commonArea
-            this.otherArea.checkedCities = row.model.otherArea
-          } else {
-            this.commonArea.checkedCities = this.commonArea.allIds
-            this.otherArea.checkedCities = []
-          }
-          this.template = {
-            closeShow: true,
-            show: false,
-            name: ''
-          }
+          city.checked = (selected.indexOf(+city.id) > -1);
         }
-      } else {
-        this.commonArea.checkedCities = row.model.commonArea
-        this.otherArea.checkedCities = row.model.otherArea
-
-        this.template = {
-          closeShow: false,
-          show: true,
-          name: row.name
-        }
-      }
-    },
-    areaCheckedFilter(IDs, type) {
-      let areas = (type === 'commonArea') ? this.mxAreas : this.mxOtherAreas
-      let checkedFilter = (c) => {
-        if (c.hasOwnProperty('cities')) {
-          let checkedSum = 0
-          let checkedAll = false
-          c.cities.forEach(d => {
-            let checked = false
-            if (IDs.includes(d.id)) {
-              checked = true
-              checkedSum = checkedSum + 1
-            }
-            this.$set(d, 'checked', checked)
-          })
-          if (checkedSum === c.cities.length) {
-            checkedAll = true
-          }
-          this.$set(c, 'checkedAll', checkedAll)
-          this.$set(c, 'checkedSum', checkedSum)
-        }
-      }
-      areas.forEach(a => {
-        if (type === 'commonArea') {
-          a.forEach(b => {
-            b.provinces.forEach(c => {
-              checkedFilter(c)
-            })
-          })
-        } else {
-          checkedFilter(a)
-        }
-      })
-    },
-    handleSearchChange(val) {
-      this.searchName = val.replace(/[^\u4E00-\u9FA5]/g, '')
-    },
-    handleKeyUp() {
-      let showNum = 1
-      let checked = (a) => {
-        let show = false
-        let classShow = false
-        if (a.hasOwnProperty('cities')) {
-          if (a.name === this.searchName.trim()) {
-            classShow = true
-            showNum++
-          }
-          a.cities.forEach(b => {
-            let bClassShow = false
-            if (this.searchName.trim() === b.name) {
-              show = true
-              bClassShow = true
-              showNum++
-            }
-            this.$set(b, 'classShow', bClassShow)
-          })
-        } else {
-          if (a.name === this.searchName.trim()) {
-            classShow = true
-            showNum++
-          }
-        }
-        this.$set(a, 'show', show)
-        this.$set(a, 'classShow', classShow)
-      }
-
-      this.mxAreas.forEach(a => {
-        a.forEach(b => {
-          b.provinces.forEach(c => {
-            checked(c)
-          })
-        })
-      })
-
-      this.mxOtherAreas.forEach(a => {
-        checked(a)
-      })
-      if (showNum === 1) {
-        this.searchName = ''
-      }
-    },
-    getArea(type) {
-      let currentArea = {}
-      switch (type) {
-        case 'commonArea':
-          currentArea = this.commonArea
-          break
-        case 'otherArea':
-          currentArea = this.otherArea
-          break
-        default:
-          console.log('======提示：', '选项错误')
-      }
-      return currentArea
-    },
-    watchCheckedCities(val, type) {
-      let currentArea = this.getArea(type)
-      currentArea.isIndeterminate = val.length > 0 && val.length < currentArea.allIds.length
-      currentArea.checkedAllBoolean = val.length === currentArea.allIds.length
-    },
-    handleCheckedAllChange(val, type) {
-      let currentArea = this.getArea(type)
-      currentArea.checkedCities = val ? currentArea.allIds : []
-    },
-    handleCheckedProvinceChange(key, type) {
-      let currentArea = this.getArea(type)
-      let provinces = {}
-
-      if (type === 'otherArea') {
-        provinces = this.mxOtherAreas[key]
-      } else {
-        let keys = key.split(',')
-        provinces = this.mxAreas[keys[0]][keys[1]].provinces[keys[2]]
-      }
-
-      if (provinces.hasOwnProperty('cities')) {
-        provinces.cities.forEach((city) => {
-          let index = currentArea.checkedCities.indexOf(city.id)
-          if (provinces.checkedAll) {
-            if (index !== -1) {
-              currentArea.checkedCities.splice(index, 1)
-            }
-          } else {
-            if (index === -1) {
-              currentArea.checkedCities.push(city.id)
-            }
-          }
-        })
-      }
-    },
-    handleCheckedCityChange(key, id, type) {
-      let currentArea = this.getArea(type)
-      let keys = key.split(',')
-      let province = {}
-      let city = {}
-      if (type === 'otherArea') {
-        province = this.mxOtherAreas[key[0]]
-        city = province.cities[keys[1]]
-      } else {
-        province = this.mxAreas[keys[0]][keys[1]].provinces[keys[2]]
-        city = province.cities[keys[3]]
-      }
-
-      let cityChecked = false
-      if (!city.checked) {
-        // 加
-        cityChecked = true
-      }
-      this.$set(city, 'checked', cityChecked)
-
-      // 省是否选中
-      let checkedIds = []
-      province.cities.forEach((city) => {
         if (city.checked) {
-          checkedIds.push(city.id)
+          count++;
         }
       })
 
-      if (province.cities.length === checkedIds.length) {
-        currentArea.checkedCities.push(province.id)
+      province.count = count;
+
+      province.hasCity = (province.cities.length > 0) && cityVisible;
+    },
+
+    search() {
+      let that = this;
+      let searchName = that.searchName;
+      let { types, cityVisible } = that;
+
+      let provinceId, isCity = false;
+      types.forEach(type => {
+        let typeHighlight = false;
+        type.groups.forEach(group => {
+          group.forEach(area => {
+            area.provinces.forEach(province => {
+              province.highlight = false;
+              if (province.name === searchName) {
+                provinceId = province.id;
+                province.highlight = true;
+              }
+              if (cityVisible) {
+                let cities = province.cities;
+                cities.forEach(city => {
+                  city.highlight = false;
+                  if (city.name === searchName) {
+                    provinceId = province.id;
+                    isCity = true;
+                    city.highlight = true;
+                  }
+                })
+              }
+            })
+          })
+        })
+      })
+
+      that.showProvinceId = isCity ? provinceId : -1
+    },
+
+    val(full) {
+      let that = this;
+      let { types, cityVisible } = that;
+      let selected = [];
+      let all = [];
+      types.forEach(type => {
+        type.groups.forEach(group => {
+          group.forEach(area => {
+            area.provinces.forEach(province => {
+              if (province.checked) {
+                selected.push(province.id);
+                all.push(province);
+              } else {
+                if (cityVisible) {
+                  province.cities.forEach(city => {
+                    if (city.checked) {
+                      selected.push(city.id);
+                      all.push(city);
+                    }
+                  })
+                }
+              }
+            })
+          })
+        })
+      })
+      if (full) {
+        return deepClone(all);
       } else {
-        let index = currentArea.checkedCities.indexOf(province.id)
-        if (index !== -1) {
-          currentArea.checkedCities.splice(index, 1)
-        }
+        return selected;
       }
     },
-    handleConfirm() {
-      this.$emit('saveTemplate', 'launchArea')
+
+    getSelected() {
+      return this.val(true);
     }
   }
 };

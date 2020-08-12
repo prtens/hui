@@ -1,6 +1,7 @@
-*:before,
-*:after {
-  box-sizing: border-box;
+*,
+:after,
+:before {
+  box-sizing: inherit;
 }
 
 html,
@@ -95,30 +96,4 @@ ul,
 li {
   list-style-type: none;
   list-style-image: none;
-}
-
-.hide,
-.none {
-  display: none;
-}
-
-// 浮动
-.fr {
-  float: right;
-}
-
-.fl {
-  float: left;
-}
-
-// margin样式
-.mb5 {
-  margin-bottom: 5px;
-}
-
-.mb10 {
-  margin-bottom: 10px;
-}
-.mb20 {
-  margin-bottom: 20px;
 }

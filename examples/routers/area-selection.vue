@@ -1,6 +1,7 @@
 <template>
   <div>
-    <area-selection :item.sync="launchArea.item" />
+    <area-selection :selected.sync="selected"
+                    @on-change="change" />
   </div>
 </template>
 
@@ -8,28 +9,15 @@
 export default {
   data() {
     return {
-      launchArea: {
-        radioChecked: 2,
-        optionsShow: true,
-        optionValue: "",
-        options: [],
-        definedShow: false,
-        itemListStr: "",
-        templateId: 0,
-        item: {
-          createdBy: "",
-          declareFlag: 0,
-          id: 0,
-          model: "",
-          name: "",
-          tbUserId: 0,
-          tbUserNick: "",
-          type: 0
-        }
-      }
+      selected: [1]
     };
+  },
+  methods: {
+    change(selected, values) {
+      console.log(selected)
+      console.log(values)
+    }
   }
-
 };
 </script>
 

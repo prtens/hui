@@ -29,9 +29,14 @@ module.exports = {
     "no-unreachable": "off",
     "one-var": "off",
     indent: "off",
+    yoda: "off",
     "no-redeclare": "off",
+    "no-unused-vars": "off",
     "no-unused-expressions": "off",
     "no-sequences": "off",
-    "vue/no-use-v-if-with-v-for": "off"
+    "vue/no-use-v-if-with-v-for": "off",
+    "vue/no-template-key": "off",
+    "vue/valid-v-if": "off",
+    "vue/require-v-for-key": "off"
   }
 };

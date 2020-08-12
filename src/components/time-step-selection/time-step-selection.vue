@@ -1,283 +1,373 @@
 <template>
-  <div class="hn-time-setp-picker">
-    <div class="hn-time-setp-picker__content">
+  <div>
+    <div class="period">
+
+      <!-- 每日分隔是才有该功能 -->
+      <div v-if="periods.length === 7">
+        <span class="color-9 mr10">快捷操作：</span>
+        <el-radio-group
+          v-model="type"
+          @change="changeType"
+        >
+          <el-radio
+            v-for="(t, index) of types"
+            :label="t.value"
+            :key="index"
+          >
+            {{ t.text }}
+          </el-radio>
+        </el-radio-group>
+      </div>
+
       <ul
-        class="hn-time-setp-picker__items"
-        v-for="(item, k) of periods"
-        :key="k"
+        class="hours clearfix"
+        v-for="(p,pIndex) of periods"
+        :key="pIndex"
       >
-        <li class="hn-time-setp-picker__item">
-          <span>时间段</span>
+        <li class="all">
+          <span class="all-tip">时间段</span>
           <a
             href="javascript:;"
-            class="btn btn-small"
-            :class="item.selected ? 'btn-primary' : ''"
-            @click="toggleAll({ pIndex: k })"
-          >{{ item.name }}</a>
+            :class="`btn btn-small all-btn ${p.selected ? 'btn-primary' : ''}`"
+            @click="toggleAll({pIndex: pIndex})"
+          >{{p.name}}</a>
         </li>
-
         <li
-          v-for="(hour, hk) of item.hours"
-          :key="hk"
-          class="hn-time-setp-picker__item"
-          :class="getClass(hour)"
-          :data-period="k"
-          :data-hour="hour.index"
+          v-for="(h,hIndex) of p.hours"
+          :key="hIndex"
+          :class="`hour ${h.milestone ? 'milestone' : ''} ${h.selected ? 'selected' : ''}`"
+          :data-period="pIndex"
+          :data-hour="h.index"
           @mousedown="drag($event)"
         >
-          <div class="block"></div>
+          <div class="hour-inner"></div>
           <div
-            class="line-select"
-            :class="hour.firstSelected ? '' : 'hide'"
-            :style="`z-index: ${hour.zIndex};`"
+            :class="`line-start ${!h.firstSelected ? 'hide' : ''}`"
+            :style="{'z-index': `${h.zIndex}`}"
           >
-            <span class="line-top-number">{{ hour.index }}</span>
+            <span class="line-info">{{h.index}}</span>
           </div>
           <div
-            class="line-select1"
-            :class="hour.endSelected ? '' : 'hide'"
-            :style="`z-index: ${hour.zIndex};`"
+            :class="`line-end ${!h.endSelected ? 'hide' : ''}`"
+            :style="{'z-index': `${h.zIndex}`}"
           >
-            <span class="line-top-number">{{ hour.indexNext }}</span>
+            <span class="line-info">{{h.indexNext}}</span>
           </div>
-          <div class="line-select-not">
-            <span class="line-top-number-not">{{ hour.index }}</span>
+          <div class="hour-line">
+            <span class="hour-info">{{h.index}}</span>
           </div>
         </li>
-
-        <li class="hn-time-setp-picker__item milestone">
-          <span class="line-select-not"><span class="line-top-number-not">24</span></span>
+        <li class="hour milestone hour-last">
+          <span class="hour-line">
+            <span class="hour-info">24</span>
+          </span>
         </li>
       </ul>
     </div>
-    <div class="hn-time-setp-picker__footer">
+
+    <div class="clearfix opers-wrapper">
       <a
         href="javascript:;"
-        class="btn btn-primary btn-small"
-        @click="add"
-      >保存为模板</a>
-      <a
+        class="btn btn-small clear-btn"
         @click="clearAll"
-        href="javascript:;"
-        class="btn btn-small clear"
-      >清空</a>
-      <span class="fr reminder">蓝色为已选投放时段</span>
+      >
+        清空
+      </a>
+      <span class="fr oper-tip">{{tip}}</span>
     </div>
   </div>
 </template>
 
 <script type="text/babel">
 import $ from "jquery";
-import { converse, reverse } from "../../utils/timeStep";
 
-var a = {
-  1: "周一",
-  2: "周二",
-  3: "周三",
-  4: "周四",
-  5: "周五",
-  6: "周六",
-  7: "周日"
-};
+const WeekMap = {
+  1: '周一',
+  2: '周二',
+  3: '周三',
+  4: '周四',
+  5: '周五',
+  6: '周六',
+  7: '周日'
+}
 
 export default {
   name: "TimeStepSelection",
   props: {
-    tmp: {
+    // 历史可配置参数simple
+    // 1. true：极简模式，默认只区分工作日和双休日
+    // 2. false：每日单独设置
+    simple: {
+      type: Boolean,
+      default: true
+    },
+    groups: {
+      type: Array,
+      default() {
+        return [12345, 67];
+      }
+    },
+    selected: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    tip: {
       type: String,
-      require: true
+      default: ""
     }
   },
   data() {
     return {
-      periods: []
+      periods: [],
+      type: [],
+      types: []
     };
   },
-  created() {
+  mounted() {
     this.init();
   },
   methods: {
-    getClass(t) {
-      var Class = "";
-      if (t.milestone) {
-        Class += " milestone ";
-      }
-
-      if (t.selected) {
-        Class += " select-block ";
-      }
-      return Class;
-    },
     init() {
-      var t = converse(this.tmp);
-      var h = [12345, 67];
-      var i = {};
-      t.forEach(function (r) {
-        (r.week + "").split("").forEach(function (e) {
-          i[e] = (r.times || []).map(function (r) {
-            return r + "";
-          });
-        });
-      });
+      let that = this;
 
-      var n = function () {
-        for (var r = [], e = 0; e < 24; e++) {
-          r.push({
-            index: e,
-            indexNext: e + 1,
-            milestone: e % 6 === 0,
-            zIndex: e + 10
-          });
-        }
-        return r;
-      };
+      let selected = that.selected;
 
-      var o = h.map(function (r, e) {
-        r = (r + "").split("");
-        var s = i[r[0]] || [];
-        var t = n();
-        return (
-          t.forEach(function (r) {
-            r.selected = s.indexOf(r.index + "") > -1;
-          }),
-          {
-            name: r.length > 1 ? a[r[0]] + "至" + a[r[r.length - 1]] : a[r[0]],
-            hours: t,
-            weeks: r
-          }
-        );
-      });
-
-      var ttt = this.sync(o);
-      this.periods = ttt;
-    },
-    sync(r) {
-      return (
-        r.forEach(function (r) {
-          for (var e = r.hours, s = !0, t = 0; t < e.length; t++) {
-            var c = e[t],
-              d = e[t - 1],
-              a = e[t + 1];
-            (c.firstSelected = !1),
-              (c.endSelected = !1),
-              c.selected &&
-              (((d && !d.selected) || !d) && (c.firstSelected = !0),
-                ((a && !a.selected) || !a) && (c.endSelected = !0)),
-              (s = s && c.selected);
-          }
-          r.selected = s;
-        }),
-        r
-      );
-    },
-    toggleAll(r) {
-      var e = this.periods;
-      var s = e[r.pIndex];
-      var t = !s.selected;
-      s.hours.forEach(function (r) {
-        r.selected = t;
-      });
-
-      this.sync(e);
-    },
-    drag(r) {
-      var e = this,
-        s = e.periods,
-        t = $(r.currentTarget),
-        d = t.data("period"),
-        a = t.data("hour"),
-        h = !s[d].hours[a].selected;
-      e.toggle(d, a, h);
-      var i = t.parent(".hn-time-setp-picker__items").find("[data-hour]");
-      return (
-        i.on("mouseenter.drag", function (r) {
-          r.preventDefault();
-          var s = $(r.currentTarget);
-          e.toggle(s.data("period"), s.data("hour"), h);
-        }),
-        $(document.body)
-          .off("mouseup.drag")
-          .on("mouseup.drag", function (r) {
-            i.off("mouseenter.drag");
-          }),
-        r.preventDefault()
-      );
-      return false;
-
-      var e = this,
-        s = e.periods,
-        d = r.currentTarget.getAttribute("data-period"),
-        a = r.currentTarget.getAttribute("data-hour"),
-        h = !s[d].hours[a].selected;
-
-      e.toggle(d, a, h);
-
-      var i = r.currentTarget.parentElement.querySelectorAll("[data-hour]");
-      for (var s = 0; s < i.length; s++) {
-        var aaa = i[s];
-        aaa.onmouseenter = function (r) {
-          console.log("进入");
-          r.preventDefault();
-          r.cancelBubble = false;
-          var s = r.currentTarget;
-          e.toggle(
-            s.getAttribute("data-period"),
-            s.getAttribute("data-hour"),
-            h
-          );
-        };
-        aaa.onmouseup = function (r, that = aaa) {
-          console.log("松开");
-          // console.log(that.onmouseenter)
-          r.preventDefault();
-          that.onmouseenter = null;
-          that.onmouseup = null;
-        };
+      let simple = (that.simple + '' !== 'false'),
+        groups = that.groups; // 分组信息
+      if (!groups || !groups.length) {
+        groups = simple ? [12345, 67] : [1, 2, 3, 4, 5, 6, 7]
       }
-    },
-    toggle(r, e, s) {
-      var t = this.periods;
-      t[r].hours[e].selected = s;
-      this.periods = this.sync(t);
-    },
-    clearAll() {
-      var e = this.periods;
-      e.forEach(function (r) {
-        r.hours.forEach(function (r) {
-          r.selected = !1;
+
+      // 所有选中的日期
+      let map = {};
+      selected.forEach(item => {
+        // 支持合并配置，具体计算是展开成单日
+        let weeks = (item.week + '').split('');
+        weeks.forEach(week => {
+          map[week] = (item.times || []).map(time => {
+            return time + '';
+          });
+        })
+      })
+
+      let getHours = () => {
+        let hours = [];
+        for (var i = 0; i < 24; i++) {
+          hours.push({
+            'index': i,
+            'indexNext': (i + 1),
+            'milestone': (i % 6 === 0),
+            'zIndex': (i + 10) // fix样式
+          })
+        }
+        return hours;
+      }
+
+      let periods = [];
+      if ($.isPlainObject(groups[0])) {
+        // groups = [{
+        //     text,
+        //     value
+        // }]
+        periods = groups.map((g, index) => {
+          // 多天合并的，取一天即可
+          let weeks = (g.value + '').split('');
+          let times = map[weeks[0]] || [];
+          let hours = getHours();
+          hours.forEach(h => {
+            h.selected = (times.indexOf(h.index + '') > -1);
+          })
+          return {
+            name: g.text,
+            hours,
+            weeks
+          };
         });
-      });
-      this.periods = this.sync(e);
+      } else {
+        periods = groups.map((weeks, index) => {
+          // 多天合并的，取一天即可
+          weeks = (weeks + '').split('');
+          let times = map[weeks[0]] || [];
+          let hours = getHours();
+          hours.forEach(h => {
+            h.selected = (times.indexOf(h.index + '') > -1);
+          })
+          return {
+            name: (weeks.length > 1) ? `${WeekMap[weeks[0]]}至${WeekMap[weeks[weeks.length - 1]]}` : WeekMap[weeks[0]],
+            hours,
+            weeks
+          };
+        });
+      }
+
+      // 拆分成单日选择时的批量操作功能
+      let types = [
+        {
+          text: '全日程',
+          value: '1234567'
+        }, {
+          text: '工作日',
+          value: '12345'
+        }, {
+          text: '双休日',
+          value: '67'
+        }
+      ]
+      let type = '';
+      for (let i = 0; i < types.length; i++) {
+        let t = types[i];
+        let weeks = (t.value + '').split('');
+        let all = true;
+        weeks.forEach(week => {
+          all = all && ((map[week] || []).length === 24);
+        })
+
+        if (all) {
+          type = types[i].value;
+          break;
+        }
+      }
+
+      that.periods = that.sync(periods)
+      that.type = type
+      that.types = types
     },
-    __l: function () {
-      var e = this.val();
-      this.tmpPeriods = e;
+
+    sync(periods) {
+      periods.forEach(p => {
+        let hours = p.hours;
+        let allSelected = true;
+        for (let i = 0; i < hours.length; i++) {
+          let h = hours[i];
+          let prev = hours[i - 1],
+            next = hours[i + 1];
+
+          h.firstSelected = false;
+          h.endSelected = false;
+          if (h.selected) {
+            if ((prev && !prev.selected) || !prev) {
+              h.firstSelected = true;
+            }
+            if ((next && !next.selected) || !next) {
+              h.endSelected = true;
+            }
+          }
+          allSelected = allSelected && h.selected;
+        }
+        p.selected = allSelected;
+      })
+      return periods;
     },
-    val: function () {
-      var r = this.periods;
-      var e = [];
-      return (
-        r.forEach(function (r) {
-          var s = [];
-          r.hours.forEach(function (r) {
-            r.selected && s.push(r.index);
-          }),
-            r.weeks.forEach(function (r) {
-              e.push({
-                week: r,
-                name: a[r],
-                times: s
-              });
-            });
-        }),
-        e
-      );
+
+    toggleAll(event) {
+      let that = this
+      let periods = that.periods;
+      let { pIndex } = event
+      let period = periods[pIndex];
+      let allSelected = !period.selected;
+      period.hours.forEach(h => {
+        h.selected = allSelected;
+      })
+
+      that.periods = this.sync(periods)
+      that.fire();
     },
-    add() {
-      this.__l();
-      // console.log(this.periods)
-      var data = reverse(this.tmpPeriods);
-      console.log(data);
+
+    clearAll() {
+      let periods = this.periods;
+      periods.forEach(p => {
+        p.hours.forEach(h => {
+          h.selected = false;
+        })
+      })
+      this.periods = this.sync(periods)
+      this.fire();
+    },
+
+    fire() {
+      let that = this;
+      let selected = that.val();
+      let values = selected.map(item => item.id);
+
+      this.$emit("on-change", selected, values);
+    },
+
+    /**
+     * 拖动选择，第一个是什么状态，则所有选中标签都是什么状态
+     */
+    drag(event) {
+      let that = this;
+      let periods = that.periods;
+      let target = $(event.currentTarget);
+      let pIndex = target.data('period'),
+        hourIndex = target.data('hour');
+
+      let selected = !periods[pIndex].hours[hourIndex].selected;
+      that.toggle(pIndex, hourIndex, selected);
+
+      let parent = target.parent('.hours');
+      let siblings = parent.find('[data-hour]');
+
+      siblings.on('mouseenter.drag', (dragStartEvent) => {
+        dragStartEvent.preventDefault();
+        let t = $(dragStartEvent.currentTarget);
+        that.toggle(t.data('period'), t.data('hour'), selected);
+      })
+
+      $(document.body).off('mouseup.drag').on('mouseup.drag', (dragEndEvent) => {
+        siblings.off('mouseenter.drag');
+        that.fire();
+      })
+
+      event.preventDefault();
+      return false;
+    },
+
+    toggle(pIndex, hourIndex, selected) {
+      let periods = this.periods;
+      periods[pIndex].hours[hourIndex].selected = selected;
+      this.periods = this.sync(periods)
+    },
+
+    /**
+     * 每日单独选择时有的批量功能
+     */
+    changeType() {
+      let that = this;
+      let value = that.type;
+      let periods = that.periods;
+      let weeks = (value + '').split('');
+      periods.forEach(p => {
+        p.hours.forEach(h => {
+          h.selected = (weeks.indexOf(p.weeks + '') > -1);
+        })
+      })
+
+      that.periods = that.sync(periods)
+      that.fire();
+    },
+
+    val() {
+      let periods = this.periods;
+      let results = [];
+      periods.forEach(p => {
+        let times = [];
+        p.hours.forEach(h => {
+          if (h.selected) {
+            times.push(h.index);
+          }
+        })
+        p.weeks.forEach(week => {
+          results.push({
+            week,
+            name: WeekMap[week],
+            times
+          })
+        })
+      })
+      return results;
     }
   }
 };
