@@ -29,7 +29,6 @@ module.exports = {
     "no-unreachable": "off",
     "one-var": "off",
     indent: "off",
-    yoda: "off",
     "no-redeclare": "off",
     "no-unused-vars": "off",
     "no-unused-expressions": "off",
