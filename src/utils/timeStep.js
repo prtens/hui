@@ -24,12 +24,12 @@ export const reverse = e => {
       var t = e.times;
       // p>1 ? p<b ? p>b :p=6 : p=3
       t.length > 0 && (i = !0),
-        1 == e.week
+        1 === e.week
           ? n.push({
             dayOfWeek: "0111110",
             timeSpans: t
           })
-          : 6 == e.week &&
+          : 6 === e.week &&
           n.push({
             dayOfWeek: "1000001",
             timeSpans: t
