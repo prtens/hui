@@ -1,0 +1,32 @@
+$error-prefix-cls: "#{$css-prefix}error";
+
+.#{$error-prefix-cls} {
+  width: 400px;
+  margin: auto;
+  padding-top: 80px;
+  padding-bottom: 120px;
+  text-align: center;
+
+  .bad-img {
+    display: block;
+    width: 400px;
+    margin: auto;
+  }
+  .info {
+    font-size: 16px;
+    color: #999;
+    margin-top: 40px;
+  }
+
+  .btns {
+    margin-top: 20px;
+
+    .home-btn,
+    .back-btn {
+      width: calc($font-size-small * 7);
+    }
+    .back-btn {
+      margin-left: 20px;
+    }
+  }
+}

@@ -63,7 +63,7 @@ export default {
   },
   data() {
     return {
-      prefixCls: "hn-affix",
+      prefix: "hn-affix",
       affix: false,
       styles: {},
       slot: false,
@@ -82,7 +82,7 @@ export default {
     classes() {
       return [
         {
-          [`${this.prefixCls}`]: this.affix
+          [`${this.prefix}`]: this.affix
         }
       ];
     }

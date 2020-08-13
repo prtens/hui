@@ -17,15 +17,10 @@ $primary-color--light-8: mix($white-color, $primary-color, 80%) !default;
 $primary-color--light-9: mix($white-color, $primary-color, 90%) !default;
 
 $danger-color: #f56c6c;
+$danger-color--light-9: mix($white-color, $danger-color, 90%) !default;
 
-/// color|1|Border Color|3
-$border-color-base: #dcdfe6 !default;
-/// color|1|Border Color|3
-$border-color-light: #e4e7ed !default;
-/// color|1|Border Color|3
-$border-color-lighter: #ebeef5 !default;
-/// color|1|Border Color|3
-$border-color-extra-light: #f2f6fc !default;
+// Background
+$body-background-base: #fafafa;
 
 // link
 $link-color: $primary-color--light-2;
@@ -33,8 +28,15 @@ $link-hover-color: tint($link-color, 20%);
 $link-active-color: shade($link-color, 5%);
 $black: #000;
 
-// Background
-$body-background-base: #fafafa;
+// Font Color
+$text-color: #515a6e;
+$text-color-secondary: fade($black, 45%);
+
+// Border Color
+$border-color-base: #dcdfe6 !default;
+$border-color-light: #e4e7ed !default;
+$border-color-lighter: #ebeef5 !default;
+$border-color-extra-light: #f2f6fc !default;
 
 // Base
 $font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
@@ -44,8 +46,6 @@ $font-size-base: 14px;
 $font-size-small: 12px;
 $font-size-large: $font-size-base + 2px;
 $line-height-base: 1.5;
-$text-color: #515a6e;
-$text-color-secondary: fade($black, 45%);
 $heading-color: fade(#000, 85%);
 $border-radius-base: 6px;
 $border-radius-small: 4px;

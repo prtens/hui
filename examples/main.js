@@ -77,6 +77,18 @@ const router = new VueRouter({
       component: resolve => require(["./routers/tip.vue"], resolve)
     },
     {
+      path: "/time",
+      component: resolve => require(["./routers/time.vue"], resolve)
+    },
+    {
+      path: "/deferror",
+      component: resolve => require(["./routers/def-error.vue"], resolve)
+    },
+    {
+      path: "/effectsempty",
+      component: resolve => require(["./routers/effects-empty.vue"], resolve)
+    },
+    {
       path: "/timestepselection",
       component: resolve =>
         require(["./routers/time-step-selection.vue"], resolve)

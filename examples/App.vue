@@ -42,6 +42,15 @@
         <li>
           <router-link to="/tip">Tip 小贴士</router-link>
         </li>
+        <li>
+          <router-link to="/time">Time 相对时间</router-link>
+        </li>
+        <li>
+          <router-link to="/deferror">DefError 错误提示页面</router-link>
+        </li>
+        <li>
+          <router-link to="/effectsempty">EffectsEmpty 空状态</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

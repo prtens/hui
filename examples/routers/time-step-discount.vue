@@ -1,6 +1,11 @@
 <template>
   <div>
     <time-step-discount :selected.sync="selected" />
+    <time-step-discount
+      :selected.sync="selected"
+      :boxWidth="18"
+      :half="true"
+    />
   </div>
 </template>
 

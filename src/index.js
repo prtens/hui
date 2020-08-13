@@ -5,6 +5,8 @@ import AreaSelection from "./components/area-selection";
 import BackTop from "./components/back-top";
 import Breadcrumb from "./components/breadcrumb";
 import ChartsEntrance from "./components/charts-entrance";
+import DefError from "./components/def-error";
+import EffectsEmpty from "./components/effects-empty";
 import Hamburger from "./components/hamburger";
 import List from "./components/list";
 import MultipleSelection from "./components/multiple-selection";
@@ -12,6 +14,7 @@ import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
 import TableTreeColumn from "./components/table-tree-column";
+import Time from "./components/time";
 import TimeStepDiscount from "./components/time-step-discount";
 import TimeStepSelection from "./components/time-step-selection";
 import Tip from "./components/tip";
@@ -27,6 +30,8 @@ const components = [
   BackTop,
   Breadcrumb,
   ChartsEntrance,
+  DefError,
+  EffectsEmpty,
   Hamburger,
   List,
   ListItem,
@@ -36,6 +41,7 @@ const components = [
   Screenfull,
   SvgIcon,
   TableTreeColumn,
+  Time,
   TimeStepDiscount,
   TimeStepSelection,
   Tip

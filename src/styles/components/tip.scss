@@ -11,11 +11,11 @@ $tip-prefix-cls: "#{$css-prefix}tip";
 }
 
 .#{$tip-prefix-cls}--default {
-  background-color: #ecf8ff;
+  background-color: $primary-color--light-9;
   border-left: 5px solid $primary-color;
 }
 
 .#{$tip-prefix-cls}--warning {
-  background-color: #fff6f7;
+  background-color: $danger-color--light-9;
   border-left: 5px solid $danger-color;
 }

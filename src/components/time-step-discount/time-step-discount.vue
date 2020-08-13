@@ -40,20 +40,20 @@
               v-for="(sItem, key) of settingList"
               :key="key"
             >
-              <div v-if="(sItem.value === 1)">
+              <template v-if="(sItem.value === 1)">
                 <el-radio :label="+sItem.value">{{ sItem.text }}</el-radio>
                 <el-input
                   class="w150"
-                  v-if="(settingInfo.type == sItem.value)"
                   v-model="settingInfo.discount"
+                  :disabled="(settingInfo.type !== sItem.value)"
                   placeholder="请输入折扣"
                 >
                   <template slot="append">%</template>
                 </el-input>
-              </div>
-              <div v-else>
+              </template>
+              <template v-else>
                 <el-radio :label="sItem.value">{{ sItem.text }}</el-radio>
-              </div>
+              </template>
             </div>
           </el-radio-group>
         </div>
@@ -150,7 +150,7 @@
             <span class="font-tahoma bold color-c mr15">{{dot.text}}</span>
           </span>
         </template>
-        <i class="mc-iconfont displacement-2">&#xe705;</i>
+        <i class="el-icon-bell"></i>
         <span class="mr10">可以拖拽鼠标选择投放时段</span>
       </span>
 

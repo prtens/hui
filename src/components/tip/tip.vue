@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     typeClass() {
-      return [this.prefixCls, `${this.prefixCls}--${this.type}`];
+      return [this.prefix, `${this.prefix}--${this.type}`];
     }
   }
 };

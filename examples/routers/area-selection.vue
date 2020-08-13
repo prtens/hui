@@ -1,7 +1,15 @@
 <template>
   <div>
-    <area-selection :selected.sync="selected"
-                    @on-change="change" />
+    <area-selection
+      :selected.sync="selected"
+      @on-change="change"
+    />
+
+    <area-selection
+      :selected.sync="selected"
+      :city="false"
+      @on-change="change"
+    />
   </div>
 </template>
 

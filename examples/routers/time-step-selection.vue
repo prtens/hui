@@ -2,6 +2,18 @@
   <div style="width: 60%">
     <time-step-selection
       :selected.sync="selected"
+      :groups="[1234567]"
+      @on-change="change"
+    />
+
+    <time-step-selection
+      :selected.sync="selected"
+      @on-change="change"
+    />
+
+    <time-step-selection
+      :selected.sync="selected"
+      :groups="[1,2,3,4,5,6,7]"
       @on-change="change"
     />
   </div>
