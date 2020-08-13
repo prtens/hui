@@ -5,6 +5,8 @@ const path = require("path");
 const webpack = require("webpack");
 const pkg = require("../package.json");
 
+const isProd = process.env.NODE_ENV === "production";
+
 function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
@@ -28,49 +30,11 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        loaders: [
-          {
-            loader: "vue-style-loader",
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: "style-loader",
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: "css-loader",
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          {
-            loader: "style-loader",
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: "css-loader",
-            options: {
-              sourceMap: true
-            }
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true
-            }
-          }
+        test: /\.(scss|css)$/,
+        use: [
+          isProd ? "vue-style-loader" : "style-loader",
+          "css-loader",
+          "sass-loader"
         ]
       },
       {

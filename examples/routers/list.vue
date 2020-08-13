@@ -5,7 +5,8 @@
       header="Header"
       footer="Footer"
       size="small"
-      :split="false"
+      border
+      :split="true"
     >
       <ListItem
         v-for="item in data1"

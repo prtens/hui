@@ -67,11 +67,11 @@ $area-height: 42px;
         position: absolute;
         top: $area-height;
         left: -72px;
-        z-index: 99;
+        z-index: $zindex-area;
         width: 240px;
         padding: 10px;
         border-radius: 4px;
-        background-color: #fff;
+        background-color: $white-color;
         .city {
           float: left;
           width: 48%;

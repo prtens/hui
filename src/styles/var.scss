@@ -2,15 +2,41 @@
 $css-prefix: hn-;
 
 // Color
-$primary-color: #3c90e9;
+$white-color: #ffffff !default;
+$primary-color: #409eff;
+
+// mix($color-1,$color-2,$weight); $weight默认值50%
+$primary-color--light-1: mix($white-color, $primary-color, 10%) !default;
+$primary-color--light-2: mix($white-color, $primary-color, 20%) !default;
+$primary-color--light-3: mix($white-color, $primary-color, 30%) !default;
+$primary-color--light-4: mix($white-color, $primary-color, 40%) !default;
+$primary-color--light-5: mix($white-color, $primary-color, 50%) !default;
+$primary-color--light-6: mix($white-color, $primary-color, 60%) !default;
+$primary-color--light-7: mix($white-color, $primary-color, 70%) !default;
+$primary-color--light-8: mix($white-color, $primary-color, 80%) !default;
+$primary-color--light-9: mix($white-color, $primary-color, 90%) !default;
+
 $danger-color: #f56c6c;
-$link-color: #2d8cf0;
+
+/// color|1|Border Color|3
+$border-color-base: #dcdfe6 !default;
+/// color|1|Border Color|3
+$border-color-light: #e4e7ed !default;
+/// color|1|Border Color|3
+$border-color-lighter: #ebeef5 !default;
+/// color|1|Border Color|3
+$border-color-extra-light: #f2f6fc !default;
+
+// link
+$link-color: $primary-color--light-2;
 $link-hover-color: tint($link-color, 20%);
 $link-active-color: shade($link-color, 5%);
 $black: #000;
 
+// Background
+$body-background-base: #fafafa;
+
 // Base
-$body-background: #fff;
 $font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
   "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 $code-family: Consolas, Menlo, Courier, monospace;
@@ -41,12 +67,14 @@ $btn-height-large: 40px;
 $btn-height-small: 24px;
 
 $btn-primary: $primary-color;
-$btn-primary-color: #fff;
+$btn-primary-color: $white-color;
 
 $btn-duration: 0.25s;
 
 // Z-index
 $zindex-affix: 10;
+$zindex-area: 90;
+$zindex-discount: 100;
 
 // Animation
 $animation-time: 0.3s;

@@ -32,7 +32,7 @@ $anchor-prefix: "#{$css-prefix}anchor";
         height: 8px;
         border-radius: 50%;
         border: 2px solid $primary-color;
-        background-color: $body-background;
+        background-color: $body-background-base;
         left: 50%;
         transition: top $transition-time $ease-in-out;
         transform: translate(-50%, 2px);
