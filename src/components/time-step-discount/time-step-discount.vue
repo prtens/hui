@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{width: `${maxWidth}px`}"
-    class="duration-wrapper"
+    class="hn-duration-wrapper"
   >
     <!-- 鼠标hover提示浮层 -->
     <div

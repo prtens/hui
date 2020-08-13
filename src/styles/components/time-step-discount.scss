@@ -1,4 +1,6 @@
-.duration-wrapper {
+$duration-wrapper-prefix-cls: "#{$css-prefix}duration-wrapper";
+
+.#{$duration-wrapper-prefix-cls} {
   position: relative;
   font-size: $border-radius-small;
 

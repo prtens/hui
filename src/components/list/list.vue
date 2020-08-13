@@ -1,6 +1,9 @@
 <template>
   <div :class="classes">
-    <div class="hn-list-header" v-if="header || $slots.header">
+    <div
+      class="hn-list-header"
+      v-if="header || $slots.header"
+    >
       <slot name="header">{{ header }}</slot>
     </div>
     <div class="hn-list-container">
@@ -8,10 +11,17 @@
         <slot></slot>
       </ul>
     </div>
-    <Spin v-if="loading" fix size="large">
+    <Spin
+      v-if="loading"
+      fix
+      size="large"
+    >
       <slot name="spin"></slot>
     </Spin>
-    <div class="hn-list-footer" v-if="footer || $slots.footer">
+    <div
+      class="hn-list-footer"
+      v-if="footer || $slots.footer"
+    >
       <slot name="footer">{{ footer }}</slot>
     </div>
   </div>

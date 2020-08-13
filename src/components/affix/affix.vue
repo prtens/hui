@@ -1,15 +1,21 @@
 <template>
   <div>
-    <div ref="point" :class="classes" :style="styles">
+    <div
+      ref="point"
+      :class="classes"
+      :style="styles"
+    >
       <slot></slot>
     </div>
-    <div v-show="slot" :style="slotStyle"></div>
+    <div
+      v-show="slot"
+      :style="slotStyle"
+    ></div>
   </div>
 </template>
 
 <script type="text/babel">
 import { on, off } from "../../utils/dom";
-const prefixCls = "hn-affix";
 
 function getScroll(target, top) {
   const prop = top ? "pageYOffset" : "pageXOffset";
@@ -57,6 +63,7 @@ export default {
   },
   data() {
     return {
+      prefixCls: "hn-affix",
       affix: false,
       styles: {},
       slot: false,
@@ -75,7 +82,7 @@ export default {
     classes() {
       return [
         {
-          [`${prefixCls}`]: this.affix
+          [`${this.prefixCls}`]: this.affix
         }
       ];
     }
@@ -106,7 +113,7 @@ export default {
       // Fixed Top
       if (
         elOffset.top - this.offsetTop < scrollTop &&
-        this.offsetType == "top" &&
+        this.offsetType === "top" &&
         !affix
       ) {
         this.affix = true;
@@ -124,7 +131,7 @@ export default {
         this.$emit("on-change", true);
       } else if (
         elOffset.top - this.offsetTop > scrollTop &&
-        this.offsetType == "top" &&
+        this.offsetType === "top" &&
         affix
       ) {
         this.slot = false;
@@ -138,8 +145,8 @@ export default {
       // Fixed Bottom
       if (
         elOffset.top + this.offsetBottom + elHeight >
-          scrollTop + windowHeight &&
-        this.offsetType == "bottom" &&
+        scrollTop + windowHeight &&
+        this.offsetType === "bottom" &&
         !affix
       ) {
         this.affix = true;
@@ -152,8 +159,8 @@ export default {
         this.$emit("on-change", true);
       } else if (
         elOffset.top + this.offsetBottom + elHeight <
-          scrollTop + windowHeight &&
-        this.offsetType == "bottom" &&
+        scrollTop + windowHeight &&
+        this.offsetType === "bottom" &&
         affix
       ) {
         this.affix = false;

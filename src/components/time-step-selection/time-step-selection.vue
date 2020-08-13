@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hn-period">
     <div class="period">
 
       <!-- 每日分隔是才有该功能 -->

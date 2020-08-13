@@ -8,14 +8,13 @@
 </template>
 
 <script type="text/babel">
-const prefixCls = "hn-tip";
 
 export default {
   name: "Tip",
   props: {
     type: {
       type: String,
-      validator: function(value) {
+      validator: function (value) {
         return ["default", "warning"].indexOf(value) !== -1;
       },
       default: "default"
@@ -25,9 +24,14 @@ export default {
       default: ""
     }
   },
+  data() {
+    return {
+      prefix: 'hn-tip'
+    };
+  },
   computed: {
     typeClass() {
-      return [prefixCls, `${prefixCls}--${this.type}`];
+      return [this.prefixCls, `${this.prefixCls}--${this.type}`];
     }
   }
 };
