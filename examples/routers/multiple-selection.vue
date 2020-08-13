@@ -5,6 +5,7 @@
       :selects="selects"
       :props="{
         key: 'id',
+        value: 'id',
         label: 'label'
       }"
       @on-change="handleChange"
@@ -33,9 +34,10 @@ export default {
         });
       }
       this.options = options;
-      console.log(this.options);
     },
-    handleChange() {}
+    handleChange(val) {
+      console.log(val)
+    }
   }
 };
 </script>
