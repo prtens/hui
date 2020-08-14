@@ -8,6 +8,7 @@ import "../src/icons/index";
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import zhLang from "element-ui/lib/locale/lang/zh-CN";
+import locale from '../src/locale/lang/zh-CN';
 
 Vue.config.productionTip = false;
 
@@ -15,7 +16,7 @@ Vue.use(VueRouter);
 Vue.use(hui);
 Vue.use(Element, {
   size: "small",
-  locale: zhLang
+  locale: [zhLang, ...locale]
 });
 
 const router = new VueRouter({
@@ -87,6 +88,10 @@ const router = new VueRouter({
     {
       path: "/effectsempty",
       component: resolve => require(["./routers/effects-empty.vue"], resolve)
+    },
+    {
+      path: "/calendar",
+      component: resolve => require(["./routers/calendar.vue"], resolve)
     },
     {
       path: "/timestepselection",

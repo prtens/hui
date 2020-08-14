@@ -1,0 +1,374 @@
+<template>
+  <div class="dewwf" style="width: 200px; position: relative">
+    <div :class="`mx-trigger result result-with-icon ${vs ? 'result-vs':''}`" :id="`trigger_${viewId}`"
+         @click="toggle">
+      <i class="el-icon-date prefix-icon"></i>
+      <template v-if="endStr">
+        <span class="co co-left">{{ startStr }}</span>
+        <span class="center color-9">{{centerTip}}</span>
+        <span class="co co-right">{{endStr}}</span>
+      </template>
+      <template v-else>
+        {{startStr}}
+      </template>
+
+    </div>
+  
+    <div :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+         :style="{left: `${left}px`, top: `${top}px`}"
+         :id="`rpcnt_${viewId}`">
+  
+  
+      <calendars-range
+        :start.sync="start"
+        :end.sync="end"
+        :max.sync="max"
+        :min.sync="min"
+                       :timeType.sync="timeType"
+                       :dateType.sync="dateType"
+                       :startStr.sync="startStr" />
+      
+    </div>
+
+  </div>
+</template>
+
+<script>
+import $ from "jquery"
+import util from './util'
+import Locale from '../../mixins/locale';
+
+const { foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType } = util;
+
+export default {
+  name: 'CalendarsRangepicker',
+  mixins: [Locale],
+  props: {
+    viewId: {
+      type: String,
+      default: 'calendars-rangepicker'
+    },
+    //默认选中开始日期
+    start:{
+      type: String,
+      default: ''
+    },
+    //默认选中结束日期，不限的情况下end=不限即可
+    end:{
+      type: String,
+      default: ''
+    },
+    /**
+     * 是否禁止选择开始日期
+     开始日期禁止使用的时候，只允许使用动态计算的快捷日期
+     动态计算的都是依据开始日期计算的
+     */
+    startDisabled: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     *是否禁止选中结束日期
+     结束日期禁止使用的时候，禁止快捷操作，开始日期最大可选为结束日期
+     */
+    endDisabled: {
+      type: Boolean,
+      default: false
+    },
+    // 是否可对比
+    vsenable: {
+      type: Boolean,
+      default: false
+    },
+    // 对比初始值
+    vs: {
+      type: Boolean,
+      default: false
+    },
+    // vsenable=true时可生效，关闭对比的时候选择单天还是连续的时间段
+    single: {
+      type: Boolean,
+      default: false
+    },
+    // 是否有快捷方式
+    shortcuts: {
+      type: Boolean,
+      default: true
+    },
+    /**
+     * shortcuts=true时生效，支持以下两个形式：
+     1.配置备选快捷方式key值，如["today","yesterday"]，点击查看所有备选值
+     2.自定义快捷方式，格式如下
+     [{
+    key: '', //唯一key
+    text: '', //显示文案
+    tip: '', //快捷方式说明，没有为空即可
+    start: '2019-06-21', //对应的开始时间
+    end: '2019-06-24' //对应的结束时间
+}]
+     */
+    shortkeys: {
+      type: Array,
+      default(){
+        return [
+          "today",
+          "yesterday",
+          "passed7",
+          "preWeekMon",
+          "passed15",
+          "lastestThisMonth",
+          "passed30",
+          "preMonth"
+        ]
+      }
+    },
+    //最大可选的日期
+    max:{
+      type: String,
+      default: ''
+    },
+    //最小可选的日期
+    min:{
+      type: String,
+      default: ''
+    },
+    // 年月日选择类型：    可选择"year,month,day
+    dateType: {
+      type: String,
+      default: ''
+    },
+    /**
+     * 时分秒选择类型：
+     1.设置该值后会出现时间选择组件
+     可选择"hour,minute,second"中的一个或者多个
+     此外提供快捷的配置"all" = "hour,minute,second"
+     2.不设置无时分秒选择
+     */
+    timeType: {
+      type: String,
+      default: ''
+    },
+    // date格式
+    formatter: {
+      type: String,
+      default: 'YYYY-MM-DD'
+    },
+    // 日历选择面板与目标的对齐方式，可选left和right
+    align: {
+      type: String,
+      default: 'left'
+    },
+  },
+  data() {
+    return {
+      vsSingle: false,
+    startStr:'',
+    endStr :'',
+      centerTip:'',
+    quickDateText:'',
+    quickDateKey :'',
+      show: false,
+      left: '',
+      top: '',
+    };
+  },
+  mounted() {
+    this.init()
+  },
+  methods:{
+    init(){
+      let that = this;
+  
+      // vsEnable 是否可对比，默认关闭
+      // vs 对比初始状态
+      // vsSingle 可对比情况下，关闭对比时是选择时间段还是单天
+      let vsEnable = (/^true$/i).test(that.vsenable) || false,
+        vs = false;
+      if (vsEnable) {
+        vs = (/^true$/i).test(that.vs) || false;
+      }
+      let vsSingle = vsEnable ? ((/^true$/i).test(that.single) || false) : false;
+  
+      let timeType = that.timeType; //可选时分秒
+      let formatter = that.formatter || ('YYYY-MM-DD' + (timeType ? ' hh:mm:ss' : ''));
+      let dateType = that.dateType; //可选年月日
+      let types = ParseDateType(dateType); //解析年月日
+      if (types.day) {
+        // 可选择日期
+      } else {
+        if (types.month) {
+          // 可选择月份 todo
+          formatter = formatter.slice(0, 7);
+        } else {
+          // 只可选择年份 todo
+          formatter = formatter.slice(0, 4);
+        }
+      }
+  
+      // 快捷选项
+      let startDisabled = (/^true$/i).test(that.startDisabled) || false; //开始时间是否可选
+      let endDisabled = (/^true$/i).test(that.endDisabled) || false;//结束时间是否可选
+      let showShortcuts = !(/^false$/i).test(that.shortcuts); // 默认开启快捷选项的
+      let quickDates = showShortcuts ? (that.shortkeys || ['today', 'yesterday', 'preWeekMon', 'lastestWeekMon', 'preMonth', 'lastestThisMonth']) : [];
+  
+      if (startDisabled) {
+        // 开始时间禁止使用的时候，只允许使用动态计算的快捷日期
+        // 动态计算的都是依据开始时间计算的
+        showShortcuts = false;
+        for (var i = 0; i < quickDates.length; i++) {
+          if ((quickDates[i].indexOf('dynamic') < 0) && (quickDates[i].indexOf('forever') < 0)) {
+            quickDates.splice(i--, 1);
+          }
+        }
+      }
+      if (endDisabled) {
+        // 结束时间禁止选择的时候，不允许使用快捷方式
+        showShortcuts = false;
+        quickDates = [];
+      }
+  
+      let { start, end, min, max } = that;
+      if (!start) {
+        start = GetDefaultDate(min, max, formatter);
+      }
+      // 包含快捷方式不限的时候end=不限，不需默认初始化
+      if (!end && (!showShortcuts || (quickDates.indexOf('forever') < 0))) {
+        end = GetDefaultDate(min, max, formatter);
+      }
+      
+      let dateStartStr = DateFormat(start, formatter);
+      let dateStart = DateParse(dateStartStr);
+      let dateEnd, dateEndStr;
+      if (end == ForeverStr) {
+        dateEnd = dateEndStr = ForeverStr;
+      } else {
+        dateEndStr = DateFormat(end, formatter);
+        dateEnd = DateParse(dateEndStr);
+      }
+  
+      // 快捷操作，检测是否匹配到快捷日期
+      let quickInfos = GetQuickInfos(quickDates, dateStartStr, formatter);
+ 
+      let quickDateText, quickDateKey;
+      // 可能匹配到多个
+      for (let index = 0; index < quickInfos.length; index++) {
+        let q = quickInfos[index];
+        if (q.start == dateStartStr && q.end == dateEndStr) {
+          quickDateText = q.text;
+          quickDateKey = q.key;
+          break;
+        }
+      }
+      
+  
+      that.vsSingle = vsSingle
+      that.start = dateStart //Date
+      that.startStr = dateStartStr
+      that.end = dateEnd //Date or Forever
+      that.endStr = dateEndStr
+      that.formatter = formatter
+      that.quickDateText = quickDateText
+      that.quickDateKey = quickDateKey
+  
+      that.fillToNode()
+      
+    },
+  
+    fillToNode() {
+      let that = this;
+      let vs = that.vs,
+        vsSingle = that.vsSingle,
+        formatter = that.formatter;
+    
+      let startStr = that.startStr,
+        endStr = that.endStr,
+        quickDateText = that.quickDateText;
+    
+      let result = {
+        centerTip: vs ? this.t('h.calendar.vs') : this.t('h.calendar.to')
+      }
+  
+    
+      let today = DateFormat(GetOffsetDate(0), formatter),
+        yesterday = DateFormat(GetOffsetDate(-1), formatter),
+        tomorrow = DateFormat(GetOffsetDate(1), formatter);
+      let map = {
+        [today]: this.t('h.calendar.today'),
+        [yesterday]: this.t('h.calendar.yesterday'),
+        [tomorrow]: this.t('h.calendar.tomorrow')
+      };
+      let textFn = (str) => {
+        return map[str] || str;
+      }
+    
+      if (vs) {
+        result.startStr = textFn(startStr);
+        result.endStr = textFn(endStr);
+      } else {
+        // 非对比情况
+        if (vsSingle) {
+          // 选择单日
+          result.startStr = textFn(startStr);
+        } else {
+          // 选择连续时间
+          if (quickDateText) {
+            if (quickDateText == ForeverStr) {
+              // 不限的情况显示开始时间
+              result.startStr = startStr;
+              result.endStr = ForeverStr;
+            } else {
+              result.startStr = quickDateText;
+            }
+          } else {
+            result.startStr = startStr;
+            result.endStr = endStr;
+          }
+        }
+      }
+    
+      that.centerTip = result.centerTip
+      that.startStr = result.startStr
+      that.endStr = result.endStr
+      
+    },
+    
+    toggle(){
+      let show = this.show;
+      if (show) {
+        this.hideDiv();
+      } else {
+        this.showDiv();
+      }
+    },
+    showDiv() {
+      let that = this;
+      let show = that.show;
+      if (!show) {
+        that.show= true
+      
+        let inputNode = $('#trigger_' + that.viewId),
+          calNode = $('#rpcnt_' + that.viewId);
+      
+        let left = 0,
+          top = inputNode.outerHeight();
+        if (that.align == 'right') {
+          left = inputNode.outerWidth() - calNode.outerWidth();
+        }
+  
+        that.top=top
+          that.left=left
+      }
+    },
+  
+    hideDiv() {
+      let that = this;
+      let show = that.show;
+      if (show) {
+        that.show= false
+      }
+    },
+  }
+};
+</script>
+
+<style></style>

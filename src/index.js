@@ -5,6 +5,7 @@ import AreaSelection from "./components/area-selection";
 import BackTop from "./components/back-top";
 import Breadcrumb from "./components/breadcrumb";
 import ChartsEntrance from "./components/charts-entrance";
+import Calendars from "./components/calendars";
 import DefError from "./components/def-error";
 import EffectsEmpty from "./components/effects-empty";
 import Hamburger from "./components/hamburger";
@@ -22,6 +23,12 @@ import locale from "./locale/index";
 
 const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
+
+
+const CalendarsDatepicker = Calendars.Datepicker;
+// const CalendarsRange = Calendars.Range;
+// const CalendarsRangepicker = Calendars.Rangepicker;
+
 const components = [
   Affix,
   Anchor,
@@ -30,6 +37,10 @@ const components = [
   BackTop,
   Breadcrumb,
   ChartsEntrance,
+  Calendars,
+  CalendarsDatepicker,
+  // CalendarsRange,
+  // CalendarsRangepicker,
   DefError,
   EffectsEmpty,
   Hamburger,
@@ -67,6 +78,8 @@ if (typeof window !== "undefined" && window.Vue) {
 
 export default {
   version: "0.0.1",
+  locale: locale.use,
+  i18n: locale.i18n,
   install,
   ...components
 };
