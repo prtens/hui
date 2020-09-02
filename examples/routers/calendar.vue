@@ -210,7 +210,7 @@ export default {
   methods: {
     init() {
       let that = this;
-    },
+    }
   }
 };
 </script>
