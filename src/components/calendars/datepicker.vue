@@ -1,23 +1,28 @@
 <template>
-  <div class="mx-cascade">
-    <div :id="`trigger_${viewId}`" :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
+  <div class="hn-datepicker">
+    <div :id="`trigger_${viewId}`"
+         :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
          @click="toggle">
       <template v-if="!prefix">
         <i class="el-icon-date prefix-icon"></i>
       </template>
       <template v-else>
-        <span class="color-9">{{ prefix }}</span>
+        <span class="color-9">{{ prefix }}：</span>
       </template>
       {{ (selected || placeholder) }}
     </div>
 
-    <div :id="`dpcnt_${viewId}`" :class="` mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+    <div :id="`dpcnt_${viewId}`" :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
          :style="{left: `${left}px`, top: `${top}px`}">
       <calendars
-        :selected.sync="currentSelected"
         :min="min"
         :max="max"
+        :selected="selected"
+        :dateType="dateType"
+        :timeType="timeType"
+        :formatter="formatter"
         :disabledWeeks="disabledWeeks"
+        :weekStart="weekStart"
         @change="choose"/>
     </div>
   </div>
@@ -37,20 +42,6 @@ export default {
       type: String,
       default: 'calendars-datepicker'
     },
-    prefix: {
-      type: String,
-      default: ''
-    },
-    // 空状态文案
-    placeholder: {
-      type: String,
-      default: '请选择'
-    },
-    align: {
-      type: String,
-      default: 'left'
-    },
-
     // 最小可选的日期
     min: {
       type: String,
@@ -66,11 +57,6 @@ export default {
       type: String,
       default: ''
     },
-    // date格式
-    formatter: {
-      type: String,
-      default: 'YYYY-MM-DD'
-    },
     // 年月日选择类型 year,month,day
     dateType: {
       type: String,
@@ -81,10 +67,20 @@ export default {
       type: String,
       default: ''
     },
-    // 从周几开，0-6，0表示周日
-    weekStart: {
-      type: Number,
-      default: 0
+    // date格式
+    formatter: {
+      type: String,
+      default: 'YYYY-MM-DD'
+    },
+    // 日历选择面板与目标的对齐方式，可选left和right
+    align: {
+      type: String,
+      default: 'left'
+    },
+    // 提示文案前缀，展示为prefix：date time
+    prefix: {
+      type: String,
+      default: ''
     },
     // 限制周几不可选，[0, 1, 2, 3, 4, 5, 6]的子集
     disabledWeeks: {
@@ -92,6 +88,21 @@ export default {
       default() {
         return []
       }
+    },
+    // 从周几开，0-6，0表示周日
+    weekStart: {
+      type: Number,
+      default: 0
+    },
+    // 空状态文案
+    placeholder: {
+      type: String,
+      default: '请选择'
+    },
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -101,21 +112,16 @@ export default {
       show: false
     };
   },
-  computed: {
-    currentSelected: {
-      get() {
-        return this.selected;
-      },
-      set(val) {
-        this.$emit("update:selected", val);
-      }
-    }
-  },
+  computed: {},
   mounted() {
   },
   methods: {
     toggle() {
       let that = this
+      if (that.disabled) {
+        return false
+      }
+
       let show = that.show;
       if (show) {
         that.hideDiv();
@@ -134,7 +140,7 @@ export default {
         let left = 0,
           top = inputNode.outerHeight();
 
-        if (align == 'right') {
+        if (align === 'right') {
           left = inputNode.outerWidth() - calNode.outerWidth()
         }
 
@@ -149,7 +155,9 @@ export default {
         that.show = false
       }
     },
-    choose (params) {
+    choose(params) {
+      this.hideDiv()
+      this.$emit('update:selected', params.date)
       this.$emit('change', params)
     }
   }

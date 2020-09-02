@@ -81,7 +81,7 @@ export default {
 <style lang="scss">
 @import "../src/styles/index.scss";
 #app {
-  width: 1200px;
+  width: 80%;
   margin: 0 auto;
 }
 nav {

@@ -22,6 +22,11 @@
   color: #ccc;
 }
 
+.color-error,
+.color-red {
+  color: $danger-color; // #d52112
+}
+
 .cursor-pointer{
   cursor: pointer;
 }
@@ -29,6 +34,10 @@
 // line-height
 .lh28 {
   line-height: 28px;
+}
+
+.pr {
+  position: relative;
 }
 
 // 浮动

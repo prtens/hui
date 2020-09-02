@@ -1,7 +1,9 @@
 <template>
-  <div class="dewwf" style="width: 200px; position: relative">
-    <div :class="`mx-trigger result result-with-icon ${vs ? 'result-vs':''}`" :id="`trigger_${viewId}`"
-         @click="toggle">
+  <div class="hn-rangepicker-wrapper pr">
+    <div
+      :class="`mx-trigger result result-center result-with-icon ${vs ? 'result-vs':''}`"
+      :id="`trigger_${viewId}`"
+      @click="toggle">
       <i class="el-icon-date prefix-icon"></i>
       <template v-if="endStr">
         <span class="co co-left">{{ startStr }}</span>
@@ -11,7 +13,6 @@
       <template v-else>
         {{ startStr }}
       </template>
-
     </div>
 
     <div :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
@@ -21,10 +22,25 @@
       <calendars-range
         :start.sync="start"
         :end.sync="end"
-        :max.sync="max"
-        :min.sync="min"
-        :timeType.sync="timeType"
-        :dateType.sync="dateType"/>
+        :startDisabled="startDisabled"
+        :endDisabled="endDisabled"
+        :vsenable="vsenable"
+        :vs.sync="vs"
+        :single="single"
+        :shortcuts="shortcuts"
+        :shortkeys="shortkeys"
+        :min="min"
+        :max="max"
+        :maxGap="maxGap"
+        :minGap="minGap"
+        :dateType="dateType"
+        :formatter="formatter"
+        :align="align"
+        :textAlign="textAlign"
+        :disabledWeeks="disabledWeeks"
+        :weekStart="weekStart"
+        :disabled="disabled"
+        @change="choose"/>
     </div>
 
   </div>
@@ -36,7 +52,15 @@ import util from './util'
 import Locale from '../../mixins/locale';
 import CalendarsRange from './range'
 
-const {foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType} = util;
+const {
+  foreverStr: ForeverStr,
+  dateFormat: DateFormat,
+  dateParse: DateParse,
+  getDefaultDate: GetDefaultDate,
+  getQuickInfos: GetQuickInfos,
+  getOffsetDate: GetOffsetDate,
+  parseDateType: ParseDateType
+} = util;
 
 export default {
   name: 'CalendarsRangepicker',
@@ -59,92 +83,92 @@ export default {
       type: String,
       default: ''
     },
-    /**
-     * 是否禁止选择开始日期
-     开始日期禁止使用的时候，只允许使用动态计算的快捷日期
-     动态计算的都是依据开始日期计算的
-     */
+    // 是否禁止选择开始日期
+    // 开始日期禁止使用的时候，只允许使用动态计算的快捷日期
+    // 动态计算的都是依据开始日期计算的
     startDisabled: {
       type: Boolean,
       default: false
     },
-    /**
-     *是否禁止选中结束日期
-     结束日期禁止使用的时候，禁止快捷操作，开始日期最大可选为结束日期
-     */
+    // 是否禁止选中结束日期
+    // 结束日期禁止使用的时候，禁止快捷操作，开始日期最大可选为结束日期
     endDisabled: {
       type: Boolean,
       default: false
     },
-    //  是否可对比
+    // 是否可对比
     vsenable: {
       type: Boolean,
       default: false
     },
-    //  对比初始值
+    // 对比初始值
     vs: {
       type: Boolean,
       default: false
     },
-    //  vsenable=true时可生效，关闭对比的时候选择单天还是连续的时间段
+    // vsenable=true时可生效，关闭对比的时候选择单天还是连续的时间段
     single: {
       type: Boolean,
       default: false
     },
-    //  是否有快捷方式
+    // 是否有快捷方式
     shortcuts: {
       type: Boolean,
       default: true
     },
-    /**
-     * shortcuts=true时生效，支持以下两个形式：
-     1.配置备选快捷方式key值，如["today","yesterday"]，点击查看所有备选值
-     2.自定义快捷方式，格式如下
-     [{
-    key: '', // 唯一key
-    text: '', // 显示文案
-    tip: '', // 快捷方式说明，没有为空即可
-    start: '2019-06-21', // 对应的开始时间
-    end: '2019-06-24' // 对应的结束时间
-}]
-     */
     shortkeys: {
       type: Array,
       default() {
         return [
-          "today",
-          "yesterday",
-          "passed7",
-          "preWeekMon",
-          "passed15",
-          "lastestThisMonth",
-          "passed30",
-          "preMonth"
-        ]
+          // "today", // 今日
+          // "yesterday", // 昨日
+          // "beforeYesterday", // 前天
+          // "preMonth", // 上月
+          // "preWeekSun", // 上周（周日至周六）
+          // "preWeekMon", // 上周（周一至周日）
+          // "lastestWeekSun", // 本周（周日开始，包含今日）
+          // "lastestWeekMon", // 本周（周一开始，包含今日）
+          // "passedThisMonth", // 本月（昨日开始算）
+          // "lastestThisMonth", // 本月（今日开始算）
+          // "passed{n}", // 过去 n 天（昨日开始算），n可为任意整数，passed1，passed15...
+          // "lastest{n}", // 最近 n 天（今日开始算），n可为任意整数，lastest1，lastest15...
+          // "dynamicStart{n}", // n天后结束（以开始时间为准动态计算），n可为任意整数，dynamicStart1，dynamicStart15...
+          // "dynamicEndThisMonth", // 开始时间到开始时间所在月月底
+          // "dynamicEndNextMonth", // 开始时间到开始时间次月月底
+          // "forever" //有开始时间，结束时间不限
+        ];
       }
-    },
-    // 最大可选的日期
-    max: {
-      type: String,
-      default: ''
     },
     // 最小可选的日期
     min: {
       type: String,
       default: ''
     },
-    //  年月日选择类型：    可选择"year,month,day
+    // 最大可选的日期
+    max: {
+      type: String,
+      default: ''
+    },
+    // 可选择的最大天数间隔
+    maxGap: {
+      type: Number
+    },
+    // 可选择的最小天数间隔
+    minGap: {
+      type: Number
+    },
+    // 年月日选择类型：
+    // 可选择"year,month,day"中的一个或者多个
+    // 此外"all" = "year,month,day" = ""，不设置的时候默认年月日都显示
     dateType: {
       type: String,
       default: ''
     },
-    /**
-     * 时分秒选择类型：
-     1.设置该值后会出现时间选择组件
-     可选择"hour,minute,second"中的一个或者多个
-     此外提供快捷的配置"all" = "hour,minute,second"
-     2.不设置无时分秒选择
-     */
+    // 时分秒选择类型：
+    // 1.设置该值后会出现时间选择组件
+    // 可选择"hour,minute,second"中的一个或者多个
+    // 此外提供快捷的配置"all" = "hour,minute,second"
+    // 2.不设置无时分秒选择
     timeType: {
       type: String,
       default: ''
@@ -158,6 +182,28 @@ export default {
     align: {
       type: String,
       default: 'left'
+    },
+    // 选中结果文案对齐方式，可选left，right和center，默认居中对齐
+    textAlign: {
+      type: String,
+      default: 'center'
+    },
+    // 限制周几不可选，[0, 1, 2, 3, 4, 5, 6]的子集
+    disabledWeeks: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    // 从周几开，0-6，0表示周日
+    weekStart: {
+      type: Number,
+      default: 0
+    },
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -266,13 +312,11 @@ export default {
       that.startStr = dateStartStr
       // that.end = dateEnd // Date or Forever
       that.endStr = dateEndStr
-      that.formatter = formatter
       that.quickDateText = quickDateText
       that.quickDateKey = quickDateKey
 
       that.fillToNode()
     },
-
     fillToNode() {
       let that = this;
       let vs = that.vs,
@@ -328,8 +372,10 @@ export default {
       that.startStr = result.startStr
       that.endStr = result.endStr
     },
-
     toggle() {
+      if (this.disabled) {
+        return false
+      }
       let show = this.show;
       if (show) {
         this.hideDiv();
@@ -356,13 +402,19 @@ export default {
         that.left = left
       }
     },
-
     hideDiv() {
       let that = this;
       let show = that.show;
       if (show) {
         that.show = false
       }
+    },
+    choose(params) {
+      this.startStr = DateFormat(params.startStr, this.formatter)
+      this.endStr = DateFormat(params.endStr, this.formatter)
+
+      // this.$emit('update:start', DateFormat(params.startStr, this.formatter))
+      // this.$emit('update:end', DateFormat(params.endStr, this.formatter))
     }
   }
 };

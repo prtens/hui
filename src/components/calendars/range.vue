@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div :class="`range-wrapper ${timeType ? 'time' : ''}`">
-
+    <div :class="`hn-range-wrapper ${timeType ? 'time' : ''}`">
       <div class="range">
         <div class="title clearfix">
           <span class="fl">{{ title }}：</span>
@@ -9,34 +8,37 @@
             <el-switch class="fr" v-model="currentVs"></el-switch>
           </template>
         </div>
-        <div class="clearfix">
+        <div class="clearfix pr">
           <div class="range-input range-input-left">
             <!-- 结束时间禁止操作的时候限制最大可选为直接时间endDisabled -->
-            <calendars-datepicker :class="`${currentVs} ? 'vs1' : ''`"
-                                  :min="min"
-                                  :max="endDisabled?dates.endStr:max"
-                                  :formatter="formatter"
-                                  :disabled-weeks="disabledWeeks"
-                                  :time-type="timeType"
-                                  :date-type="dateType"
-                                  :selected.sync="dates.startStr"
-                                  :disabled="startDisabled"
-                                  @change="syncDate($event, 'start')"/>
+            <calendars-datepicker
+              :class="`${currentVs} ? 'vs1' : ''`"
+              :min="min"
+              :max="endDisabled?dates.endStr:max"
+              :selected.sync="dates.startStr"
+              :dateType="dateType"
+              :timeType="timeType"
+              :formatter="formatter"
+              :disabledWeeks="disabledWeeks"
+              :weekStart="weekStart"
+              :disabled="startDisabled"
+              @change="syncDate($event, 'start')"/>
           </div>
           <div class="range-gap">-</div>
           <div class="range-input range-input-right">
             <!-- 不对比的时候，限制结束时间最小值为(开始时间或最小日期中的较大值) -->
-            <calendars-datepicker :class="`${currentVs} ? 'vs2' : ''`"
-                                  :min="!currentVs?endMinFn(dates.startStr,min):min"
-                                  :max="max"
-                                  :formatter="formatter"
-                                  :disabled-weeks="disabledWeeks"
-                                  :time-type="timeType"
-                                  :date-type="dateType"
-                                  :align="align"
-                                  :selected.sync="dates.endStr"
-                                  :disabled="(!currentVs&&vsSingle) || endDisabled ? true : false"
-                                  @change="syncDate($event, 'end')"/>
+            <calendars-datepicker
+              :class="`${currentVs} ? 'vs2' : ''`"
+              :min="!currentVs?endMinFn(dates.startStr,min):min"
+              :max="max"
+              :selected.sync="dates.endStr"
+              :dateType="dateType"
+              :timeType="timeType"
+              :formatter="formatter"
+              :align="align"
+              :disabledWeeks="disabledWeeks"
+              :disabled="(!currentVs&&vsSingle) || endDisabled ? true : false"
+              @change="syncDate($event, 'end')"/>
           </div>
         </div>
       </div>
@@ -54,7 +56,6 @@
         </div>
       </template>
     </div>
-
     <div class="mx-output-footer">
       <el-button class="mr10" type="primary" @click="datePicked">{{ submitText }}</el-button>
       <el-button class="mr10" type="primary" plain @click="cancel">{{ cancelText }}</el-button>
@@ -65,11 +66,16 @@
 
 <script>
 import Locale from '../../mixins/locale';
+import util from './util'
 import CalendarsDatepicker from "./datepicker";
 
-import util from './util'
-
-const {foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType} = util;
+const {
+  foreverStr: ForeverStr,
+  dateFormat: DateFormat,
+  dateParse: DateParse,
+  getDefaultDate: GetDefaultDate,
+  getQuickInfos: GetQuickInfos
+} = util;
 
 export default {
   name: 'CalendarsRange',
@@ -88,9 +94,9 @@ export default {
       type: String,
       default: ''
     },
-//     是否禁止选择开始日期
-//     开始日期禁止使用的时候，只允许使用动态计算的快捷日期
-// 动态计算的都是依据开始日期计算的
+    // 是否禁止选择开始日期
+    // 开始日期禁止使用的时候，只允许使用动态计算的快捷日期
+    // 动态计算的都是依据开始日期计算的
     startDisabled: {
       type: Boolean,
       default: false
@@ -125,14 +131,22 @@ export default {
       type: Array,
       default() {
         return [
-          "today",
-          "yesterday",
-          "passed7",
-          "preWeekMon",
-          "passed15",
-          "lastestThisMonth",
-          "passed30",
-          "preMonth"
+          // "today", // 今日
+          // "yesterday", // 昨日
+          // "beforeYesterday", // 前天
+          // "preMonth", // 上月
+          // "preWeekSun", // 上周（周日至周六）
+          // "preWeekMon", // 上周（周一至周日）
+          // "lastestWeekSun", // 本周（周日开始，包含今日）
+          // "lastestWeekMon", // 本周（周一开始，包含今日）
+          // "passedThisMonth", // 本月（昨日开始算）
+          // "lastestThisMonth", // 本月（今日开始算）
+          // "passed{n}", // 过去 n 天（昨日开始算），n可为任意整数，passed1，passed15...
+          // "lastest{n}", // 最近 n 天（今日开始算），n可为任意整数，lastest1，lastest15...
+          // "dynamicStart{n}", // n天后结束（以开始时间为准动态计算），n可为任意整数，dynamicStart1，dynamicStart15...
+          // "dynamicEndThisMonth", // 开始时间到开始时间所在月月底
+          // "dynamicEndNextMonth", // 开始时间到开始时间次月月底
+          // "forever" //有开始时间，结束时间不限
         ];
       }
     },
@@ -154,18 +168,18 @@ export default {
     minGap: {
       type: Number
     },
-//     年月日选择类型：
-// 可选择"year,month,day"中的一个或者多个
-// 此外"all" = "year,month,day" = ""，不设置的时候默认年月日都显示
+    // 年月日选择类型：
+    // 可选择"year,month,day"中的一个或者多个
+    // 此外"all" = "year,month,day" = ""，不设置的时候默认年月日都显示
     dateType: {
       type: String,
       default: ''
     },
-//     时分秒选择类型：
-// 1.设置该值后会出现时间选择组件
-// 可选择"hour,minute,second"中的一个或者多个
-// 此外提供快捷的配置"all" = "hour,minute,second"
-// 2.不设置无时分秒选择
+    // 时分秒选择类型：
+    // 1.设置该值后会出现时间选择组件
+    // 可选择"hour,minute,second"中的一个或者多个
+    // 此外提供快捷的配置"all" = "hour,minute,second"
+    // 2.不设置无时分秒选择
     timeType: {
       type: String,
       default: ''
@@ -193,7 +207,7 @@ export default {
       }
     },
     // 从周几开，0-6，0表示周日
-    weekstart: {
+    weekStart: {
       type: Number,
       default: 0
     },
@@ -206,7 +220,6 @@ export default {
   data() {
     return {
       title: '选择日期',
-      quickDates: ['passed5', 'passed10'],
       quickInfos: [],
       quickGap: '',
       quickTip: '快捷日期',
@@ -253,11 +266,13 @@ export default {
     },
     init() {
       let that = this;
-
       let dates = that.dates,
         formatter = that.formatter;
-      let startStr = that.start || dates.startStr,
-        endStr = that.end || dates.endStr;
+      dates.startStr = that.start
+      dates.endStr = that.end
+
+      let startStr = dates.startStr,
+        endStr = dates.endStr;
 
       let min = that.min,
         max = that.max;
@@ -278,7 +293,7 @@ export default {
         dates.end = DateParse(dates.endStr);
       }
 
-      let quickInfos = GetQuickInfos(that.quickDates, startStr, formatter);
+      let quickInfos = GetQuickInfos(that.shortkeys, startStr, formatter);
       if (!dates.quickDateKey) {
         for (let index = 0; index < quickInfos.length; index++) {
           let q = quickInfos[index];
@@ -300,6 +315,7 @@ export default {
 
       let startStr = that.dates.startStr,
         endStr = that.dates.endStr;
+
       let start = new Date(DateFormat(startStr, that.formatter)),
         end;
       if (endStr === ForeverStr) {
@@ -314,7 +330,7 @@ export default {
       }
 
       // 开始时间会影响快捷日期
-      let quickInfos = GetQuickInfos(that.quickDates, startStr, that.formatter);
+      let quickInfos = GetQuickInfos(that.shortkeys, startStr, that.formatter);
       let quickDateText, quickDateKey;
       for (let index = 0; index < quickInfos.length; index++) {
         let q = quickInfos[index];
@@ -328,10 +344,17 @@ export default {
       that.quickInfos = quickInfos
       that.dates.quickDateKey = quickDateKey
       that.dates.quickDateText = quickDateText
+
+      this.$emit('update:start', DateFormat(that.dates.startStr, that.formatter))
+      this.$emit('update:end', DateFormat(that.dates.endStr, that.formatter))
+      this.$emit('change', {
+        startStr: that.dates.startStr,
+        endStr: that.dates.endStr
+      })
     },
     datePicked(params) {
       let that = this;
-      let {dates, formatter, quickDates, vs, vsSingle, minGap, maxGap} = that;
+      let {dates, formatter, shortkeys, vs, vsSingle, minGap, maxGap} = that;
       if (params.quick) {
         // 选择快捷方式
         // 快捷日期可能需要动态计算，已当前开始时间为准
@@ -381,7 +404,7 @@ export default {
           endStr = (end === ForeverStr) ? ForeverStr : DateFormat(end, formatter);
 
         // 开始时间会影响快捷日期
-        let quickInfos = GetQuickInfos(quickDates, startStr, formatter);
+        let quickInfos = GetQuickInfos(shortkeys, startStr, formatter);
         let quickDateText, quickDateKey;
         for (let index = 0; index < quickInfos.length; index++) {
           let q = quickInfos[index];
@@ -432,8 +455,15 @@ export default {
           errorMsg = `至多选择${maxGap}天`;
         }
       }
-      this.errorMsg = errorMsg
-      this.dates = dates
+      that.errorMsg = errorMsg
+      that.dates = dates
+
+      this.$emit('update:start', DateFormat(that.dates.startStr, that.formatter))
+      this.$emit('update:end', DateFormat(that.dates.endStr, that.formatter))
+      this.$emit('change', {
+        startStr: that.dates.startStr,
+        endStr: that.dates.endStr
+      })
     },
     cancel() {
     }

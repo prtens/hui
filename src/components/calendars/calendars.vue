@@ -33,8 +33,8 @@
 
       <template v-if="timeType">
         <div class="mx-output-footer">
-          <button type="button" class="btn btn-small btn-brand" @click="hide({enter:true})">确定</button>
-          <button type="button" class="btn btn-small ml10" @click="hide()">取消</button>
+          <el-button type="primary" plain>确定</el-button>
+          <el-button type="primary">取消</el-button>
         </div>
       </template>
     </div>
@@ -85,82 +85,26 @@
 </template>
 
 <script type="text/babel">
-
-import {t} from "../../locale";
 import util from './util'
+import Locale from "../../mixins/locale";
 
-const {foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType} = util;
-
-let locale = (...args) => {
-  return t.apply(this, args);
-}
-
-let Today = new Date();
-
-let Days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map(key => {
-  return locale(`h.calendar.${key}`);
-})
-
-let GetWeekText = (weekStart) => {
-  let a = [];
-  for (let i = 0; i < 7; i++) {
-    a[i] = Days[(i + weekStart) % 7];
-  }
-  return a;
-};
-
-let GetNumOfDays = (year, month) => {
-  return 32 - new Date(year, month - 1, 32).getDate();
-};
-
-let DateDisabled = (current, start, end, disabledWeeks) => {
-  // disabledWeeks 不可选择周几
-  let day = current.getDay();
-  if (disabledWeeks.indexOf(day) > -1) {
-    return true;
-  }
-
-  let ts = current.getTime(),
-    flag;
-  if (start) {
-    flag = ts < start.getTime();
-  }
-  if (!flag) {
-    if (end) {
-      flag = ts > end.getTime();
-    } else {
-      flag = false;
-    }
-  }
-  return flag;
-};
-
-let MonthDisabled = (year, month, start, end) => {
-  let flag, current = parseInt(year + PadZero(month), 10);
-  if (start) {
-    start = parseInt(start.getFullYear() + PadZero(start.getMonth()), 10);
-    flag = current < start;
-  }
-  if (!flag && end) {
-    end = parseInt(end.getFullYear() + PadZero(end.getMonth()), 10);
-    flag = current > end;
-  }
-  return flag;
-};
-
-let YearDisabled = (year, start, end) => {
-  let flag;
-  if (start) {
-    flag = year < start.getFullYear();
-  }
-  if (!flag && end) {
-    flag = year > end.getFullYear();
-  }
-  return flag;
-};
+const {
+  today: Today,
+  foreverStr: ForeverStr,
+  dateFormat: DateFormat,
+  dateParse: DateParse,
+  getDefaultDate: GetDefaultDate,
+  parseDateType: ParseDateType,
+  getWeekText: GetWeekText,
+  getNumOfDays: GetNumOfDays,
+  dateDisabled: DateDisabled,
+  monthDisabled: MonthDisabled,
+  yearDisabled: YearDisabled
+} = util;
 
 export default {
   name: "Calendars",
+  mixins: [Locale],
   props: {
     // 最小可选的日期
     min: {
@@ -177,25 +121,20 @@ export default {
       type: String,
       default: ''
     },
-    // date格式
-    formatter: {
-      type: String,
-      default: 'YYYY-MM-DD'
-    },
     // 年月日选择类型 year,month,day
     dateType: {
       type: String,
-      default: ''
+      default: 'day'
     },
     // 时分秒选择类型 hour,minute,second
     timeType: {
       type: String,
       default: ''
     },
-    // 从周几开，0-6，0表示周日
-    weekStart: {
-      type: Number,
-      default: 0
+    // date格式
+    formatter: {
+      type: String,
+      default: 'YYYY-MM-DD'
     },
     // 限制周几不可选，[0, 1, 2, 3, 4, 5, 6]的子集
     disabledWeeks: {
@@ -203,11 +142,15 @@ export default {
       default() {
         return []
       }
+    },
+    // 从周几开，0-6，0表示周日
+    weekStart: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
-      currentSelected: '',
       currentMin: '',
       currentMax: '',
       forever: false,
@@ -233,8 +176,7 @@ export default {
   },
   watch: {
     selected: {
-      immediate: true,
-      handler (val) {
+      handler(val) {
         this.init()
       }
     }
@@ -242,10 +184,9 @@ export default {
   methods: {
     init() {
       let me = this;
-      let currentSelected = me.selected
 
-      let forever = (currentSelected === ForeverStr);
-      let formatter = me.formatter || 'YYYY-MM-DD';
+      let forever = (me.selected === ForeverStr);
+      let formatter = me.formatter;
 
       // 最大最小不关心时分秒，时分秒的大小不限制
       let max, min;
@@ -258,20 +199,15 @@ export default {
       }
 
       let selected
-      if (!currentSelected || forever) {
+      if (!me.selected || forever) {
         selected = GetDefaultDate(me.min, me.max, me.formatter);
       } else {
-        selected = DateParse(currentSelected);
+        selected = DateParse(me.selected);
       }
 
       let timeValue = DateFormat(selected, 'hh:mm:ss');
       let dateValue = DateFormat(selected, formatter.slice(0, 10));
       let types = ParseDateType(me.dateType);
-
-      let disabledWeeks = (me.disabledWeeks || []).map(w => {
-        return +w;
-      });
-      this.$emit('disabledWeeksChange', disabledWeeks)
 
       let weekText = GetWeekText(me.weekStart);
       let days = GetNumOfDays(types.year, types.month)
@@ -282,7 +218,6 @@ export default {
       me.weekText = weekText
       me.currentMin = min
       me.currentMax = max
-
       me.days = days
 
       // 不限的情况特殊处理，不设置选中值
@@ -302,9 +237,7 @@ export default {
         me.selectedYear = selected.getFullYear()
         me.selectedMonth = selected.getMonth() + 1
         // TODO
-        // me.currentSelected = forever ? '' : DateFormat(selected, formatter)
-        me.currentSelected = forever ? '' : DateFormat(selected, formatter)
-        this.$emit('update:selected', me.currentSelected)
+        this.$emit('update:selected', forever ? '' : DateFormat(selected, formatter))
       }
     },
     updateYears() {
@@ -364,7 +297,7 @@ export default {
       let formatter = me.formatter
       formatter = formatter.slice(0, 10);
 
-      let selected = me.currentSelected
+      let selected = me.selected
       if (selected) {
         // 不限的情况下，selected = ''
         selected = DateFormat(selected, formatter);
@@ -418,7 +351,6 @@ export default {
       }
       me.days = trs
     },
-
     changeMonth(params) {
       let me = this,
         month = me.month,
@@ -453,13 +385,11 @@ export default {
       me.dateValue = params.date
 
       me.updateDays();
-      me.fireEvent();
       this.$emit('change', {
         date: me.dateValue,
         time: me.timeValue
       })
     },
-
     showMonths() {
       let me = this;
       me.showMonth = 1
@@ -501,7 +431,6 @@ export default {
       } else {
         me.updateSelected(year + '-01-01');
         me.updateYears();
-        me.fireEvent();
       }
     },
     pickMonth(params) {
@@ -514,15 +443,8 @@ export default {
       } else {
         me.updateSelected(me.year + '-' + month + '-01');
         me.updateMonths(true);
-        me.fireEvent();
       }
-    },
-
-    hide(params) {
-    },
-
-    fireEvent(fromBtn) {
-    },
+    }
   }
 };
 </script>
