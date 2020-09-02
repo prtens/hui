@@ -1,20 +1,20 @@
 <template>
   <div class="hn-calendar-wrapper unselectable">
-  
-    <div  class="clearfix" v-if="types.day">
+
+    <div class="clearfix" v-if="types.day">
       <div class="header">
         <i class="el-icon-arrow-left minus" @click="changeMonth"></i>
-        
+
         <template v-if="types.month">
-          <span class="title" @click="showMonths">{{ year }} - {{ ('0'+month).slice(-2) }}</span>
+          <span class="title" @click="showMonths">{{ year }} - {{ ('0' + month).slice(-2) }}</span>
         </template>
         <template v-else>
-          <span class="title" @click="showYears">{{ year }} - {{ ('0'+month).slice(-2) }}</span>
+          <span class="title" @click="showYears">{{ year }} - {{ ('0' + month).slice(-2) }}</span>
         </template>
-        
+
         <i class="el-icon-arrow-left plus" @click="changeMonth({next:true})"></i>
       </div>
-  
+
       <div class="body">
         <div class="weeks clearfix">
           <span class="week" v-for="text in weekText">{{ text }}</span>
@@ -30,24 +30,25 @@
           </span>
         </div>
       </div>
-      
+
       <template v-if="timeType">
         <div class="mx-output-footer">
-          <button type="button" class="btn btn-small btn-brand" @click="hide({enter:true})" >确定</button>
+          <button type="button" class="btn btn-small btn-brand" @click="hide({enter:true})">确定</button>
           <button type="button" class="btn btn-small ml10" @click="hide()">取消</button>
         </div>
       </template>
     </div>
-  
+
     <template v-if="types.month">
-    <div :class="`clearfix ${types.day ? 'm-panel' : ''} ${showMonth ? 'ym-show' : ''}`">
-      <div class="header">
-        <i class="el-icon-arrow-left minus" @click="changeYear"></i>
-        <span class="title" @click="showYears">{{ year }}</span>
-        <i class="el-icon-arrow-left plus" @click="changeYear({next:true})"></i>
-      </div>
-      <div class="body clearfix">
-        <span v-for="(m, indexM) of months" :key="indexM" :class="`ym ${m.disabled ? 'notallowed' : ''} ${m.selected ? 'selected' : ''}`">
+      <div :class="`clearfix ${types.day ? 'm-panel' : ''} ${showMonth ? 'ym-show' : ''}`">
+        <div class="header">
+          <i class="el-icon-arrow-left minus" @click="changeYear"></i>
+          <span class="title" @click="showYears">{{ year }}</span>
+          <i class="el-icon-arrow-left plus" @click="changeYear({next:true})"></i>
+        </div>
+        <div class="body clearfix">
+        <span v-for="(m, indexM) of months" :key="indexM"
+              :class="`ym ${m.disabled ? 'notallowed' : ''} ${m.selected ? 'selected' : ''}`">
           <span v-if="!m.disabled" @click="pickMonth({month:m.month})">
             {{ m.month }}
           </span>
@@ -55,20 +56,20 @@
             {{ m.month }}
           </span>
         </span>
+        </div>
       </div>
-    </div>
     </template>
-  
+
     <template v-if="types.year">
-    <div :class="`clearfix ${types.day||types.month ? 'y-panel' : ''} ${showYear ? 'ym-show' : ''}`">
-      <div class="header">
-        <i class="el-icon-arrow-left minus" @click="changeYear({range:true})"></i>
-        <span class="title">{{ startYear }} - {{ endYear }}</span>
-        <i class="el-icon-arrow-left plus" @click="changeYear({range:true,next:true})"></i>
-      </div>
-      <div class="body clearfix">
+      <div :class="`clearfix ${types.day||types.month ? 'y-panel' : ''} ${showYear ? 'ym-show' : ''}`">
+        <div class="header">
+          <i class="el-icon-arrow-left minus" @click="changeYear({range:true})"></i>
+          <span class="title">{{ startYear }} - {{ endYear }}</span>
+          <i class="el-icon-arrow-left plus" @click="changeYear({range:true,next:true})"></i>
+        </div>
+        <div class="body clearfix">
         <span v-for="(y, index) of years" :key="index"
-        :class="`ym ${y.selected ? 'selected' : ''} ${y.disabled ? 'notallowed' : ''}`">
+              :class="`ym ${y.selected ? 'selected' : ''} ${y.disabled ? 'notallowed' : ''}`">
           <span v-if="!y.disabled" @click="pickYear({year:y.year})">
             {{ y.year }}
           </span>
@@ -76,8 +77,8 @@
             {{ y.year }}
           </span>
         </span>
+        </div>
       </div>
-    </div>
     </template>
 
   </div>
@@ -88,7 +89,7 @@
 import {t} from "../../locale";
 import util from './util'
 
-const { foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType } = util;
+const {foreverStr: ForeverStr, padZero: PadZero, dateFormat: DateFormat, dateParse: DateParse, getDefaultDate: GetDefaultDate, getQuickInfos: GetQuickInfos, getOffsetDate: GetOffsetDate, parseDateType: ParseDateType} = util;
 
 let locale = (...args) => {
   return t.apply(this, args);
@@ -112,14 +113,13 @@ let GetNumOfDays = (year, month) => {
   return 32 - new Date(year, month - 1, 32).getDate();
 };
 
-
 let DateDisabled = (current, start, end, disabledWeeks) => {
   // disabledWeeks 不可选择周几
   let day = current.getDay();
   if (disabledWeeks.indexOf(day) > -1) {
     return true;
   }
-  
+
   let ts = current.getTime(),
     flag;
   if (start) {
@@ -162,17 +162,17 @@ let YearDisabled = (year, start, end) => {
 export default {
   name: "Calendars",
   props: {
-    // 	最大可选的日期
-    max: {
-      type: String,
-      default: ''
-    },
     // 最小可选的日期
     min: {
       type: String,
       default: ''
     },
-    // 	默认选中的日期
+    // 最大可选的日期
+    max: {
+      type: String,
+      default: ''
+    },
+    // 默认选中的日期
     selected: {
       type: String,
       default: ''
@@ -200,13 +200,16 @@ export default {
     // 限制周几不可选，[0, 1, 2, 3, 4, 5, 6]的子集
     disabledWeeks: {
       type: Array,
-      default(){
+      default() {
         return []
       }
     }
   },
   data() {
     return {
+      currentSelected: '',
+      currentMin: '',
+      currentMax: '',
       forever: false,
       types: {},
       timeValue: '',
@@ -216,26 +219,34 @@ export default {
       years: [],
       month: '',
       months: [],
-      days:[],
+      days: [],
       showYear: 0,
       selectedYear: '',
       startYear: '',
       endYear: '',
-      showMonth:0,
-      selectedMonth: '',
+      showMonth: 0,
+      selectedMonth: ''
     }
   },
   mounted() {
     this.init()
   },
+  watch: {
+    selected: {
+      immediate: true,
+      handler (val) {
+        this.init()
+      }
+    }
+  },
   methods: {
     init() {
-  
       let me = this;
-  
-      let forever = (me.selected === ForeverStr);
+      let currentSelected = me.selected
+
+      let forever = (currentSelected === ForeverStr);
       let formatter = me.formatter || 'YYYY-MM-DD';
-  
+
       // 最大最小不关心时分秒，时分秒的大小不限制
       let max, min;
       // Safari不支持YYYY-MM-DD，使用YYYY/MM/DD
@@ -245,94 +256,98 @@ export default {
       if (me.min) {
         min = new Date(DateFormat(me.min, 'YYYY/MM/DD') + ' 00:00:00');
       }
-  
+
       let selected
-      if (!me.selected || forever) {
+      if (!currentSelected || forever) {
         selected = GetDefaultDate(me.min, me.max, me.formatter);
       } else {
-        selected = DateParse(me.selected);
+        selected = DateParse(currentSelected);
       }
 
       let timeValue = DateFormat(selected, 'hh:mm:ss');
       let dateValue = DateFormat(selected, formatter.slice(0, 10));
       let types = ParseDateType(me.dateType);
-  
+
       let disabledWeeks = (me.disabledWeeks || []).map(w => {
         return +w;
       });
       this.$emit('disabledWeeksChange', disabledWeeks)
-  
+
       let weekText = GetWeekText(me.weekStart);
       let days = GetNumOfDays(types.year, types.month)
-  
+
       me.types = types
       me.timeValue = timeValue
       me.dateValue = dateValue
       me.weekText = weekText
-  
+      me.currentMin = min
+      me.currentMax = max
+
       me.days = days
-  
+
       // 不限的情况特殊处理，不设置选中值
       me.updateSelected(selected, forever);
       me.updateYears();
       me.updateMonths();
       me.updateDays();
-
     },
     updateSelected(odlSelected, forever) {
       let me = this,
         selected = DateParse(odlSelected);
+
       let formatter = me.formatter;
       if (selected) {
         me.year = selected.getFullYear()
-          me. month= selected.getMonth() + 1
-          me. selectedYear= selected.getFullYear()
-          me. selectedMonth= selected.getMonth() + 1
+        me.month = selected.getMonth() + 1
+        me.selectedYear = selected.getFullYear()
+        me.selectedMonth = selected.getMonth() + 1
         // TODO
-          me.selected= forever ? '' : DateFormat(selected, formatter)
+        // me.currentSelected = forever ? '' : DateFormat(selected, formatter)
+        me.currentSelected = forever ? '' : DateFormat(selected, formatter)
+        this.$emit('update:selected', me.currentSelected)
       }
     },
     updateYears() {
       let me = this;
       let year = me.year;
-      let min = me.min;
-      let max = me.max;
+      let min = me.currentMin;
+      let max = me.currentMax;
       let startYear = year - year % 10 - 1;
       let endYear = startYear + 11;
       let rows = [];
+
       for (let i = startYear; i <= endYear; i++) {
         rows.push({
           year: i,
-          selected: i == me.selectedYear,
+          selected: i === me.selectedYear,
           disabled: YearDisabled(i, min, max)
         });
       }
-      me.startYear= startYear
-        me.  endYear= endYear
-        me.years= rows
-
+      me.startYear = startYear
+      me.endYear = endYear
+      me.years = rows
     },
     updateMonths() {
       let rows = [],
         me = this,
         year = me.year,
-        min = me.min,
-        max = me.max;
+        min = me.currentMin,
+        max = me.currentMax;
       for (let i = 1; i <= 12; i++) {
         rows.push({
           month: i,
-          selected: year == me.selectedYear && i == me.selectedMonth,
+          selected: year === me.selectedYear && i === me.selectedMonth,
           disabled: MonthDisabled(year, i - 1, min, max)
         });
       }
-      me.months= rows
+      me.months = rows
     },
     updateDays() {
       let me = this;
       let trs = [];
       let weekStart = me.weekStart;
       let disabledWeeks = me.disabledWeeks;
-  
+
       let year = me.year;
       let month = me.month;
       let startOffset = (7 - weekStart + new Date(year, month - 1, 1).getDay()) % 7;
@@ -340,21 +355,21 @@ export default {
       let days = GetNumOfDays(year, month),
         i;
       let preDays = GetNumOfDays(year, month - 1);
-      let max = me.max
-      let min = me.min
-  
+      let max = me.currentMax
+      let min = me.currentMin
+
       let day, date, formatDay;
-  
+
       // 日期不关注时分秒
       let formatter = me.formatter
       formatter = formatter.slice(0, 10);
-  
-      let selected = me.selected
-      if(selected){
+
+      let selected = me.currentSelected
+      if (selected) {
         // 不限的情况下，selected = ''
         selected = DateFormat(selected, formatter);
       }
-  
+
       let today = DateFormat(Today, formatter);
       for (i = 1; i <= startOffset; i++) {
         day = preDays - (startOffset - i);
@@ -371,8 +386,8 @@ export default {
         date = new Date(year, month - 1, i);
         formatDay = DateFormat(date, formatter);
         tds.push({
-          today: formatDay == today,
-          selected: formatDay == selected,
+          today: formatDay === today,
+          selected: formatDay === selected,
           day: i,
           month: month,
           full: formatDay,
@@ -383,8 +398,8 @@ export default {
           tds = [];
         }
       }
-      let fillStart = tds.length; //补充
-      let fillEnd = 14; //2周
+      let fillStart = tds.length; // 补充
+      let fillEnd = 14; // 2周
       for (i = fillStart; i < fillEnd; i++) {
         day = i - fillStart + 1;
         date = new Date(year, month, day);
@@ -398,12 +413,12 @@ export default {
         if ((i + 1) % 7 === 0) {
           trs.push(tds);
           tds = [];
-          if (trs.length == 6) break;
+          if (trs.length === 6) break;
         }
       }
       me.days = trs
     },
-  
+
     changeMonth(params) {
       let me = this,
         month = me.month,
@@ -421,14 +436,14 @@ export default {
           year--;
         }
       }
-      me.year= year
-      me.month= month
+      me.year = year
+      me.month = month
       me.updateDays();
     },
     choose(params) {
       let me = this;
       let month = me.month;
-      let turnMonth = params.toMonth != month;
+      let turnMonth = params.toMonth !== month;
       me.updateSelected(params.date);
 
       if (turnMonth) {
@@ -439,8 +454,12 @@ export default {
 
       me.updateDays();
       me.fireEvent();
+      this.$emit('change', {
+        date: me.dateValue,
+        time: me.timeValue
+      })
     },
-  
+
     showMonths() {
       let me = this;
       me.showMonth = 1
@@ -460,7 +479,7 @@ export default {
       } else {
         year = year + (params.next ? 1 : -1);
       }
-      me.year= year
+      me.year = year
       if (params.range) {
         me.updateYears(true);
       } else {
@@ -472,8 +491,8 @@ export default {
       let me = this;
       let types = me.types;
       if (types.day || types.month) {
-        me.showYear= 0,
-          me.year=+year
+        me.showYear = 0,
+          me.year = +year
         if (types.month) {
           me.updateMonths();
         } else {
@@ -489,8 +508,8 @@ export default {
       let month = params.month;
       let me = this;
       if (me.types.day) {
-        me.showMonth= 0
-          me.  month= +month
+        me.showMonth = 0
+        me.month = +month
         me.updateDays();
       } else {
         me.updateSelected(me.year + '-' + month + '-01');
@@ -498,10 +517,10 @@ export default {
         me.fireEvent();
       }
     },
-    
+
     hide(params) {
     },
-  
+
     fireEvent(fromBtn) {
     },
   }

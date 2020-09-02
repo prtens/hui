@@ -129,8 +129,8 @@ $duration-wrapper-prefix-cls: "#{$css-prefix}duration-wrapper";
     margin-right: 3px;
     border-radius: 50%;
   }
+}
 
-  .clearfix {
-    @include clearfix();
-  }
+.clearfix {
+  @include clearfix();
 }

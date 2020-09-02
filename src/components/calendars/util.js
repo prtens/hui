@@ -138,7 +138,6 @@ export default {
     let quickInfos = [];
     quickDates = quickDates || [];
     quickDates.forEach(quickKey => {
-
       let text, start, end, tip;
       if (quickKey === "today") {
         text = t("h.calendar.today");

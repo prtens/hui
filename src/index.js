@@ -24,10 +24,9 @@ import locale from "./locale/index";
 const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
 
-
 const CalendarsDatepicker = Calendars.Datepicker;
-// const CalendarsRange = Calendars.Range;
-// const CalendarsRangepicker = Calendars.Rangepicker;
+const CalendarsRange = Calendars.Range;
+const CalendarsRangepicker = Calendars.Rangepicker;
 
 const components = [
   Affix,
@@ -39,8 +38,8 @@ const components = [
   ChartsEntrance,
   Calendars,
   CalendarsDatepicker,
-  // CalendarsRange,
-  // CalendarsRangepicker,
+  CalendarsRange,
+  CalendarsRangepicker,
   DefError,
   EffectsEmpty,
   Hamburger,

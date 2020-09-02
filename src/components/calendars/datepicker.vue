@@ -1,28 +1,37 @@
 <template>
-  <div class="mx-cascade" style="width: 200px">
+  <div class="mx-cascade">
     <div :id="`trigger_${viewId}`" :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
          @click="toggle">
       <template v-if="!prefix">
         <i class="el-icon-date prefix-icon"></i>
       </template>
       <template v-else>
-        <span class="color-9">{{prefix}}</span>
+        <span class="color-9">{{ prefix }}</span>
       </template>
-      {{(selected || placeholder)}}
+      {{ (selected || placeholder) }}
     </div>
-    
+
     <div :id="`dpcnt_${viewId}`" :class="` mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
-         :style="{left: `${left}px`, top: `${top}px`}" >
-      <calendars :selected.sync="selected" />
+         :style="{left: `${left}px`, top: `${top}px`}">
+      <calendars
+        :selected.sync="currentSelected"
+        :min="min"
+        :max="max"
+        :disabledWeeks="disabledWeeks"
+        @change="choose"/>
     </div>
   </div>
 </template>
 
 <script>
+import Calendars from './calendars'
 import $ from "jquery"
 
 export default {
   name: 'CalendarsDatepicker',
+  components: {
+    Calendars
+  },
   props: {
     viewId: {
       type: String,
@@ -41,18 +50,18 @@ export default {
       type: String,
       default: 'left'
     },
-  
-    // 	最大可选的日期
-    max: {
-      type: String,
-      default: ''
-    },
+
     // 最小可选的日期
     min: {
       type: String,
       default: ''
     },
-    // 	默认选中的日期
+    // 最大可选的日期
+    max: {
+      type: String,
+      default: ''
+    },
+    // 默认选中的日期
     selected: {
       type: String,
       default: ''
@@ -80,7 +89,7 @@ export default {
     // 限制周几不可选，[0, 1, 2, 3, 4, 5, 6]的子集
     disabledWeeks: {
       type: Array,
-      default(){
+      default() {
         return []
       }
     }
@@ -89,11 +98,22 @@ export default {
     return {
       left: '',
       top: '',
-      show: false,
+      show: false
     };
   },
-  mounted() {},
-  methods:{
+  computed: {
+    currentSelected: {
+      get() {
+        return this.selected;
+      },
+      set(val) {
+        this.$emit("update:selected", val);
+      }
+    }
+  },
+  mounted() {
+  },
+  methods: {
     toggle() {
       let that = this
       let show = that.show;
@@ -105,30 +125,33 @@ export default {
     },
     showDiv() {
       let that = this;
-      let { show, align, viewId } = that;
+      let {show, align, viewId} = that;
       if (!show) {
-        that.show= true
-        
+        that.show = true
+
         let inputNode = $(`#trigger_${viewId}`)
         let calNode = $(`#dpcnt_${viewId}`);
         let left = 0,
           top = inputNode.outerHeight();
-        
+
         if (align == 'right') {
           left = inputNode.outerWidth() - calNode.outerWidth()
         }
-        
-        that.top=top
-        that.  left=left
+
+        that.top = top
+        that.left = left
       }
     },
     hideDiv() {
       let that = this;
       let show = that.show;
       if (show) {
-        that.show= false
+        that.show = false
       }
     },
+    choose (params) {
+      this.$emit('change', params)
+    }
   }
 };
 </script>
