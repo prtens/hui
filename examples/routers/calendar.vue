@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="calendar-wrapper">
     <el-row :gutter="20">
       <el-col :span="5">
         <p style="height: 50px; line-height: 50px">=====calendars=====</p>
@@ -48,27 +48,29 @@
       </el-col>
       <el-col :span="8">
         <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
-        <calendars-rangepicker
-          :start.sync="rangeDatepicker.start"
-          :end.sync="rangeDatepicker.end"
-          :startDisabled="rangeDatepicker.startDisabled"
-          :endDisabled="rangeDatepicker.endDisabled"
-          :vsenable.sync="rangeDatepicker.vsenable"
-          :vs.sync="rangeDatepicker.vs"
-          :single="rangeDatepicker.single"
-          :shortcuts="rangeDatepicker.shortcuts"
-          :shortkeys="rangeDatepicker.shortkeys"
-          :min="rangeDatepicker.min"
-          :max="rangeDatepicker.max"
-          :maxGap="rangeDatepicker.maxGap"
-          :minGap="rangeDatepicker.minGap"
-          :dateType="rangeDatepicker.dateType"
-          :formatter="rangeDatepicker.formatter"
-          :align="rangeDatepicker.align"
-          :textAlign="rangeDatepicker.textAlign"
-          :disabledWeeks="rangeDatepicker.disabledWeeks"
-          :weekStart="rangeDatepicker.weekStart"
-          :disabled="rangeDatepicker.disabled"/>
+        <div style="width: 240px">
+          <calendars-rangepicker
+            :start.sync="rangeDatepicker.start"
+            :end.sync="rangeDatepicker.end"
+            :startDisabled="rangeDatepicker.startDisabled"
+            :endDisabled="rangeDatepicker.endDisabled"
+            :vsenable.sync="rangeDatepicker.vsenable"
+            :vs.sync="rangeDatepicker.vs"
+            :single="rangeDatepicker.single"
+            :shortcuts="rangeDatepicker.shortcuts"
+            :shortkeys="rangeDatepicker.shortkeys"
+            :min="rangeDatepicker.min"
+            :max="rangeDatepicker.max"
+            :maxGap="rangeDatepicker.maxGap"
+            :minGap="rangeDatepicker.minGap"
+            :dateType="rangeDatepicker.dateType"
+            :formatter="rangeDatepicker.formatter"
+            :align="rangeDatepicker.align"
+            :textAlign="rangeDatepicker.textAlign"
+            :disabledWeeks="rangeDatepicker.disabledWeeks"
+            :weekStart="rangeDatepicker.weekStart"
+            :disabled="rangeDatepicker.disabled"/>
+        </div>
       </el-col>
     </el-row>
 
@@ -111,17 +113,31 @@ export default {
         shortkeys: [
           "today",
           "yesterday",
-          "passed7",
+          "beforeYesterday",
+          "preMonth",
+          "preWeekSun",
           "preWeekMon",
-          "passed15",
+          "lastestWeekSun",
+          "lastestWeekMon",
+          "passedThisMonth",
           "lastestThisMonth",
+          "passed7",
+          "passed15",
           "passed30",
-          "preMonth"
+          "lastest7",
+          "lastest15",
+          "lastest30",
+          "dynamicStart7",
+          "dynamicStart15",
+          "dynamicStart30",
+          "dynamicEndThisMonth",
+          "dynamicEndNextMonth",
+          "forever"
         ],
-        min: '2020-05-01',
-        max: '2020-12-01',
-        maxGap: 34,
-        minGap: 2,
+        min: '',
+        max: '',
+        maxGap: 0,
+        minGap: 0,
         dateType: 'day',
         formatter: '',
         align: 'left',
@@ -141,18 +157,18 @@ export default {
         shortcuts: true,
         shortkeys: [
           "today",
-          "yesterday",
           "passed7",
-          "preWeekMon",
+          "yesterday",
           "passed15",
-          "lastestThisMonth",
+          "preWeekMon",
           "passed30",
-          "preMonth"
+          "preMonth",
+          "forever"
         ],
         min: '2020-05-01',
         max: '2020-12-01',
         maxGap: 34,
-        minGap: 2,
+        minGap: 1,
         dateType: 'day',
         formatter: '',
         align: 'left',
@@ -161,17 +177,6 @@ export default {
         weekStart: 0,
         disabled: false
       }
-      // selected: '',
-      // align: '',
-      // vsenable: true,
-      // vs: true,
-      // start: '2020-09-01',
-      // end: '2020-12-20',
-      // shortkeys: [
-      //   'today',
-      //   'yesterday',
-      //   'passed7'
-      // ],
     };
   },
   watch: {
@@ -210,4 +215,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.calendar-wrapper {
+  font-size: 12px;
+}
+</style>

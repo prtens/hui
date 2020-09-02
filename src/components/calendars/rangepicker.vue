@@ -14,14 +14,12 @@
         {{ startStr }}
       </template>
     </div>
-
     <div :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
          :style="{left: `${left}px`, top: `${top}px`}"
          :id="`rpcnt_${viewId}`">
-
       <calendars-range
-        :start.sync="start"
-        :end.sync="end"
+        :start.sync="getStart"
+        :end.sync="getEnd"
         :startDisabled="startDisabled"
         :endDisabled="endDisabled"
         :vsenable="vsenable"
@@ -42,7 +40,6 @@
         :disabled="disabled"
         @change="choose"/>
     </div>
-
   </div>
 </template>
 
@@ -218,6 +215,24 @@ export default {
       left: '',
       top: ''
     };
+  },
+  computed: {
+    getStart: {
+      get() {
+        return this.start;
+      },
+      set(val) {
+        this.$emit("update:start", val);
+      }
+    },
+    getEnd: {
+      get() {
+        return this.end;
+      },
+      set(val) {
+        this.$emit("update:end", val);
+      }
+    }
   },
   mounted() {
     this.init()
@@ -410,11 +425,13 @@ export default {
       }
     },
     choose(params) {
-      this.startStr = DateFormat(params.startStr, this.formatter)
-      this.endStr = DateFormat(params.endStr, this.formatter)
-
-      // this.$emit('update:start', DateFormat(params.startStr, this.formatter))
-      // this.$emit('update:end', DateFormat(params.endStr, this.formatter))
+      let that = this
+      that.startStr = DateFormat(params.startStr, that.formatter)
+      let endStr = params.endStr
+      if (ForeverStr !== endStr) {
+        endStr = DateFormat(params.endStr, that.formatter)
+      }
+      that.endStr = endStr
     }
   }
 };
