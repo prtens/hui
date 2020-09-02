@@ -15,7 +15,6 @@ $--mx-calendar-ym-height: calc(
   2 - 80px) / 4
 );
 $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
-
 // calendar
 .#{$calendar-wrapper-prefix-cls} {
   position: relative;
