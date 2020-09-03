@@ -69,9 +69,9 @@ const router = new VueRouter({
       component: resolve => require(["./routers/svg-icon.vue"], resolve)
     },
     {
-      path: "/tabletreecolumn",
+      path: "/table-column-tree",
       component: resolve =>
-        require(["./routers/table-tree-column.vue"], resolve)
+        require(["./routers/table-column-tree.vue"], resolve)
     },
     {
       path: "/tip",

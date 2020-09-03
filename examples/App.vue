@@ -37,7 +37,7 @@
           <router-link to="/svgicon">SvgIcon 图片</router-link>
         </li>
         <li>
-          <router-link to="/tabletreecolumn">TableTreeColumn 表格树</router-link>
+          <router-link to="/table-column-tree">TableColumnTree 表格树</router-link>
         </li>
         <li>
           <router-link to="/tip">Tip 小贴士</router-link>

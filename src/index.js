@@ -14,7 +14,7 @@ import MultipleSelection from "./components/multiple-selection";
 import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
-import TableTreeColumn from "./components/table-tree-column";
+import TableColumnTree from "./components/table-column-tree";
 import Time from "./components/time";
 import Discount from "./components/duration";
 import Hour from "./components/hour";
@@ -50,7 +50,7 @@ const components = [
   Pagination,
   Screenfull,
   SvgIcon,
-  TableTreeColumn,
+  TableColumnTree,
   Time,
   Discount,
   Hour,
