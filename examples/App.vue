@@ -80,6 +80,7 @@ export default {
 
 <style lang="scss">
 @import "../src/styles/index.scss";
+
 #app {
   width: 80%;
   margin: 0 auto;
