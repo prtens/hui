@@ -11,74 +11,73 @@
           :disabledWeeks="calendars.disabledWeeks"
         />
       </el-col>
-
-<!--      <el-col :span="5">-->
-<!--        <p style="height: 50px; line-height: 50px">=====datepicker=====</p>-->
-<!--        <calendars-datepicker-->
-<!--          :min="datepicker.start"-->
-<!--          :max="datepicker.end"-->
-<!--          :selected.sync="datepicker.selected"-->
-<!--          :dateType="datepicker.dateType"-->
-<!--          :formatter="datepicker.formatter"-->
-<!--          :align="datepicker.align"-->
-<!--          :prefix="datepicker.prefix"-->
-<!--          :disabledWeeks="datepicker.disabledWeeks"-->
-<!--          :weekStart="datepicker.weekStart"-->
-<!--          :disabled="datepicker.disabled"-->
-<!--        />-->
-<!--      </el-col>-->
-<!--      <el-col :span="6">-->
-<!--        <p style="height: 50px; line-height: 50px">=====range=====</p>-->
-<!--        <calendars-range-->
-<!--          :start.sync="range.start"-->
-<!--          :end.sync="range.end"-->
-<!--          :startDisabled="range.startDisabled"-->
-<!--          :endDisabled="range.endDisabled"-->
-<!--          :vsenable="range.vsenable"-->
-<!--          :vs.sync="range.vs"-->
-<!--          :single="range.single"-->
-<!--          :shortcuts="range.shortcuts"-->
-<!--          :shortkeys="range.shortkeys"-->
-<!--          :min="range.min"-->
-<!--          :max="range.max"-->
-<!--          :maxGap="range.maxGap"-->
-<!--          :minGap="range.minGap"-->
-<!--          :dateType="range.dateType"-->
-<!--          :formatter="range.formatter"-->
-<!--          :align="range.align"-->
-<!--          :textAlign="range.textAlign"-->
-<!--          :disabledWeeks="range.disabledWeeks"-->
-<!--          :weekStart="range.weekStart"-->
-<!--          :disabled="range.disabled"-->
-<!--        />-->
-<!--      </el-col>-->
-<!--      <el-col :span="8">-->
-<!--        <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>-->
-<!--        <div style="width: 240px">-->
-<!--          <calendars-rangepicker-->
-<!--            :start.sync="rangeDatepicker.start"-->
-<!--            :end.sync="rangeDatepicker.end"-->
-<!--            :startDisabled="rangeDatepicker.startDisabled"-->
-<!--            :endDisabled="rangeDatepicker.endDisabled"-->
-<!--            :vsenable.sync="rangeDatepicker.vsenable"-->
-<!--            :vs.sync="rangeDatepicker.vs"-->
-<!--            :single="rangeDatepicker.single"-->
-<!--            :shortcuts="rangeDatepicker.shortcuts"-->
-<!--            :shortkeys="rangeDatepicker.shortkeys"-->
-<!--            :min="rangeDatepicker.min"-->
-<!--            :max="rangeDatepicker.max"-->
-<!--            :maxGap="rangeDatepicker.maxGap"-->
-<!--            :minGap="rangeDatepicker.minGap"-->
-<!--            :dateType="rangeDatepicker.dateType"-->
-<!--            :formatter="rangeDatepicker.formatter"-->
-<!--            :align="rangeDatepicker.align"-->
-<!--            :textAlign="rangeDatepicker.textAlign"-->
-<!--            :disabledWeeks="rangeDatepicker.disabledWeeks"-->
-<!--            :weekStart="rangeDatepicker.weekStart"-->
-<!--            :disabled="rangeDatepicker.disabled"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </el-col>-->
+      <el-col :span="5">
+        <p style="height: 50px; line-height: 50px">=====datepicker=====</p>
+        <calendars-datepicker
+          :min="datepicker.start"
+          :max="datepicker.end"
+          :selected.sync="datepicker.selected"
+          :dateType="datepicker.dateType"
+          :formatter="datepicker.formatter"
+          :align="datepicker.align"
+          :prefix="datepicker.prefix"
+          :disabledWeeks="datepicker.disabledWeeks"
+          :weekStart="datepicker.weekStart"
+          :disabled="datepicker.disabled"
+        />
+      </el-col>
+      <el-col :span="6">
+        <p style="height: 50px; line-height: 50px">=====range=====</p>
+        <calendars-range
+          :start.sync="range.start"
+          :end.sync="range.end"
+          :startDisabled="range.startDisabled"
+          :endDisabled="range.endDisabled"
+          :vsenable="range.vsenable"
+          :vs.sync="range.vs"
+          :single="range.single"
+          :shortcuts="range.shortcuts"
+          :shortkeys="range.shortkeys"
+          :min="range.min"
+          :max="range.max"
+          :maxGap="range.maxGap"
+          :minGap="range.minGap"
+          :dateType="range.dateType"
+          :formatter="range.formatter"
+          :align="range.align"
+          :textAlign="range.textAlign"
+          :disabledWeeks="range.disabledWeeks"
+          :weekStart="range.weekStart"
+          :disabled="range.disabled"
+        />
+      </el-col>
+      <el-col :span="8">
+        <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
+        <div style="width: 240px">
+          <calendars-rangepicker
+            :start.sync="rangeDatepicker.start"
+            :end.sync="rangeDatepicker.end"
+            :startDisabled="rangeDatepicker.startDisabled"
+            :endDisabled="rangeDatepicker.endDisabled"
+            :vsenable.sync="rangeDatepicker.vsenable"
+            :vs.sync="rangeDatepicker.vs"
+            :single="rangeDatepicker.single"
+            :shortcuts="rangeDatepicker.shortcuts"
+            :shortkeys="rangeDatepicker.shortkeys"
+            :min="rangeDatepicker.min"
+            :max="rangeDatepicker.max"
+            :maxGap="rangeDatepicker.maxGap"
+            :minGap="rangeDatepicker.minGap"
+            :dateType="rangeDatepicker.dateType"
+            :formatter="rangeDatepicker.formatter"
+            :align="rangeDatepicker.align"
+            :textAlign="rangeDatepicker.textAlign"
+            :disabledWeeks="rangeDatepicker.disabledWeeks"
+            :weekStart="rangeDatepicker.weekStart"
+            :disabled="rangeDatepicker.disabled"
+          />
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -193,26 +192,26 @@ export default {
         console.log('==========calendars', val)
       }
     },
-    // 'datepicker.selected': {
-    //   immediate: true,
-    //   handler(val) {
-    //     console.log('==========datepicker', val)
-    //   }
-    // },
-    // range: {
-    //   deep: true,
-    //   immediate: true,
-    //   handler(val) {
-    //     console.log('==========range', val)
-    //   }
-    // },
-    // rangeDatepicker: {
-    //   deep: true,
-    //   immediate: true,
-    //   handler(val) {
-    //     console.log('==========rangeDatepicker', val)
-    //   }
-    // }
+    'datepicker.selected': {
+      immediate: true,
+      handler(val) {
+        console.log('==========datepicker', val)
+      }
+    },
+    range: {
+      deep: true,
+      immediate: true,
+      handler(val) {
+        console.log('==========range', val)
+      }
+    },
+    rangeDatepicker: {
+      deep: true,
+      immediate: true,
+      handler(val) {
+        console.log('==========rangeDatepicker', val)
+      }
+    }
   },
   methods: {
     init() {
