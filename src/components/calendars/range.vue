@@ -1,5 +1,5 @@
 <template>
-  <div class="resultTest">
+  <div>
     <div :class="`hn-range-wrapper ${timeType ? 'time' : ''}`">
       <div class="range">
         <div class="title clearfix">
@@ -476,7 +476,7 @@ export default {
 
       this.$emit('change', {
         startStr: DateFormat(that.dates.startStr, that.formatter),
-        endStr: DateFormat(that.dates.endStr, that.formatter)
+        endStr: that.dates.endStr === '不限' ? that.dates.endStr : DateFormat(that.dates.endStr, that.formatter)
       })
     },
     cancel() {

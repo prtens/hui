@@ -175,6 +175,11 @@ export default {
       type: String,
       default: ''
     },
+    // 默认选中的日期
+    value: {
+      type: String,
+      default: ''
+    },
     // 年月日选择类型 year,month,day
     dateType: {
       type: String,

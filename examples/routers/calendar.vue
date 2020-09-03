@@ -87,7 +87,7 @@ export default {
       calendars: {
         min: '2020-09-01',
         max: '2020-12-01',
-        selected: '',
+        selected: '2020-10-01',
         dateType: '',
         disabledWeeks: [],
         weekStart: 0
