@@ -16,8 +16,8 @@ import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
 import TableTreeColumn from "./components/table-tree-column";
 import Time from "./components/time";
-import TimeStepDiscount from "./components/time-step-discount";
-import TimeStepSelection from "./components/time-step-selection";
+import Discount from "./components/duration";
+import Hour from "./components/hour";
 import Tip from "./components/tip";
 import locale from "./locale/index";
 
@@ -52,8 +52,8 @@ const components = [
   SvgIcon,
   TableTreeColumn,
   Time,
-  TimeStepDiscount,
-  TimeStepSelection,
+  Discount,
+  Hour,
   Tip
 ];
 

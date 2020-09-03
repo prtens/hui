@@ -1,6 +1,9 @@
 <template>
   <div>
-    <hamburger :is-active="opened" @toggleClick="toggleSideBar" />
+    <hamburger
+      :is-active="opened"
+      @toggleClick="toggleSideBar"
+    />
   </div>
 </template>
 

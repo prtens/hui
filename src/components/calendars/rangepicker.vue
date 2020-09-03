@@ -1,9 +1,13 @@
 <template>
-  <div class="hn-rangepicker-wrapper pr">
+  <div
+    class="hn-rangepicker-wrapper pr"
+    v-clickoutside:calendarsRangePicker="hideDiv"
+  >
     <div
-      :class="`mx-trigger result result-center result-with-icon ${vs ? 'result-vs':''}`"
       :id="`trigger_${viewId}`"
-      @click="toggle">
+      :class="`mx-trigger result result-center result-with-icon ${vs ? 'result-vs':''}`"
+      @click.stop="toggle"
+    >
       <i class="el-icon-date prefix-icon"></i>
       <template v-if="endStr">
         <span class="co co-left">{{ startStr }}</span>
@@ -14,9 +18,12 @@
         {{ startStr }}
       </template>
     </div>
-    <div :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
-         :style="{left: `${left}px`, top: `${top}px`}"
-         :id="`rpcnt_${viewId}`">
+    <div
+      :id="`rpcnt_${viewId}`"
+      :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+      class="calendarsRangePicker"
+      :style="{left: `${left}px`, top: `${top}px`}"
+    >
       <calendars-range
         :start.sync="getStart"
         :end.sync="getEnd"
@@ -38,7 +45,8 @@
         :disabledWeeks="disabledWeeks"
         :weekStart="weekStart"
         :disabled="disabled"
-        @change="choose"/>
+        @change="choose"
+      />
     </div>
   </div>
 </template>
@@ -48,6 +56,7 @@ import $ from "jquery"
 import util from './util'
 import Locale from '../../mixins/locale';
 import CalendarsRange from './range'
+import Clickoutside from 'element-ui/src/utils/clickoutside';
 
 const {
   foreverStr: ForeverStr,
@@ -63,6 +72,9 @@ export default {
   name: 'CalendarsRangepicker',
   components: {
     CalendarsRange
+  },
+  directives: {
+    Clickoutside
   },
   mixins: [Locale],
   props: {
@@ -289,7 +301,7 @@ export default {
         quickDates = [];
       }
 
-      let {start, end, min, max} = that;
+      let { start, end, min, max } = that;
       if (!start) {
         start = GetDefaultDate(min, max, formatter);
       }

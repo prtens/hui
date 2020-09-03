@@ -58,13 +58,13 @@
       <p>业务组件</p>
       <ul>
         <li>
-          <router-link to="/areaselection">area 选择地域</router-link>
+          <router-link to="/area-selection">area 选择地域</router-link>
         </li>
         <li>
-          <router-link to="/timestepdiscount">duration 时段折扣</router-link>
+          <router-link to="/discount">duration 时段折扣</router-link>
         </li>
         <li>
-          <router-link to="/timestepselection">hour 时段选择</router-link>
+          <router-link to="/hour">hour 时段选择</router-link>
         </li>
       </ul>
     </nav>

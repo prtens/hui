@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-table highlight-current-row stripe :data="itemList">
+    <el-table
+      highlight-current-row
+      stripe
+      :data="itemList"
+    >
       <el-table-column
         v-for="item in columns"
         :prop="item.prop"
@@ -11,7 +15,10 @@
         :width="item.width"
       >
       </el-table-column>
-      <table-tree-column prop="label" levelKey="level" />
+      <table-tree-column
+        prop="label"
+        levelKey="level"
+      />
     </el-table>
   </div>
 </template>

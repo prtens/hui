@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{width: `${maxWidth}px`}"
-    class="hn-duration-wrapper"
+    class="hn-duration"
   >
     <!-- 鼠标hover提示浮层 -->
     <div
@@ -168,7 +168,7 @@ const Data = {
 }
 
 export default {
-  name: "TimeStepDiscount",
+  name: "Discount",
   props: {
     // 单个格子宽度
     boxWidth: {

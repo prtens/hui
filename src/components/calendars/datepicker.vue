@@ -1,8 +1,11 @@
 <template>
   <div class="hn-datepicker">
-    <div :id="`trigger_${viewId}`"
-         :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
-         @click="toggle">
+    <div
+      :id="`trigger_${viewId}`"
+      :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
+      v-clickoutside="hideDiv"
+      @click="toggle"
+    >
       <template v-if="!prefix">
         <i class="el-icon-date prefix-icon"></i>
       </template>
@@ -12,8 +15,11 @@
       {{ (selected || placeholder) }}
     </div>
 
-    <div :id="`dpcnt_${viewId}`" :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
-         :style="{left: `${left}px`, top: `${top}px`}">
+    <div
+      :id="`dpcnt_${viewId}`"
+      :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+      :style="{left: `${left}px`, top: `${top}px`}"
+    >
       <calendars
         :min="min"
         :max="max"
@@ -23,7 +29,8 @@
         :formatter="formatter"
         :disabledWeeks="disabledWeeks"
         :weekStart="weekStart"
-        @change="choose"/>
+        @change="choose"
+      />
     </div>
   </div>
 </template>
@@ -31,11 +38,15 @@
 <script>
 import Calendars from './calendars'
 import $ from "jquery"
+import Clickoutside from 'element-ui/src/utils/clickoutside';
 
 export default {
   name: 'CalendarsDatepicker',
   components: {
     Calendars
+  },
+  directives: {
+    Clickoutside
   },
   props: {
     viewId: {
@@ -131,7 +142,7 @@ export default {
     },
     showDiv() {
       let that = this;
-      let {show, align, viewId} = that;
+      let { show, align, viewId } = that;
       if (!show) {
         that.show = true
 

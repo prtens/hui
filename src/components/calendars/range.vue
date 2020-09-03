@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="resultTest">
     <div :class="`hn-range-wrapper ${timeType ? 'time' : ''}`">
       <div class="range">
         <div class="title clearfix">
           <span class="fl">{{ title }}：</span>
           <template v-if="vsenable">
-            <el-switch class="fr" v-model="currentVs"></el-switch>
+            <el-switch
+              class="fr"
+              v-model="currentVs"
+            ></el-switch>
           </template>
         </div>
         <div class="clearfix pr">
@@ -22,7 +25,8 @@
               :disabledWeeks="disabledWeeks"
               :weekStart="weekStart"
               :disabled="startDisabled"
-              @change="syncDate($event, 'start')"/>
+              @change="syncDate($event, 'start')"
+            />
           </div>
           <div class="range-gap">-</div>
           <div class="range-input range-input-right">
@@ -38,7 +42,8 @@
               :align="align"
               :disabledWeeks="disabledWeeks"
               :disabled="(!currentVs&&vsSingle) || endDisabled ? true : false"
-              @change="syncDate($event, 'end')"/>
+              @change="syncDate($event, 'end')"
+            />
           </div>
         </div>
       </div>
@@ -47,18 +52,32 @@
         <div :class="`shortcuts ${quickInfos.length > quickGap ? 'shortcuts-small' : ''}`">
           <div class="title">{{ quickTip }}：</div>
           <div class="clearfix">
-            <span v-for="(info, index) of quickInfos" :key="index">
-              <span :class="`st ${dates.quickDateKey==info.key ? 'selected' : ''}`"
-                    @click="datePicked({quick:true,quickInfo:info})"
-                    :title="info.text">{{ info.text }}</span>
+            <span
+              v-for="(info, index) of quickInfos"
+              :key="index"
+            >
+              <span
+                :class="`st ${dates.quickDateKey==info.key ? 'selected' : ''}`"
+                @click="datePicked({quick:true,quickInfo:info})"
+                :title="info.text"
+              >{{ info.text }}</span>
             </span>
           </div>
         </div>
       </template>
     </div>
     <div class="mx-output-footer">
-      <el-button class="mr10" type="primary" @click="datePicked">{{ submitText }}</el-button>
-      <el-button class="mr10" type="primary" plain @click="cancel">{{ cancelText }}</el-button>
+      <el-button
+        class="mr10"
+        type="primary"
+        @click="datePicked"
+      >{{ submitText }}</el-button>
+      <el-button
+        class="mr10"
+        type="primary"
+        plain
+        @click="cancel"
+      >{{ cancelText }}</el-button>
       <span class="color-red">{{ errorMsg }}</span>
     </div>
   </div>
@@ -344,17 +363,14 @@ export default {
       that.quickInfos = quickInfos
       that.dates.quickDateKey = quickDateKey
       that.dates.quickDateText = quickDateText
+      that.dates.startStr = DateFormat(startStr, that.formatter)
+      that.dates.endStr = DateFormat(endStr, that.formatter)
 
-      this.$emit('update:start', DateFormat(that.dates.startStr, that.formatter))
-      this.$emit('update:end', DateFormat(that.dates.endStr, that.formatter))
-      this.$emit('change', {
-        startStr: that.dates.startStr,
-        endStr: that.dates.endStr
-      })
+      this.$emit('change', that.dates)
     },
     datePicked(params) {
       let that = this;
-      let {dates, formatter, shortkeys, vs, vsSingle, minGap, maxGap} = that;
+      let { dates, formatter, shortkeys, vs, vsSingle, minGap, maxGap } = that;
       if (params.quick) {
         // 选择快捷方式
         // 快捷日期可能需要动态计算，已当前开始时间为准
@@ -458,11 +474,9 @@ export default {
       that.errorMsg = errorMsg
       that.dates = dates
 
-      this.$emit('update:start', DateFormat(that.dates.startStr, that.formatter))
-      this.$emit('update:end', DateFormat(that.dates.endStr, that.formatter))
       this.$emit('change', {
-        startStr: that.dates.startStr,
-        endStr: that.dates.endStr
+        startStr: DateFormat(that.dates.startStr, that.formatter),
+        endStr: DateFormat(that.dates.endStr, that.formatter)
       })
     },
     cancel() {

@@ -15,8 +15,8 @@
         show-ink
       >
         <AnchorLink
-          v-if="(link - 1) % 30 === 0"
           v-for="link in 300"
+          v-if="(link - 1) % 30 === 0"
           :key="`link${link}`"
           :href="`#title-${link}`"
           :title="`title-${link}`"

@@ -21,7 +21,7 @@
             v-model="type.checked"
             @change="changeAll(typeIndex)"
           ></el-checkbox>
-          <span class="ml5">全选 - {{type.name}}</span>
+          <span class="ml5">全选 - {{ type.name }}</span>
         </label>
       </div>
 
@@ -39,7 +39,8 @@
               <div
                 class="area-name"
                 v-if="area.name"
-              >{{area.name}}</div>
+              >{{ area.name }}
+              </div>
               <div class="provinces clearfix">
                 <div
                   class="province"
@@ -52,12 +53,12 @@
                       v-model="province.checked"
                       @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
                     ></el-checkbox>
-                    <span :class="`name${province.highlight ? highlight : ''}`">{{province.name}}
+                    <span :class="`name${province.highlight ? highlight : ''}`">{{ province.name }}
                       <span
                         class="province-count"
                         v-if="province.hasCity && (province.count > 0)"
                       >
-                        ({{province.count}})</span>
+                        ({{ province.count }})</span>
                     </span>
                     <template v-if="province.hasCity">
                       <i
@@ -79,7 +80,7 @@
                         v-model="city.checked"
                         @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
                       ></el-checkbox>
-                      <span :class="`name ${city.highlight? 'highlight' : ''}`">{{city.name}}</span>
+                      <span :class="`name ${city.highlight? 'highlight' : ''}`">{{ city.name }}</span>
                     </label>
                   </div>
                 </div>
@@ -93,7 +94,7 @@
 </template>
 
 <script type="text/babel">
-import { deepClone } from '../../utils/util'
+import {deepClone} from '../../utils/util'
 import * as Atds from './data'
 
 export default {
@@ -217,7 +218,7 @@ export default {
 
     toggleCity(event) {
       let that = this;
-      let { province: provinceId } = event,
+      let {province: provinceId} = event,
         oldProvince = that.showProvinceId;
 
       if (provinceId === oldProvince) {
@@ -231,7 +232,7 @@ export default {
 
     changeAll(typeIndex) {
       let that = this;
-      let { types } = that;
+      let {types} = that;
       let type = types[typeIndex];
       let checked = type.checked;
       type.groups.forEach(group => {
@@ -254,7 +255,7 @@ export default {
     changeOne(event) {
       let that = this;
 
-      let { checked, typeIndex, province: provinceId, city: cityId } = event;
+      let {checked, typeIndex, province: provinceId, city: cityId} = event;
       let types = that.types;
       let type = types[typeIndex]
 
@@ -332,7 +333,7 @@ export default {
     search() {
       let that = this;
       let searchName = that.searchName;
-      let { types, cityVisible } = that;
+      let {types, cityVisible} = that;
 
       let provinceId, isCity = false;
       types.forEach(type => {
@@ -366,7 +367,7 @@ export default {
 
     val(full) {
       let that = this;
-      let { types, cityVisible } = that;
+      let {types, cityVisible} = that;
       let selected = [];
       let all = [];
       types.forEach(type => {

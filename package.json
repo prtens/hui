@@ -1,6 +1,6 @@
 {
   "name": "hui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A UI components Library with Vue.js",
   "main": "dist/hui.js",
   "typings": "types/index.d.ts",
@@ -22,8 +22,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "pub": "npm run dist && ./build/bin/release.sh",
-    "pub1": "sh ./build/bin/release.sh"
+    "pub": "npm run dist && ./build/bin/release.sh"
   },
   "repository": {
     "type": "git",

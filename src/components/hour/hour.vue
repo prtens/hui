@@ -1,5 +1,5 @@
 <template>
-  <div class="hn-period">
+  <div class="hn-hour">
     <div class="period">
 
       <!-- 每日分隔是才有该功能 -->
@@ -92,7 +92,7 @@ const WeekMap = {
 }
 
 export default {
-  name: "TimeStepSelection",
+  name: "Hour",
   props: {
     // 历史可配置参数simple
     // 1. true：极简模式，默认只区分工作日和双休日

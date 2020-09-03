@@ -1,8 +1,8 @@
-$area-selection-prefix-cls: "#{$css-prefix}area-selection";
+$area-prefix-cls: "#{$css-prefix}area-selection";
 
 $area-height: 42px;
 
-.#{$area-selection-prefix-cls} {
+.#{$area-prefix-cls} {
   .area-search-box {
     display: block;
     width: 300px;

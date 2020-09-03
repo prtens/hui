@@ -94,18 +94,18 @@ const router = new VueRouter({
       component: resolve => require(["./routers/calendar.vue"], resolve)
     },
     {
-      path: "/timestepselection",
+      path: "/hour",
       component: resolve =>
-        require(["./routers/time-step-selection.vue"], resolve)
+        require(["./routers/hour.vue"], resolve)
     },
     {
-      path: "/areaselection",
+      path: "/area-selection",
       component: resolve => require(["./routers/area-selection.vue"], resolve)
     },
     {
-      path: "/timestepdiscount",
+      path: "/discount",
       component: resolve =>
-        require(["./routers/time-step-discount.vue"], resolve)
+        require(["./routers/discount.vue"], resolve)
     }
   ]
 });

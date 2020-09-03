@@ -1,6 +1,9 @@
 <template>
   <div>
-    <charts-entrance :chart-data="chartData" height="500px" />
+    <charts-entrance
+      :chart-data="chartData"
+      height="500px"
+    />
   </div>
 </template>
 <script>

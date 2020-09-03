@@ -1,7 +1,7 @@
-$period-prefix-cls: "#{$css-prefix}period";
+$hour-prefix-cls: "#{$css-prefix}hour";
 $hour-height: 36px;
 
-.#{$period-prefix-cls} {
+.#{$hour-prefix-cls} {
   .period {
     .hours {
       padding-top: 40px;

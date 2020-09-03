@@ -1,30 +1,54 @@
 <template>
   <div class="hn-calendar-wrapper unselectable">
-
-    <div class="clearfix" v-if="types.day">
+    <div
+      class="clearfix"
+      v-if="types.day"
+    >
       <div class="header">
-        <i class="el-icon-arrow-left minus" @click="changeMonth"></i>
+        <i
+          class="el-icon-arrow-left minus"
+          @click="changeMonth"
+        ></i>
 
         <template v-if="types.month">
-          <span class="title" @click="showMonths">{{ year }} - {{ ('0' + month).slice(-2) }}</span>
+          <span
+            class="title"
+            @click="showMonths"
+          >{{ year }} - {{ ('0' + month).slice(-2) }}</span>
         </template>
         <template v-else>
-          <span class="title" @click="showYears">{{ year }} - {{ ('0' + month).slice(-2) }}</span>
+          <span
+            class="title"
+            @click="showYears"
+          >{{ year }} - {{ ('0' + month).slice(-2) }}</span>
         </template>
 
-        <i class="el-icon-arrow-left plus" @click="changeMonth({next:true})"></i>
+        <i
+          class="el-icon-arrow-left plus"
+          @click="changeMonth({next:true})"
+        ></i>
       </div>
 
       <div class="body">
         <div class="weeks clearfix">
-          <span class="week" v-for="text in weekText">{{ text }}</span>
+          <span
+            class="week"
+            v-for="(text, key) in weekText"
+            :key="key"
+          >{{ text }}</span>
         </div>
         <div class="days clearfix">
-          <span v-for="(tds, indexT) of days" :key="indexT" style="width: 100%;display: inline-block">
-            <span v-for="(td, index) of tds"
-                  :key="index"
-                  :class="`day ${td.today ? 'today' : ''} ${td.otherMonth ? 'gray' : ''} ${td.disabled ? 'notallowed' : ''} ${td.selected ? 'selected' : ''}`"
-                  @click="choose({toMonth:td.month,date:td.full})">
+          <span
+            v-for="(tds, indexT) of days"
+            :key="indexT"
+            style="width: 100%;display: inline-block"
+          >
+            <span
+              v-for="(td, index) of tds"
+              :key="index"
+              :class="`day ${td.today ? 'today' : ''} ${td.otherMonth ? 'gray' : ''} ${td.disabled ? 'notallowed' : ''} ${td.selected ? 'selected' : ''}`"
+              @click="choose({toMonth:td.month,date:td.full})"
+            >
               {{ td.day }}
             </span>
           </span>
@@ -33,7 +57,10 @@
 
       <template v-if="timeType">
         <div class="mx-output-footer">
-          <el-button type="primary" plain>确定</el-button>
+          <el-button
+            type="primary"
+            plain
+          >确定</el-button>
           <el-button type="primary">取消</el-button>
         </div>
       </template>
@@ -42,20 +69,35 @@
     <template v-if="types.month">
       <div :class="`clearfix ${types.day ? 'm-panel' : ''} ${showMonth ? 'ym-show' : ''}`">
         <div class="header">
-          <i class="el-icon-arrow-left minus" @click="changeYear"></i>
-          <span class="title" @click="showYears">{{ year }}</span>
-          <i class="el-icon-arrow-left plus" @click="changeYear({next:true})"></i>
+          <i
+            class="el-icon-arrow-left minus"
+            @click="changeYear"
+          ></i>
+          <span
+            class="title"
+            @click="showYears"
+          >{{ year }}</span>
+          <i
+            class="el-icon-arrow-left plus"
+            @click="changeYear({next:true})"
+          ></i>
         </div>
         <div class="body clearfix">
-        <span v-for="(m, indexM) of months" :key="indexM"
-              :class="`ym ${m.disabled ? 'notallowed' : ''} ${m.selected ? 'selected' : ''}`">
-          <span v-if="!m.disabled" @click="pickMonth({month:m.month})">
-            {{ m.month }}
+          <span
+            v-for="(m, indexM) of months"
+            :key="indexM"
+            :class="`ym ${m.disabled ? 'notallowed' : ''} ${m.selected ? 'selected' : ''}`"
+          >
+            <span
+              v-if="!m.disabled"
+              @click="pickMonth({month:m.month})"
+            >
+              {{ m.month }}
+            </span>
+            <span v-else>
+              {{ m.month }}
+            </span>
           </span>
-          <span v-else>
-            {{ m.month }}
-          </span>
-        </span>
         </div>
       </div>
     </template>
@@ -63,20 +105,32 @@
     <template v-if="types.year">
       <div :class="`clearfix ${types.day||types.month ? 'y-panel' : ''} ${showYear ? 'ym-show' : ''}`">
         <div class="header">
-          <i class="el-icon-arrow-left minus" @click="changeYear({range:true})"></i>
+          <i
+            class="el-icon-arrow-left minus"
+            @click="changeYear({range:true})"
+          ></i>
           <span class="title">{{ startYear }} - {{ endYear }}</span>
-          <i class="el-icon-arrow-left plus" @click="changeYear({range:true,next:true})"></i>
+          <i
+            class="el-icon-arrow-left plus"
+            @click="changeYear({range:true,next:true})"
+          ></i>
         </div>
         <div class="body clearfix">
-        <span v-for="(y, index) of years" :key="index"
-              :class="`ym ${y.selected ? 'selected' : ''} ${y.disabled ? 'notallowed' : ''}`">
-          <span v-if="!y.disabled" @click="pickYear({year:y.year})">
-            {{ y.year }}
+          <span
+            v-for="(y, index) of years"
+            :key="index"
+            :class="`ym ${y.selected ? 'selected' : ''} ${y.disabled ? 'notallowed' : ''}`"
+          >
+            <span
+              v-if="!y.disabled"
+              @click="pickYear({year:y.year})"
+            >
+              {{ y.year }}
+            </span>
+            <span v-else>
+              {{ y.year }}
+            </span>
           </span>
-          <span v-else>
-            {{ y.year }}
-          </span>
-        </span>
         </div>
       </div>
     </template>
@@ -124,7 +178,7 @@ export default {
     // 年月日选择类型 year,month,day
     dateType: {
       type: String,
-      default: 'day'
+      default: ''
     },
     // 时分秒选择类型 hour,minute,second
     timeType: {
@@ -175,10 +229,8 @@ export default {
     this.init()
   },
   watch: {
-    selected: {
-      handler(val) {
-        this.init()
-      }
+    selected(val) {
+      this.init()
     }
   },
   methods: {
@@ -393,7 +445,6 @@ export default {
     showMonths() {
       let me = this;
       me.showMonth = 1
-      console.log(me.showMonth)
       me.updateMonths();
     },
     showYears() {

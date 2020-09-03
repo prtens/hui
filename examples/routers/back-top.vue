@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-for="(item, index) in arr" :key="index">{{ item }}</div>
+    <div
+      v-for="(item, index) in arr"
+      :key="index"
+    >{{ item }}</div>
     <back-top
       :visibility-height="300"
       :back-position="0"

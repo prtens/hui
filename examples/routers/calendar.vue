@@ -7,7 +7,8 @@
           :selected.sync="calendars.selected"
           :min="calendars.min"
           :max="calendars.max"
-          :disabledWeeks="calendars.disabledWeeks"/>
+          :disabledWeeks="calendars.disabledWeeks"
+        />
       </el-col>
       <el-col :span="5">
         <p style="height: 50px; line-height: 50px">=====datepicker=====</p>
@@ -20,7 +21,8 @@
           :prefix="datepicker.prefix"
           :disabledWeeks="datepicker.disabledWeeks"
           :weekStart="datepicker.weekStart"
-          :disabled="datepicker.disabled"/>
+          :disabled="datepicker.disabled"
+        />
       </el-col>
       <el-col :span="6">
         <p style="height: 50px; line-height: 50px">=====range=====</p>
@@ -44,7 +46,8 @@
           :textAlign="range.textAlign"
           :disabledWeeks="range.disabledWeeks"
           :weekStart="range.weekStart"
-          :disabled="range.disabled"/>
+          :disabled="range.disabled"
+        />
       </el-col>
       <el-col :span="8">
         <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
@@ -69,11 +72,11 @@
             :textAlign="rangeDatepicker.textAlign"
             :disabledWeeks="rangeDatepicker.disabledWeeks"
             :weekStart="rangeDatepicker.weekStart"
-            :disabled="rangeDatepicker.disabled"/>
+            :disabled="rangeDatepicker.disabled"
+          />
         </div>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
@@ -85,7 +88,7 @@ export default {
         min: '2020-09-01',
         max: '2020-12-01',
         selected: '',
-        dateType: 'day',
+        dateType: '',
         disabledWeeks: [],
         weekStart: 0
       },
@@ -93,7 +96,7 @@ export default {
         min: '2020-09-01',
         max: '2020-12-01',
         selected: '2020-09-01',
-        dateType: 'day',
+        dateType: '',
         formatter: 'YYYY/MM/DD',
         align: 'left',
         prefix: '截止至',
@@ -138,7 +141,7 @@ export default {
         max: '',
         maxGap: 0,
         minGap: 0,
-        dateType: 'day',
+        dateType: '',
         formatter: '',
         align: 'left',
         textAlign: 'left',
@@ -167,9 +170,9 @@ export default {
         ],
         min: '2020-05-01',
         max: '2020-12-01',
-        maxGap: 34,
-        minGap: 1,
-        dateType: 'day',
+        maxGap: 0,
+        minGap: 0,
+        dateType: '',
         formatter: '',
         align: 'left',
         textAlign: 'left',
