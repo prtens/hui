@@ -1,4 +1,4 @@
-import { t } from '../../locale';
+import {t} from '../../locale';
 
 let Today = new Date();
 let Formatter = "YYYY-MM-DD";
@@ -67,7 +67,9 @@ let DateParse = date => {
     // date = new Date(Date.parse(String(date).replace(/-/g, '/')));
     // Date.parse('2019/12') safari 下不支持
     // Date.parse('2019-12') safari 下支持
-    result = new Date(Date.parse(String(date).replace(/\//g, "-")));
+    let get = new Date()
+    let tmpDate = `${date} ${get.getHours()}:${get.getMinutes()}:${get.getSeconds()}`
+    result = new Date(Date.parse(String(tmpDate).replace(/\//g, "-")));
     if (date && (result === "Invalid Date" || isNaN(result))) {
       // safari兼容处理
       let vs = String(date).split(/[^0-9]/);
