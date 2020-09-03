@@ -9,8 +9,8 @@
       :style="{top: `${hoverInfo.top}px`, left: `${hoverInfo.left}px`}"
       class="discount-hover mx-shadow"
     >
-      <div>{{hoverInfo.week}}</div>
-      <div><strong>{{hoverInfo.time}}</strong></div>
+      <div>{{ hoverInfo.week }}</div>
+      <div><strong>{{ hoverInfo.time }}</strong></div>
       <div><strong>{{ hoverInfo.discount }}</strong>%折扣</div>
     </div>
 
@@ -30,8 +30,8 @@
     >
       <div class="setting-content">
         <div class="mb10">
-          <span>{{settingInfo.week}}</span>：
-          <strong class="ml5">{{settingInfo.time}}</strong>
+          <span>{{ settingInfo.week }}</span>：
+          <strong class="ml5">{{ settingInfo.time }}</strong>
         </div>
         <div class="mb10">
           <el-radio-group v-model="settingInfo.type">
@@ -64,12 +64,14 @@
           type="primary"
           plain
           @click="submitSetting"
-        >确定</el-button>
+        >确定
+        </el-button>
         <el-button
           type="primary"
           plain
           @click="cancelSetting"
-        >取消</el-button>
+        >取消
+        </el-button>
       </div>
     </div>
 
@@ -86,13 +88,15 @@
         <li
           class="week-item"
           :style="{height: `${headerHeight + 1}px`, lineHeight: `${headerHeight}px`}"
-        >星期</li>
+        >星期
+        </li>
         <li
           class="week-item"
           :style="{height: `${boxHeight}px`, lineHeight: `${boxHeight}px`}"
           v-for="(week, key) in weeks"
           :key="key"
-        >{{ week }}</li>
+        >{{ week }}
+        </li>
       </ul>
       <div
         class="content fl"
@@ -104,7 +108,8 @@
             :style="{width: `${(boxWidth*(rowNum/4))}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
             v-for="(range, key) in ranges"
             :key="key"
-          >{{range}}</li>
+          >{{ range }}
+          </li>
         </ul>
         <ul class="time clearfix">
           <li
@@ -112,7 +117,8 @@
             :style="{width: `${(boxWidth*multiple)}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
             v-for="(C, i) in 24"
             :key="C"
-          >{{i}}</li>
+          >{{ i }}
+          </li>
         </ul>
         <ul class="boxzone clearfix">
           <li
@@ -133,12 +139,14 @@
         type="primary"
         plain
         @click="clear"
-      >清空</el-button>
+      >清空
+      </el-button>
       <el-button
         type="primary"
         plain
         @click="reset"
-      >重置</el-button>
+      >重置
+      </el-button>
 
       <span class="fr lh28 color-c">
         <template v-for="(dot, key) of dots">
@@ -147,7 +155,7 @@
               class="circle"
               :style="{'background-color': `${dot.value}`}"
             ></span>
-            <span class="font-tahoma bold color-c mr15">{{dot.text}}</span>
+            <span class="font-tahoma bold color-c mr15">{{ dot.text }}</span>
           </span>
         </template>
         <i class="el-icon-bell"></i>
@@ -220,9 +228,7 @@ export default {
       hideTimeout: 0
     };
   },
-  watch: {
-
-  },
+  watch: {},
   mounted() {
     this.init()
 
@@ -335,7 +341,7 @@ export default {
     },
     render() {
       let that = this
-      let { timeDiscount, boxLength } = that;
+      let {timeDiscount, boxLength} = that;
       let array = that.report2Array(timeDiscount);
       for (let i = 0; i < boxLength; i++) {
         that.setBoxDiscount(i, array[i]);
@@ -352,7 +358,7 @@ export default {
     report2Array(report) {
       let array = [];
       let that = this;
-      let { rowNum, multiple } = that;
+      let {rowNum, multiple} = that;
 
       let arr = report.split(';'); // ;分隔天的内容
       for (let i = 0, aLen = arr.length; i < aLen; i++) {
@@ -393,7 +399,7 @@ export default {
       let that = this;
       discount = parseInt(discount) || 0;
 
-      let { discountColorMap, boxZones } = that;
+      let {discountColorMap, boxZones} = that;
 
       boxZones[index] = {
         index: index,
@@ -409,12 +415,12 @@ export default {
       downEvent.preventDefault();
 
       let that = this;
-      let { hoverInfo, settingInfo, maskInfo, boxWidth, multiple, headerHeight } = this;
+      let {hoverInfo, settingInfo, maskInfo, boxWidth, multiple, headerHeight} = this;
       hoverInfo.show = false;
       settingInfo.show = false;
 
       let wrapper = that.wrapper;
-      let { left: wrapperLeft, top: wrapperTop } = wrapper.offset();
+      let {left: wrapperLeft, top: wrapperTop} = wrapper.offset();
       let startX = downEvent.pageX - wrapperLeft;
       let startY = downEvent.pageY - wrapperTop;
 
@@ -452,7 +458,7 @@ export default {
 
     selectEnd() {
       let that = this;
-      let { maskInfo, headerHeight, boxHeight, boxWidth, multiple, columnNum, rowNum } = that;
+      let {maskInfo, headerHeight, boxHeight, boxWidth, multiple, columnNum, rowNum} = that;
 
       // 从0开始
       let row1 = parseInt((maskInfo.top - headerHeight) / boxHeight);
@@ -490,7 +496,7 @@ export default {
      */
     clickOutside(index) {
       let that = this;
-      let { maskInfo } = that;
+      let {maskInfo} = that;
       if (!maskInfo.show ||
         (maskInfo.show && maskInfo.selectedZones.indexOf(index) > -1)) {
         return;
@@ -505,7 +511,7 @@ export default {
 
     submitSetting() {
       let that = this;
-      let { settingList, settingInfo, maskInfo } = that;
+      let {settingList, settingInfo, maskInfo} = that;
       let discount = 0;
       let valid = true;
 
@@ -533,11 +539,14 @@ export default {
       for (let i = 0; i < maskInfo.selectedZones.length; i++) {
         that.setBoxDiscount(maskInfo.selectedZones[i], discount);
       }
+
+      // get Value
+      console.log(this.val())
     },
 
     cancelSetting() {
       let that = this;
-      let { settingList, settingInfo, maskInfo } = that;
+      let {settingList, settingInfo, maskInfo} = that;
 
       maskInfo.show = false;
       settingInfo.show = false;
@@ -547,16 +556,16 @@ export default {
 
     showSetting() {
       let that = this;
-      let { settingInfo, maskInfo, boxZones } = that;
+      let {settingInfo, maskInfo, boxZones} = that;
 
       let startweek = maskInfo.startRow + 1;
       let endweek = maskInfo.endRow + 1;
 
       let week;
       if (startweek !== endweek) {
-        week = that.formatweek(startweek) + ' - ' + that.formatweek(endweek);
+        week = that.formatWeek(startweek) + ' - ' + that.formatWeek(endweek);
       } else {
-        week = that.formatweek(startweek);
+        week = that.formatWeek(startweek);
       }
       settingInfo.week = week;
       settingInfo.time = that.getDuration(maskInfo.startColumn, maskInfo.endColumn + 1, '%s - %s');
@@ -601,7 +610,7 @@ export default {
       let that = this;
       clearTimeout(that.hoverTimeout);
       clearTimeout(that.hideTimeout);
-      let { maskInfo, settingInfo, boxWidth, boxHeight, headerHeight, rowNum, hoverInfo, boxZones } = that;
+      let {maskInfo, settingInfo, boxWidth, boxHeight, headerHeight, rowNum, hoverInfo, boxZones} = that;
       if (maskInfo.show || settingInfo.show) {
         return;
       }
@@ -611,7 +620,7 @@ export default {
 
         let left = boxWidth + (index % rowNum + 1) * boxWidth;
         let top = headerHeight + (parseInt(index / rowNum) + 1) * boxHeight;
-        let week = that.formatweek(parseInt(index / rowNum) + 1);
+        let week = that.formatWeek(parseInt(index / rowNum) + 1);
         let time = that.getDuration(index, index + 1, '%s - %s');
         let discount = boxZones[index].discount;
 
@@ -628,7 +637,7 @@ export default {
       let that = this;
       clearTimeout(that.hoverTimeout);
       clearTimeout(that.hideTimeout);
-      let { maskInfo, settingInfo, hoverInfo } = that;
+      let {maskInfo, settingInfo, hoverInfo} = that;
       if (maskInfo.show || settingInfo.show) {
         return;
       }
@@ -662,7 +671,7 @@ export default {
 
     array2Report(array) {
       let that = this;
-      let { columnNum, rowNum, multiple } = that;
+      let {columnNum, rowNum, multiple} = that;
 
       let result = [];
       for (let row = 0; row < columnNum; row++) {
@@ -698,7 +707,7 @@ export default {
 
     val() {
       let that = this;
-      let { boxZones } = that;
+      let {boxZones} = that;
       let discounts = boxZones.map(zone => {
         return zone.discount;
       })
@@ -722,7 +731,7 @@ export default {
       }
     },
 
-    formatweek(week) {
+    formatWeek(week) {
       return '星期' + ['日', '一', '二', '三', '四', '五', '六'][week % 7];
     },
 
@@ -744,7 +753,7 @@ export default {
 
     getTimeFromNum(num) {
       let that = this;
-      let { rowNum, multiple } = that;
+      let {rowNum, multiple} = that;
       let h = Math.floor((num % rowNum) / multiple);
       if ((h + '').length === 1) {
         h = '0' + h;
@@ -761,7 +770,8 @@ export default {
           bg: '#ffffff',
           discount: 0
         })
-      };
+      }
+      ;
 
       return boxzone;
     }

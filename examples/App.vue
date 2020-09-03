@@ -54,6 +54,9 @@
         <li>
           <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
         </li>
+        <li>
+          <router-link to="/drawer">drawer</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

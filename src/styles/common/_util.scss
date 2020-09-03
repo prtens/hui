@@ -82,3 +82,21 @@
 .w150 {
   width: 150px;
 }
+
+
+/*卡片样式*/
+.grid {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s ease-out;
+  &:hover{
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.08);
+  }
+}
+.grid-title{
+  font-size: 16px;
+  >*{
+    max-height: 32px;
+  }
+}

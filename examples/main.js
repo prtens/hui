@@ -94,6 +94,10 @@ const router = new VueRouter({
       component: resolve => require(["./routers/calendar.vue"], resolve)
     },
     {
+      path: "/drawer",
+      component: resolve => require(["./routers/drawer.vue"], resolve)
+    },
+    {
       path: "/hour",
       component: resolve =>
         require(["./routers/hour.vue"], resolve)
