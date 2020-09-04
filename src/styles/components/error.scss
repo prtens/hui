@@ -23,7 +23,7 @@ $error-prefix-cls: "#{$css-prefix}error";
 
     .home-btn,
     .back-btn {
-      width: calc($font-size-small * 7);
+      width: calc(#{$font-size-small} * 7);
     }
     .back-btn {
       margin-left: 20px;
