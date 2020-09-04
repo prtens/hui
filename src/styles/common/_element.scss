@@ -1,0 +1,46 @@
+.el-dialog {
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .08);
+
+  &__header, &__body {
+    padding: 16px 24px;
+  }
+
+  &__header {
+    border-bottom: 1px solid #e6e6e6;
+  }
+
+  &__footer {
+    padding: 10px 24px;
+    text-align: left;
+    border-top: 1px solid #e6e6e6;
+  }
+}
+
+.el-drawer__container {
+  .el-drawer__header {
+    border-bottom: 1px solid #e8eaec;
+    padding: 14px 16px;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  .el-drawer__body {
+    height: calc(100% - 55px);
+    overflow: auto;
+    margin-bottom: 53px;
+    position: static;
+    padding: 16px 24px;
+    background-color: rgb(232, 235, 242);
+  }
+
+  .el-drawer__footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 16px;
+    text-align: right;
+  }
+}

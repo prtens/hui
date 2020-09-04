@@ -1,6 +1,6 @@
 {
   "name": "hui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A UI components Library with Vue.js",
   "main": "dist/hui.js",
   "typings": "types/index.d.ts",

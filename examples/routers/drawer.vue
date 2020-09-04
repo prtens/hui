@@ -17,18 +17,17 @@
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose">
-      <div class="demo-drawer__content">
-        <div class="grid mb10" style="padding: 16px 24px;">
-          <div class="mb10">
-            浮层HTML Code：
-          </div>
-          <pre class="tip-content">
+      <div class="grid mb10" style="padding: 16px 24px;">
+        <div class="mb10">
+          浮层HTML Code：
+        </div>
+        <pre class="tip-content">
             fewfewfew
           </pre>
-        </div>
-        <div class="clearfix grid" style="padding: 16px 24px;">
-          <div class="mb10 grid-title">浮层JS Code：</div>
-          <pre class="tip-content">
+      </div>
+      <div class="clearfix grid" style="padding: 16px 24px;">
+        <div class="mb10 grid-title">浮层JS Code：</div>
+        <pre class="tip-content">
             let Magix = require('magix');
             module.exports = Magix.View.extend({
                 tmpl: '@index.html',
@@ -60,11 +59,10 @@
                 }
             });
         </pre>
-        </div>
-        <div class="demo-drawer__footer">
-          <el-button>取 消</el-button>
-          <el-button type="primary">确 定</el-button>
-        </div>
+      </div>
+      <div class="el-drawer__footer">
+        <el-button>取 消</el-button>
+        <el-button type="primary">确 定</el-button>
       </div>
     </el-drawer>
   </div>
@@ -92,29 +90,5 @@ export default {
 </script>
 
 <style>
-.el-drawer__header {
-  border-bottom: 1px solid #e8eaec;
-  padding: 14px 16px;
-  line-height: 1;
-  margin-bottom: 0;
-}
 
-.el-drawer__body {
-  height: calc(100% - 55px);
-  overflow: auto;
-  margin-bottom: 53px;
-  position: static;
-  padding: 16px 24px;
-  background-color: rgb(232, 235, 242);
-}
-
-.demo-drawer__footer {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  border-top: 1px solid #e8e8e8;
-  padding: 10px 16px;
-  text-align: right;
-}
 </style>

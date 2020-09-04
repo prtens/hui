@@ -98,6 +98,10 @@ const router = new VueRouter({
       component: resolve => require(["./routers/drawer.vue"], resolve)
     },
     {
+      path: "/dialog",
+      component: resolve => require(["./routers/dialog.vue"], resolve)
+    },
+    {
       path: "/hour",
       component: resolve =>
         require(["./routers/hour.vue"], resolve)
