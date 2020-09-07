@@ -30,7 +30,7 @@
         :startDisabled="startDisabled"
         :endDisabled="endDisabled"
         :vsenable="vsenable"
-        :vs.sync="vs"
+        :vs.sync="getVs"
         :single="single"
         :shortcuts="shortcuts"
         :shortkeys="shortkeys"
@@ -244,6 +244,14 @@ export default {
       set(val) {
         this.$emit("update:end", val);
       }
+    },
+    getVs: {
+      get() {
+        return this.vs;
+      },
+      set(val) {
+        this.$emit("update:vs", val);
+      }
     }
   },
   mounted() {
@@ -259,7 +267,7 @@ export default {
       let vsEnable = (/^true$/i).test(that.vsenable) || false,
         vs = false;
       if (vsEnable) {
-        vs = (/^true$/i).test(that.vs) || false;
+        vs = (/^true$/i).test(that.getVs) || false;
       }
       let vsSingle = vsEnable ? ((/^true$/i).test(that.single) || false) : false;
 
@@ -346,7 +354,7 @@ export default {
     },
     fillToNode() {
       let that = this;
-      let vs = that.vs,
+      let vs = that.getVs,
         vsSingle = that.vsSingle,
         formatter = that.formatter;
 

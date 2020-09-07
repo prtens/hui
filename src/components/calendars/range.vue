@@ -15,7 +15,7 @@
           <div class="range-input range-input-left">
             <!-- 结束时间禁止操作的时候限制最大可选为直接时间endDisabled -->
             <calendars-datepicker
-              :class="`${currentVs} ? 'vs1' : ''`"
+              :class="`${currentVs ? 'vs1' : ''}`"
               :min="min"
               :max="endDisabled?dates.endStr:max"
               :selected.sync="dates.startStr"
@@ -32,7 +32,7 @@
           <div class="range-input range-input-right">
             <!-- 不对比的时候，限制结束时间最小值为(开始时间或最小日期中的较大值) -->
             <calendars-datepicker
-              :class="`${currentVs} ? 'vs2' : ''`"
+              :class="`${currentVs ? 'vs2' : ''}`"
               :min="!currentVs?endMinFn(dates.startStr,min):min"
               :max="max"
               :selected.sync="dates.endStr"
@@ -265,6 +265,7 @@ export default {
         return this.vs;
       },
       set(val) {
+        console.log(val)
         this.$emit("update:vs", val);
       }
     }

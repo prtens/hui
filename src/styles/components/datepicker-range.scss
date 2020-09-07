@@ -28,6 +28,14 @@
       min-width: $--calendar-range-input-width;
       text-align: center;
       cursor: text;
+
+      .vs1 {
+        color: $--color-primary;
+      }
+
+      .vs2 {
+        color: $--color-primary-vs;
+      }
     }
 
     .range-input-left {

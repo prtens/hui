@@ -157,7 +157,7 @@ export default {
         end: '2020-10-01',
         startDisabled: false,
         endDisabled: false,
-        vsenable: false,
+        vsenable: true,
         vs: false,
         single: false,
         shortcuts: true,
