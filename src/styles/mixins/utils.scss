@@ -68,7 +68,7 @@
   border-width: 1px;
   border-style: solid;
   border-color: #e6e6e6;
-  background-color: #fff;
+  background-color: $--color-white;
 
   .hn-trigger-label {
     display: block;
@@ -113,9 +113,8 @@
   min-width: 100%;
   max-width: 280%;
   border-radius: 4px;
-  background-color: #fff;
   user-select: none;
-  background-color: #fff;
+  background-color: $--color-white;
 
   &.hn-output-bottom {
     top: 100%;

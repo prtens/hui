@@ -79,7 +79,7 @@ a {
 }
 
 .color-f {
-  color: #fff;
+  color: $--color-white;
 }
 
 /* 常用字号
@@ -187,7 +187,7 @@ a {
 /* 卡片样式
 -------------------------- */
 .grid {
-  background: #fff;
+  background: $--color-white;
   border-radius: 4px;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.25s ease-out;
