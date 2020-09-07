@@ -79,8 +79,8 @@
 
       &.selected,
       &.selected:hover {
-        color: #4d7fff;
-        background-color: #edf2ff;
+        color: $--color-primary;
+        background-color: $--color-primary-light-9;
       }
     }
 

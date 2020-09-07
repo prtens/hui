@@ -166,7 +166,7 @@ a {
   outline: none;
   border-radius: $--border-radius-base;
   border: 1px solid $--color-primary;
-  background-color: #edf2ff;
+  background-color: $--color-primary-light-9;
   background-image: none;
   color: $--color-text-primary;
   transition: border-color $--transition-time, background-color $--transition-time,

@@ -188,8 +188,8 @@
     &.hn-output-link-active:hover,
     &.hn-output-link-active:active,
     &.hn-output-link-active:focus {
-      color: #4d7fff;
-      background-color: #edf2ff;
+      color: $--color-primary;
+      background-color: $--color-primary-light-9;
     }
 
     &.hn-output-link-disabled,

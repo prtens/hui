@@ -74,11 +74,11 @@
 
   @at-root .result-vs {
     .co-left {
-      color: #4d7fff;
+      color: $--color-primary;
     }
 
     .co-right {
-      color: #14c9ce;
+      color: $--color-primary-vs;
     }
   }
 }

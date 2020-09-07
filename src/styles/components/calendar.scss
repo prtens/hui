@@ -33,7 +33,7 @@
       cursor: pointer;
 
       &:hover {
-        color: #4d7fff;
+        color: $--color-primary;
       }
     }
 
@@ -87,7 +87,7 @@
 
     .today,
     .today:hover {
-      background-color: #edf2ff;
+      background-color: $--color-primary-light-9;
     }
 
     .notallowed,
@@ -100,7 +100,7 @@
     .selected,
     .selected:hover {
       color: #fff;
-      background-color: #4d7fff;
+      background-color: $--color-primary;
     }
   }
 
