@@ -6,14 +6,14 @@
     @on-change="handleAffixStateChange"
   >
     <div
-      :class="`${prefix}-wrapper`"
+      :class="`${prefix}__wrapper`"
       :style="wrapperStyle"
     >
       <div :class="`${prefix}`">
-        <div :class="`${prefix}-ink`">
+        <div :class="`${prefix}__ink`">
           <span
             v-show="showInk"
-            :class="`${prefix}-ink-ball`"
+            :class="`${prefix}__ink-ball`"
             :style="{ top: `${inkTop}px` }"
           ></span>
         </div>

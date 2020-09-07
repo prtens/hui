@@ -1,11 +1,12 @@
-$multiple-selection-prefix-cls: "#{$css-prefix}multiple-selection";
+@import "../mixins/mixins";
 
-.#{$multiple-selection-prefix-cls} {
-}
-
-.check-all {
-  width: 100%;
-  padding: 0 20px;
-  height: 34px;
-  line-height: 34px;
+@include b(multiple-selection) {
+  @at-root {
+    .check-all {
+      width: 100%;
+      padding: 0 20px;
+      height: 34px;
+      line-height: 34px;
+    }
+  }
 }

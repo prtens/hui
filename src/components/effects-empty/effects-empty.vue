@@ -25,10 +25,13 @@ export default {
       default: "暂无内容"
     }
   },
+  data() {
+    return {};
+  },
   computed: {
     classes() {
       let white = this.bg === 'white';
-      return [(white ? 'white' : 'area')];
+      return [(white ? 'hn-empty__white' : 'hn-empty__area')];
     }
   },
   mounted() {

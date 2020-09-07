@@ -1,6 +1,6 @@
-$affix-prefix-cls: "#{$css-prefix}affix";
+@import "../mixins/mixins";
 
-.#{$affix-prefix-cls} {
+@include b(affix) {
   position: fixed;
-  z-index: $zindex-affix;
+  z-index: $--index-affix;
 }

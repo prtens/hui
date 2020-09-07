@@ -1,25 +1,10 @@
-$calendar-wrapper-prefix-cls: "#{$css-prefix}calendar-wrapper";
+@import "../mixins/mixins";
+@import "../mixins/utils";
 
-$--mx-calendar-item-gap: 2px;
-$--mx-calendar-item-size: 24px;
-
-$--mx-calendar-width: calc(
-  (#{$--mx-calendar-item-size} + #{$--mx-calendar-item-gap} * 2) * 7 + 20px
-);
-$--mx-calendar-height: calc(
-  (#{$--mx-calendar-item-size} + #{$--mx-calendar-item-gap} * 2) * 8 + 20px
-);
-$--mx-calendar-ym-width: calc((#{$--mx-calendar-width} - 60px) / 3);
-$--mx-calendar-ym-height: calc(
-  (#{$--mx-calendar-height} - #{$--mx-calendar-item-size} - #{$--mx-calendar-item-gap} *
-  2 - 80px) / 4
-);
-$--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
-// calendar
-.#{$calendar-wrapper-prefix-cls} {
+@include b(calendar){
   position: relative;
   z-index: 1000;
-  width: $--mx-calendar-width;
+  width: $--calendar-width;
   padding: 0;
   background-color: #fff;
   border-radius: 4px;
@@ -28,7 +13,7 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
   text-align: center;
 
   .header {
-    width: $--mx-calendar-width;
+    width: $--calendar-width;
     padding: 2px 4px;
 
     .minus {
@@ -42,7 +27,7 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
 
     .minus,
     .plus {
-      line-height: $--mx-calendar-item-size;
+      line-height: $--calendar-item-size;
       font-size: 12px;
       color: #ccc;
       cursor: pointer;
@@ -54,8 +39,8 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
 
     .title {
       display: inline-block;
-      height: $--mx-calendar-item-size;
-      line-height: $--mx-calendar-item-size;
+      height: $--calendar-item-size;
+      line-height: $--calendar-item-size;
       padding: 0 10px;
       cursor: pointer;
       border-radius: 4px;
@@ -68,7 +53,7 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
   }
 
   .body {
-    width: $--mx-calendar-width;
+    width: $--calendar-width;
 
     .weeks {
       background-color: #f5f5f6;
@@ -83,10 +68,10 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
     .week,
     .day {
       float: left;
-      width: $--mx-calendar-item-size;
-      height: $--mx-calendar-item-size;
-      margin: $--mx-calendar-item-gap;
-      line-height: $--mx-calendar-item-size;
+      width: $--calendar-item-size;
+      height: $--calendar-item-size;
+      margin: $--calendar-item-gap;
+      line-height: $--calendar-item-size;
       border-radius: 4px;
       cursor: pointer;
       color: #333;
@@ -123,8 +108,8 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
     border-top: 1px solid #e6e6e6;
   }
 
-  .clearfix {
-    @include clearfix()
+  @at-root .clearfix {
+    @include utils-clearfix()
   }
 
   .y-panel,
@@ -143,10 +128,10 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
 
   .ym {
     float: left;
-    width: $--mx-calendar-ym-width;
-    height: $--mx-calendar-ym-height;
+    width: $--calendar-ym-width;
+    height: $--calendar-ym-height;
     margin: 10px;
-    line-height: $--mx-calendar-ym-height;
+    line-height: $--calendar-ym-height;
     border-radius: 4px;
     font-size: calc(12px + 2px);
     cursor: pointer;
@@ -154,180 +139,5 @@ $--mx-calendar-time-width: calc(#{$--mx-calendar-item-size} * 2 + 6px);
     &:hover {
       background-color: #eeeeee;
     }
-  }
-}
-
-// datepicker mx-cascade
-.hn-datepicker {
-  position: relative;
-  display: inline-block;
-  min-width: 100px;
-  min-height: 32px;
-  vertical-align: middle;
-
-  &:hover {
-    .mx-trigger {
-      border-color: #cccccc;
-
-      .mx-trigger-arrow {
-        color: #cccccc;
-      }
-    }
-  }
-}
-
-$center-width: 10px;
-
-.result {
-  position: relative;
-  padding: 0 10px;
-
-  &.result-with-icon {
-    padding: 0 10px 0 26px;
-
-    .prefix-icon {
-      position: absolute;
-      top: 50%;
-      left: 6px;
-      width: 18px;
-      height: 18px;
-      margin-top: -7px;
-      color: #ccc;
-      text-align: left;
-    }
-  }
-}
-
-.result-left {
-  .center {
-    padding: 0 5px;
-  }
-}
-
-.result-center {
-  .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 30px;
-    margin-left: -12px;
-    margin-top: -15px;
-    line-height: 30px;
-    text-align: center;
-  }
-
-  .co {
-    display: inline-block;
-    width: 49%;
-    text-align: center;
-  }
-
-  .co-left {
-    padding-right: $center-width;
-  }
-
-  .co-right {
-    padding-left: $center-width;
-  }
-}
-
-.result-vs {
-  .co-left {
-    color: #4d7fff;
-  }
-
-  .co-right {
-    color: #14c9ce;
-  }
-}
-
-// range datepicker
-$--mx-calendar-range-input-width: 100px;
-.hn-range-wrapper {
-  --mx-calendar-range-input-width: 100px;
-  position: relative;
-  z-index: 1000;
-  min-width: calc(#{$--mx-calendar-range-input-width} * 2 + 40px);
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: #fff;
-  user-select: none;
-  -webkit-user-select: none;
-
-  .title {
-    margin-bottom: 5px;
-    color: #999;
-  }
-
-  .range {
-    position: relative;
-    line-height: 26px;
-
-    .range-input {
-      float: left;
-      width: 50%;
-      min-width: $--mx-calendar-range-input-width;
-      text-align: center;
-      cursor: text;
-    }
-
-    .range-input-left {
-      padding-right: 9px;
-    }
-
-    .range-input-right {
-      padding-left: 9px;
-    }
-
-    .range-gap {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 18px;
-      height: 26px;
-      margin-left: -9px;
-      text-align: center;
-    }
-  }
-
-  .shortcuts {
-    margin-top: 15px;
-
-    .st {
-      float: left;
-      width: 46%;
-      height: 26px;
-      margin-right: 4%;
-      margin-top: 5px;
-      padding: 0 0 0 10px;
-      line-height: 26px;
-      border-radius: 4px;
-      cursor: pointer;
-      overflow: hidden;
-      white-space: nowrap;
-
-      &:hover {
-        background-color: #eeeeee;
-      }
-
-      &.selected,
-      &.selected:hover {
-        color: #4d7fff;
-        background-color: #edf2ff;
-      }
-    }
-
-    &.shortcuts-small {
-      .st {
-        width: 32%;
-        margin-right: 1%;
-      }
-    }
-  }
-
-  &.time {
-    --mx-calendar-range-input-width: calc(12 * 12);
   }
 }

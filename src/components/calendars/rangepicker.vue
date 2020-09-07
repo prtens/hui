@@ -1,11 +1,11 @@
 <template>
   <div
-    class="hn-rangepicker-wrapper pr"
+    class="hn-rangepicker pr"
     v-clickoutside:calendarsRangePicker="hideDiv"
   >
     <div
       :id="`trigger_${viewId}`"
-      :class="`mx-trigger result result-center result-with-icon ${vs ? 'result-vs':''}`"
+      :class="`hn-trigger result result-left result-with-icon ${vs ? 'result-vs':''}`"
       @click.stop="toggle"
     >
       <i class="el-icon-date prefix-icon"></i>
@@ -20,7 +20,7 @@
     </div>
     <div
       :id="`rpcnt_${viewId}`"
-      :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+      :class="`hn-output hn-output-bottom ${show ? 'hn-output-open' : ''}`"
       class="calendarsRangePicker"
       :style="{left: `${left}px`, top: `${top}px`}"
     >

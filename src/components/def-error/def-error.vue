@@ -10,7 +10,7 @@
     <div class="info">{{tip}}</div>
 
     <div
-      class="btns"
+      class="hn-error__footer"
       v-if="btns"
     >
       <el-button

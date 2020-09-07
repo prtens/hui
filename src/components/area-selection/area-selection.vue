@@ -69,7 +69,7 @@
                   </label>
                   <div
                     :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
-                    class="cities mx-shadow clearfix"
+                    class="cities hn-shadow clearfix"
                   >
                     <label
                       class="city cursor-pointer"

@@ -8,6 +8,7 @@
 </template>
 
 <script type="text/babel">
+const types = ["default", "danger"]
 
 export default {
   name: "Tip",
@@ -15,7 +16,7 @@ export default {
     type: {
       type: String,
       validator: function (value) {
-        return ["default", "warning"].indexOf(value) !== -1;
+        return types.indexOf(value) !== -1;
       },
       default: "default"
     },
@@ -31,7 +32,7 @@ export default {
   },
   computed: {
     typeClass() {
-      return [this.prefix, `${this.prefix}--${this.type}`];
+      return [this.prefix, `${this.prefix}__${this.type}`];
     }
   }
 };

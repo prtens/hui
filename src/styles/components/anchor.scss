@@ -1,73 +1,74 @@
-$anchor-prefix: "#{$css-prefix}anchor";
+@import "../mixins/mixins";
 
-.#{$anchor-prefix} {
-  &-wrapper {
+@include b(anchor) {
+  @include e(wrapper) {
     overflow: auto;
-    padding-left: 4px;
-    margin-left: -4px;
+    padding-left: 6px;
+    margin-left: -6px;
   }
 
-  & {
-    position: relative;
-    padding-left: $anchor-border-width;
+  position: relative;
+  padding-left: 2px;
 
-    &-ink {
-      position: absolute;
+  &__ink {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    &:before {
+      content: " ";
+      position: relative;
+      width: 2px;
       height: 100%;
-      left: 0;
-      top: 0;
-      &:before {
-        content: " ";
-        position: relative;
-        width: $anchor-border-width;
-        height: 100%;
-        display: block;
-        background-color: $border-color-split;
-        margin: 0 auto;
-      }
-      &-ball {
-        display: inline-block;
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        border: 2px solid $primary-color;
-        background-color: $body-background-base;
-        left: 50%;
-        transition: top $transition-time $ease-in-out;
-        transform: translate(-50%, 2px);
-      }
+      display: block;
+      background-color: #e8eaec;
+      margin: 0 auto;
     }
 
-    &.fixed &-ink &-ink-ball {
-      display: none;
+    &-ball {
+      display: inline-block;
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 2px solid #2d8cf0;
+      background-color: #fff;
+      left: 50%;
+      transition: top .2s ease-in-out;
+      transform: translate(-50%, 2px);
     }
   }
 
-  &-link {
+  &.fixed &__ink &__ink-ball {
+    display: none;
+  }
+
+  &__link {
     padding: 8px 0 8px 16px;
     line-height: 1;
 
     &-title {
       display: block;
       position: relative;
-      transition: all 0.3s;
-      color: $text-color;
+      transition: all .3s;
+      color: #515a6e;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       margin-bottom: 8px;
+
       &:only-child {
         margin-bottom: 0;
       }
     }
 
     &-active > &-title {
-      color: $primary-color;
+      color: #2d8cf0;
     }
   }
 
-  &-link &-link {
+  &__link &__link {
     padding-top: 6px;
     padding-bottom: 6px;
   }

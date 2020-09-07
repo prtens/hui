@@ -7,7 +7,7 @@
     <div
       v-show="hoverInfo.show"
       :style="{top: `${hoverInfo.top}px`, left: `${hoverInfo.left}px`}"
-      class="discount-hover mx-shadow"
+      class="discount-hover hn-shadow"
     >
       <div>{{ hoverInfo.week }}</div>
       <div><strong>{{ hoverInfo.time }}</strong></div>
@@ -26,7 +26,7 @@
     <div
       v-if="settingInfo.show"
       :style="{top: `${settingInfo.top}`, left: `${settingInfo.left}px`}"
-      class="discount-setting mx-shadow"
+      class="discount-setting hn-shadow"
     >
       <div class="setting-content">
         <div class="mb10">

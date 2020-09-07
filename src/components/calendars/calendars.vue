@@ -1,5 +1,5 @@
 <template>
-  <div class="hn-calendar-wrapper unselectable">
+  <div class="hn-calendar unselectable">
     <div
       class="clearfix"
       v-if="types.day"
@@ -56,7 +56,7 @@
       </div>
 
       <template v-if="timeType">
-        <div class="mx-output-footer">
+        <div class="hn-output-footer">
           <el-button
             type="primary"
             plain

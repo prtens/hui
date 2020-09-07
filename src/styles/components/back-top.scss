@@ -1,6 +1,6 @@
-$backtop-prefix-cls: "#{$css-prefix}back-top";
+@import "../mixins/mixins";
 
-.#{$backtop-prefix-cls} {
+@include b(back-top) {
   position: fixed;
   display: inline-block;
   text-align: center;
@@ -14,12 +14,3 @@ $backtop-prefix-cls: "#{$css-prefix}back-top";
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}

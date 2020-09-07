@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="`hn-range-wrapper ${timeType ? 'time' : ''}`">
+    <div :class="`hn-range-datepicker ${timeType ? 'time' : ''}`">
       <div class="range">
         <div class="title clearfix">
           <span class="fl">{{ title }}：</span>
@@ -66,7 +66,7 @@
         </div>
       </template>
     </div>
-    <div class="mx-output-footer">
+    <div class="hn-output-footer">
       <el-button
         class="mr10"
         type="primary"

@@ -12,7 +12,7 @@
   "author": "prtens <hux@huonu.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --open --inline --hot --compress --history-api-fallback --port 8081 --config build/webpack.dev.config.js",
+    "dev": "webpack-dev-server --open --inline --hot --compress --history-api-fallback --port 8080 --config build/webpack.dev.config.js",
     "start": "npm run dev",
     "dist:style": "gulp --gulpfile build/build-style.js",
     "dist:dev": "webpack --config build/webpack.dist.dev.config.js",

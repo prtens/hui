@@ -1,0 +1,84 @@
+@import "../mixins/mixins";
+@import "../mixins/utils";
+
+@include b(datepicker) {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  min-height: 32px;
+  vertical-align: middle;
+
+  &:hover {
+    .hn-trigger {
+      border-color: #cccccc;
+
+      .hn-trigger-arrow {
+        color: #cccccc;
+      }
+    }
+  }
+
+  @at-root .result {
+    position: relative;
+    padding: 0 10px;
+
+    &.result-with-icon {
+      padding: 0 10px 0 26px;
+
+      .prefix-icon {
+        position: absolute;
+        top: 50%;
+        left: 6px;
+        width: 18px;
+        height: 18px;
+        margin-top: -7px;
+        color: #ccc;
+        text-align: left;
+      }
+    }
+  }
+
+  @at-root .result-left {
+    .center {
+      padding: 0 5px;
+    }
+  }
+
+  @at-root .result-center {
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 40px;
+      height: 30px;
+      margin-left: -12px;
+      margin-top: -15px;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    .co {
+      display: inline-block;
+      width: 49%;
+      text-align: center;
+    }
+
+    .co-left {
+      padding-right: 10px;
+    }
+
+    .co-right {
+      padding-left: 10px;
+    }
+  }
+
+  @at-root .result-vs {
+    .co-left {
+      color: #4d7fff;
+    }
+
+    .co-right {
+      color: #14c9ce;
+    }
+  }
+}

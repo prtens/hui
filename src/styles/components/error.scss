@@ -1,6 +1,6 @@
-$error-prefix-cls: "#{$css-prefix}error";
+@import "../mixins/mixins";
 
-.#{$error-prefix-cls} {
+@include b(error) {
   width: 400px;
   margin: auto;
   padding-top: 80px;
@@ -12,18 +12,19 @@ $error-prefix-cls: "#{$css-prefix}error";
     width: 400px;
     margin: auto;
   }
+
   .info {
     font-size: 16px;
     color: #999;
     margin-top: 40px;
   }
 
-  .btns {
+  @include e(footer) {
     margin-top: 20px;
 
     .home-btn,
     .back-btn {
-      width: calc($font-size-small * 7);
+      width: calc(#{$--font-size-base} * 7);
     }
     .back-btn {
       margin-left: 20px;

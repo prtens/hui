@@ -1,6 +1,8 @@
-$list-prefix-cls: "#{$css-prefix}list";
+@import "../mixins/mixins";
 
-.#{$list-prefix-cls} {
+$list-prefix-cls: "#{$namespace}-list";
+
+@include b(list) {
   position: relative;
 
   &-items {
@@ -12,10 +14,10 @@ $list-prefix-cls: "#{$css-prefix}list";
   &-item {
     display: flex;
     align-items: center;
-    padding: $list-item-padding;
+    padding: 12px;
 
     &-content {
-      color: $text-color;
+      color: $--color-text-primary;
     }
 
     &-meta {
@@ -25,28 +27,33 @@ $list-prefix-cls: "#{$css-prefix}list";
       font-size: 0;
 
       &-avatar {
-        margin-right: $list-item-meta-avatar-margin-right;
+        margin-right: 16px;
       }
+
       &-content {
         flex: 1 0;
       }
+
       &-title {
         font-weight: 500;
         margin-bottom: 4px;
-        color: $text-color;
-        font-size: $font-size-base;
+        color: $--color-text-primary;
+        font-size: $--font-size-base;
         line-height: 22px;
+
         > a {
-          color: $text-color;
-          transition: all $transition-time;
+          color: $--color-text-primary;
+          transition: all $--transition-time;
+
           &:hover {
-            color: $primary-color;
+            color: $--color-primary;
           }
         }
       }
+
       &-description {
-        color: $text-color-secondary;
-        font-size: $font-size-base;
+        color: $--color-primary-light-1;
+        font-size: $--font-size-base;
         line-height: 22px;
       }
     }
@@ -57,12 +64,13 @@ $list-prefix-cls: "#{$css-prefix}list";
       padding: 0;
       font-size: 0;
       list-style: none;
+
       & > li {
         position: relative;
         display: inline-block;
         padding: 0 8px;
-        color: $text-color-secondary;
-        font-size: $font-size-base;
+        color: $--color-primary-light-1;
+        font-size: $--font-size-base;
         line-height: 22px;
         text-align: center;
         cursor: pointer;
@@ -75,27 +83,30 @@ $list-prefix-cls: "#{$css-prefix}list";
           width: 1px;
           height: 14px;
           margin-top: -7px;
-          background-color: $border-color-split;
+          background-color: $--border-color-light;
         }
       }
+
       & > li:first-child {
         padding-left: 0;
       }
+
       & > li:last-child {
         &:after {
           display: none;
         }
       }
+
       // &-split {}
     }
   }
 
   &-header {
-    background: $list-header-background;
+    background: transparent;
   }
 
   &-footer {
-    background: $list-footer-background;
+    background: transparent;
   }
 
   &-header,
@@ -105,17 +116,18 @@ $list-prefix-cls: "#{$css-prefix}list";
   }
 
   &-split &-item {
-    border-bottom: 1px solid $border-color-split;
+    border-bottom: 1px solid $--border-color-light;
+
     &:last-child {
       border-bottom: none;
     }
   }
 
   &-split &-header {
-    border-bottom: 1px solid $border-color-split;
+    border-bottom: 1px solid $--border-color-light;
   }
   &-split &-footer {
-    border-top: 1px solid $border-color-split;
+    border-top: 1px solid $--border-color-light;
   }
 
   &-large &-item {
@@ -141,22 +153,23 @@ $list-prefix-cls: "#{$css-prefix}list";
     }
 
     &-meta {
-      margin-bottom: $list-item-meta-margin-bottom;
+      margin-bottom: 16px;
 
       &-title {
-        margin-bottom: $list-item-meta-title-margin-bottom;
-        color: $heading-color;
-        font-size: $font-size-large;
+        margin-bottom: 12px;
+        color: fade(#000, 85%);
+        font-size: $--font-size-large;
         line-height: 24px;
       }
     }
 
     &-action {
-      margin-top: $padding-md;
+      margin-top: 16px;
       margin-left: auto;
 
       > li {
         padding: 0 16px;
+
         &:first-child {
           padding-left: 0;
         }
@@ -180,8 +193,8 @@ $list-prefix-cls: "#{$css-prefix}list";
 }
 
 .#{$list-prefix-cls}-bordered {
-  border: 1px solid $border-color-base;
-  border-radius: $border-radius-base;
+  border: 1px solid $--border-color-base;
+  border-radius: $--border-radius-base;
 
   .#{$list-prefix-cls}-header {
     padding-right: 24px;
@@ -196,7 +209,7 @@ $list-prefix-cls: "#{$css-prefix}list";
   .#{$list-prefix-cls}-item {
     padding-right: 24px;
     padding-left: 24px;
-    border-bottom: 1px solid $border-color-split;
+    border-bottom: 1px solid $--border-color-lighter;
   }
 
   .#{$list-prefix-cls}-pagination {
@@ -208,6 +221,7 @@ $list-prefix-cls: "#{$css-prefix}list";
       padding-right: 16px;
       padding-left: 16px;
     }
+
     .#{$list-prefix-cls}-header,
     .#{$list-prefix-cls}-footer {
       padding: 8px 16px;

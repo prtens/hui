@@ -1,43 +1,43 @@
-$duration-prefix-cls: "#{$css-prefix}duration";
+@import "../mixins/mixins";
 
-.#{$duration-prefix-cls} {
+@include b(duration) {
   position: relative;
-  font-size: $font-size-small;
+  font-size: $--font-size-base;
 
   .discount-mask {
     position: absolute;
-    z-index: $zindex-discount;
+    z-index: $--index-discount;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: default;
-    border: 1px solid $primary-color;
+    border: 1px solid $--color-text-primary;
     background: rgba(75, 138, 251, 0.2);
   }
 
   .discount-hover {
     position: absolute;
-    z-index: $zindex-discount;
+    z-index: $--index-discount;
     width: 120px;
     padding: 10px;
     line-height: 22px;
-    border-radius: $border-radius-small;
-    background: $white-color;
+    border-radius: $--border-radius-base;
+    background: $--color-white;
     filter: alpha(opacity=80);
     opacity: 0.8;
   }
 
   .discount-setting {
     position: absolute;
-    z-index: $zindex-discount;
+    z-index: $--index-discount;
     width: calc(12 * 16 + 40px);
-    border-radius: $border-radius-small;
-    background: $white-color;
+    border-radius: $--border-radius-base;
+    background: $--color-white;
 
     .setting-content {
       padding: 10px 10px 0 10px;
-      border-bottom: 1px solid $border-color-base;
+      border-bottom: 1px solid $--border-color-base;
     }
 
     .setting-footer {
@@ -47,75 +47,75 @@ $duration-prefix-cls: "#{$css-prefix}duration";
 
   .duration {
     box-sizing: border-box;
-    border-radius: $border-radius-small;
+    border-radius: $--border-radius-base;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     cursor: default;
-    background-color: $body-background-base;
+    background-color: #fafafa;
 
     .week {
-      border-top: 1px solid $border-color-base;
-      border-right: 1px solid $border-color-base;
-      border-left: 1px solid $border-color-base;
-      border-top-left-radius: $border-radius-small;
-      border-bottom-left-radius: $border-radius-small;
+      border-top: 1px solid $--border-color-base;
+      border-right: 1px solid $--border-color-base;
+      border-left: 1px solid $--border-color-base;
+      border-top-left-radius: $--border-radius-base;
+      border-bottom-left-radius: $--border-radius-base;
 
       .week-item {
         color: #999;
         text-align: center;
-        border-bottom: 1px solid $border-color-base;
+        border-bottom: 1px solid $--border-color-base;
 
         &:first-child {
-          border-top-left-radius: $border-radius-small;
+          border-top-left-radius: $--border-radius-base;
         }
 
         &:last-child {
-          border-bottom-left-radius: $border-radius-small;
+          border-bottom-left-radius: $--border-radius-base;
         }
       }
     }
 
     .content {
       .range {
-        background-color: $body-background-base;
-        border-top: 1px solid $border-color-base;
-        border-bottom: 1px solid $border-color-base;
-        border-top-right-radius: $border-radius-small;
+        background-color: #fafafa;
+        border-top: 1px solid $--border-color-base;
+        border-bottom: 1px solid $--border-color-base;
+        border-top-right-radius: $--border-radius-base;
         text-align: center;
         color: #999;
 
         .range-item {
           float: left;
-          border-right: 1px solid $border-color-base;
+          border-right: 1px solid $--border-color-base;
 
           &:last-child {
-            border-top-right-radius: $border-radius-small;
+            border-top-right-radius: $--border-radius-base;
           }
         }
       }
 
       .time {
-        background-color: $body-background-base;
+        background-color: #fafafa;
         text-align: center;
         color: #999;
 
         .time-item {
           float: left;
-          border-right: 1px solid $border-color-base;
-          border-bottom: 1px solid $border-color-base;
+          border-right: 1px solid $--border-color-base;
+          border-bottom: 1px solid $--border-color-base;
         }
       }
 
       .boxzone {
         .box {
-          background: $white-color;
-          border-right: 1px solid $border-color-base;
-          border-bottom: 1px solid $border-color-base;
+          background: $--color-white;
+          border-right: 1px solid $--border-color-base;
+          border-bottom: 1px solid $--border-color-base;
 
           &:last-child {
-            border-bottom-right-radius: $border-radius-small;
+            border-bottom-right-radius: $--border-radius-base;
           }
         }
       }
@@ -129,8 +129,8 @@ $duration-prefix-cls: "#{$css-prefix}duration";
     margin-right: 3px;
     border-radius: 50%;
   }
-}
 
-.clearfix {
-  @include clearfix();
+  .clearfix {
+    @include utils-clearfix();
+  }
 }

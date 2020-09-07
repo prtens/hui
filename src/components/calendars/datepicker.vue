@@ -2,7 +2,7 @@
   <div class="hn-datepicker">
     <div
       :id="`trigger_${viewId}`"
-      :class="`mx-trigger result ${!prefix ? 'result-with-icon' : ''}`"
+      :class="`hn-trigger result ${!prefix ? 'result-with-icon' : ''}`"
       v-clickoutside="hideDiv"
       @click="toggle"
     >
@@ -17,7 +17,7 @@
 
     <div
       :id="`dpcnt_${viewId}`"
-      :class="`mx-output mx-output-bottom ${show ? 'mx-output-open' : ''}`"
+      :class="`hn-output hn-output-bottom ${show ? 'hn-output-open' : ''}`"
       :style="{left: `${left}px`, top: `${top}px`}"
     >
       <calendars

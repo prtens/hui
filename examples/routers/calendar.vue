@@ -53,7 +53,7 @@
       </el-col>
       <el-col :span="8">
         <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
-        <div style="width: 240px">
+        <div style="width: 250px">
           <calendars-rangepicker
             :start.sync="rangeDatepicker.start"
             :end.sync="rangeDatepicker.end"
