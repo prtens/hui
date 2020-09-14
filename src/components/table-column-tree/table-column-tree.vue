@@ -68,7 +68,7 @@ export default {
     // 切换处理
     toggleHandle(index, row) {
       if (this.hasChild(row)) {
-        var data = this.$parent.store.states.data.slice(0);
+        let data = this.$parent.store.states.data.slice(0);
         data[index]._expanded = !data[index]._expanded;
         if (data[index]._expanded) {
           data = data
@@ -86,12 +86,12 @@ export default {
     },
     // 移除子节点
     removeChildNode(data, parentId) {
-      var parentIds = isArray(parentId) ? parentId : [parentId];
+      let parentIds = isArray(parentId) ? parentId : [parentId];
       if (parentId.length <= 0) {
         return data;
       }
-      var ids = [];
-      for (var i = 0; i < data.length; i++) {
+      let ids = [];
+      for (let i = 0; i < data.length; i++) {
         if (
           parentIds.indexOf(data[i][this.parentKey]) !== -1 &&
           parentIds.indexOf(data[i][this.treeKey]) === -1

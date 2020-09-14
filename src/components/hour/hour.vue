@@ -154,7 +154,7 @@ export default {
 
       let getHours = () => {
         let hours = [];
-        for (var i = 0; i < 24; i++) {
+        for (let i = 0; i < 24; i++) {
           hours.push({
             'index': i,
             'indexNext': (i + 1),

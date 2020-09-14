@@ -297,7 +297,7 @@ export default {
         // 开始时间禁止使用的时候，只允许使用动态计算的快捷日期
         // 动态计算的都是依据开始时间计算的
         showShortcuts = false;
-        for (var i = 0; i < quickDates.length; i++) {
+        for (let i = 0; i < quickDates.length; i++) {
           if ((quickDates[i].indexOf('dynamic') < 0) && (quickDates[i].indexOf('forever') < 0)) {
             quickDates.splice(i--, 1);
           }

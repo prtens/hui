@@ -1,5 +1,5 @@
 export const converse = e => {
-  var i = {};
+  let i = {};
   e &&
     JSON.parse(e).forEach(function(e) {
       i[e.dayOfWeek] = e.timeSpans || [];
@@ -17,11 +17,11 @@ export const converse = e => {
 };
 
 export const reverse = e => {
-  var i = !1,
+  let i = !1,
     n = [];
   return (
     e.forEach(function(e) {
-      var t = e.times;
+      let t = e.times;
       // p>1 ? p<b ? p>b :p=6 : p=3
       t.length > 0 && (i = !0),
         +e.week === 1
