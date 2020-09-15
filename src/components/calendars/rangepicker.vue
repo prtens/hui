@@ -20,7 +20,7 @@
     </div>
     <div
       :id="`rpcnt_${viewId}`"
-      :class="`hn-output hn-output-bottom ${show ? 'hn-output-open' : ''}`"
+      :class="`hn-output hn-output__bottom ${show ? 'hn-output--open' : ''}`"
       class="calendarsRangePicker"
       :style="{left: `${left}px`, top: `${top}px`}"
     >

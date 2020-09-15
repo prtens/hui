@@ -2,9 +2,9 @@
 @import "../common/var";
 
 /* BEM： block  element 和 modifier
-  .block {  }
-  .block__element {  }
-  .block--modifier {  }
+  .block {  } 块: 一个块就是一个组件
+  .block__element {  } 元素
+  .block--modifier {  } 修饰符: 是改变某个块的外观的标志
 -------------------------- */
 @mixin b($block) {
   $B: $namespace+'-'+$block !global;

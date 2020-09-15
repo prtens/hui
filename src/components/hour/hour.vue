@@ -1,6 +1,6 @@
 <template>
   <div class="hn-hour">
-    <div class="period">
+    <div class="hn-hour__period">
 
       <!-- 每日分隔是才有该功能 -->
       <div v-if="periods.length === 7">
@@ -20,7 +20,7 @@
       </div>
 
       <ul
-        class="hours clearfix"
+        class="hn-hour__hours"
         v-for="(p,pIndex) of periods"
         :key="pIndex"
       >
@@ -65,7 +65,7 @@
       </ul>
     </div>
 
-    <div class="clearfix opers-wrapper">
+    <div class="hn-hour__operates">
       <a
         href="javascript:;"
         class="btn btn-small clear-btn"

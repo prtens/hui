@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/babel">
-import { on, off } from "../../utils/dom";
+import {on, off} from "../../utils/dom";
 
 function getScroll(target, top) {
   const prop = top ? "pageYOffset" : "pageXOffset";
@@ -80,16 +80,12 @@ export default {
       return type;
     },
     classes() {
-      return [
-        {
-          [`${this.prefix}`]: this.affix
-        }
-      ];
+      return {
+        [`${this.prefix}`]: this.affix
+      };
     }
   },
   mounted() {
-    // window.addEventListener('scroll', this.handleScroll, false);
-    // window.addEventListener('resize', this.handleScroll, false);
     on(window, "scroll", this.handleScroll, this.useCapture);
     on(window, "resize", this.handleScroll, this.useCapture);
     this.$nextTick(() => {
@@ -97,8 +93,6 @@ export default {
     });
   },
   beforeDestroy() {
-    // window.removeEventListener('scroll', this.handleScroll, false);
-    // window.removeEventListener('resize', this.handleScroll, false);
     off(window, "scroll", this.handleScroll, this.useCapture);
     off(window, "resize", this.handleScroll, this.useCapture);
   },

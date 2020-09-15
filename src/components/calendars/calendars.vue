@@ -56,7 +56,7 @@
       </div>
 
       <template v-if="timeType">
-        <div class="hn-output-footer">
+        <div class="hn-output__footer">
           <el-button
             type="primary"
             plain

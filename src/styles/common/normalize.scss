@@ -171,6 +171,14 @@ a {
   color: $--color-text-primary;
   transition: border-color $--transition-time, background-color $--transition-time,
   color $--transition-time;
+
+  &:hover,
+  &.hover,
+  &:active {
+    background-color: $--color-primary-light-8;
+    background-image: none;
+    color: $--color-text-primary;
+  }
 }
 
 .btn-primary {

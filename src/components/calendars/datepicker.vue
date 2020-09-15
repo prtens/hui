@@ -1,9 +1,9 @@
 <template>
-  <div class="hn-datepicker">
+  <div class="hn-datepicker"
+       v-clickoutside:calendars="hideDiv">
     <div
       :id="`trigger_${viewId}`"
       :class="`hn-trigger result ${!prefix ? 'result-with-icon' : ''}`"
-      v-clickoutside="hideDiv"
       @click="toggle"
     >
       <template v-if="!prefix">
@@ -17,7 +17,8 @@
 
     <div
       :id="`dpcnt_${viewId}`"
-      :class="`hn-output hn-output-bottom ${show ? 'hn-output-open' : ''}`"
+      :class="`hn-output hn-output__bottom ${show ? 'hn-output--open' : ''}`"
+      class="calendars"
       :style="{left: `${left}px`, top: `${top}px`}"
     >
       <calendars

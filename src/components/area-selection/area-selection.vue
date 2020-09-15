@@ -1,6 +1,6 @@
 <template>
-  <div class="hn-area-selection">
-    <div class="area-search-box">
+  <div class="hn-area">
+    <div class="hn-area__search">
       <el-input
         :placeholder="placeholder"
         prefix-icon="el-icon-search"
@@ -11,44 +11,42 @@
     </div>
 
     <div
-      class="mb10"
+      class="hn-area__box"
       v-for="(type, typeIndex) of types"
       :key="typeIndex"
     >
-      <div class="all">
-        <label class="cursor-pointer">
+      <div class="hn-area__all">
+        <label class="hn-area__all-inner">
           <el-checkbox
             v-model="type.checked"
             @change="changeAll(typeIndex)"
           ></el-checkbox>
-          <span class="ml5">全选 - {{ type.name }}</span>
+          <span class="hn-area__all-checked">全选 - {{ type.name }}</span>
         </label>
       </div>
 
-      <div class="clearfix">
+      <div class="hn-area__groups">
         <div
-          :class="type.half ? 'area-half' : ''"
+          :class="type.half ? 'hn-area__half' : ''"
           v-for="(group,groupIndex) of type.groups"
           :key="groupIndex"
         >
-          <div
-            v-for="(area,areaIndex) of group"
-            :key="areaIndex"
-          >
-            <div class="area">
+          <template
+            v-for="(area) of group">
+            <div class="hn-area__group">
               <div
                 class="area-name"
                 v-if="area.name"
               >{{ area.name }}
               </div>
-              <div class="provinces clearfix">
+              <div class="provinces">
                 <div
                   class="province"
                   v-for="(province,provinceIndex) of area.provinces"
                   :key="provinceIndex"
                   :style="{'min-width': (!type.half ? (100/lineNumber)*(province.lineNumberMulti || 1) : '' )}"
                 >
-                  <label class="province-label cursor-pointer clearfix">
+                  <div class="province-label">
                     <el-checkbox
                       v-model="province.checked"
                       @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
@@ -66,13 +64,13 @@
                         @click="toggleCity({province:province.id})"
                       ></i>
                     </template>
-                  </label>
+                  </div>
                   <div
                     :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
-                    class="cities hn-shadow clearfix"
+                    class="cities hn-shadow"
                   >
                     <label
-                      class="city cursor-pointer"
+                      class="city"
                       v-for="(city, cityIndex) of province.cities"
                       :key="cityIndex"
                     >
@@ -86,7 +84,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </template>
         </div>
       </div>
     </div>

@@ -116,33 +116,33 @@
   user-select: none;
   background-color: $--color-white;
 
-  &.hn-output-bottom {
+  &__bottom {
     top: 100%;
     margin-top: 10px;
 
-    &.hn-output-open {
+    &.hn-output--open {
       display: block;
       animation: fade-in-down 0.25s ease-out;
       animation-fill-mode: forwards;
     }
   }
 
-  &.hn-output-top {
+  &-top {
     bottom: 100%;
     margin-bottom: 10px;
 
-    &.hn-output-open {
+    &.hn-output--open {
       display: block;
       animation: fade-in-up 0.25s ease-out;
       animation-fill-mode: forwards;
     }
   }
 
-  .hn-output-search {
+  .hn-output__search {
     padding: 10px 10px 0 10px;
   }
 
-  .hn-output-list {
+  .hn-output__list {
     max-height: 300px;
     padding: 8px 10px;
     overflow: auto;
@@ -152,7 +152,7 @@
     padding: 2px 0;
   }
 
-  .hn-output-header {
+  .hn-output__header {
     height: 26px;
     line-height: 26px;
     padding-left: 2px;
@@ -165,7 +165,7 @@
     text-overflow: ellipsis;
   }
 
-  .hn-output-link {
+  .hn-output__link {
     display: block;
     width: 100%;
     height: 26px;
@@ -183,18 +183,18 @@
       background-color: #eeeeee;
     }
 
-    &.hn-output-link-active,
-    &.hn-output-link-active:hover,
-    &.hn-output-link-active:active,
-    &.hn-output-link-active:focus {
+    &.hn-output__link-active,
+    &.hn-output__link-active:hover,
+    &.hn-output__link-active:active,
+    &.hn-output__link-active:focus {
       color: $--color-primary;
       background-color: $--color-primary-light-9;
     }
 
-    &.hn-output-link-disabled,
-    &.hn-output-link-disabled:hover,
-    &.hn-output-link-disabled:active,
-    &.hn-output-link-disabled:focus {
+    &.hn-output__link-disabled,
+    &.hn-output__link-disabled:hover,
+    &.hn-output__link-disabled:active,
+    &.hn-output__link-disabled:focus {
       color: #999;
       cursor: not-allowed;
       background-color: transparent;
@@ -202,7 +202,7 @@
   }
 }
 
-.hn-output-footer {
+.hn-output__footer {
   padding: 10px;
   border-top: 1px solid #e6e6e6;
   text-align: left;

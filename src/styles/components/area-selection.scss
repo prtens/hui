@@ -1,107 +1,48 @@
 @import "../mixins/mixins";
 @import "../mixins/utils";
 
-@include b(area-selection) {
-  .area-search-box {
+@include b(area) {
+
+  @include e(search) {
     display: block;
     width: 300px;
     margin-bottom: 12px;
   }
 
-  .provinces {
-    .province {
-      position: relative;
-      float: left;
-      min-width: 16.6%;
-      height: $--area-height;
+  @include e(box) {
+    margin-bottom: 10px;
+  }
 
-      .province-label {
-        position: absolute;
-        float: left;
-        min-width: 100px;
-        padding-right: 16px;
-        line-height: $--area-height;
-        white-space: nowrap;
+  @include e(all) {
+    height: $--area-height;
+    line-height: $--area-height;
 
-        .name {
-          display: inline-block;
-          position: relative;
-          padding-right: 26px;
-          border-radius: $--border-radius-base;
-          transition: all 0.25s;
+    &-inner {
+      cursor: pointer;
+    }
 
-          .province-count {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            width: 24px;
-            height: $--area-height;
-            line-height: $--area-height;
-            margin-top: 0 - $--area-height / 2;
-            text-align: left;
-            font-size: 12px;
-            font-weight: bold;
-          }
-        }
-
-        .province-arrow {
-          position: absolute;
-          top: 0;
-          right: 4px;
-          width: 20px;
-          height: $--area-height;
-          line-height: $--area-height;
-          text-align: center;
-          color: #ccc;
-          cursor: pointer;
-          transition: all 0.25s;
-          user-select: none;
-
-          &.province-expand {
-            right: 2px;
-            transform: rotate(180deg);
-          }
-        }
-      }
-
-      .cities {
-        position: absolute;
-        top: $--area-height;
-        left: -72px;
-        z-index: $--index-area;
-        width: 240px;
-        padding: 10px;
-        border-radius: 4px;
-        background-color: $--color-white;
-
-        .city {
-          float: left;
-          width: 49%;
-          height: 32px;
-          margin-right: 2%;
-          line-height: 32px;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-
-          &:nth-child(even) {
-            margin-right: 0;
-          }
-
-          .highlight {
-            background-color: $--color-primary-light-9;
-          }
-        }
-      }
+    &-checked {
+      margin-left: 5px;
     }
   }
 
-  .all {
-    height: $--area-height;
-    line-height: $--area-height;
+  @include e(groups) {
+    width: 100%;
+    @include utils-clearfix();
   }
 
-  .area {
+  @include e(half) {
+    float: left;
+    width: 50%;
+
+    .province {
+      width: 33%;
+      min-width: calc(12 * 6 + 28px);
+    }
+  }
+
+
+  @include e(group) {
     position: relative;
     padding-left: 25px;
 
@@ -117,19 +58,97 @@
       font-weight: bold;
       font-family: "Tahoma";
     }
-  }
 
-  .area-half {
-    float: left;
-    width: 50%;
+    .provinces {
+      @include utils-clearfix();
 
-    .province {
-      width: 33%;
-      min-width: calc(12 * 6 + 28px);
+      .province {
+        position: relative;
+        float: left;
+        min-width: 16.6%;
+        height: $--area-height;
+
+        .province-label {
+          position: absolute;
+          float: left;
+          min-width: 100px;
+          padding-right: 16px;
+          line-height: $--area-height;
+          white-space: nowrap;
+          cursor: pointer;
+
+          .name {
+            display: inline-block;
+            position: relative;
+            padding-right: 26px;
+            border-radius: $--border-radius-base;
+            transition: all 0.25s;
+
+            .province-count {
+              position: absolute;
+              top: 50%;
+              right: 0;
+              width: 24px;
+              height: $--area-height;
+              line-height: $--area-height;
+              margin-top: 0 - $--area-height / 2;
+              text-align: left;
+              font-size: 12px;
+              font-weight: bold;
+            }
+          }
+
+          .province-arrow {
+            position: absolute;
+            top: 0;
+            right: 4px;
+            width: 20px;
+            height: $--area-height;
+            line-height: $--area-height;
+            text-align: center;
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.25s;
+            user-select: none;
+
+            &.province-expand {
+              right: 2px;
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .cities {
+          position: absolute;
+          top: $--area-height;
+          left: 0; // -72px;
+          z-index: $--index-area;
+          width: 240px;
+          padding: 10px;
+          border-radius: 4px;
+          background-color: $--color-white;
+
+          .city {
+            float: left;
+            width: 49%;
+            height: 32px;
+            margin-right: 2%;
+            line-height: 32px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            cursor: pointer;
+
+            &:nth-child(even) {
+              margin-right: 0;
+            }
+
+            .highlight {
+              background-color: $--color-primary-light-9;
+            }
+          }
+        }
+      }
     }
-  }
-
-  .clearfix {
-    @include utils-clearfix();
   }
 }

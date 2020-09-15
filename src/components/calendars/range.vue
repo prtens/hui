@@ -66,7 +66,7 @@
         </div>
       </template>
     </div>
-    <div class="hn-output-footer">
+    <div class="hn-output__footer">
       <el-button
         class="mr10"
         type="primary"

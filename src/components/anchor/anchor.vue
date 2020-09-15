@@ -22,6 +22,7 @@
     </div>
   </component>
 </template>
+
 <script>
 import {
   scrollTop,
@@ -29,6 +30,7 @@ import {
   sharpMatcherRegx
 } from "../../utils/assist";
 import { on, off } from "../../utils/dom";
+
 export default {
   name: "Anchor",
   provide() {
