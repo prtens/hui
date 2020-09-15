@@ -43,10 +43,10 @@
               <template v-if="(sItem.value === 1)">
                 <el-radio :label="+sItem.value">{{ sItem.text }}</el-radio>
                 <el-input
-                  class="w150"
                   v-model="settingInfo.discount"
                   :disabled="(settingInfo.type !== sItem.value)"
                   placeholder="请输入折扣"
+                  style="width: 150px;"
                 >
                   <template slot="append">%</template>
                 </el-input>
@@ -126,7 +126,7 @@
             :style="{width: `${boxWidth}px`, height: `${boxHeight}px`, 'background-color': `${zone.bg}`}"
             v-for="(zone, key) of boxZones"
             :key="key"
-            @click="clickOutside(zone.index)"
+            @click="clickOutside($event, zone.index)"
             @mousedown="select($event, key)"
             @mouseover="showTip(key)"
             @mouseout="hideTip(key)"
@@ -192,11 +192,11 @@ export default {
       default: 32
     },
     /**
-     * 当前选中值 00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100
+     * 当前选中值
      */
     selected: {
       type: String,
-      default: ""
+      default: Data.def
     },
     /**
      * 是否以半小时为选择间隔
@@ -311,8 +311,6 @@ export default {
 
       this.discountColorMap = discountColorMap
       this.timeDiscount = timeDiscount
-      this.weeks = ['一', '二', '三', '四', '五', '六', '日']
-      this.ranges = ['00:00 - 06:00', '06:00 - 12:00', '12:00 - 18:00', '18:00 - 24:00']
       this.multiple = multiple // 以一小时算一格还是半小时算一格 1半小时，2一小时
       this.maxWidth = maxWidth // 容器整体宽度
       this.rowNum = rowNum // 一行有多少个格子
@@ -410,11 +408,9 @@ export default {
       let that = this;
       discount = parseInt(discount) || 0;
 
-      let {discountColorMap, boxZones} = that;
-
-      boxZones[index] = {
+      that.boxZones[index] = {
         index: index,
-        bg: discountColorMap[discount],
+        bg: that.discountColorMap[discount],
         discount: discount
       }
     },
@@ -505,7 +501,7 @@ export default {
     /**
      * 选中情况下点击其他区域隐藏选中区域
      */
-    clickOutside(index) {
+    clickOutside(event, index) {
       let that = this;
       let {maskInfo} = that;
       if (!maskInfo.show ||
