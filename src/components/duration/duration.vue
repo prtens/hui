@@ -178,26 +178,37 @@ const Data = {
 export default {
   name: "Discount",
   props: {
-    // 单个格子宽度
-    boxWidth: {
-      type: Number,
-      default: 32
-    },
     viewId: {
       type: String,
       default: "time-step-discount"
     },
-    half: {
-      type: Boolean,
-      default: false
+    /**
+     * 单个格子宽度
+     * 1. 选择一小时的场景默认 32px
+     * 2. 选择半小时的场景默认 18px
+     */
+    boxWidth: {
+      type: Number,
+      default: 32
     },
+    /**
+     * 当前选中值 00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100
+     */
     selected: {
       type: String,
       default: ""
     },
+    /**
+     * 是否以半小时为选择间隔
+     * false，默认一小时为间隔
+     */
+    half: {
+      type: Boolean,
+      default: false
+    },
     bizCode: {
       type: String,
-      default: ""
+      default: "def"
     }
   },
   data() {
@@ -247,7 +258,7 @@ export default {
         columnNum = 7, // 一列有多少个格子
         multiple = half ? 2 : 1; // 倍数
 
-      let colorMap = ColorMap[this.bizCode] || ColorMap.def;
+      let colorMap = ColorMap[this.bizCode];
       let discountColorMap = {};
       for (let i = 0; i <= 250; i++) {
         discountColorMap[i] = '#ffffff';

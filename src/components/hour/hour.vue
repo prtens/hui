@@ -24,42 +24,42 @@
         v-for="(p,pIndex) of periods"
         :key="pIndex"
       >
-        <li class="all">
-          <span class="all-tip">时间段</span>
+        <li class="hn-hour__all">
+          <span class="hn-hour__all-tip">时间段</span>
           <a
             href="javascript:;"
-            :class="`btn btn-small all-btn ${p.selected ? 'btn-primary' : ''}`"
+            :class="`btn btn-small hn-hour__all-btn ${p.selected ? 'btn-primary' : ''}`"
             @click="toggleAll({pIndex: pIndex})"
           >{{p.name}}</a>
         </li>
         <li
           v-for="(h,hIndex) of p.hours"
           :key="hIndex"
-          :class="`hour ${h.milestone ? 'milestone' : ''} ${h.selected ? 'selected' : ''}`"
+          :class="`hour ${h.milestone ? 'hn-hour--milestone' : ''} ${h.selected ? 'hn-hour--selected' : ''}`"
           :data-period="pIndex"
           :data-hour="h.index"
           @mousedown="drag($event)"
         >
-          <div class="hour-inner"></div>
+          <div class="hn-hour__inner"></div>
           <div
-            :class="`line-start ${!h.firstSelected ? 'hide' : ''}`"
+            :class="`hn-hour__line-start ${!h.firstSelected ? 'hide' : ''}`"
             :style="{'z-index': `${h.zIndex}`}"
           >
-            <span class="line-info">{{h.index}}</span>
+            <span class="hn-hour__line-info">{{h.index}}</span>
           </div>
           <div
-            :class="`line-end ${!h.endSelected ? 'hide' : ''}`"
+            :class="`hn-hour__line-end ${!h.endSelected ? 'hide' : ''}`"
             :style="{'z-index': `${h.zIndex}`}"
           >
-            <span class="line-info">{{h.indexNext}}</span>
+            <span class="hn-hour__line-info">{{h.indexNext}}</span>
           </div>
-          <div class="hour-line">
-            <span class="hour-info">{{h.index}}</span>
+          <div class="hn-hour__hour-line">
+            <span class="hn-hour__hour-info">{{h.index}}</span>
           </div>
         </li>
-        <li class="hour milestone hour-last">
-          <span class="hour-line">
-            <span class="hour-info">24</span>
+        <li class="hour hn-hour--milestone hn-hour__hour-last">
+          <span class="hn-hour__hour-line">
+            <span class="hn-hour__hour-info">24</span>
           </span>
         </li>
       </ul>
@@ -68,12 +68,12 @@
     <div class="hn-hour__operates">
       <a
         href="javascript:;"
-        class="btn btn-small clear-btn"
+        class="btn btn-small hn-hour__btn"
         @click="clearAll"
       >
         清空
       </a>
-      <span class="fr oper-tip">{{tip}}</span>
+      <span class="fr hn-hour__operates-tip">{{tip}}</span>
     </div>
   </div>
 </template>
@@ -115,7 +115,7 @@ export default {
     },
     tip: {
       type: String,
-      default: ""
+      default: "11111111111"
     }
   },
   data() {
