@@ -1,26 +1,27 @@
 @import "../mixins/mixins";
 
-$list-prefix-cls: "#{$namespace}-list";
-
 @include b(list) {
   position: relative;
 
-  &-items {
+  &__header,
+  &__footer {
+    background: transparent;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  @include e(items) {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
 
-  &-item {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-
-    &-content {
-      color: $--color-text-primary;
+    .hn-list__item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
     }
 
-    &-meta {
+    .hn-list__meta {
       display: flex;
       flex: 1;
       align-items: flex-start;
@@ -37,28 +38,28 @@ $list-prefix-cls: "#{$namespace}-list";
       &-title {
         font-weight: 500;
         margin-bottom: 4px;
-        color: $--color-text-primary;
-        font-size: $--font-size-base;
+        color: #515a6e;
+        font-size: 14px;
         line-height: 22px;
 
-        > a {
-          color: $--color-text-primary;
-          transition: all $--transition-time;
+        & > a {
+          color: #515a6e;
+          transition: all .2s;
 
           &:hover {
-            color: $--color-primary;
+            color: #2d8cf0;
           }
         }
       }
 
       &-description {
-        color: $--color-primary-light-1;
-        font-size: $--font-size-base;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 14px;
         line-height: 22px;
       }
     }
 
-    &-action {
+    .hn-list__item-action {
       flex: 0 0 auto;
       margin-left: 48px;
       padding: 0;
@@ -69,21 +70,21 @@ $list-prefix-cls: "#{$namespace}-list";
         position: relative;
         display: inline-block;
         padding: 0 8px;
-        color: $--color-primary-light-1;
-        font-size: $--font-size-base;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 14px;
         line-height: 22px;
         text-align: center;
         cursor: pointer;
 
         &:after {
-          content: "";
+          content: '';
           position: absolute;
           top: 50%;
           right: 0;
           width: 1px;
           height: 14px;
           margin-top: -7px;
-          background-color: $--border-color-light;
+          background-color: #e8eaec;
         }
       }
 
@@ -96,26 +97,10 @@ $list-prefix-cls: "#{$namespace}-list";
           display: none;
         }
       }
-
-      // &-split {}
     }
   }
 
-  &-header {
-    background: transparent;
-  }
-
-  &-footer {
-    background: transparent;
-  }
-
-  &-header,
-  &-footer {
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  &-split &-item {
+  &--split &__item {
     border-bottom: 1px solid $--border-color-light;
 
     &:last-child {
@@ -123,24 +108,24 @@ $list-prefix-cls: "#{$namespace}-list";
     }
   }
 
-  &-split &-header {
+  &--split &__header {
     border-bottom: 1px solid $--border-color-light;
   }
-  &-split &-footer {
+  &--split &__footer {
     border-top: 1px solid $--border-color-light;
   }
 
-  &-large &-item {
+  &--large &__item {
     padding-top: 16px;
     padding-bottom: 16px;
   }
 
-  &-small &-item {
+  &--small &__item {
     padding-top: 8px;
     padding-bottom: 8px;
   }
 
-  &-vertical &-item {
+  &--vertical &__item {
     align-items: initial;
 
     &-main {
@@ -148,19 +133,19 @@ $list-prefix-cls: "#{$namespace}-list";
       flex: 1;
     }
 
-    &-extra {
-      margin-left: 40px;
-    }
-
-    &-meta {
+    &-main .hn-list__meta {
       margin-bottom: 16px;
 
       &-title {
         margin-bottom: 12px;
-        color: fade(#000, 85%);
+        color: rgba($--color-black, .85);
         font-size: $--font-size-large;
         line-height: 24px;
       }
+    }
+
+    &-extra {
+      margin-left: 40px;
     }
 
     &-action {
@@ -178,59 +163,59 @@ $list-prefix-cls: "#{$namespace}-list";
   }
 
   // without flex
-  &-item-no-flex {
+  &__item-no-flex {
     display: block;
   }
 
   // Horizontal
-  &:not(.#{$list-prefix-cls}-vertical) {
-    .#{$list-prefix-cls}-item-no-flex {
-      .#{$list-prefix-cls}-item-action {
+  &:not(.hn-list--vertical) {
+    .hn-list__item-no-flex {
+      .hn-list__item-action {
         float: right;
       }
     }
   }
 }
 
-.#{$list-prefix-cls}-bordered {
+.hn-list--bordered {
   border: 1px solid $--border-color-base;
   border-radius: $--border-radius-base;
 
-  .#{$list-prefix-cls}-header {
+  .hn-list__header {
     padding-right: 24px;
     padding-left: 24px;
   }
 
-  .#{$list-prefix-cls}-footer {
+  .hn-list__footer {
     padding-right: 24px;
     padding-left: 24px;
   }
 
-  .#{$list-prefix-cls}-item {
+  .hn-list__item {
     padding-right: 24px;
     padding-left: 24px;
     border-bottom: 1px solid $--border-color-lighter;
   }
 
-  .#{$list-prefix-cls}-pagination {
+  .hn-list-pagination {
     margin: 16px 24px;
   }
 
-  &.#{$list-prefix-cls}-small {
-    .#{$list-prefix-cls}-item {
+  &.hn-list--small {
+    .hn-list__item {
       padding-right: 16px;
       padding-left: 16px;
     }
 
-    .#{$list-prefix-cls}-header,
-    .#{$list-prefix-cls}-footer {
+    .hn-list__header,
+    .hn-list__footer {
       padding: 8px 16px;
     }
   }
 
-  &.#{$list-prefix-cls}-large {
-    .#{$list-prefix-cls}-header,
-    .#{$list-prefix-cls}-footer {
+  &.hn-list--large {
+    .hn-list__header,
+    .hn-list__footer {
       padding: 16px 24px;
     }
   }

@@ -1,23 +1,23 @@
 <template>
-  <div class="hn-list-item-meta">
+  <div class="hn-list__meta">
     <div
-      class="hn-list-item-meta-avatar"
+      class="hn-list__meta-avatar"
       v-if="avatar || $slots.avatar"
     >
       <slot name="avatar">
-        <img :src="avatar" />
+        <el-avatar :src="avatar"></el-avatar>
       </slot>
     </div>
-    <div class="hn-list-item-meta-content">
+    <div class="hn-list__meta-content">
       <div
         v-if="title || $slots.title"
-        class="hn-list-item-meta-title"
+        class="hn-list__meta-title"
       >
         <slot name="title">{{ title }}</slot>
       </div>
       <div
         v-if="description || $slots.description"
-        class="hn-list-item-meta-description"
+        class="hn-list__meta-description"
       >
         <slot name="description">{{ description }}</slot>
       </div>

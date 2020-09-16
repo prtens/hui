@@ -1,31 +1,31 @@
 <template>
   <li
-    class="hn-list-item"
+    class="hn-list__item"
     :class="classes"
   >
     <template v-if="itemLayout === 'vertical' && $slots.extra">
-      <div class="hn-list-item-main">
+      <div class="hn-list__item-main">
         <slot></slot>
         <ul
-          class="hn-list-item-action"
+          class="hn-list__item-action"
           v-if="$slots.action"
         >
           <slot name="action"></slot>
         </ul>
       </div>
-      <div class="hn-list-item-extra">
+      <div class="hn-list__item-extra">
         <slot name="extra"></slot>
       </div>
     </template>
     <template v-else>
       <slot></slot>
       <ul
-        class="hn-list-item-action"
+        class="hn-list__item-action"
         v-if="$slots.action"
       >
         <slot name="action"></slot>
       </ul>
-      <div class="hn-list-item-extra">
+      <div class="hn-list__item-extra">
         <slot name="extra"></slot>
       </div>
     </template>
@@ -62,7 +62,7 @@ export default {
     classes() {
       return [
         {
-          "hn-list-item-no-flex": !this.isFlexMode
+          "hn-list__item-no-flex": !this.isFlexMode
         }
       ];
     }
