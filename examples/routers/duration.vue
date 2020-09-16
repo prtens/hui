@@ -1,12 +1,18 @@
 <template>
   <div>
-    <discount :selected.sync="selected" />
+    <el-row style="margin-bottom: 20px">
+      <duration
+        viewId="test"
+        :selected.sync="selected" />
+    </el-row>
 
-    <discount
-      :selected.sync="selected1"
-      :boxWidth="18"
-      :half="true"
-    />
+    <el-row style="margin-bottom: 20px">
+      <duration
+        :selected.sync="selected1"
+        :boxWidth="18"
+        :half="true"
+      />
+    </el-row>
   </div>
 </template>
 

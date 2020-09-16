@@ -16,7 +16,7 @@ import Screenfull from "./components/screenfull";
 import SvgIcon from "./components/svg-icon";
 import TableColumnTree from "./components/table-column-tree";
 import Time from "./components/time";
-import Discount from "./components/duration";
+import Duration from "./components/duration";
 import Hour from "./components/hour";
 import Tip from "./components/tip";
 import locale from "./locale/index";
@@ -52,7 +52,7 @@ const components = [
   SvgIcon,
   TableColumnTree,
   Time,
-  Discount,
+  Duration,
   Hour,
   Tip
 ];

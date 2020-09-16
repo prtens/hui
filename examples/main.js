@@ -111,9 +111,9 @@ const router = new VueRouter({
       component: resolve => require(["./routers/area-selection.vue"], resolve)
     },
     {
-      path: "/discount",
+      path: "/duration",
       component: resolve =>
-        require(["./routers/discount.vue"], resolve)
+        require(["./routers/duration.vue"], resolve)
     }
   ]
 });

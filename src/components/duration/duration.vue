@@ -1,13 +1,13 @@
 <template>
   <div
     :style="{width: `${maxWidth}px`}"
-    class="hn-duration"
+    class="hn-duration-wrapper"
   >
     <!-- 鼠标hover提示浮层 -->
     <div
       v-show="hoverInfo.show"
       :style="{top: `${hoverInfo.top}px`, left: `${hoverInfo.left}px`}"
-      class="discount-hover hn-shadow"
+      class="hn-discount-hover hn-shadow"
     >
       <div>{{ hoverInfo.week }}</div>
       <div><strong>{{ hoverInfo.time }}</strong></div>
@@ -18,7 +18,7 @@
     <div
       v-show="maskInfo.show"
       :style="{top: `${maskInfo.top}px`, left: `${maskInfo.left}px`, height: `${maskInfo.height}px`, width: `${maskInfo.width}px`}"
-      class="discount-mask"
+      class="hn-discount-mask"
     >
     </div>
 
@@ -26,9 +26,9 @@
     <div
       v-if="settingInfo.show"
       :style="{top: `${settingInfo.top}`, left: `${settingInfo.left}px`}"
-      class="discount-setting hn-shadow"
+      class="hn-discount-setting hn-shadow"
     >
-      <div class="setting-content">
+      <div class="hn-discount-setting__content">
         <div class="mb10">
           <span>{{ settingInfo.week }}</span>：
           <strong class="ml5">{{ settingInfo.time }}</strong>
@@ -57,9 +57,8 @@
             </div>
           </el-radio-group>
         </div>
-
       </div>
-      <div class="setting-footer">
+      <div class="hn-discount-setting__footer">
         <el-button
           type="primary"
           plain
@@ -77,16 +76,16 @@
 
     <!-- 区域选择 -->
     <div
-      class="duration clearfix"
+      class="hn-duration clearfix"
       :id="`${viewId}_duration`"
       :style="{width: `${maxWidth}px`}"
     >
       <ul
-        class="week fl"
+        class="hn-duration__week fl"
         :style="{width: `${boxWidth * multiple}px`}"
       >
         <li
-          class="week-item"
+          class="hn-duration__week-item"
           :style="{height: `${headerHeight + 1}px`, lineHeight: `${headerHeight}px`}"
         >星期
         </li>
@@ -99,30 +98,30 @@
         </li>
       </ul>
       <div
-        class="content fl"
+        class="hn-duration__content fl"
         :style="{width: `${boxWidth*rowNum}px`}"
       >
-        <ul class="range clearfix">
+        <ul class="hn-duration__range clearfix">
           <li
-            class="range-item"
+            class="hn-duration__range-item"
             :style="{width: `${(boxWidth*(rowNum/4))}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
             v-for="(range, key) in ranges"
             :key="key"
           >{{ range }}
           </li>
         </ul>
-        <ul class="time clearfix">
+        <ul class="hn-duration__time clearfix">
           <li
-            class="time-item"
+            class="hn-duration__time-item"
             :style="{width: `${(boxWidth*multiple)}px`, height: `${headerHeight/2}px`, 'line-height': `${headerHeight/2}px`}"
             v-for="(C, i) in 24"
             :key="C"
           >{{ i }}
           </li>
         </ul>
-        <ul class="boxzone clearfix">
+        <ul class="hn-duration__boxzones clearfix">
           <li
-            class="box fl"
+            class="hn-duration__boxzone fl"
             :style="{width: `${boxWidth}px`, height: `${boxHeight}px`, 'background-color': `${zone.bg}`}"
             v-for="(zone, key) of boxZones"
             :key="key"
@@ -134,7 +133,7 @@
         </ul>
       </div>
     </div>
-    <div class="pt10 pb10 clearfix">
+    <div class="hn-duration__footer clearfix">
       <el-button
         type="primary"
         plain
@@ -150,12 +149,12 @@
 
       <span class="fr lh28 color-c">
         <template v-for="(dot, key) of dots">
-          <span :key="key">
+          <span class="mr15" :key="key">
             <span
-              class="circle"
+              class="hn-duration--circle"
               :style="{'background-color': `${dot.value}`}"
             ></span>
-            <span class="font-tahoma bold color-c mr15">{{ dot.text }}</span>
+            <span class="font-tahoma bold color-c">{{ dot.text }}</span>
           </span>
         </template>
         <i class="el-icon-bell"></i>
@@ -176,7 +175,7 @@ const Data = {
 }
 
 export default {
-  name: "Discount",
+  name: "Duration",
   props: {
     viewId: {
       type: String,
@@ -352,11 +351,14 @@ export default {
       let that = this
       let {timeDiscount, boxLength} = that;
       let array = that.report2Array(timeDiscount);
+      let boxZones = []
       for (let i = 0; i < boxLength; i++) {
-        that.setBoxDiscount(i, array[i]);
+        let boxZone = that.setBoxDiscount(i, array[i]);
+        boxZones.push(boxZone)
       }
 
-      this.wrapper = $('#' + this.viewId + '_duration');
+      that.wrapper = $(`#${that.viewId}_duration`);
+      that.boxZones = boxZones
     },
     /**
      * 提交格式转化为数组，半小时一格
@@ -408,16 +410,16 @@ export default {
       let that = this;
       discount = parseInt(discount) || 0;
 
-      that.boxZones[index] = {
+      let {discountColorMap} = that;
+
+      return {
         index: index,
-        bg: that.discountColorMap[discount],
+        bg: discountColorMap[discount],
         discount: discount
       }
     },
 
-    /**
-     * 时段选择
-     */
+    // 时段选择
     select(downEvent) {
       downEvent.preventDefault();
 
@@ -498,9 +500,7 @@ export default {
       that.showSetting();
     },
 
-    /**
-     * 选中情况下点击其他区域隐藏选中区域
-     */
+    // 选中情况下点击其他区域隐藏选中区域
     clickOutside(event, index) {
       let that = this;
       let {maskInfo} = that;
@@ -518,7 +518,7 @@ export default {
 
     submitSetting() {
       let that = this;
-      let {settingList, settingInfo, maskInfo} = that;
+      let {settingList, settingInfo, maskInfo, boxZones} = that;
       let discount = 0;
       let valid = true;
 
@@ -544,10 +544,11 @@ export default {
       maskInfo.show = false;
 
       for (let i = 0; i < maskInfo.selectedZones.length; i++) {
-        that.setBoxDiscount(maskInfo.selectedZones[i], discount);
+        let index = maskInfo.selectedZones[i]
+        boxZones[index] = that.setBoxDiscount(index, discount);
       }
 
-      // get Value
+      // TODO get Value
       console.log(this.val())
     },
 
@@ -593,11 +594,11 @@ export default {
 
       let settingInfoWidth = 260;
       let settingInfoHeight = 238;
-      let wrapperWdith = that.wrapper.outerWidth();
+      let wrapperWidth = that.wrapper.outerWidth();
       let wrapperHeight = that.wrapper.outerHeight();
 
       let left = (maskInfo.left + maskInfo.width / 2);
-      if (left + settingInfoWidth > wrapperWdith) {
+      if (left + settingInfoWidth > wrapperWidth) {
         left -= settingInfoWidth;
       }
       let top = (maskInfo.top + maskInfo.height / 2);
@@ -660,9 +661,12 @@ export default {
     reset() {
       let that = this;
       let boxLength = that.boxLength;
+      let boxZones = []
       for (let i = 0; i < boxLength; i++) {
-        that.setBoxDiscount(i, 100);
+        let boxZone = that.setBoxDiscount(i, 100);
+        boxZones.push(boxZone)
       }
+      that.boxZones = boxZones
     },
 
     /**
@@ -671,9 +675,12 @@ export default {
     clear() {
       let that = this;
       let boxLength = that.boxLength;
+      let boxZones = []
       for (let i = 0; i < boxLength; i++) {
-        that.setBoxDiscount(i, 0);
+        let boxZone = that.setBoxDiscount(i, 0);
+        boxZones.push(boxZone)
       }
+      that.boxZones = boxZones
     },
 
     array2Report(array) {
@@ -778,7 +785,6 @@ export default {
           discount: 0
         })
       }
-      ;
 
       return boxzone;
     }

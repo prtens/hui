@@ -1,22 +1,10 @@
 @import "../mixins/mixins";
 
-@include b(duration) {
+@include b(duration-wrapper) {
   position: relative;
-  font-size: $--font-size-base;
+  font-size: 12px;
 
-  .discount-mask {
-    position: absolute;
-    z-index: $--index-discount;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
-    border: 1px solid $--color-text-primary;
-    background: rgba(75, 138, 251, 0.2);
-  }
-
-  .discount-hover {
+  .hn-discount-hover {
     position: absolute;
     z-index: $--index-discount;
     width: 120px;
@@ -28,24 +16,36 @@
     opacity: 0.8;
   }
 
-  .discount-setting {
+  .hn-discount-mask {
+    position: absolute;
+    z-index: $--index-discount;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    border: 1px solid $--color-primary;
+    background: rgba(75, 138, 251, 0.2);
+  }
+
+  .hn-discount-setting {
     position: absolute;
     z-index: $--index-discount;
     width: calc(12 * 16 + 40px);
     border-radius: $--border-radius-base;
     background: $--color-white;
 
-    .setting-content {
+    &__content {
       padding: 10px 10px 0 10px;
       border-bottom: 1px solid $--border-color-base;
     }
 
-    .setting-footer {
+    &__footer {
       padding: 10px;
     }
   }
 
-  .duration {
+  .hn-duration {
     box-sizing: border-box;
     border-radius: $--border-radius-base;
     -webkit-user-select: none;
@@ -55,14 +55,14 @@
     cursor: default;
     background-color: #fafafa;
 
-    .week {
+    &__week {
       border-top: 1px solid $--border-color-base;
       border-right: 1px solid $--border-color-base;
       border-left: 1px solid $--border-color-base;
       border-top-left-radius: $--border-radius-base;
       border-bottom-left-radius: $--border-radius-base;
 
-      .week-item {
+      &-item {
         color: #999;
         text-align: center;
         border-bottom: 1px solid $--border-color-base;
@@ -77,8 +77,8 @@
       }
     }
 
-    .content {
-      .range {
+    &__content {
+      .hn-duration__range {
         background-color: #fafafa;
         border-top: 1px solid $--border-color-base;
         border-bottom: 1px solid $--border-color-base;
@@ -86,7 +86,7 @@
         text-align: center;
         color: #999;
 
-        .range-item {
+        &-item {
           float: left;
           border-right: 1px solid $--border-color-base;
 
@@ -96,20 +96,20 @@
         }
       }
 
-      .time {
+      .hn-duration__time {
         background-color: #fafafa;
         text-align: center;
         color: #999;
 
-        .time-item {
+        &-item {
           float: left;
           border-right: 1px solid $--border-color-base;
           border-bottom: 1px solid $--border-color-base;
         }
       }
 
-      .boxzone {
-        .box {
+      .hn-duration__boxzones {
+        .hn-duration__boxzone {
           background: $--color-white;
           border-right: 1px solid $--border-color-base;
           border-bottom: 1px solid $--border-color-base;
@@ -122,12 +122,15 @@
     }
   }
 
-  .circle {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-right: 3px;
-    border-radius: 50%;
+  .hn-duration__footer {
+    padding: 10px 0;
+    .hn-duration--circle {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 3px;
+      border-radius: 50%;
+    }
   }
 
   .clearfix {
