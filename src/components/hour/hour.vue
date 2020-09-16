@@ -115,7 +115,7 @@ export default {
     },
     tip: {
       type: String,
-      default: "11111111111"
+      default: "蓝色为已选投放时段"
     }
   },
   data() {

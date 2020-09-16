@@ -90,7 +90,7 @@
         >星期
         </li>
         <li
-          class="week-item"
+          class="hn-duration__week-item"
           :style="{height: `${boxHeight}px`, lineHeight: `${boxHeight}px`}"
           v-for="(week, key) in weeks"
           :key="key"
@@ -174,6 +174,20 @@ const Data = {
   def: '00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100;00:00-24:00:100'
 }
 
+const SettingList = [
+  {
+    text: '自定义',
+    value: 1
+  },
+  {
+    text: '无折扣',
+    value: 2
+  }, {
+    text: '不投放',
+    value: 3
+  }
+]
+
 export default {
   name: "Duration",
   props: {
@@ -226,14 +240,38 @@ export default {
       boxHeight: 40, // 单个格子高度
       boxLength: 0, // 格子总数
       boxZones: [],
-      valid: '', // 整体校验
       // 选择区域遮罩浮层
-      maskInfo: {},
-      settingList: [],
+      maskInfo: {
+        show: false,
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+        startRow: 0,
+        endRow: 0,
+        startColumn: 0,
+        endColumn: 0,
+        selectedZones: []
+      },
+      // 支持的折扣设置选项
+      settingList: SettingList,
       // 选中区域设置浮层
-      settingInfo: {},
+      settingInfo: {
+        show: false,
+        week: '',
+        time: '',
+        discount: '',
+        type: SettingList[0].value
+      },
       // 鼠标hover提示浮层
-      hoverInfo: {},
+      hoverInfo: {
+        show: false,
+        left: 0,
+        top: 0,
+        week: '',
+        time: '',
+        discount: ''
+      },
       hoverTimeout: 0,
       hideTimeout: 0
     };
@@ -273,29 +311,18 @@ export default {
       }
 
       // 提示渐变点
-      this.dots = [{
-        text: '30-100%',
-        value: discountColorMap[65]
-      }, {
-        text: '100-200%',
-        value: discountColorMap[150]
-      }, {
-        text: '200-250%',
-        value: discountColorMap[225]
-      }]
-
-      // 支持的折扣设置选项
-      this.settingList = [
+      this.dots = [
         {
-          text: '自定义',
-          value: 1
+          text: '30-100%',
+          value: discountColorMap[65]
         },
         {
-          text: '无折扣',
-          value: 2
-        }, {
-          text: '不投放',
-          value: 3
+          text: '100-200%',
+          value: discountColorMap[150]
+        },
+        {
+          text: '200-250%',
+          value: discountColorMap[225]
         }
       ]
 
@@ -314,38 +341,9 @@ export default {
       this.maxWidth = maxWidth // 容器整体宽度
       this.rowNum = rowNum // 一行有多少个格子
       this.columnNum = columnNum // 一列有多少个格子
-      this.headerHeight = 60 // 头部内容高度（+border1）
       this.boxWidth = boxWidth // 单个格子宽度
-      this.boxHeight = 40 // 单个格子高度
       this.boxLength = boxLength // 格子总数
       this.boxZones = this.getBoxzone(boxLength)
-      this.maskInfo = { // 选择区域遮罩浮层
-        show: false,
-        left: 0,
-        top: 0,
-        width: 0,
-        height: 0,
-        startRow: 0,
-        endRow: 0,
-        startColumn: 0,
-        endColumn: 0,
-        selectedZones: []
-      }
-      this.settingInfo = { // 选中区域设置浮层
-        show: false,
-        week: '',
-        time: '',
-        discount: '',
-        type: this.settingList[0].value
-      }
-      this.hoverInfo = { // 鼠标hover提示浮层
-        show: false,
-        left: 0,
-        top: 0,
-        week: '',
-        time: '',
-        discount: ''
-      }
     },
     render() {
       let that = this
@@ -559,21 +557,20 @@ export default {
       maskInfo.show = false;
       settingInfo.show = false;
       settingInfo.type = settingList[0].value;
-      console.log(maskInfo)
     },
 
     showSetting() {
       let that = this;
       let {settingInfo, maskInfo, boxZones} = that;
 
-      let startweek = maskInfo.startRow + 1;
-      let endweek = maskInfo.endRow + 1;
+      let startWeek = maskInfo.startRow + 1;
+      let endWeek = maskInfo.endRow + 1;
 
       let week;
-      if (startweek !== endweek) {
-        week = that.formatWeek(startweek) + ' - ' + that.formatWeek(endweek);
+      if (startWeek !== endWeek) {
+        week = that.formatWeek(startWeek) + ' - ' + that.formatWeek(endWeek);
       } else {
-        week = that.formatWeek(startweek);
+        week = that.formatWeek(startWeek);
       }
       settingInfo.week = week;
       settingInfo.time = that.getDuration(maskInfo.startColumn, maskInfo.endColumn + 1, '%s - %s');
