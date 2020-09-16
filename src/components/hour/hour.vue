@@ -113,6 +113,7 @@ export default {
         return [];
       }
     },
+    // 右下角提示文案信息
     tip: {
       type: String,
       default: "蓝色为已选投放时段"
