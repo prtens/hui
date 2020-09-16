@@ -11,7 +11,7 @@
         height="16"
         viewBox="0 0 17 17"
         xmlns="http://www.w3.org/2000/svg"
-        class="Icon Icon--backToTopArrow"
+        class="hn-back-top__icon"
         aria-hidden="true"
         style="height:16px;width:16px"
       >

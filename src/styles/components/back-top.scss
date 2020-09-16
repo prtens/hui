@@ -5,10 +5,12 @@
   display: inline-block;
   text-align: center;
   cursor: pointer;
+
   &:hover {
     background: #d5dbe7;
   }
-  .Icon {
+
+  @include e(icon) {
     fill: #9aaabf;
     background: none;
   }
