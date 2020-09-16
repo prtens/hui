@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     typeClass() {
-      return [this.prefix, `${this.prefix}__${this.type}`];
+      return [this.prefix, `${this.prefix}--${this.type}`];
     }
   }
 };

@@ -9,13 +9,13 @@
   &__white, &__area {
     min-height: 200px;
 
-    .no-data {
+    .hn-empty--nodata {
       height: 80px;
       font-size: 60px;
       color: #ccc;
     }
 
-    .inner {
+    .hn-empty__inner {
       position: absolute;
       top: 50%;
       left: 50%;

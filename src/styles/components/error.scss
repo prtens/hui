@@ -7,13 +7,13 @@
   padding-bottom: 120px;
   text-align: center;
 
-  .bad-img {
+  @include e(img) {
     display: block;
     width: 400px;
     margin: auto;
   }
 
-  .info {
+  @include e(info) {
     font-size: 16px;
     color: #999;
     margin-top: 40px;
@@ -22,12 +22,8 @@
   @include e(footer) {
     margin-top: 20px;
 
-    .home-btn,
-    .back-btn {
+    .hn-error__btn {
       width: calc(#{$--font-size-base} * 7);
-    }
-    .back-btn {
-      margin-left: 20px;
     }
   }
 }

@@ -2,24 +2,24 @@
   <div class="hn-error">
 
     <el-image
-      class="bad-img"
+      class="hn-error__img"
       :src="img"
       fit="contain"
     ></el-image>
 
-    <div class="info">{{tip}}</div>
+    <div class="hn-error__info">{{tip}}</div>
 
     <div
       class="hn-error__footer"
       v-if="btns"
     >
       <el-button
-        class="home-btn"
+        class="hn-error__btn"
         type="primary"
         @click="home"
       >回到首页</el-button>
       <el-button
-        class="back-btn"
+        class="hn-error__btn"
         type="primary"
         plain
         @click="back"

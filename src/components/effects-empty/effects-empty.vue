@@ -1,9 +1,9 @@
 <template>
   <div class="hn-empty">
     <div :class="classes">
-      <div class="inner">
+      <div class="hn-empty__inner">
         <div>
-          <i class="el-icon-chat-dot-round no-data">
+          <i class="el-icon-chat-dot-round hn-empty--nodata">
           </i>
         </div>
         <div>{{content}}</div>
