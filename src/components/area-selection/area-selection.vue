@@ -6,6 +6,7 @@
         prefix-icon="el-icon-search"
         v-model="searchName"
         @keyup.13.native="search"
+        @blur="search"
       >
       </el-input>
     </div>
@@ -35,42 +36,44 @@
             v-for="(area) of group">
             <div class="hn-area__group">
               <div
-                class="area-name"
+                class="hn-area__name"
                 v-if="area.name"
               >{{ area.name }}
               </div>
-              <div class="provinces">
+              <div class="hn-area__provinces">
                 <div
-                  class="province"
+                  class="hn-area__province"
                   v-for="(province,provinceIndex) of area.provinces"
                   :key="provinceIndex"
                   :style="{'min-width': (!type.half ? (100/lineNumber)*(province.lineNumberMulti || 1) : '' )}"
                 >
-                  <div class="province-label">
+                  <div class="hn-area__label">
                     <el-checkbox
                       v-model="province.checked"
                       @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
                     ></el-checkbox>
-                    <span :class="`name${province.highlight ? highlight : ''}`">{{ province.name }}
+                    <span :class="`hn-area__label-name ${province.highlight ? 'hn-area__highlight' : ''}`">{{
+                        province.name
+                      }}
                       <span
-                        class="province-count"
+                        class="hn-area__count"
                         v-if="province.hasCity && (province.count > 0)"
                       >
                         ({{ province.count }})</span>
                     </span>
                     <template v-if="province.hasCity">
                       <i
-                        :class="`el-icon-arrow-down province-arrow ${province.hasCity && (province.id == showProvinceId) ? 'province-expand' : ''}`"
+                        :class="`el-icon-arrow-down hn-area--arrow ${province.hasCity && (province.id == showProvinceId) ? 'hn-area--expand' : ''}`"
                         @click="toggleCity({province:province.id})"
                       ></i>
                     </template>
                   </div>
                   <div
                     :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
-                    class="cities hn-shadow"
+                    class="hn-area__cities hn-shadow"
                   >
                     <label
-                      class="city"
+                      class="hn-area__city"
                       v-for="(city, cityIndex) of province.cities"
                       :key="cityIndex"
                     >
@@ -78,7 +81,7 @@
                         v-model="city.checked"
                         @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
                       ></el-checkbox>
-                      <span :class="`name ${city.highlight? 'highlight' : ''}`">{{ city.name }}</span>
+                      <span :class="`hn-area__label-name ${city.highlight? 'hn-area__highlight' : ''}`">{{ city.name }}</span>
                     </label>
                   </div>
                 </div>
@@ -309,10 +312,12 @@ export default {
       // province 省的id被选中了，则其全部城市id不传
       // for example 1 = (2 + 3 + ... + 18)
       province.checked = (selected.indexOf(+province.id) > -1);
+      province.highlight = false
 
       let count = 0;
       province.cities = province.cities || [];
       province.cities.forEach(city => {
+        city.highlight = false
         if (province.checked) {
           city.checked = true;
         } else {
@@ -338,12 +343,13 @@ export default {
         let typeHighlight = false;
         type.groups.forEach(group => {
           group.forEach(area => {
-            area.provinces.forEach(province => {
+            area.provinces.forEach((province, pk) => {
               province.highlight = false;
               if (province.name === searchName) {
                 provinceId = province.id;
                 province.highlight = true;
               }
+
               if (cityVisible) {
                 let cities = province.cities;
                 cities.forEach(city => {
@@ -359,6 +365,7 @@ export default {
           })
         })
       })
+      // console.log(types)
 
       that.showProvinceId = isCity ? provinceId : -1
     },
