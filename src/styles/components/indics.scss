@@ -98,6 +98,9 @@
         float: left;
         padding: 8px 0;
         white-space: nowrap;
+        & i {
+          color: $--color-text-ccc;
+        }
       }
     }
 

@@ -57,7 +57,7 @@
       color: #999;
       line-height: 20px;
       font-weight: bold;
-      font-family: "Tahoma";
+      font-family: $--font-family-text-tahoma;
 
       &.hn-hour__hour-last {
         width: 1.8%;
