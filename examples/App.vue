@@ -96,7 +96,7 @@ export default {
 }
 
 nav {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 
   ul {
     display: flex;
