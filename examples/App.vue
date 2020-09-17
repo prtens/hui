@@ -55,7 +55,7 @@
           <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
         </li>
         <li>
-          <router-link to="/indics">Indics 指标默认配置及选择排序 </router-link>
+          <router-link to="/indics">Indics 指标默认配置及选择排序</router-link>
         </li>
         <li>
           <router-link to="/drawer">drawer</router-link>
@@ -77,7 +77,7 @@
         </li>
       </ul>
     </nav>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -94,6 +94,7 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
+
 nav {
   margin-bottom: 40px;
 
@@ -101,19 +102,15 @@ nav {
     display: flex;
     flex-wrap: wrap;
   }
+
   li {
     display: inline-block;
   }
+
   li + li {
     border-left: solid 1px #bbb;
     padding-left: 10px;
     margin-left: 10px;
   }
-}
-.container {
-  padding: 10px 40px 0;
-}
-.v-link-active {
-  color: #bbb;
 }
 </style>
