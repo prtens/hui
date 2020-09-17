@@ -4,6 +4,7 @@
 }
 
 @include b(indics) {
+  font-size: $--font-size-base;
   @include e(show) {
     display: inline-block;
     width: 40px;
@@ -25,16 +26,16 @@
 
   &:hover {
     .hn-indics__show {
-      border-color: $--border-color-lighter;
-      color: #333;
+      border-color: $--border-color-base;
+      color: $--color-text-primary;
     }
 
     .hn-indics__switch {
-      border-color: $--border-color-lighter;
-      color: #333;
+      border-color: $--border-color-base;
+      color: $--color-text-primary;
 
       .hn-indics--icon {
-        color: $--border-color-lighter;
+        color: $--color-text-primary;
       }
     }
   }
@@ -163,33 +164,14 @@
       }
     }
 
-    .hn-indics__header, .hn-indics__drag-header .hn-indics__drag-title {
-      & span {
-        &:first-child {
-          font-size: 16px;
-        }
-
-        &:not(:first-child) {
-          font-size: 14px;
-          margin-left: 10px;
-        }
-      }
+    .hn-indics--text {
+      font-size: $--font-size-large;
     }
 
-    .hn-indics__header .hn-indics--operation, .hn-indics__drag-header .hn-indics__drag-operation {
-      & span {
-        cursor: pointer;
-
-        &:first-child {
-          margin-right: 16px;
-        }
-      }
-
-      & i {
-        margin-right: 5px;
-      }
+    .hn-indics--default {
+      cursor: pointer;
+      margin-right: 10px;
     }
-
   }
 
   .clearfix {

@@ -15,12 +15,12 @@
 
       <div class="hn-indics__setting" :class="{'hn-indics--sortable': sortable, 'hn-indics--parent': hasParent}">
         <div class="hn-indics__header">
-          <span>选择数据字段</span>
+          <span class="hn-indics--text">选择数据字段</span>
           <span class="color-9 font-tahoma bold"
                 v-if="max">{{ selectedItems.length }} / {{ max }}</span>
           <span class="color-9" v-if="tip">{{ tip }}</span>
           <span class="hn-indics--operation" v-if="!sortable">
-            <span @click="reset()">
+            <span class="hn-indics--default" @click="reset()">
               <i class="el-icon-refresh-left"></i>恢复默认
             </span>
             <span @click="clear()">
@@ -40,7 +40,7 @@
                   @change="toggle">
                   {{ field.text }}
                 </el-checkbox>
-                <el-tooltip effect="light" :content="field.tip" placement="top" v-if="field.tip">
+                <el-tooltip :content="field.tip" placement="top" v-if="field.tip">
                   <i class="el-icon-question"></i>
                 </el-tooltip>
               </div>
@@ -51,11 +51,11 @@
         <template v-if="sortable">
           <div class="hn-indics__drag-header">
             <div class="hn-indics__drag-title">
-              <span>自定义字段</span>
+              <span class="hn-indics--text">自定义字段</span>
               <span class="color-9">可拖动排序</span>
             </div>
             <div class="hn-indics__drag-operation">
-              <span @click="reset()">
+              <span class="hn-indics--default"  @click="reset()">
                 <i class="el-icon-refresh-left"></i>恢复默认
               </span>
               <span @click="clear()">
