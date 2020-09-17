@@ -1,5 +1,5 @@
 <template>
-  <div class="hn-calendar unselectable">
+  <div class="hn-calendar">
     <div
       class="clearfix"
       v-if="types.day"

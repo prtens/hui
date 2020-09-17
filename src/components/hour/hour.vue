@@ -4,7 +4,7 @@
 
       <!-- 每日分隔是才有该功能 -->
       <div v-if="periods.length === 7">
-        <span class="color-9 mr10">快捷操作：</span>
+        <span class="mr10">快捷操作：</span>
         <el-radio-group
           v-model="type"
           @change="changeType"
@@ -26,11 +26,10 @@
       >
         <li class="hn-hour__all">
           <span class="hn-hour__all-tip">时间段</span>
-          <a
-            href="javascript:;"
+          <span
             :class="`btn btn-small hn-hour__all-btn ${p.selected ? 'btn-primary' : ''}`"
             @click="toggleAll({pIndex: pIndex})"
-          >{{p.name}}</a>
+          >{{p.name}}</span>
         </li>
         <li
           v-for="(h,hIndex) of p.hours"
@@ -66,14 +65,13 @@
     </div>
 
     <div class="hn-hour__operates">
-      <a
-        href="javascript:;"
+      <span
         class="btn btn-small hn-hour__btn"
         @click="clearAll"
       >
         清空
-      </a>
-      <span class="fr hn-hour__operates-tip">{{tip}}</span>
+      </span>
+      <span class="hn-hour__operates-tip">{{tip}}</span>
     </div>
   </div>
 </template>

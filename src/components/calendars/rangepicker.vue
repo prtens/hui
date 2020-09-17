@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hn-rangepicker pr"
+    class="hn-rangepicker"
     v-clickoutside:calendarsRangePicker="hideDiv"
   >
     <div
@@ -11,7 +11,7 @@
       <i class="el-icon-date prefix-icon"></i>
       <template v-if="endStr">
         <span class="co co-left">{{ startStr }}</span>
-        <span class="center color-9">{{ centerTip }}</span>
+        <span class="center">{{ centerTip }}</span>
         <span class="co co-right">{{ endStr }}</span>
       </template>
       <template v-else>

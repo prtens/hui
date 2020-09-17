@@ -1,8 +1,3 @@
-.el-drawer__container .el-drawer__body {
-  padding: 0 !important;
-  background-color: #fff;
-}
-
 @include b(indics) {
   font-size: $--font-size-base;
   @include e(show) {
@@ -40,6 +35,12 @@
     }
   }
 
+  .hn-indics__drawer {
+    .el-drawer__body {
+      padding: 0px !important;
+      background-color: $--color-white !important;;
+    }
+  }
 
   @include e(setting) {
     position: relative;
@@ -164,13 +165,27 @@
       }
     }
 
+    .hn-indics--max {
+      color: #999999;
+      font-weight: bold;
+      font-family: Tahoma;
+    }
+
+    .hn-indics--tip, .hn-indics--sort {
+      color: #999;
+    }
+
     .hn-indics--text {
       font-size: $--font-size-large;
     }
 
     .hn-indics--span {
+      color: $--color-primary;
       &:first-child {
         margin-right: 10px;
+      }
+      &:hover {
+        color: $--color-primary-light-2;
       }
 
       cursor: pointer;

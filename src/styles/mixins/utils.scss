@@ -52,6 +52,74 @@
   }
 }
 
+/* btn
+-------------------------- */
+.btn {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 0 10px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  border-radius: $--border-radius-base;
+  border: 1px solid $--color-primary;
+  background-color: $--color-primary-light-9;
+  background-image: none;
+  color: $--color-text-primary;
+  transition: border-color $--transition-time, background-color $--transition-time,
+  color $--transition-time;
+
+  &:hover,
+  &.hover,
+  &:active {
+    background-color: $--color-primary-light-8;
+    background-image: none;
+    color: $--color-text-primary;
+  }
+}
+
+.btn-primary {
+  background-color: $--color-primary;
+  background-image: linear-gradient(90deg, transparent, $--color-primary);
+  color: $--color-white;
+}
+
+.btn-small {
+  height: 24px;
+  line-height: 24px;
+}
+
+/* 卡片样式
+-------------------------- */
+.grid {
+  background: $--color-white;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s ease-out;
+
+  &:hover {
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.08);
+  }
+}
+
+.grid-title {
+  font-size: 16px;
+
+  & > * {
+    max-height: 32px;
+  }
+}
+
+
 /* trigger
 -------------------------- */
 .hn-trigger {

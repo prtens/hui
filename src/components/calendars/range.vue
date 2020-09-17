@@ -11,7 +11,7 @@
             ></el-switch>
           </template>
         </div>
-        <div class="clearfix pr">
+        <div class="clearfix">
           <div class="range-input range-input-left">
             <!-- 结束时间禁止操作的时候限制最大可选为直接时间endDisabled -->
             <calendars-datepicker

@@ -10,7 +10,7 @@
         <i class="el-icon-date prefix-icon"></i>
       </template>
       <template v-else>
-        <span class="color-9">{{ prefix }}：</span>
+        <span>{{ prefix }}：</span>
       </template>
       {{ (selected || placeholder) }}
     </div>

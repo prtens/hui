@@ -29,14 +29,14 @@
       class="hn-discount-setting hn-shadow"
     >
       <div class="hn-discount-setting__content">
-        <div class="mb10">
+        <div class="hn-discount-setting__box">
           <span>{{ settingInfo.week }}</span>：
-          <strong class="ml5">{{ settingInfo.time }}</strong>
+          <strong>{{ settingInfo.time }}</strong>
         </div>
-        <div class="mb10">
+        <div class="hn-discount-setting__box">
           <el-radio-group v-model="settingInfo.type">
             <div
-              class="mb10"
+              class="hn-discount-setting__box"
               v-for="(sItem, key) of settingList"
               :key="key"
             >
@@ -81,7 +81,7 @@
       :style="{width: `${maxWidth}px`}"
     >
       <ul
-        class="hn-duration__week fl"
+        class="hn-duration__week"
         :style="{width: `${boxWidth * multiple}px`}"
       >
         <li
@@ -98,7 +98,7 @@
         </li>
       </ul>
       <div
-        class="hn-duration__content fl"
+        class="hn-duration__content"
         :style="{width: `${boxWidth*rowNum}px`}"
       >
         <ul class="hn-duration__range clearfix">
@@ -121,7 +121,7 @@
         </ul>
         <ul class="hn-duration__boxzones clearfix">
           <li
-            class="hn-duration__boxzone fl"
+            class="hn-duration__boxzone"
             :style="{width: `${boxWidth}px`, height: `${boxHeight}px`, 'background-color': `${zone.bg}`}"
             v-for="(zone, key) of boxZones"
             :key="key"
@@ -147,18 +147,18 @@
       >重置
       </el-button>
 
-      <span class="fr lh28 color-c">
+      <span class="hn-duration__tip">
         <template v-for="(dot, key) of dots">
-          <span class="mr15" :key="key">
+          <span class="hn-duration--circle-percent" :key="key">
             <span
               class="hn-duration--circle"
               :style="{'background-color': `${dot.value}`}"
             ></span>
-            <span class="font-tahoma bold color-c">{{ dot.text }}</span>
+            <span class="hn-duration--percent">{{ dot.text }}</span>
           </span>
         </template>
         <i class="el-icon-bell"></i>
-        <span class="mr10">可以拖拽鼠标选择投放时段</span>
+        <span>可以拖拽鼠标选择投放时段</span>
       </span>
 
     </div>

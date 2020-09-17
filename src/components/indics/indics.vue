@@ -11,14 +11,15 @@
     <el-drawer
       :visible.sync="visible"
       :with-header="false"
+      class="hn-indics__drawer"
       size="50%">
 
       <div class="hn-indics__setting" :class="{'hn-indics--sortable': sortable, 'hn-indics--parent': hasParent}">
         <div class="hn-indics__header">
           <span class="hn-indics--text">选择数据字段</span>
-          <span class="color-9 font-tahoma bold"
+          <span class="hn-indics--max"
                 v-if="max">{{ selectedItems.length }} / {{ max }}</span>
-          <span class="color-9" v-if="tip">{{ tip }}</span>
+          <span class="hn-indics--tip" v-if="tip">{{ tip }}</span>
           <span class="hn-indics--operation" v-if="!sortable">
             <span class="hn-indics--span" @click="reset()">
               <i class="el-icon-refresh-left"></i>恢复默认
@@ -52,7 +53,7 @@
           <div class="hn-indics__drag-header">
             <div class="hn-indics__drag-title">
               <span class="hn-indics--text">自定义字段</span>
-              <span class="color-9">可拖动排序</span>
+              <span class="hn-indics--sort">可拖动排序</span>
             </div>
             <div class="hn-indics__drag-operation">
               <span class="hn-indics--span"  @click="reset()">

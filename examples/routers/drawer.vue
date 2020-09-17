@@ -17,8 +17,8 @@
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose">
-      <div class="grid mb10" style="padding: 16px 24px;">
-        <div class="mb10">
+      <div class="grid" style="padding: 16px 24px; margin-bottom: 10px">
+        <div style="margin-bottom: 10px">
           浮层HTML Code：
         </div>
         <pre class="tip-content">
@@ -26,7 +26,7 @@
           </pre>
       </div>
       <div class="clearfix grid" style="padding: 16px 24px;">
-        <div class="mb10 grid-title">浮层JS Code：</div>
+        <div class="grid-title" style="margin-bottom: 10px">浮层JS Code：</div>
         <pre class="tip-content">
             let Magix = require('magix');
             module.exports = Magix.View.extend({

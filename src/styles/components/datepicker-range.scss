@@ -1,3 +1,7 @@
+@include b(rangepicker) {
+  position: relative;
+}
+
 @include b(range-datepicker) {
   --calendar-range-input-width: 100px;
   position: relative;
@@ -10,14 +14,24 @@
   user-select: none;
   -webkit-user-select: none;
 
-  .title {
-    margin-bottom: 5px;
-    color: #999;
-  }
-
   .range {
     position: relative;
     line-height: 26px;
+
+    .title {
+      margin-bottom: 5px;
+      color: #999;
+      .fl {
+        float: left;
+      }
+      .fr {
+        float: right;
+      }
+    }
+
+    .pr {
+      position: relative;
+    }
 
     .range-input {
       float: left;

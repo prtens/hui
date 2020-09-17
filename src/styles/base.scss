@@ -1,3 +1,22 @@
-@import "common/normalize";
 @import "common/_element";
 @import "common/transition.scss";
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+ol,
+ul,
+li {
+  list-style-type: none;
+  list-style-image: none;
+}
+
+ol,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}

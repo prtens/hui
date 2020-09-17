@@ -8,6 +8,7 @@
   overflow-y: hidden;
   color: #333;
   text-align: center;
+  user-select: none;
 
   .header {
     width: $--calendar-width;

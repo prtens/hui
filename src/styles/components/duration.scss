@@ -36,6 +36,9 @@
     &__content {
       padding: 10px 10px 0 10px;
       border-bottom: 1px solid $--border-color-base;
+      .hn-discount-setting__box {
+        margin-bottom: 10px;
+      }
     }
 
     &__footer {
@@ -59,6 +62,7 @@
       border-left: 1px solid $--border-color-base;
       border-top-left-radius: $--border-radius-base;
       border-bottom-left-radius: $--border-radius-base;
+      float: left;
 
       &-item {
         color: #999;
@@ -76,6 +80,8 @@
     }
 
     &__content {
+      float: left;
+
       .hn-duration__range {
         background-color: #fafafa;
         border-top: 1px solid $--border-color-base;
@@ -111,6 +117,7 @@
           background: $--color-white;
           border-right: 1px solid $--border-color-base;
           border-bottom: 1px solid $--border-color-base;
+          float: left;
 
           &:last-child {
             border-bottom-right-radius: $--border-radius-base;
@@ -122,12 +129,29 @@
 
   .hn-duration__footer {
     padding: 10px 0;
-    .hn-duration--circle {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin-right: 3px;
-      border-radius: 50%;
+
+    .hn-duration__tip {
+      float: right;
+      line-height: 28px;
+      color: $--color-text-ccc;
+
+      .hn-duration--circle-percent {
+        margin-right: 15px;
+
+        .hn-duration--circle {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 3px;
+          border-radius: 50%;
+        }
+
+        .hn-duration--percent {
+          font-family: "Tahoma";
+          font-weight: bold;
+        }
+      }
+
     }
   }
 
