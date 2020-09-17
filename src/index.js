@@ -59,7 +59,7 @@ const components = [
   Tip
 ];
 
-const install = function(Vue, opts = {}) {
+const install = function (Vue, opts = {}) {
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 

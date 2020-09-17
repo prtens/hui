@@ -1,4 +1,4 @@
-import {t} from '../../locale';
+import { t } from '../../locale';
 
 let Today = new Date();
 let Formatter = "YYYY-MM-DD";

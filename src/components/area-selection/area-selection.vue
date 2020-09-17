@@ -32,9 +32,11 @@
           v-for="(group,groupIndex) of type.groups"
           :key="groupIndex"
         >
-          <template
-            v-for="(area) of group">
-            <div class="hn-area__group">
+          <template v-for="(area, index) of group">
+            <div
+              class="hn-area__group"
+              :key="index"
+            >
               <div
                 class="hn-area__name"
                 v-if="area.name"
@@ -95,7 +97,7 @@
 </template>
 
 <script type="text/babel">
-import {deepClone} from '../../utils/util'
+import { deepClone } from '../../utils/util'
 import * as Atds from './data'
 
 export default {
@@ -219,7 +221,7 @@ export default {
 
     toggleCity(event) {
       let that = this;
-      let {province: provinceId} = event,
+      let { province: provinceId } = event,
         oldProvince = that.showProvinceId;
 
       if (provinceId === oldProvince) {
@@ -233,7 +235,7 @@ export default {
 
     changeAll(typeIndex) {
       let that = this;
-      let {types} = that;
+      let { types } = that;
       let type = types[typeIndex];
       let checked = type.checked;
       type.groups.forEach(group => {
@@ -256,7 +258,7 @@ export default {
     changeOne(event) {
       let that = this;
 
-      let {checked, typeIndex, province: provinceId, city: cityId} = event;
+      let { checked, typeIndex, province: provinceId, city: cityId } = event;
       let types = that.types;
       let type = types[typeIndex]
 
@@ -336,7 +338,7 @@ export default {
     search() {
       let that = this;
       let searchName = that.searchName;
-      let {types, cityVisible} = that;
+      let { types, cityVisible } = that;
 
       let provinceId, isCity = false;
       types.forEach(type => {
@@ -372,7 +374,7 @@ export default {
 
     val(full) {
       let that = this;
-      let {types, cityVisible} = that;
+      let { types, cityVisible } = that;
       let selected = [];
       let all = [];
       types.forEach(type => {

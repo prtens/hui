@@ -2,7 +2,10 @@
   <div>
     <strong>Default Size:</strong>
     <br><br>
-    <List border :split="false">
+    <List
+      border
+      :split="false"
+    >
       <template slot="header">
         Header1111111
       </template>
@@ -16,7 +19,12 @@
     <br>
     <strong>Small Size:</strong>
     <br><br>
-    <List header="Header" footer="Footer" border size="small">
+    <List
+      header="Header"
+      footer="Footer"
+      border
+      size="small"
+    >
       <ListItem>111111111</ListItem>
       <ListItem>22222222</ListItem>
       <ListItem>333333333</ListItem>
@@ -24,7 +32,12 @@
     <br>
     <strong>Large Size:</strong>
     <br><br>
-    <List header="Header" footer="Footer" border size="large">
+    <List
+      header="Header"
+      footer="Footer"
+      border
+      size="large"
+    >
       <ListItem>111111111</ListItem>
       <ListItem>22222222</ListItem>
       <ListItem>333333333</ListItem>
@@ -34,16 +47,25 @@
     <br><br>
     <List>
       <ListItem>
-        <ListItemMeta avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" title="This is title"
-                      description="This is description, this is description."/>
+        <ListItemMeta
+          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          title="This is title"
+          description="This is description, this is description."
+        />
       </ListItem>
       <ListItem>
-        <ListItemMeta avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" title="This is title"
-                      description="This is description, this is description."/>
+        <ListItemMeta
+          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          title="This is title"
+          description="This is description, this is description."
+        />
       </ListItem>
       <ListItem>
-        <ListItemMeta avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" title="This is title"
-                      description="This is description, this is description."/>
+        <ListItemMeta
+          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          title="This is title"
+          description="This is description, this is description."
+        />
         <template slot="action">
           <li>
             <a href="">Edit</a>
@@ -54,8 +76,11 @@
         </template>
       </ListItem>
       <ListItem>
-        <ListItemMeta avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" title="This is title"
-                      description="This is description, this is description."/>
+        <ListItemMeta
+          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          title="This is title"
+          description="This is description, this is description."
+        />
         <template slot="action">
           <li>
             <a href="">Edit</a>
@@ -70,8 +95,15 @@
     <strong>竖排列表样式。设置属性 itemLayout 为 vertical 可实现竖排列表样式。</strong>
     <br><br>
     <List itemLayout="vertical">
-      <ListItem v-for="item in data" :key="item.title">
-        <ListItemMeta :avatar="item.avatar" :title="item.title" :description="item.description"/>
+      <ListItem
+        v-for="item in data"
+        :key="item.title"
+      >
+        <ListItemMeta
+          :avatar="item.avatar"
+          :title="item.title"
+          :description="item.description"
+        />
         {{ item.content }}
         <template slot="action">
           <li>

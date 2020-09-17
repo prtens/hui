@@ -108,6 +108,6 @@ export const getRelativeTime = (timeStamp, locale) => {
   return resStr;
 };
 
-export default function(timestamp, locale) {
+export default function (timestamp, locale) {
   return getRelativeTime(timestamp, locale);
 }

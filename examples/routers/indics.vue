@@ -8,7 +8,8 @@
       :custom.sync="tmp.custom"
       :customs="tmp.customs"
       :sortable="tmp.sortable"
-      @changeSelected="changeSelected"></indics>
+      @changeSelected="changeSelected"
+    ></indics>
 
     <p>不限制/不排序</p>
     <indics
@@ -16,7 +17,8 @@
       :defaults="tmp1.defaults"
       :custom.sync="tmp1.custom"
       :tip="tmp1.tip"
-      @changeSelected="changeSelected"></indics>
+      @changeSelected="changeSelected"
+    ></indics>
 
     <p>不限制/排序</p>
     <indics
@@ -26,7 +28,8 @@
       :custom.sync="tmp2.custom"
       :customs="tmp2.customs"
       :sortable="tmp2.sortable"
-      @changeSelected="changeSelected"></indics>
+      @changeSelected="changeSelected"
+    ></indics>
   </div>
 </template>
 
@@ -166,5 +169,4 @@ export default {
 </script>
 
 <style>
-
 </style>

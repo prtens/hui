@@ -36,6 +36,7 @@ module.exports = {
     "vue/no-use-v-if-with-v-for": "off",
     "vue/no-template-key": "off",
     "vue/valid-v-if": "off",
-    "vue/require-v-for-key": "off"
+    "vue/require-v-for-key": "off",
+    "vue/no-use-v-if-with-v-for": "off",
   }
 };

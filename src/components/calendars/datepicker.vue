@@ -1,6 +1,8 @@
 <template>
-  <div class="hn-datepicker"
-       v-clickoutside:calendars="hideDiv">
+  <div
+    class="hn-datepicker"
+    v-clickoutside:calendars="hideDiv"
+  >
     <div
       :id="`trigger_${viewId}`"
       :class="`hn-trigger result ${!prefix ? 'result-with-icon' : ''}`"

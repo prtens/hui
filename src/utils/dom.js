@@ -1,13 +1,13 @@
 /* istanbul ignore next */
-export const on = (function() {
+export const on = (function () {
   if (document.addEventListener) {
-    return function(element, event, handler, useCapture = false) {
+    return function (element, event, handler, useCapture = false) {
       if (element && event && handler) {
         element.addEventListener(event, handler, useCapture);
       }
     };
   } else {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event && handler) {
         element.attachEvent("on" + event, handler);
       }
@@ -16,15 +16,15 @@ export const on = (function() {
 })();
 
 /* istanbul ignore next */
-export const off = (function() {
+export const off = (function () {
   if (document.removeEventListener) {
-    return function(element, event, handler, useCapture = false) {
+    return function (element, event, handler, useCapture = false) {
       if (element && event) {
         element.removeEventListener(event, handler, useCapture);
       }
     };
   } else {
-    return function(element, event, handler) {
+    return function (element, event, handler) {
       if (element && event) {
         element.detachEvent("on" + event, handler);
       }

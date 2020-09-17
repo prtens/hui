@@ -5,7 +5,7 @@ export function scrollTop(el, from = 0, to, duration = 500, endCallback) {
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.msRequestAnimationFrame ||
-      function(callback) {
+      function (callback) {
         return window.setTimeout(callback, 1000 / 60);
       };
   }

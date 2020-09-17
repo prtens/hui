@@ -1,9 +1,17 @@
 <template>
   <div class="hn-indics">
-    <span href="javascript:;" class="hn-trigger hn-indics__show" @click="show">
+    <span
+      href="javascript:;"
+      class="hn-trigger hn-indics__show"
+      @click="show"
+    >
       <i class="el-icon-setting"></i>
     </span>
-    <span href="javascript:;" class="hn-trigger hn-indics__switch" @click="toggleDefault">
+    <span
+      href="javascript:;"
+      class="hn-trigger hn-indics__switch"
+      @click="toggleDefault"
+    >
       {{ text }}
       <i class="el-icon-arrow-down hn-trigger-arrow hn-indics--icon"></i>
     </span>
@@ -12,36 +20,68 @@
       :visible.sync="visible"
       :with-header="false"
       class="hn-indics__drawer"
-      size="50%">
+      size="50%"
+    >
 
-      <div class="hn-indics__setting" :class="{'hn-indics--sortable': sortable, 'hn-indics--parent': hasParent}">
+      <div
+        class="hn-indics__setting"
+        :class="{'hn-indics--sortable': sortable, 'hn-indics--parent': hasParent}"
+      >
         <div class="hn-indics__header">
           <span class="hn-indics--text">选择数据字段</span>
-          <span class="hn-indics--max"
-                v-if="max">{{ selectedItems.length }} / {{ max }}</span>
-          <span class="hn-indics--tip" v-if="tip">{{ tip }}</span>
-          <span class="hn-indics--operation" v-if="!sortable">
-            <span class="hn-indics--span" @click="reset()">
+          <span
+            class="hn-indics--max"
+            v-if="max"
+          >{{ selectedItems.length }} / {{ max }}</span>
+          <span
+            class="hn-indics--tip"
+            v-if="tip"
+          >{{ tip }}</span>
+          <span
+            class="hn-indics--operation"
+            v-if="!sortable"
+          >
+            <span
+              class="hn-indics--span"
+              @click="reset()"
+            >
               <i class="el-icon-refresh-left"></i>恢复默认
             </span>
-            <span class="hn-indics--span" @click="clear()">
+            <span
+              class="hn-indics--span"
+              @click="clear()"
+            >
               <i class="el-icon-delete"></i>清空
             </span>
           </span>
         </div>
 
         <div class="hn-indics__content">
-          <div class="hn-indics__lines clearfix" v-for="(group, key) of groups" :key="key">
+          <div
+            class="hn-indics__lines clearfix"
+            v-for="(group, key) of groups"
+            :key="key"
+          >
             <div class="hn-indics__name">{{ group.text }}</div>
             <div class="clearfix">
-              <div class="hn-indics__line" :style="`width: ${width}`" v-for="(field, fKey) of group.fields" :key="fKey">
+              <div
+                class="hn-indics__line"
+                :style="`width: ${width}`"
+                v-for="(field, fKey) of group.fields"
+                :key="fKey"
+              >
                 <el-checkbox
                   v-model="field.checked"
                   :disabled="((max > 0) && (selectedItems.length >= max) && !field.checked)"
-                  @change="toggle">
+                  @change="toggle"
+                >
                   {{ field.text }}
                 </el-checkbox>
-                <el-tooltip :content="field.tip" placement="top" v-if="field.tip">
+                <el-tooltip
+                  :content="field.tip"
+                  placement="top"
+                  v-if="field.tip"
+                >
                   <i class="el-icon-question"></i>
                 </el-tooltip>
               </div>
@@ -56,10 +96,16 @@
               <span class="hn-indics--sort">可拖动排序</span>
             </div>
             <div class="hn-indics__drag-operation">
-              <span class="hn-indics--span"  @click="reset()">
+              <span
+                class="hn-indics--span"
+                @click="reset()"
+              >
                 <i class="el-icon-refresh-left"></i>恢复默认
               </span>
-              <span class="hn-indics--span" @click="clear()">
+              <span
+                class="hn-indics--span"
+                @click="clear()"
+              >
                 <i class="el-icon-delete"></i>清空
               </span>
             </div>
@@ -68,9 +114,11 @@
           <div class="hn-indics__drag-wrapper">
             <draggable v-model="selectedItems">
               <transition-group>
-                <div class="hn-indics__drag"
-                     v-for="s of selectedItems"
-                     :key="s.value">
+                <div
+                  class="hn-indics__drag"
+                  v-for="s of selectedItems"
+                  :key="s.value"
+                >
                   {{ s.text }}
                 </div>
               </transition-group>
@@ -80,7 +128,10 @@
       </div>
 
       <div class="el-drawer__footer">
-        <el-button type="primary" @click="confirm">确 定</el-button>
+        <el-button
+          type="primary"
+          @click="confirm"
+        >确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-drawer>
@@ -211,7 +262,7 @@ export default {
     },
     getFields() {
       let that = this
-      let {textKey, valueKey, parentKey} = this
+      let { textKey, valueKey, parentKey } = this
       let fields = [];
       that.fields.forEach(item => {
         let tmp = {
@@ -220,26 +271,26 @@ export default {
           pValue: item[parentKey],
           checked: false
         }
-        fields.push({...item, ...tmp});
+        fields.push({ ...item, ...tmp });
       })
       return fields
     },
     getParents() {
       let that = this
-      let {textKey, valueKey} = this
+      let { textKey, valueKey } = this
       let parents = [];
       that.parents.forEach(item => {
         let tmp = {
           text: item[textKey],
           value: item[valueKey]
         }
-        parents.push({...item, ...tmp})
+        parents.push({ ...item, ...tmp })
       })
       return parents
     },
     init() {
       let that = this;
-      let {customs, defaults, lineNumber, type} = that
+      let { customs, defaults, lineNumber, type } = that
 
       // 当自定义为空时，默认为defaults
       if (customs.length === 0) {
@@ -267,7 +318,7 @@ export default {
 
     getGroupsSelected() {
       let that = this
-      let {map, type, lineNumber} = that
+      let { map, type, lineNumber } = that
 
       let fields = that.getFields()
       let parents = that.getParents()

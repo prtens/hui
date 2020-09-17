@@ -149,7 +149,10 @@
 
       <span class="hn-duration__tip">
         <template v-for="(dot, key) of dots">
-          <span class="hn-duration--circle-percent" :key="key">
+          <span
+            class="hn-duration--circle-percent"
+            :key="key"
+          >
             <span
               class="hn-duration--circle"
               :style="{'background-color': `${dot.value}`}"
@@ -347,7 +350,7 @@ export default {
     },
     render() {
       let that = this
-      let {timeDiscount, boxLength} = that;
+      let { timeDiscount, boxLength } = that;
       let array = that.report2Array(timeDiscount);
       let boxZones = []
       for (let i = 0; i < boxLength; i++) {
@@ -367,7 +370,7 @@ export default {
     report2Array(report) {
       let array = [];
       let that = this;
-      let {rowNum, multiple} = that;
+      let { rowNum, multiple } = that;
 
       let arr = report.split(';'); // ;分隔天的内容
       for (let i = 0, aLen = arr.length; i < aLen; i++) {
@@ -408,7 +411,7 @@ export default {
       let that = this;
       discount = parseInt(discount) || 0;
 
-      let {discountColorMap} = that;
+      let { discountColorMap } = that;
 
       return {
         index: index,
@@ -422,12 +425,12 @@ export default {
       downEvent.preventDefault();
 
       let that = this;
-      let {hoverInfo, settingInfo, maskInfo, boxWidth, multiple, headerHeight} = this;
+      let { hoverInfo, settingInfo, maskInfo, boxWidth, multiple, headerHeight } = this;
       hoverInfo.show = false;
       settingInfo.show = false;
 
       let wrapper = that.wrapper;
-      let {left: wrapperLeft, top: wrapperTop} = wrapper.offset();
+      let { left: wrapperLeft, top: wrapperTop } = wrapper.offset();
       let startX = downEvent.pageX - wrapperLeft;
       let startY = downEvent.pageY - wrapperTop;
 
@@ -465,7 +468,7 @@ export default {
 
     selectEnd() {
       let that = this;
-      let {maskInfo, headerHeight, boxHeight, boxWidth, multiple, columnNum, rowNum} = that;
+      let { maskInfo, headerHeight, boxHeight, boxWidth, multiple, columnNum, rowNum } = that;
 
       // 从0开始
       let row1 = parseInt((maskInfo.top - headerHeight) / boxHeight);
@@ -501,7 +504,7 @@ export default {
     // 选中情况下点击其他区域隐藏选中区域
     clickOutside(event, index) {
       let that = this;
-      let {maskInfo} = that;
+      let { maskInfo } = that;
       if (!maskInfo.show ||
         (maskInfo.show && maskInfo.selectedZones.indexOf(index) > -1)) {
         return;
@@ -516,7 +519,7 @@ export default {
 
     submitSetting() {
       let that = this;
-      let {settingList, settingInfo, maskInfo, boxZones} = that;
+      let { settingList, settingInfo, maskInfo, boxZones } = that;
       let discount = 0;
       let valid = true;
 
@@ -552,7 +555,7 @@ export default {
 
     cancelSetting() {
       let that = this;
-      let {settingList, settingInfo, maskInfo} = that;
+      let { settingList, settingInfo, maskInfo } = that;
 
       maskInfo.show = false;
       settingInfo.show = false;
@@ -561,7 +564,7 @@ export default {
 
     showSetting() {
       let that = this;
-      let {settingInfo, maskInfo, boxZones} = that;
+      let { settingInfo, maskInfo, boxZones } = that;
 
       let startWeek = maskInfo.startRow + 1;
       let endWeek = maskInfo.endRow + 1;
@@ -615,7 +618,7 @@ export default {
       let that = this;
       clearTimeout(that.hoverTimeout);
       clearTimeout(that.hideTimeout);
-      let {maskInfo, settingInfo, boxWidth, boxHeight, headerHeight, rowNum, hoverInfo, boxZones} = that;
+      let { maskInfo, settingInfo, boxWidth, boxHeight, headerHeight, rowNum, hoverInfo, boxZones } = that;
       if (maskInfo.show || settingInfo.show) {
         return;
       }
@@ -642,7 +645,7 @@ export default {
       let that = this;
       clearTimeout(that.hoverTimeout);
       clearTimeout(that.hideTimeout);
-      let {maskInfo, settingInfo, hoverInfo} = that;
+      let { maskInfo, settingInfo, hoverInfo } = that;
       if (maskInfo.show || settingInfo.show) {
         return;
       }
@@ -682,7 +685,7 @@ export default {
 
     array2Report(array) {
       let that = this;
-      let {columnNum, rowNum, multiple} = that;
+      let { columnNum, rowNum, multiple } = that;
 
       let result = [];
       for (let row = 0; row < columnNum; row++) {
@@ -718,7 +721,7 @@ export default {
 
     val() {
       let that = this;
-      let {boxZones} = that;
+      let { boxZones } = that;
       let discounts = boxZones.map(zone => {
         return zone.discount;
       })
@@ -764,7 +767,7 @@ export default {
 
     getTimeFromNum(num) {
       let that = this;
-      let {rowNum, multiple} = that;
+      let { rowNum, multiple } = that;
       let h = Math.floor((num % rowNum) / multiple);
       if ((h + '').length === 1) {
         h = '0' + h;

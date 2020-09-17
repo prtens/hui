@@ -7,7 +7,11 @@
       <el-radio label="btt">从下往上开</el-radio>
     </el-radio-group>
 
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+    <el-button
+      @click="drawer = true"
+      type="primary"
+      style="margin-left: 16px;"
+    >
       点我打开
     </el-button>
 
@@ -16,8 +20,12 @@
       size="50%"
       :visible.sync="drawer"
       :direction="direction"
-      :before-close="handleClose">
-      <div class="grid" style="padding: 16px 24px; margin-bottom: 10px">
+      :before-close="handleClose"
+    >
+      <div
+        class="grid"
+        style="padding: 16px 24px; margin-bottom: 10px"
+      >
         <div style="margin-bottom: 10px">
           浮层HTML Code：
         </div>
@@ -25,8 +33,14 @@
             fewfewfew
           </pre>
       </div>
-      <div class="clearfix grid" style="padding: 16px 24px;">
-        <div class="grid-title" style="margin-bottom: 10px">浮层JS Code：</div>
+      <div
+        class="clearfix grid"
+        style="padding: 16px 24px;"
+      >
+        <div
+          class="grid-title"
+          style="margin-bottom: 10px"
+        >浮层JS Code：</div>
         <pre class="tip-content">
             let Magix = require('magix');
             module.exports = Magix.View.extend({
@@ -73,7 +87,7 @@ export default {
   data() {
     return {
       drawer: false,
-      direction: 'rtl',
+      direction: 'rtl'
     };
   },
   methods: {
@@ -90,5 +104,4 @@ export default {
 </script>
 
 <style>
-
 </style>

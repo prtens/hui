@@ -48,7 +48,7 @@ export default {
       vs: "对比",
       wednesday: "三",
       yesterday: "昨日",
-      tomorrow: "明日",
+      tomorrow: "明日"
     }
   }
 };

@@ -3,7 +3,8 @@
     <el-row style="margin-bottom: 20px">
       <duration
         viewId="test"
-        :selected.sync="selected" />
+        :selected.sync="selected"
+      />
     </el-row>
 
     <el-row style="margin-bottom: 20px">

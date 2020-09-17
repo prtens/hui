@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/babel">
-import {on, off} from "../../utils/dom";
+import { on, off } from "../../utils/dom";
 
 function getScroll(target, top) {
   const prop = top ? "pageYOffset" : "pageXOffset";
