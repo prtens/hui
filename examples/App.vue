@@ -105,6 +105,23 @@ nav {
 
   li {
     display: inline-block;
+    a {
+      color: #333;
+      text-decoration: none;
+      transition: all 0.2s;
+
+      &:hover {
+        color: #4d7fff;
+      }
+
+      &:hover,
+      &:focus,
+      &:active,
+      &:visited {
+        outline: 0;
+        text-decoration: none;
+      }
+    }
   }
 
   li + li {

@@ -69,6 +69,12 @@ p {
   color: #5e6d82;
 }
 
+/* 常用的字体
+-------------------------- */
+.font-tahoma {
+  font-family: "Tahoma";
+}
+
 /* 常用的顔色
 -------------------------- */
 .color-c {
@@ -117,17 +123,12 @@ p {
   padding-bottom: 10px;
 }
 
-
 .unselectable {
   user-select: none;
 }
 
-.pa {
-  position: absolute;
-}
-
-.pr {
-  position: relative;
+.bold {
+  font-weight: bold;
 }
 
 .fl {
@@ -136,11 +137,6 @@ p {
 
 .fr {
   float: right;
-}
-
-.none,
-.hide {
-  display: none;
 }
 
 .cursor-pointer {
@@ -157,4 +153,17 @@ p {
 
 .cursor-not-allow {
   cursor: not-allowed;
+}
+
+.pa {
+  position: absolute;
+}
+
+.pr {
+  position: relative;
+}
+
+.none,
+.hide {
+  display: none;
 }
