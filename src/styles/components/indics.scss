@@ -168,9 +168,12 @@
       font-size: $--font-size-large;
     }
 
-    .hn-indics--default {
+    .hn-indics--span {
+      &:first-child {
+        margin-right: 10px;
+      }
+
       cursor: pointer;
-      margin-right: 10px;
     }
   }
 

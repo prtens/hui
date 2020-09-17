@@ -20,10 +20,10 @@
                 v-if="max">{{ selectedItems.length }} / {{ max }}</span>
           <span class="color-9" v-if="tip">{{ tip }}</span>
           <span class="hn-indics--operation" v-if="!sortable">
-            <span class="hn-indics--default" @click="reset()">
+            <span class="hn-indics--span" @click="reset()">
               <i class="el-icon-refresh-left"></i>恢复默认
             </span>
-            <span @click="clear()">
+            <span class="hn-indics--span" @click="clear()">
               <i class="el-icon-delete"></i>清空
             </span>
           </span>
@@ -55,10 +55,10 @@
               <span class="color-9">可拖动排序</span>
             </div>
             <div class="hn-indics__drag-operation">
-              <span class="hn-indics--default"  @click="reset()">
+              <span class="hn-indics--span"  @click="reset()">
                 <i class="el-icon-refresh-left"></i>恢复默认
               </span>
-              <span @click="clear()">
+              <span class="hn-indics--span" @click="clear()">
                 <i class="el-icon-delete"></i>清空
               </span>
             </div>
@@ -79,8 +79,8 @@
       </div>
 
       <div class="el-drawer__footer">
-        <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="confirm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
       </div>
     </el-drawer>
   </div>
