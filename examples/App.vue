@@ -55,7 +55,7 @@
           <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
         </li>
         <li>
-          <router-link to="/indics">Indics</router-link>
+          <router-link to="/indics">Indics 指标默认配置及选择排序</router-link>
         </li>
         <li>
           <router-link to="/drawer">drawer</router-link>
