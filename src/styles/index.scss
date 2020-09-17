@@ -1,4 +1,6 @@
-@import "./base.scss";
+@import "./base";
+@import "./mixins/mixins";
+@import "./mixins/utils";
 @import "./components/affix";
 @import "./components/anchor";
 @import "./components/area-selection";
@@ -10,6 +12,7 @@
 @import "./components/empty";
 @import "./components/error";
 @import "./components/hour";
+@import "./components/indics";
 @import "./components/list";
 @import "./components/multiple-selection";
 @import "./components/tip";

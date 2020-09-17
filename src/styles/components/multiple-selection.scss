@@ -1,5 +1,3 @@
-@import "../mixins/mixins";
-
 @include b(multiple-selection) {
   @at-root {
     .check-all {

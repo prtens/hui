@@ -1,6 +1,6 @@
 {
   "name": "hui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A UI components Library with Vue.js",
   "main": "dist/hui.js",
   "typings": "types/index.d.ts",
@@ -38,7 +38,8 @@
     "path-to-regexp": "^6.1.0",
     "screenfull": "^5.0.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuedraggable": "^2.24.1"
   },
   "peerDependencies": {
     "vue": "^2.5.2"

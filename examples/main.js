@@ -94,6 +94,10 @@ const router = new VueRouter({
       component: resolve => require(["./routers/calendar.vue"], resolve)
     },
     {
+      path: "/indics",
+      component: resolve => require(["./routers/indics.vue"], resolve)
+    },
+    {
       path: "/drawer",
       component: resolve => require(["./routers/drawer.vue"], resolve)
     },

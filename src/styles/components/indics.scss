@@ -1,0 +1,198 @@
+.el-drawer__container .el-drawer__body {
+  padding: 0 !important;
+  background-color: #fff;
+}
+
+@include b(indics) {
+  @include e(show) {
+    display: inline-block;
+    width: 40px;
+    padding: 0;
+    margin-right: 10px;
+    text-align: center;
+
+    @include m(icon) {
+      position: relative;
+      top: 2px;
+      font-size: 18px;
+    }
+  }
+
+  @include e(switch) {
+    display: inline-block;
+    width: auto;
+  }
+
+  &:hover {
+    .hn-indics__show {
+      border-color: $--border-color-lighter;
+      color: #333;
+    }
+
+    .hn-indics__switch {
+      border-color: $--border-color-lighter;
+      color: #333;
+
+      .hn-indics--icon {
+        color: $--border-color-lighter;
+      }
+    }
+  }
+
+
+  @include e(setting) {
+    position: relative;
+    height: 100%;
+
+    .hn-indics__header {
+      position: relative;
+      width: 100%;
+      height: $--indics-header-height;
+      padding: 0 24px;
+      background-color: #fff;
+      line-height: $--indics-header-height;
+      border-bottom: 1px solid #e6e6e6;
+      white-space: nowrap;
+      word-wrap: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .hn-indics--operation {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 24px;
+        background-color: #fff;
+      }
+    }
+
+    .hn-indics__content {
+      position: absolute;
+      top: $--indics-header-height;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      overflow-y: auto;
+
+      .hn-indics__lines {
+        position: relative;
+        padding: 16px 24px;
+
+        &:nth-of-type(even) {
+          background-color: #fafafa;
+        }
+      }
+
+      .hn-indics__name {
+        position: absolute;
+        top: 16px;
+        left: 24px;
+        width: $--indics-content-name-width;
+        padding: 8px 0;
+        color: #999;
+      }
+
+      .hn-indics__line {
+        float: left;
+        padding: 8px 0;
+        white-space: nowrap;
+      }
+    }
+
+    &.hn-indics--parent {
+      .hn-indics__lines {
+        padding-left: 16 * 2 + $--indics-content-name-width;
+      }
+    }
+
+    &.hn-indics--sortable {
+      padding-right: $--indics-right-width;
+
+      .hn-indics__content {
+        right: $--indics-right-width;
+        border-right: 1px solid #e6e6e6;
+      }
+
+      .hn-indics__drag-header {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: $--indics-right-width;
+        height: $--indics-header-height + 38px;
+
+        .hn-indics__drag-title {
+          height: $--indics-header-height;
+          line-height: $--indics-header-height;
+          padding-left: 24px;
+          border-bottom: 1px solid #e6e6e6;
+        }
+
+        .hn-indics__drag-operation {
+          height: 38px;
+          padding: 0 24px;
+          line-height: 38px;
+          text-align: right;
+          background-color: #fafafa;
+        }
+      }
+
+      .hn-indics__drag-wrapper {
+        position: absolute;
+        top: $--indics-header-height + 38px;
+        right: 0;
+        bottom: 0;
+        width: $--indics-right-width;
+        padding: 0 24px 16px 24px;
+        overflow-y: auto;
+        background-color: #fafafa;
+
+        .hn-indics__drag {
+          height: 30px;
+          margin-bottom: 5px;
+          padding: 0 15px;
+          line-height: 28px;
+          background: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 4px;
+          cursor: move;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .hn-indics__header, .hn-indics__drag-header .hn-indics__drag-title {
+      & span {
+        &:first-child {
+          font-size: 16px;
+        }
+
+        &:not(:first-child) {
+          font-size: 14px;
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .hn-indics__header .hn-indics--operation, .hn-indics__drag-header .hn-indics__drag-operation {
+      & span {
+        cursor: pointer;
+
+        &:first-child {
+          margin-right: 16px;
+        }
+      }
+
+      & i {
+        margin-right: 5px;
+      }
+    }
+
+  }
+
+  .clearfix {
+    @include utils-clearfix();
+  }
+}

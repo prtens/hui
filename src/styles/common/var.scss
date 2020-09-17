@@ -63,3 +63,9 @@ $--calendar-ym-width: calc((#{$--calendar-width} - 60px) / 3);
 $--calendar-ym-height: calc((#{$--calendar-height} - #{$--calendar-item-size} - #{$--calendar-item-gap} * 2 - 80px) / 4);
 $--calendar-time-width: calc(#{$--calendar-item-size} * 2 + 6px);
 $--calendar-range-input-width: 100px;
+
+/* Indics
+-------------------------- */
+$--indics-right-width: 240px;
+$--indics-header-height: 60px;
+$--indics-content-name-width: 90px;

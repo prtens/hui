@@ -1,5 +1,3 @@
-@import "../mixins/mixins";
-
 @include b(back-top) {
   position: fixed;
   display: inline-block;

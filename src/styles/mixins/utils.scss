@@ -84,11 +84,12 @@
     top: 50%;
     width: 28px;
     height: 28px;
-    font-size: 28px;
+    font-size: 16px;
     line-height: 28px;
     margin-top: -14px;
     color: #e6e6e6;
     transition: all 0.25s;
+    text-align: center;
   }
 
   &.hn-trigger-open {

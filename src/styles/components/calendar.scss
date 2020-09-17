@@ -1,6 +1,3 @@
-@import "../mixins/mixins";
-@import "../mixins/utils";
-
 @include b(calendar){
   position: relative;
   z-index: 1000;

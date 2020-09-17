@@ -10,6 +10,7 @@ import DefError from "./components/def-error";
 import EffectsEmpty from "./components/effects-empty";
 import Hamburger from "./components/hamburger";
 import List from "./components/list";
+import Indics from "./components/indics";
 import MultipleSelection from "./components/multiple-selection";
 import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
@@ -46,6 +47,7 @@ const components = [
   List,
   ListItem,
   ListItemMeta,
+  Indics,
   MultipleSelection,
   Pagination,
   Screenfull,
