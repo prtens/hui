@@ -3,10 +3,12 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: "babel-eslint"
+    ecmaVersion: 6
   },
   env: {
-    browser: true
+    browser: true,
+    commonjs: true,
+    es6: true
   },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
@@ -36,7 +38,6 @@ module.exports = {
     "vue/no-use-v-if-with-v-for": "off",
     "vue/no-template-key": "off",
     "vue/valid-v-if": "off",
-    "vue/require-v-for-key": "off",
-    "vue/no-use-v-if-with-v-for": "off",
+    "vue/require-v-for-key": "off"
   }
 };
