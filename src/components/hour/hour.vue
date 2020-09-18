@@ -306,7 +306,7 @@ export default {
       let selected = !periods[pIndex].hours[hourIndex].selected;
       that.toggle(pIndex, hourIndex, selected);
 
-      let parent = target.parent('.hours');
+      let parent = target.parent('.hn-hour__hours');
       let siblings = parent.find('[data-hour]');
 
       siblings.on('mouseenter.drag', (dragStartEvent) => {
