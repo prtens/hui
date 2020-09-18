@@ -10,7 +10,7 @@
     "types"
   ],
   "author": "prtens <hux@huonu.com>",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "webpack-dev-server --open --inline --hot --compress --history-api-fallback --port 8080 --config build/webpack.dev.config.js",
     "start": "npm run dev",
