@@ -30,7 +30,8 @@ export declare class HnAnchor extends UIComponent {
   $emit(eventName: 'on-change', []): this
 }
 
-export declare class AnchorLink extends UIComponent {
+/** Anchor Link Component */
+export declare class HnAnchorLink extends UIComponent {
   /** 锚点链接 */
   href?: string
 

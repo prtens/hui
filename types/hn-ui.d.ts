@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {UIComponent} from './component'
 
 import {HnAffix} from './affix'
-import {HnAnchor} from './anchor'
+import {HnAnchor, HnAnchorLink} from './anchor'
 import {HnAreaSelection} from './area-selection'
 import {HnBackTop} from './back-top'
 import {HnBreadcrumb} from './breadcrumb'
@@ -13,7 +13,7 @@ import {HnEffectsEmpty} from './effects-empty'
 import {HnHamburger} from './hamburger'
 import {HnHour} from './hour'
 import {HnIndics} from './indics'
-import {HnList} from './list'
+import {HnList, HnListItem, HnListItemMeta} from './list'
 import {HnMultipleSelection} from './multiple-selection'
 import {HnPagination} from './pagination'
 import {HnScreenfull} from './screenfull'
@@ -43,6 +43,10 @@ export class Affix extends HnAffix {
 
 /** Alert Component */
 export class Anchor extends HnAnchor {
+}
+
+/** Anchor Link Component */
+export class AnchorLink extends HnAnchorLink {
 }
 
 /** Area Selection Component */
@@ -87,6 +91,14 @@ export class Indics extends HnIndics {
 
 /** List Component */
 export class List extends HnList {
+}
+
+/** List Item Component */
+export class ListItem extends HnListItem {
+}
+
+/** List Item Meta Component */
+export class ListItemMeta extends HnListItemMeta {
 }
 
 /** Multiple Selection Component */
