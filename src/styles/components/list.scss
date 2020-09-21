@@ -82,7 +82,7 @@
           width: 1px;
           height: 14px;
           margin-top: -7px;
-          background-color: #e8eaec;
+          background-color: $--border-color-base;
         }
       }
 
@@ -192,7 +192,7 @@
   .hn-list__item {
     padding-right: 24px;
     padding-left: 24px;
-    border-bottom: 1px solid $--border-color-lighter;
+    border-bottom: 1px solid $--border-color-base;
   }
 
   .hn-list-pagination {

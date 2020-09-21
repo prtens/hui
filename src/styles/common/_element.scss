@@ -1,25 +1,21 @@
 .el-dialog {
-  border-radius: 4px;
+  border-radius: $--border-radius-base;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .08);
 
-  &__header, &__body {
-    padding: 16px 24px;
-  }
-
   &__header {
-    border-bottom: 1px solid #e6e6e6;
+    padding: 16px 24px;
+    border-bottom: 1px solid $--border-color-base;
   }
 
   &__footer {
     padding: 10px 24px;
-    text-align: left;
-    border-top: 1px solid #e6e6e6;
+    border-top: 1px solid $--border-color-base;
   }
 }
 
 .el-drawer__container {
   .el-drawer__header {
-    border-bottom: 1px solid #e8eaec;
+    border-bottom: 1px solid $--border-color-base;
     padding: 14px 16px;
     line-height: 1;
     margin-bottom: 0;
@@ -39,7 +35,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $--border-color-base;
     padding: 10px 16px;
   }
 }

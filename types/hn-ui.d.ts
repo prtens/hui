@@ -6,6 +6,7 @@ import {HnAnchor, HnAnchorLink} from './anchor'
 import {HnAreaSelection} from './area-selection'
 import {HnBackTop} from './back-top'
 import {HnBreadcrumb} from './breadcrumb'
+import {HnCalendars, HnCalendarsDatepicker, HnCalendarsRange, HnCalendarsRangepicker} from './calendars'
 import {HnChartsEntrance} from './charts-entrance'
 import {HnDefError} from './def-error'
 import {HnDuration} from './duration'
@@ -59,6 +60,22 @@ export class BackTop extends HnBackTop {
 
 /** Breadcrumb Component */
 export class Breadcrumb extends HnBreadcrumb {
+}
+
+/** Calendars Component */
+export class Calendars extends HnCalendars {
+}
+
+/** Calendars Datepicker Component */
+export class CalendarsDatepicker extends HnCalendarsDatepicker {
+}
+
+/** Calendars Range Component */
+export class CalendarsRange extends HnCalendarsRange {
+}
+
+/** Calendars Rangepicker Component */
+export class CalendarsRangepicker extends HnCalendarsRangepicker {
 }
 
 /** Charts Entrance Component */

@@ -102,7 +102,7 @@
 -------------------------- */
 .grid {
   background: $--color-white;
-  border-radius: 4px;
+  border-radius: $--border-radius-base;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.25s ease-out;
 
@@ -132,10 +132,10 @@
   cursor: pointer;
   user-select: none;
   transition: all 0.25s;
-  border-radius: 4px;
+  border-radius: $--border-radius-base;
   border-width: 1px;
   border-style: solid;
-  border-color: #e6e6e6;
+  border-color: $--border-color-base;
   background-color: $--color-white;
 
   .hn-trigger-label {
@@ -155,7 +155,7 @@
     font-size: 16px;
     line-height: 28px;
     margin-top: -14px;
-    color: #e6e6e6;
+    color: $--border-color-base;
     transition: all 0.25s;
     text-align: center;
   }
@@ -181,7 +181,7 @@
   z-index: 999999;
   min-width: 100%;
   max-width: 280%;
-  border-radius: 4px;
+  border-radius: $--border-radius-base;
   user-select: none;
   background-color: $--color-white;
 
@@ -240,7 +240,7 @@
     height: 26px;
     padding: 0 8px;
     line-height: 26px;
-    border-radius: 4px;
+    border-radius: $--border-radius-base;
     transition: all 0.25s;
     cursor: pointer;
     white-space: nowrap;
@@ -273,6 +273,6 @@
 
 .hn-output__footer {
   padding: 10px;
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid $--border-color-base;
   text-align: left;
 }

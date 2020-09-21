@@ -1,5 +1,6 @@
-@import "common/_element";
-@import "common/transition.scss";
+@import "./common/var";
+@import "./common/_element";
+@import "./common/transition.scss";
 
 *,
 :after,

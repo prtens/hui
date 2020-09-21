@@ -36,11 +36,11 @@ $--font-size-large: 18px !default;
 $--font-size-base: 14px !default;
 
 /* Border
+    $--border-color-lighter
+    $--border-color-extra-light
 -------------------------- */
 $--border-color-base: #e6e6e6 !default;
-$--border-color-light: #eeeeee !default;
-$--border-color-lighter: #e8ebf2 !default;
-$--border-color-extra-light: #f5f5f6 !default;
+$--border-color-light: $--border-color-base !default;
 
 $--border-radius-base: 4px !default;
 
@@ -50,6 +50,7 @@ $--index-normal: 1 !default;
 $--index-affix: 10 !default;
 $--index-area: 90 !default;
 $--index-discount: 100 !default;
+$--index-back-top: 1000 !default;
 
 /* Area selection
 -------------------------- */

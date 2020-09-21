@@ -8,7 +8,7 @@
     width: 120px;
     padding: 10px;
     line-height: 22px;
-    border-radius: $--border-radius-base;
+    border-radius: $--border-radius-base;;
     background: $--color-white;
     filter: alpha(opacity=80);
     opacity: 0.8;
@@ -30,7 +30,7 @@
     position: absolute;
     z-index: $--index-discount;
     width: calc(12 * 16 + 40px);
-    border-radius: $--border-radius-base;
+    border-radius: $--border-radius-base;;
     background: $--color-white;
 
     &__content {
@@ -48,7 +48,7 @@
 
   .hn-duration {
     box-sizing: border-box;
-    border-radius: $--border-radius-base;
+    border-radius: $--border-radius-base;;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
