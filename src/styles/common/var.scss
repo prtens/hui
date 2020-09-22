@@ -21,14 +21,18 @@ $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default;
 $--color-danger: #f56c6c !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 
+$--color-bg: #fafafa;
+
 /* Font family
 -------------------------- */
 $--font-family-text-tahoma: "Tahoma" !default;
 
 /* Font color
 -------------------------- */
-$--color-text-primary: #303133 !default;
-$--color-text-ccc: #cccccc !default;
+$--color-text-c: #cccccc !default;
+$--color-text-3: #333333 !default;
+$--color-text-6: #666666 !default;
+$--color-text-9: #999999 !default;
 
 /* Font size
 -------------------------- */
@@ -54,14 +58,15 @@ $--index-back-top: 1000 !default;
 
 /* Area selection
 -------------------------- */
-$--area-height: 42px;
+$--area-height: 42px !default;
 
 /* Hour
 -------------------------- */
-$--hour-height: 42px;
+$--hour-height: 42px !default;
 
 /* Calendar
 -------------------------- */
+$--calendar-bg: #eeeeee !default;
 $--calendar-item-gap: 2px;
 $--calendar-item-size: 24px;
 $--calendar-width: calc((#{$--calendar-item-size} + #{$--calendar-item-gap} * 2) * 7 + 20px);

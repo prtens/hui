@@ -6,9 +6,9 @@
   background-color: $--color-white;
   border-radius: $--border-radius-base;
   overflow-y: hidden;
-  color: #333;
+  color: $--color-text-3;
   text-align: center;
-  user-select: none;
+  @include utils-user-select(none);
 
   .header {
     width: $--calendar-width;
@@ -27,7 +27,7 @@
     .plus {
       line-height: $--calendar-item-size;
       font-size: 12px;
-      color: #ccc;
+      color: $--color-text-c;
       cursor: pointer;
 
       &:hover {
@@ -42,10 +42,10 @@
       padding: 0 10px;
       cursor: pointer;
       border-radius: $--border-radius-base;
-      color: #666;
+      color: $--color-text-6;
 
       &:hover {
-        background-color: #eeeeee;
+        background-color: $--calendar-bg;
       }
     }
   }
@@ -54,9 +54,9 @@
     width: $--calendar-width;
 
     .weeks {
-      background-color: #f5f5f6;
+      background-color: $--color-bg;
       padding: 0 10px;
-      color: #666;
+      color: $--color-text-6;
     }
 
     .days {
@@ -72,15 +72,15 @@
       line-height: $--calendar-item-size;
       border-radius: $--border-radius-base;
       cursor: pointer;
-      color: #333;
+      color: $--color-text-3;
     }
 
     .day:hover {
-      background-color: #eeeeee;
+      background-color: $--calendar-bg;
     }
 
     .gray {
-      color: #999;
+      color: $--color-text-9;
     }
 
     .today,
@@ -90,7 +90,7 @@
 
     .notallowed,
     .notallowed:hover {
-      color: #eeeeee;
+      color: $--calendar-bg;
       cursor: not-allowed;
       background: $--color-white;
     }
@@ -135,7 +135,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #eeeeee;
+      background-color: $--calendar-bg;
     }
   }
 }

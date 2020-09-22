@@ -22,15 +22,15 @@
   &:hover {
     .hn-indics__show {
       border-color: $--border-color-base;
-      color: $--color-text-primary;
+      color: $--color-text-3;
     }
 
     .hn-indics__switch {
       border-color: $--border-color-base;
-      color: $--color-text-primary;
+      color: $--color-text-3;
 
       .hn-indics--icon {
-        color: $--color-text-primary;
+        color: $--color-text-3;
       }
     }
   }
@@ -51,7 +51,7 @@
       width: 100%;
       height: $--indics-header-height;
       padding: 0 24px;
-      background-color: #fff;
+      background-color: $--color-white;
       line-height: $--indics-header-height;
       border-bottom: 1px solid $--border-color-base;
       white-space: nowrap;
@@ -64,7 +64,7 @@
         top: 0;
         right: 0;
         padding: 0 24px;
-        background-color: #fff;
+        background-color: $--color-white;
       }
     }
 
@@ -81,7 +81,7 @@
         padding: 16px 24px;
 
         &:nth-of-type(even) {
-          background-color: #fafafa;
+          background-color: $--color-bg;
         }
       }
 
@@ -91,7 +91,7 @@
         left: 24px;
         width: $--indics-content-name-width;
         padding: 8px 0;
-        color: #999;
+        color: $--color-text-9;
       }
 
       .hn-indics__line {
@@ -99,7 +99,7 @@
         padding: 8px 0;
         white-space: nowrap;
         & i {
-          color: $--color-text-ccc;
+          color: $--color-text-c;
         }
       }
     }
@@ -137,7 +137,7 @@
           padding: 0 24px;
           line-height: 38px;
           text-align: right;
-          background-color: #fafafa;
+          background-color: $--color-bg;
         }
       }
 
@@ -149,14 +149,14 @@
         width: $--indics-right-width;
         padding: 0 24px 16px 24px;
         overflow-y: auto;
-        background-color: #fafafa;
+        background-color: $--color-bg;
 
         .hn-indics__drag {
           height: 30px;
           margin-bottom: 5px;
           padding: 0 15px;
           line-height: 28px;
-          background: #fff;
+          background: $--color-white;
           border: 1px solid $--border-color-base;
           border-radius: $--border-radius-base;
           cursor: move;
@@ -169,13 +169,13 @@
     }
 
     .hn-indics--max {
-      color: #999999;
+      color: $--color-text-9;
       font-weight: bold;
       font-family: Tahoma;
     }
 
     .hn-indics--tip, .hn-indics--sort {
-      color: #999;
+      color: $--color-text-9;
     }
 
     .hn-indics--text {

@@ -7,10 +7,10 @@
 
   &:hover {
     .hn-trigger {
-      border-color: #cccccc;
+      border-color: $--border-color-base;
 
       .hn-trigger-arrow {
-        color: #cccccc;
+        color: $--color-text-c;
       }
     }
   }
@@ -29,7 +29,7 @@
         width: 18px;
         height: 18px;
         margin-top: -7px;
-        color: #ccc;
+        color: $--color-text-c;
         text-align: left;
       }
     }

@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 40px;
   text-align: center;
-  color: #999;
+  color: $--color-text-9;
   border-radius: $--border-radius-base;
   &__white, &__area {
     min-height: 200px;
@@ -10,7 +10,7 @@
     .hn-empty--nodata {
       height: 80px;
       font-size: 60px;
-      color: #ccc;
+      color: $--color-text-c;
     }
 
     .hn-empty__inner {
@@ -25,6 +25,6 @@
   }
 
   @include e(area) {
-    background-color: #fafafa;
+    background-color: $--color-bg;
   }
 }

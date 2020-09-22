@@ -51,7 +51,7 @@
       height: 100%;
       line-height: $--area-height;
       font-size: 14px;
-      color: #999;
+      color: $--color-text-9;
       font-weight: bold;
       font-family: $--font-family-text-tahoma;
     }
@@ -82,10 +82,10 @@
             height: $--area-height;
             line-height: $--area-height;
             text-align: center;
-            color: #ccc;
+            color: $--color-text-c;
             cursor: pointer;
             transition: all 0.25s;
-            user-select: none;
+            @include utils-user-select(none);
 
             &.hn-area--expand {
               right: 2px;

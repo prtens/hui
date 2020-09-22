@@ -11,8 +11,7 @@
   padding: 10px;
   border-radius: $--border-radius-base;
   background-color: $--color-white;
-  user-select: none;
-  -webkit-user-select: none;
+  @include utils-user-select(none);
 
   .range {
     position: relative;
@@ -20,7 +19,7 @@
 
     .title {
       margin-bottom: 5px;
-      color: #999;
+      color: $--color-text-9;
       .fl {
         float: left;
       }
@@ -85,7 +84,7 @@
       white-space: nowrap;
 
       &:hover {
-        background-color: #eeeeee;
+        background-color: $--calendar-bg;
       }
 
       &.selected,
