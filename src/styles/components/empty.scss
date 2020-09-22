@@ -3,9 +3,9 @@
   padding-top: 40px;
   text-align: center;
   color: $--color-text-9;
-  border-radius: $--border-radius-base;
   &__white, &__area {
     min-height: 200px;
+    border-radius: $--border-radius-base;
 
     .hn-empty--nodata {
       height: 80px;
