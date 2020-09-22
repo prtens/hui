@@ -1,6 +1,6 @@
 @include b(calendar){
   position: relative;
-  z-index: 1000;
+  z-index: $--index-calendar;
   width: $--calendar-width;
   padding: 0;
   background-color: $--color-white;

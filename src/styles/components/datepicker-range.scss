@@ -5,7 +5,7 @@
 @include b(range-datepicker) {
   --calendar-range-input-width: 100px;
   position: relative;
-  z-index: 1000;
+  z-index: $--index-calendar;
   min-width: calc(#{$--calendar-range-input-width} * 2 + 40px);
   width: 100%;
   padding: 10px;
