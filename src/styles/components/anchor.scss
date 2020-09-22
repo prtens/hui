@@ -69,5 +69,9 @@
   &__link &__link {
     padding-top: 6px;
     padding-bottom: 6px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 }

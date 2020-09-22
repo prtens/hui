@@ -1,13 +1,15 @@
 <template>
   <div :class="anchorLinkClasses">
-    <a
+    <el-link
+      :underline="false"
       :class="linkTitleClasses"
       :href="href"
       :data-scroll-offset="scrollOffset"
       :data-href="href"
       @click.prevent="goAnchor"
-      :title="title"
-    >{{ title }}</a>
+      :title="title">
+      {{ title }}
+    </el-link>
     <slot></slot>
   </div>
 </template>
