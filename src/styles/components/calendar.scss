@@ -26,7 +26,7 @@
     .minus,
     .plus {
       line-height: $--calendar-item-size;
-      font-size: 12px;
+      font-size: $--font-size-small;
       color: $--color-text-c;
       cursor: pointer;
 
@@ -131,7 +131,7 @@
     margin: 10px;
     line-height: $--calendar-ym-height;
     border-radius: $--border-radius-base;
-    font-size: calc(12px + 2px);
+    font-size: $--font-size-base;
     cursor: pointer;
 
     &:hover {

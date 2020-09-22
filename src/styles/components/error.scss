@@ -12,7 +12,7 @@
   }
 
   @include e(info) {
-    font-size: 16px;
+    font-size: $--font-size-large;
     color: $--color-text-9;
     margin-top: 40px;
   }

@@ -1,6 +1,6 @@
 @include b(duration-wrapper) {
   position: relative;
-  font-size: 12px;
+  font-size: $--font-size-small;
 
   .hn-discount-hover {
     position: absolute;

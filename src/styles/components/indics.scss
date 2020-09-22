@@ -10,7 +10,7 @@
     @include m(icon) {
       position: relative;
       top: 2px;
-      font-size: 18px;
+      font-size: $--font-size-large;
     }
   }
 
