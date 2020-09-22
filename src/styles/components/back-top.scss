@@ -4,13 +4,15 @@
   text-align: center;
   cursor: pointer;
   z-index: $--index-back-top;
+  background: $--color-primary-light-9;
+  border-radius: $--border-radius-base;
 
   &:hover {
-    background: #d5dbe7;
+    background: $--color-primary-light-8;
   }
 
-  @include e(icon) {
-    fill: #9aaabf;
+  @include m(icon) {
+    fill: $--color-primary;
     background: none;
   }
 }
