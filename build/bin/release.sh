@@ -5,14 +5,15 @@ echo " ====== 当前分支 ====== "
 
 git checkout master
 
+# select-version-cli 一个简单的cli来帮助您选择发布版本
 VERSION=`npx select-version-cli`
 
-read -p "Releasing $VERSION - are you sure? (y/n)" -n 1 -r
-echo    # (optional) move to a new line
+read -p "发布版本 $VERSION - 确定? (y/n)" -n 1 -r
+echo    # 输出一个新行
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-  echo "Releasing $VERSION ..."
+  echo "发布版本 $VERSION ..."
 
   # build
   VERSION=$VERSION npm run dist
