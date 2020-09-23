@@ -1,5 +1,5 @@
 <template>
-  <div class="hn-multiple-selection">
+  <div class="hn-select">
     <el-select
       multiple
       collapse-tags
