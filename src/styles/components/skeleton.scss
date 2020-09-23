@@ -1,23 +1,41 @@
-$--skeleton-avatar-border-radius: 50% !default;
+@include b(skeleton) {
+  &__actions,
+  &__article,
+  &__card-heading,
+  &__card-text,
+  &__date-picker,
+  &__list-item,
+  &__list-item-avatar,
+  &__list-item-avatar-three-line,
+  &__list-item-avatar-two-line,
+  &__list-item-text,
+  &__list-item-three-line,
+  &__list-item-two-line,
+  &__table-heading,
+  &__table-tbody,
+  &__table-tfoot,
+  &__table-thead {
+    background: #fff;
+  }
 
-// Theme
-.hn-skeleton .hn-skeleton__avatar,
-.hn-skeleton .hn-skeleton__button,
-.hn-skeleton .hn-skeleton__chip,
-.hn-skeleton .hn-skeleton__divider,
-.hn-skeleton .hn-skeleton__heading,
-.hn-skeleton .hn-skeleton__image,
-.hn-skeleton .hn-skeleton__text {
-  background: rgba(0, 0, 0, .12)
-}
+  &__avatar,
+  &__button,
+  &__chip,
+  &__divider,
+  &__heading,
+  &__image,
+  &__text {
+    background: rgba(0, 0, 0, .12)
+  }
 
-.hn-skeleton .hn-skeleton__bone {
-  & :after {
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .3), hsla(0, 0%, 100%, 0));
+  &__bone {
+    & :after {
+      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .3), hsla(0, 0%, 100%, 0));
+    }
   }
 }
 
-.hn-skeleton {
+@include b(skeleton) {
   border-radius: $--skeleton-border-radius;
   position: relative;
   vertical-align: top;

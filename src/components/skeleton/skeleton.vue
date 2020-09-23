@@ -1,18 +1,45 @@
 <script type="text/babel">
-import {getSlot} from '../../utils/util';
+import {getSlot, convertToUnit} from '../../utils/util';
 
 export default {
   name: 'Skeleton',
   props: {
-    boilerplate: Boolean,
-    loading: Boolean,
-    tile: Boolean,
-    transition: String,
-    type: String,
+    // 从骨架中移除加载动画
+    boilerplate: {
+      type: Boolean,
+      default: false
+    },
+    // 应用一个加载动画，加载光标在悬停时加载。false 的值只有在 default 槽中有内容时才会工作。
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    // 指定头像的形状 删除组件的 border-radius。
+    tile: {
+      type: Boolean,
+      default: false
+    },
+    // 动画
+    transition: {
+      type: String,
+      default: undefined
+    },
+    // 字符串分隔要创建的骨架组件列表，例如 type="text@3" 和 type="card, list-item"。
+    type: {
+      type: String,
+      default: undefined
+    },
+    // 将与预定义选项结合使用的自定义类型对象。 有关可用的预定义选项的列表，请参见 type 属性
     types: {
       type: Object,
       default: () => ({})
-    }
+    },
+    height: Number | String,
+    minHeight: Number | String,
+    minWidth: Number | String,
+    maxHeight: Number | String,
+    maxWidth: Number | String,
+    width: Number | String
   },
 
   computed: {
@@ -30,9 +57,7 @@ export default {
       return {
         'hn-skeleton--boilerplate': this.boilerplate,
         'hn-skeleton--is-loading': this.isLoading,
-        'hn-skeleton--tile': this.tile,
-        ...this.themeClasses,
-        ...this.elevationClasses
+        'hn-skeleton--tile': this.tile
       };
     },
     isLoading() {
@@ -72,6 +97,25 @@ export default {
         text: 'text',
         ...this.types
       };
+    },
+    measurableStyles() {
+      let styles = {};
+
+      const height = convertToUnit(this.height);
+      const minHeight = convertToUnit(this.minHeight);
+      const minWidth = convertToUnit(this.minWidth);
+      const maxHeight = convertToUnit(this.maxHeight);
+      const maxWidth = convertToUnit(this.maxWidth);
+      const width = convertToUnit(this.width);
+
+      if (height) styles.height = height;
+      if (minHeight) styles.minHeight = minHeight;
+      if (minWidth) styles.minWidth = minWidth;
+      if (maxHeight) styles.maxHeight = maxHeight;
+      if (maxWidth) styles.maxWidth = maxWidth;
+      if (width) styles.width = width;
+
+      return styles;
     }
   },
 
@@ -164,7 +208,7 @@ export default {
       el.style.transition = el._initialStyle.transition;
 
       delete el._initialStyle;
-    }
+    },
   },
 
   render(h) {

@@ -18,6 +18,7 @@ import {HnList, HnListItem, HnListItemMeta} from './list'
 import {HnMultipleSelection} from './multiple-selection'
 import {HnPagination} from './pagination'
 import {HnScreenfull} from './screenfull'
+import {HnSkeleton} from './skeleton'
 import {HnSvgIcon} from './svg-icon'
 import {HnTableColumnTree} from './table-column-tree'
 import {HnTime} from './time'
@@ -128,6 +129,10 @@ export class Pagination extends HnPagination {
 
 /** Screenfull Component */
 export class Screenfull extends HnScreenfull {
+}
+
+/** Skeleton Component */
+export class Skeleton extends HnSkeleton {
 }
 
 /** Svg Icon Component */

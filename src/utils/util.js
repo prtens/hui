@@ -68,6 +68,16 @@ export function getSlot(vm, name = 'default', data, optional) {
   return undefined;
 }
 
+export function convertToUnit(str, unit = 'px') {
+  if (str == null || str === '') {
+    return undefined;
+  } else if (isNaN(+str)) {
+    return String(str);
+  } else {
+    return `${Number(str)}${unit}`;
+  }
+}
+
 export function deepClone(obj) {
   let _obj = JSON.stringify(obj);
   let objClone = JSON.parse(_obj);
