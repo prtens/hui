@@ -3,8 +3,9 @@
  */
 const path = require("path");
 const webpack = require("webpack");
-const pkg = require("../package.json");
+const WebpackBar = require('webpackbar');
 
+const pkg = require("../package.json");
 const isProd = process.env.NODE_ENV === "production";
 
 function resolve(dir) {
@@ -67,6 +68,7 @@ module.exports = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       "process.env.VERSION": `'${pkg.version}'`
-    })
+    }),
+    new WebpackBar()
   ]
 };
