@@ -1,16 +1,16 @@
 export default {
   h: {
-    defError: {
+    error: {
       goBack: '返回上一页',
       goHome: '回到首页',
       404: '抱歉，您查看的页面不存在或无权限查看当前页面~',
       500: '内部服务器错误~',
       502: '错误网关~'
     },
-    effectsEmpty: {
+    empty: {
       content: '暂无内容'
     },
-    multipleSelection: {
+    select: {
       placeholder: '请选择',
       selectAll: '全选'
     },

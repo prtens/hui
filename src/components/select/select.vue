@@ -7,14 +7,14 @@
       :filterable="filterable"
       v-model='tmpSelects'
       @change='changeSelect'
-      :placeholder='t("h.multipleSelection.placeholder")'
+      :placeholder='t("h.select.placeholder")'
     >
       <slot name="prefix">
         <el-checkbox
           class="check-all"
           v-model="checked"
           @change='selectAll'
-        >{{ t('h.multipleSelection.selectAll') }}</el-checkbox>
+        >{{ t('h.select.selectAll') }}</el-checkbox>
       </slot>
       <el-option
         v-for='item in options'

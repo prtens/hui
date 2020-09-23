@@ -17,14 +17,14 @@
         class="hn-error__btn"
         type="primary"
         @click="home"
-      >{{ t('h.defError.goHome') }}
+      >{{ t('h.error.goHome') }}
       </el-button>
       <el-button
         class="hn-error__btn"
         type="primary"
         plain
         @click="back"
-      >{{ t('h.defError.goBack') }}
+      >{{ t('h.error.goBack') }}
       </el-button>
     </div>
   </div>
@@ -67,15 +67,15 @@ export default {
       switch (that.type) {
         case 404:
           src = 'http://img.alicdn.com/tfs/TB1tAmuRCzqK1RjSZFpXXakSXXa-1262-668.png';
-          tip = this.t('h.defError.404');
+          tip = this.t('h.error.404');
           break;
         case 500:
           src = 'http://img.alicdn.com/tfs/TB1yZ5sRAvoK1RjSZPfXXXPKFXa-1182-792.png';
-          tip = this.t('h.defError.500');
+          tip = this.t('h.error.500');
           break;
         case 502:
           src = 'http://img.alicdn.com/tfs/TB1yZ5sRAvoK1RjSZPfXXXPKFXa-1182-792.png';
-          tip = this.t('h.defError.502');
+          tip = this.t('h.error.502');
           break;
       }
 

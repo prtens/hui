@@ -37,7 +37,7 @@ export default {
       return [(white ? 'hn-empty__white' : 'hn-empty__area')];
     },
     getContent() {
-      let content = this.t('h.effectsEmpty.content');
+      let content = this.t('h.empty.content');
       if (this.content) {
         content = this.content;
       }
