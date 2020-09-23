@@ -81,7 +81,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '0.0.1',
+  version: process.env.VERSION,
   locale: locale.use,
   i18n: locale.i18n,
   install,
