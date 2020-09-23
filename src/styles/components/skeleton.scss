@@ -15,7 +15,7 @@
   &__table-tbody,
   &__table-tfoot,
   &__table-thead {
-    background: #fff;
+    background: $--color-white;
   }
 
   &__avatar,
@@ -36,20 +36,20 @@
 }
 
 @include b(skeleton) {
-  border-radius: $--skeleton-border-radius;
+  border-radius: $--border-radius-base;
   position: relative;
   vertical-align: top;
 
   &__actions {
-    padding: $--skeleton-actions-padding;
+    padding: 16px 16px 8px;
     text-align: right;
 
     .hn-skeleton__button {
       display: inline-block;
 
       &:first-child {
-        margin-right: $--skeleton-actions-button-margin;
-        margin-left: $--skeleton-actions-button-margin;
+        margin-right: 12px;
+        margin-left: 12px;
       }
     }
   }
@@ -61,7 +61,7 @@
   .hn-skeleton__list-item-avatar-two-line,
   .hn-skeleton__list-item-three-line,
   .hn-skeleton__list-item-avatar-three-line {
-    border-radius: $--skeleton-border-radius;
+    border-radius: $--border-radius-base;
   }
 
   .hn-skeleton__actions,
@@ -97,12 +97,12 @@
 
   &__article {
     .hn-skeleton__heading {
-      margin: $--skeleton-article-heading-margin-top-left 0 $--skeleton-article-heading-margin-x $--skeleton-article-heading-margin-top-left;
-      margin: $--skeleton-article-heading-margin-top-left $--skeleton-article-heading-margin-x 0 $--skeleton-article-heading-margin-top-left;
+      margin: 16px 0 16px 16px;
+      margin: 16px 16px 0 16px;
     }
 
     .hn-skeleton__paragraph {
-      padding: $--skeleton-article-paragraph-padding;
+      padding: 16px;
     }
   }
 
@@ -112,28 +112,28 @@
     position: relative;
 
     &::after {
-      animation: $--skeleton-loading-animation;
+      animation: loading 1.5s infinite;
       content: '';
       height: 100%;
       left: 0;
       position: absolute;
       right: 0;
       top: 0;
-      transform: $--skeleton-loading-transform;
+      transform: translateX(-100%);
       z-index: 1;
     }
   }
 
   &__avatar {
-    border-radius: $--skeleton-avatar-border-radius;
-    height: $--skeleton-avatar-height;
-    width: $--skeleton-avatar-width;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
   }
 
   &__button {
-    border-radius: $--skeleton-button-border-radius;
-    height: $--skeleton-button-height;
-    width: $--skeleton-button-width;
+    border-radius: $--border-radius-base;
+    height: 36px;
+    width: 64px;
   }
 
   &__card {
@@ -144,22 +144,22 @@
 
   &__card-heading {
     .hn-skeleton__heading {
-      margin: $--skeleton-card-heading-loader-heading-margin;
+      margin: 16px;
     }
   }
 
   &__card-text {
-    padding: $--skeleton-card-text-padding;
+    padding: 16px;
   }
 
   &__chip {
-    border-radius: $--skeleton-chip-border-radius;
-    height: $--skeleton-chip-height;
-    width: $--skeleton-chip-width;
+    border-radius: 16px;
+    height: 32px;
+    width: 96px;
   }
 
   &__date-picker {
-    border-radius: $--skeleton-date-picker-border-radius;
+    border-radius: inherit;
 
     .hn-skeleton__list-item:first-child {
       .hn-skeleton__text {
@@ -177,31 +177,31 @@
   &__date-picker-days {
     display: flex;
     flex-wrap: wrap;
-    padding: $--skeleton-date-picker-days-padding;
+    padding: 0 12px;
     margin: 0 auto;
 
     .hn-skeleton__avatar {
-      border-radius: $--skeleton-border-radius;
+      border-radius: $--border-radius-base;
       flex: 1 1 auto;
-      margin: $--skeleton-date-picker-days-margin;
-      height: $--skeleton-date-picker-days-height;
-      width: $--skeleton-date-picker-days-width;
+      margin: 4px;
+      height: 40px;
+      width: 40px;
     }
   }
 
   &__date-picker-options {
     align-items: center;
     display: flex;
-    padding: $--skeleton-date-picker-options-padding;
+    padding: 16px;
 
     .hn-skeleton__avatar {
-      height: $--skeleton-date-picker-options-avatar-height;
-      width: $--skeleton-date-picker-options-avatar-width;
+      height: 40px;
+      width: 40px;
 
       &:nth-child(2) {
         margin-left: auto;
-        margin-right: $--skeleton-date-picker-options-avatar-child-margin;
-        margin-left: $--skeleton-date-picker-options-avatar-child-margin;
+        margin-right: 8px;
+        margin-left: 8px;
       }
     }
 
@@ -213,18 +213,18 @@
   }
 
   &__divider {
-    border-radius: $--skeleton-divider-border-radius;
-    height: $--skeleton-divider-height;
+    border-radius: 1px;
+    height: 2px;
   }
 
   &__heading {
-    border-radius: $--skeleton-heading-border-radius;
-    height: $--skeleton-heading-height;
+    border-radius: 12px;
+    height: 24px;
     width: 45%;
   }
 
   &__image {
-    height: $--skeleton-image-height;
+    height: 200px;
     border-radius: 0;
 
     ~ .hn-skeleton__card-heading {
@@ -237,7 +237,7 @@
   }
 
   &__list-item {
-    height: $--skeleton-list-item-height;
+    height: 48px;
   }
 
   &__list-item-three-line {
@@ -253,22 +253,22 @@
   &__list-item-avatar-two-line,
   &__list-item-avatar-three-line
   .hn-skeleton__avatar {
-    height: $--skeleton-item-avatar-height;
-    width: $--skeleton-item-avatar-width;
+    height: 40px;
+    width: 40px;
   }
 
   &__list-item-avatar {
-    height: $--skeleton-avatar-height;
+    height: 48px;
   }
 
   &__list-item-two-line,
   &__list-item-avatar-two-line {
-    height: $--skeleton-item-two-line-height;
+    height: 72px;
   }
 
   &__list-item-three-line,
   &__list-item-avatar-three-line {
-    height: $--skeleton-item-three-line-height;
+    height: 88px;
   }
 
   &__list-item-avatar-three-line {
@@ -287,11 +287,11 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    padding: $--skeleton-item-padding;
+    padding: 0 16px;
 
     .hn-skeleton__avatar {
-      margin-right: $--skeleton-item-avatar-margin;
-      margin-left: $--skeleton-item-avatar-margin;
+      margin-right: 16px;
+      margin-left: 16px;
     }
 
     .hn-skeleton__text:last-child,
@@ -337,7 +337,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: $--skeleton-table-heading-padding;
+    padding: 16px;
 
     .hn-skeleton__heading {
       max-width: 15%;
@@ -351,7 +351,7 @@
   &__table-thead {
     display: flex;
     justify-content: space-between;
-    padding: $--skeleton-table-thead-padding;
+    padding: 16px;
 
     .hn-skeleton__heading {
       max-width: 5%;
@@ -359,23 +359,23 @@
   }
 
   &__table-tbody {
-    padding: $--skeleton-table-tbody-padding;
+    padding: 16px 16px 0;
   }
 
   &__table-tfoot {
     align-items: center;
     display: flex;
     justify-content: flex-end;
-    padding: $--skeleton-table-tfoot-padding;
+    padding: 16px;
 
     > * {
-      margin-left: $--skeleton-table-tfoot-children-margin;
-      margin-right: $--skeleton-table-tfoot-children-margin;
+      margin-left: 8px;
+      margin-right: 8px;
     }
 
     .hn-skeleton__avatar {
-      height: $--skeleton-table-tfoot-avatar-height;
-      width: $--skeleton-table-tfoot-avatar-width;
+      height: 40px;
+      width: 40px;
     }
 
     .hn-skeleton__text {
@@ -399,8 +399,8 @@
   &__table-cell {
     align-items: center;
     display: flex;
-    height: $--skeleton-table-cell-height;
-    width: $--skeleton-table-cell-width;
+    height: 48px;
+    width: 88px;
 
     .hn-skeleton__text {
       margin-bottom: 0;
@@ -408,9 +408,9 @@
   }
 
   &__text {
-    border-radius: $--skeleton-text-border-radius;
+    border-radius: 6px;
     flex: 1 0 auto;
-    height: $--skeleton-text-height;
+    height: 12px;
     margin-bottom: 6px;
   }
 
