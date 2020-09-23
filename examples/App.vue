@@ -25,7 +25,7 @@
           <router-link to="/list">List 列表</router-link>
         </li>
         <li>
-          <router-link to="/multipleselection">MultipleSelection 选择器全选</router-link>
+          <router-link to="/Select">Select 选择器全选</router-link>
         </li>
         <li>
           <router-link to="/pagination">Pagination 分页</router-link>
@@ -37,7 +37,7 @@
           <router-link to="/svgicon">SvgIcon 图片</router-link>
         </li>
         <li>
-          <router-link to="/table-column-tree">TableColumnTree 表格树</router-link>
+          <router-link to="/table-tree">TableTree 表格树</router-link>
         </li>
         <li>
           <router-link to="/tip">Tip 小贴士</router-link>
@@ -46,10 +46,10 @@
           <router-link to="/time">Time 相对时间</router-link>
         </li>
         <li>
-          <router-link to="/deferror">DefError 错误提示页面</router-link>
+          <router-link to="/Error">Error 错误提示页面</router-link>
         </li>
         <li>
-          <router-link to="/effectsempty">EffectsEmpty 空状态</router-link>
+          <router-link to="/Empty">Empty 空状态</router-link>
         </li>
         <li>
           <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
@@ -70,7 +70,7 @@
       <p>业务组件</p>
       <ul>
         <li>
-          <router-link to="/area-selection">area 选择地域</router-link>
+          <router-link to="/area">area 选择地域</router-link>
         </li>
         <li>
           <router-link to="/duration">duration 时段折扣</router-link>

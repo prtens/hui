@@ -1,3 +1,3 @@
-import Breadcrumbs from "./breadcrumb.vue";
+import Breadcrumb from "./breadcrumb.vue";
 
-export default Breadcrumbs;
+export default Breadcrumb;

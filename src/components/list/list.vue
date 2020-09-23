@@ -24,7 +24,7 @@
 const prefixCls = "hn-list";
 
 export default {
-  name: "List",
+  name: "HList",
   provide() {
     return {
       ListInstance: this

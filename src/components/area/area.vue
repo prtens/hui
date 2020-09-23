@@ -101,7 +101,7 @@ import { deepClone } from '../../utils/util'
 import * as Atds from './data'
 
 export default {
-  name: "AreaSelection",
+  name: "HArea",
   props: {
     selected: {
       type: Array,

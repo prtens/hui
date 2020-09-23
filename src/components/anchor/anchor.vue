@@ -32,7 +32,7 @@ import {
 import { on, off } from "../../utils/dom";
 
 export default {
-  name: "Anchor",
+  name: "HAnchor",
   provide() {
     return {
       anchorCom: this
@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     wrapperComponent() {
-      return this.affix ? "Affix" : "div";
+      return this.affix ? "HAffix" : "div";
     },
     wrapperStyle() {
       return {
@@ -151,7 +151,7 @@ export default {
       this.inkTop = top;
     },
     updateTitleOffset() {
-      const links = findComponentsDownward(this, "AnchorLink").map(link => {
+      const links = findComponentsDownward(this, "HAnchorLink").map(link => {
         return link.href;
       });
       const idArr = links.map(link => {

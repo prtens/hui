@@ -192,7 +192,7 @@ const SettingList = [
 ]
 
 export default {
-  name: "Duration",
+  name: "HDuration",
   props: {
     viewId: {
       type: String,

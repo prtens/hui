@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hamburger
+    <h-hamburger
       :is-active="opened"
       @toggleClick="toggleSideBar"
     />

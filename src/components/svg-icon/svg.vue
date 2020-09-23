@@ -19,7 +19,7 @@
 import { isExternal } from "../../utils/util";
 
 export default {
-  name: "SvgIcon",
+  name: "HSvgIcon",
   props: {
     iconClass: {
       type: String,

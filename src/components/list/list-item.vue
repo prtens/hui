@@ -34,7 +34,7 @@
 
 <script type="text/babel">
 export default {
-  name: "ListItem",
+  name: "HListItem",
   inject: ["ListInstance"],
   props: {},
   computed: {

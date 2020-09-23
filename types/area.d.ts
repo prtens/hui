@@ -1,7 +1,7 @@
 import { UIComponent } from './component'
 
 /** Area Selection Component */
-export declare class HnAreaSelection extends UIComponent {
+export declare class HnArea extends UIComponent {
   /**
    * 当前选中值
    * 每个省份和城市都有各自的id

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg-icon icon-class="dashboard" />
+    <h-svg-icon icon-class="dashboard" />
   </div>
 </template>
 

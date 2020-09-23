@@ -20,7 +20,7 @@
 import { scrollTo } from "../../utils/scrollTo";
 
 export default {
-  name: "pagination",
+  name: "HPagination",
   props: {
     total: {
       required: true,

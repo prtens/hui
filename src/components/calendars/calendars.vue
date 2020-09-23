@@ -157,7 +157,7 @@ const {
 } = util;
 
 export default {
-  name: "Calendars",
+  name: "HCalendars",
   mixins: [Locale],
   props: {
     // 最小可选的日期

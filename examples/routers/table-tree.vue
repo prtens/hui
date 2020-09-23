@@ -15,7 +15,7 @@
         :width="item.width"
       >
       </el-table-column>
-      <table-column-tree
+      <h-table-tree
         prop="label"
         levelKey="level"
       />

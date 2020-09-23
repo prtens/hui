@@ -1,7 +1,7 @@
 import {UIComponent} from './component'
 
-/** Effects Empty Component */
-export declare class HnEffectsEmpty extends UIComponent {
+/** Empty Component */
+export declare class HnEmpty extends UIComponent {
   /**
    *  背景样式，默认灰色，需要白底空状态时配置bg="white"
    */

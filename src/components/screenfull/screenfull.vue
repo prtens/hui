@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg-icon
+    <h-svg-icon
       :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
       @click="click"
     />
@@ -11,7 +11,7 @@
 import screenfull from "screenfull";
 
 export default {
-  name: "Screenfull",
+  name: "HScreenfull",
   data() {
     return {
       isFullscreen: false

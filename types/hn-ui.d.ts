@@ -3,24 +3,24 @@ import {UIComponent} from './component'
 
 import {HnAffix} from './affix'
 import {HnAnchor, HnAnchorLink} from './anchor'
-import {HnAreaSelection} from './area-selection'
+import {HnArea} from './area'
 import {HnBackTop} from './back-top'
 import {HnBreadcrumb} from './breadcrumb'
 import {HnCalendars, HnCalendarsDatepicker, HnCalendarsRange, HnCalendarsRangepicker} from './calendars'
 import {HnChartsEntrance} from './charts-entrance'
-import {HnDefError} from './def-error'
 import {HnDuration} from './duration'
-import {HnEffectsEmpty} from './effects-empty'
+import {HnEmpty} from './empty'
+import {HnError} from './error'
 import {HnHamburger} from './hamburger'
 import {HnHour} from './hour'
 import {HnIndics} from './indics'
 import {HnList, HnListItem, HnListItemMeta} from './list'
-import {HnMultipleSelection} from './multiple-selection'
 import {HnPagination} from './pagination'
 import {HnScreenfull} from './screenfull'
+import {HnSelect} from './select'
 import {HnSkeleton} from './skeleton'
 import {HnSvgIcon} from './svg-icon'
-import {HnTableColumnTree} from './table-column-tree'
+import {HnTableTree} from './table-tree'
 import {HnTime} from './time'
 import {HnTip} from './tip'
 
@@ -51,8 +51,8 @@ export class Anchor extends HnAnchor {
 export class AnchorLink extends HnAnchorLink {
 }
 
-/** Area Selection Component */
-export class AreaSelection extends HnAreaSelection {
+/** Area Component */
+export class Area extends HnArea {
 }
 
 /** Back Top Component */
@@ -83,16 +83,16 @@ export class CalendarsRangepicker extends HnCalendarsRangepicker {
 export class ChartsEntrance extends HnChartsEntrance {
 }
 
-/** Def Error Component */
-export class DefError extends HnDefError {
-}
-
 /** Duration Component */
 export class Duration extends HnDuration {
 }
 
-/** Effects Empty Component */
-export class EffectsEmpty extends HnEffectsEmpty {
+/** Empty Component */
+export class Empty extends HnEmpty {
+}
+
+/** Error Component */
+export class Error extends HnError {
 }
 
 /** Hamburger Component */
@@ -119,16 +119,16 @@ export class ListItem extends HnListItem {
 export class ListItemMeta extends HnListItemMeta {
 }
 
-/** Multiple Selection Component */
-export class MultipleSelection extends HnMultipleSelection {
-}
-
 /** Pagination Component */
 export class Pagination extends HnPagination {
 }
 
 /** Screenfull Component */
 export class Screenfull extends HnScreenfull {
+}
+
+/** Select Component */
+export class HSelect extends HnSelect {
 }
 
 /** Skeleton Component */
@@ -139,8 +139,8 @@ export class Skeleton extends HnSkeleton {
 export class SvgIcon extends HnSvgIcon {
 }
 
-/** Table Column Tree Component */
-export class TableColumnTree extends HnTableColumnTree {
+/** Table Tree Component */
+export class TableTree extends HnTableTree {
 }
 
 /** Time Component */

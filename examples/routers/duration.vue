@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-row style="margin-bottom: 20px">
-      <duration
+      <h-duration
         viewId="test"
         :selected.sync="selected"
       />
     </el-row>
 
     <el-row style="margin-bottom: 20px">
-      <duration
+      <h-duration
         :selected.sync="selected1"
         :boxWidth="18"
         :half="true"

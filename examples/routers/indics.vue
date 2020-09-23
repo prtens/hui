@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>排序/分组</p>
-    <indics
+    <h-indics
       :parents="tmp.parents"
       :fields="tmp.fields"
       :defaults="tmp.defaults"
@@ -9,19 +9,19 @@
       :customs="tmp.customs"
       :sortable="tmp.sortable"
       @changeSelected="changeSelected"
-    ></indics>
+    ></h-indics>
 
     <p>不限制/不排序</p>
-    <indics
+    <h-indics
       :fields="tmp1.fields"
       :defaults="tmp1.defaults"
       :custom.sync="tmp1.custom"
       :tip="tmp1.tip"
       @changeSelected="changeSelected"
-    ></indics>
+    ></h-indics>
 
     <p>不限制/排序</p>
-    <indics
+    <h-indics
       :parents="tmp2.parents"
       :fields="tmp2.fields"
       :defaults="tmp2.defaults"
@@ -29,7 +29,7 @@
       :customs="tmp2.customs"
       :sortable="tmp2.sortable"
       @changeSelected="changeSelected"
-    ></indics>
+    ></h-indics>
   </div>
 </template>
 

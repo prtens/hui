@@ -2,81 +2,66 @@
   <div>
     <strong>Default Size:</strong>
     <br><br>
-    <List
+    <h-list
       border
       :split="false"
     >
       <template slot="header">
         Header1111111
       </template>
-      <ListItem>111111111</ListItem>
-      <ListItem>22222222</ListItem>
-      <ListItem>333333333</ListItem>
+      <h-list-item>111111111</h-list-item>
+      <h-list-item>22222222</h-list-item>
+      <h-list-item>333333333</h-list-item>
       <template slot="footer">
         Footer1111111
       </template>
-    </List>
+    </h-list>
     <br>
     <strong>Small Size:</strong>
     <br><br>
-    <List
+    <h-list
       header="Header"
       footer="Footer"
       border
       size="small"
     >
-      <ListItem>111111111</ListItem>
-      <ListItem>22222222</ListItem>
-      <ListItem>333333333</ListItem>
-    </List>
+      <h-list-item>111111111</h-list-item>
+      <h-list-item>22222222</h-list-item>
+      <h-list-item>333333333</h-list-item>
+    </h-list>
     <br>
     <strong>Large Size:</strong>
     <br><br>
-    <List
+    <h-list
       header="Header"
       footer="Footer"
       border
       size="large"
     >
-      <ListItem>111111111</ListItem>
-      <ListItem>22222222</ListItem>
-      <ListItem>333333333</ListItem>
-    </List>
+      <h-list-item>111111111</h-list-item>
+      <h-list-item>22222222</h-list-item>
+      <h-list-item>333333333</h-list-item>
+    </h-list>
     <br>
     <strong>带有图标、标题、描述的基础列表。</strong>
     <br><br>
-    <List>
-      <ListItem>
-        <ListItemMeta
+    <h-list>
+      <h-list-item>
+        <h-list-item-meta
           avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
           title="This is title"
           description="This is description, this is description."
         />
-      </ListItem>
-      <ListItem>
-        <ListItemMeta
+      </h-list-item>
+      <h-list-item>
+        <h-list-item-meta
           avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
           title="This is title"
           description="This is description, this is description."
         />
-      </ListItem>
-      <ListItem>
-        <ListItemMeta
-          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-          title="This is title"
-          description="This is description, this is description."
-        />
-        <template slot="action">
-          <li>
-            <a href="">Edit</a>
-          </li>
-          <li>
-            <a href="">More</a>
-          </li>
-        </template>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta
+      </h-list-item>
+      <h-list-item>
+        <h-list-item-meta
           avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
           title="This is title"
           description="This is description, this is description."
@@ -89,17 +74,32 @@
             <a href="">More</a>
           </li>
         </template>
-      </ListItem>
-    </List>
+      </h-list-item>
+      <h-list-item>
+        <h-list-item-meta
+          avatar="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          title="This is title"
+          description="This is description, this is description."
+        />
+        <template slot="action">
+          <li>
+            <a href="">Edit</a>
+          </li>
+          <li>
+            <a href="">More</a>
+          </li>
+        </template>
+      </h-list-item>
+    </h-list>
     <br>
     <strong>竖排列表样式。设置属性 itemLayout 为 vertical 可实现竖排列表样式。</strong>
     <br><br>
-    <List itemLayout="vertical">
-      <ListItem
+    <h-list itemLayout="vertical">
+      <h-list-item
         v-for="item in data"
         :key="item.title"
       >
-        <ListItemMeta
+        <h-list-item-meta
           :avatar="item.avatar"
           :title="item.title"
           :description="item.description"
@@ -123,8 +123,8 @@
             style="width: 280px;"
           ></el-image>
         </template>
-      </ListItem>
-    </List>
+      </h-list-item>
+    </h-list>
   </div>
 </template>
 <script>

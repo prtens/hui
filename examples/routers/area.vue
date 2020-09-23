@@ -1,11 +1,11 @@
 <template>
   <div>
-    <area-selection
+    <h-area
       :selected.sync="selected"
       @on-change="change"
     />
 
-    <area-selection
+    <h-area
       :selected.sync="selected"
       :city="false"
       @on-change="change"

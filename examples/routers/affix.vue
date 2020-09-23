@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Affix>
+    <h-affix>
       <div class="demo-affix">固定在最顶部</div>
-    </Affix>
+    </h-affix>
     <div
       v-for="(item, index) in arr"
       :key="index"

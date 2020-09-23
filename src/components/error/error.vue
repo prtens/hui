@@ -7,7 +7,7 @@
       fit="contain"
     ></el-image>
 
-    <div class="hn-error__info">{{tip}}</div>
+    <div class="hn-error__info">{{ tip }}</div>
 
     <div
       class="hn-error__footer"
@@ -17,20 +17,25 @@
         class="hn-error__btn"
         type="primary"
         @click="home"
-      >回到首页</el-button>
+      >{{ t('h.defError.goHome') }}
+      </el-button>
       <el-button
         class="hn-error__btn"
         type="primary"
         plain
         @click="back"
-      >返回上一页</el-button>
+      >{{ t('h.defError.goBack') }}
+      </el-button>
     </div>
   </div>
 </template>
 
 <script type="text/babel">
+import Locale from '../../mixins/locale';
+
 export default {
-  name: "DefError",
+  name: 'HError',
+  mixins: [Locale],
   props: {
     type: {
       type: Number,
@@ -49,41 +54,41 @@ export default {
     return {
       img: '',
       tip: ''
-    }
+    };
   },
   mounted() {
-    this.init()
+    this.init();
   },
   methods: {
     init() {
       let that = this,
         tip = '',
-        src = ""
+        src = '';
       switch (that.type) {
         case 404:
           src = 'http://img.alicdn.com/tfs/TB1tAmuRCzqK1RjSZFpXXakSXXa-1262-668.png';
-          tip = '抱歉，您查看的页面不存在或无权限查看当前页面';
+          tip = this.t('h.defError.404');
           break;
         case 500:
           src = 'http://img.alicdn.com/tfs/TB1yZ5sRAvoK1RjSZPfXXXPKFXa-1182-792.png';
-          tip = '500 Internal Server Error';
+          tip = this.t('h.defError.500');
           break;
         case 502:
           src = 'http://img.alicdn.com/tfs/TB1yZ5sRAvoK1RjSZPfXXXPKFXa-1182-792.png';
-          tip = '502 Bad Gateway';
+          tip = this.t('h.defError.502');
           break;
       }
 
-      that.img = src
-      that.tip = that.def || tip
+      that.img = src;
+      that.tip = that.def || tip;
     },
     home() {
-      this.$router.replace({ path: '/' })
+      this.$router.replace({path: '/'});
     },
     back(e) {
       e.preventDefault();
       // history.back();
-      this.$router.go(-1)
+      this.$router.go(-1);
     }
   }
 };

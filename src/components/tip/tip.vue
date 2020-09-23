@@ -11,7 +11,7 @@
 const types = ["default", "danger"]
 
 export default {
-  name: "Tip",
+  name: "HTip",
   props: {
     type: {
       type: String,

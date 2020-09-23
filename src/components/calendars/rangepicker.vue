@@ -69,7 +69,7 @@ const {
 } = util;
 
 export default {
-  name: 'CalendarsRangepicker',
+  name: 'HCalendarsRangepicker',
   components: {
     CalendarsRange
   },

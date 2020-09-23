@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-  name: 'AnchorLink',
+  name: 'HAnchorLink',
   inject: ['anchorCom'],
   props: {
     href: String,

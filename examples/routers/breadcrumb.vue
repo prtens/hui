@@ -1,6 +1,6 @@
 <template>
   <div>
-    <breadcrumb />
+    <h-breadcrumb />
   </div>
 </template>
 <script>

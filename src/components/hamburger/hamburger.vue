@@ -18,7 +18,7 @@
 
 <script type="text/babel">
 export default {
-  name: "Hamburger",
+  name: "HHamburger",
   props: {
     isActive: {
       type: Boolean,

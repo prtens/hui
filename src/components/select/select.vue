@@ -7,14 +7,14 @@
       :filterable="filterable"
       v-model='tmpSelects'
       @change='changeSelect'
-      placeholder='请选择'
+      :placeholder='t("h.multipleSelection.placeholder")'
     >
       <slot name="prefix">
         <el-checkbox
           class="check-all"
           v-model="checked"
           @change='selectAll'
-        >全选</el-checkbox>
+        >{{ t('h.multipleSelection.selectAll') }}</el-checkbox>
       </slot>
       <el-option
         v-for='item in options'
@@ -28,8 +28,11 @@
 </template>
 
 <script type="text/babel">
+import Locale from '../../mixins/locale';
+
 export default {
-  name: "MultipleSelection",
+  name: "HSelect",
+  mixins: [Locale],
   props: {
     options: {
       type: Array,

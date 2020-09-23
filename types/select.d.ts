@@ -1,7 +1,7 @@
 import {UIComponent} from './component'
 
 /** Multiple Selection Component */
-export declare class HnMultipleSelection extends UIComponent {
+export declare class HnSelect extends UIComponent {
   /***/
   options?: Array<any>
 

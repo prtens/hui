@@ -97,7 +97,7 @@ const {
 } = util;
 
 export default {
-  name: 'CalendarsRange',
+  name: 'HCalendarsRange',
   mixins: [Locale],
   components: {
     CalendarsDatepicker

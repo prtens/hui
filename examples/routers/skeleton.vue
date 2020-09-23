@@ -10,19 +10,19 @@
       </el-option>
     </el-select>
 
-    <skeleton
+    <h-skeleton
       ref="skeleton"
       :boilerplate="boilerplate"
       :type="type"
       :tile="tile"/>
 
     <el-button @click="handleChange" style="margin-top: 20px">切换</el-button>
-    <skeleton
+    <h-skeleton
       ref="skeleton"
       v-if="loading"
       width="100%"
       :type="type">
-    </skeleton>
+    </h-skeleton>
   </div>
 </template>
 

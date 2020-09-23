@@ -90,7 +90,7 @@ const WeekMap = {
 }
 
 export default {
-  name: "Hour",
+  name: "HHour",
   props: {
     // 历史可配置参数simple
     // 1. true：极简模式，默认只区分工作日和双休日

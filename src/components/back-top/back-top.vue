@@ -22,7 +22,7 @@
 
 <script type="text/babel">
 export default {
-  name: "BackTop",
+  name: "HBackTop",
   props: {
     visibilityHeight: {
       type: Number,

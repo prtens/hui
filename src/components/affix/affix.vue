@@ -47,7 +47,7 @@ function getOffset(element) {
 }
 
 export default {
-  name: "Affix",
+  name: "HAffix",
   props: {
     offsetTop: {
       type: Number,

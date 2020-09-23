@@ -142,7 +142,7 @@
 import draggable from 'vuedraggable'
 
 export default {
-  name: "Indics",
+  name: "HIndics",
   components: {
     draggable
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <charts-entrance
+    <h-charts-entrance
       :chart-data="chartData"
       height="500px"
     />

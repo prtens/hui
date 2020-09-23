@@ -1,17 +1,17 @@
 <template>
   <div style="width: 60%">
-    <hour
+    <h-hour
       :selected.sync="selected"
       :groups="[1234567]"
       @on-change="change"
     />
 
-    <hour
+    <h-hour
       :selected.sync="selected"
       @on-change="change"
     />
 
-    <hour
+    <h-hour
       :selected.sync="selected"
       :groups="[1,2,3,4,5,6,7]"
       @on-change="change"

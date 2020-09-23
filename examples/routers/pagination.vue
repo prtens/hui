@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <h-pagination
       :total="page.totalCount"
       :page.sync="page.pageNum"
       :limit.sync="page.pageSize"

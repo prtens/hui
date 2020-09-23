@@ -2,7 +2,7 @@
 import {getSlot, convertToUnit} from '../../utils/util';
 
 export default {
-  name: 'Skeleton',
+  name: 'HSkeleton',
   props: {
     // 从骨架中移除加载动画
     boilerplate: {

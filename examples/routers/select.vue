@@ -1,6 +1,6 @@
 <template>
   <div>
-    <multiple-selection
+    <h-select
       :options="options"
       :selects="selects"
       :props="{
@@ -14,7 +14,10 @@
 </template>
 
 <script>
+import HSelect from '../../src/components/select/select';
+
 export default {
+  components: {HSelect},
   data() {
     return {
       options: [],

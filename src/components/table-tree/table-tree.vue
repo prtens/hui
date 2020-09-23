@@ -25,7 +25,7 @@
 import isArray from "lodash/isArray";
 
 export default {
-  name: "TableColumnTree",
+  name: "HTableTree",
   props: {
     prop: {
       type: String

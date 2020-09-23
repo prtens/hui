@@ -6,23 +6,26 @@
           <i class="el-icon-chat-dot-round hn-empty--nodata">
           </i>
         </div>
-        <div>{{content}}</div>
+        <div>{{ getContent }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/babel">
+import Locale from '../../mixins/locale';
+
 export default {
-  name: "EffectsEmpty",
+  name: 'HEmpty',
+  mixins: [Locale],
   props: {
     bg: {
       type: String,
-      default: "white"
+      default: 'white'
     },
     content: {
       type: String,
-      default: "暂无内容"
+      default: ''
     }
   },
   data() {
@@ -32,14 +35,22 @@ export default {
     classes() {
       let white = this.bg === 'white';
       return [(white ? 'hn-empty__white' : 'hn-empty__area')];
+    },
+    getContent() {
+      let content = this.t('h.effectsEmpty.content');
+      if (this.content) {
+        content = this.content;
+      }
+
+      return content;
     }
   },
   mounted() {
-    this.init()
+    this.init();
   },
   methods: {
     init() {
-      this.$emit("toggleClick");
+      this.$emit('toggleClick');
     }
   }
 };

@@ -10,7 +10,7 @@ import echarts from "echarts";
 import { debounce } from "../../utils/util";
 
 export default {
-  name: "ChartsEntrance",
+  name: "HChartsEntrance",
   props: {
     className: {
       type: String,

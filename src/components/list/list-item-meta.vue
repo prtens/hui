@@ -27,7 +27,7 @@
 
 <script type="text/babel">
 export default {
-  name: 'ListItemMeta',
+  name: 'HListItemMeta',
   components: {},
   props: {
     avatar: {

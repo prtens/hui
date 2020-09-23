@@ -2,16 +2,16 @@
   <div>
     <el-button @click="testUpdate()">Update Test</el-button>
     <br>
-    <Time :time="time1" />
+    <h-time :time="time1" />
     <br>
-    <Time :time="time2" />
+    <h-time :time="time2" />
     <br>
-    <Time
+    <h-time
       :time="time3"
       :interval="1"
     />
     <br>
-    <Time :time="time4" />
+    <h-time :time="time4" />
   </div>
 </template>
 <script>

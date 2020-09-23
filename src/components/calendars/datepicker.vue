@@ -44,7 +44,7 @@ import $ from "jquery"
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 
 export default {
-  name: 'CalendarsDatepicker',
+  name: 'HCalendarsDatepicker',
   components: {
     Calendars
   },

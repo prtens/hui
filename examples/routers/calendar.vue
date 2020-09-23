@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="5">
         <p style="height: 50px; line-height: 50px">=====calendars=====</p>
-        <calendars
+        <h-calendars
           :selected.sync="calendars.selected"
           :min="calendars.min"
           :max="calendars.max"
@@ -13,7 +13,7 @@
       </el-col>
       <el-col :span="5">
         <p style="height: 50px; line-height: 50px">=====datepicker=====</p>
-        <calendars-datepicker
+        <h-calendars-datepicker
           :min="datepicker.start"
           :max="datepicker.end"
           :selected.sync="datepicker.selected"
@@ -28,7 +28,7 @@
       </el-col>
       <el-col :span="6">
         <p style="height: 50px; line-height: 50px">=====range=====</p>
-        <calendars-range
+        <h-calendars-range
           :start.sync="range.start"
           :end.sync="range.end"
           :startDisabled="range.startDisabled"
@@ -54,7 +54,7 @@
       <el-col :span="8">
         <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
         <div style="width: 250px">
-          <calendars-rangepicker
+          <h-calendars-rangepicker
             :start.sync="rangeDatepicker.start"
             :end.sync="rangeDatepicker.end"
             :startDisabled="rangeDatepicker.startDisabled"

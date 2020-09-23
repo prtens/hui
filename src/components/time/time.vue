@@ -9,7 +9,7 @@ import Locale from '../../mixins/locale';
 import Time from './time';
 
 export default {
-  name: 'Time',
+  name: 'HTime',
   mixins: [Locale],
   props: {
     time: {
