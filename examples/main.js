@@ -106,6 +106,10 @@ const router = new VueRouter({
       component: resolve => require(["./routers/dialog.vue"], resolve)
     },
     {
+      path: "/skeleton",
+      component: resolve => require(["./routers/skeleton.vue"], resolve)
+    },
+    {
       path: "/hour",
       component: resolve =>
         require(["./routers/hour.vue"], resolve)

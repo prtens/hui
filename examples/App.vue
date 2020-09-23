@@ -63,6 +63,9 @@
         <li>
           <router-link to="/dialog">dialog</router-link>
         </li>
+        <li>
+          <router-link to="/skeleton">skeleton</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

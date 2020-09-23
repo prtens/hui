@@ -14,6 +14,7 @@ import Indics from "./components/indics";
 import MultipleSelection from "./components/multiple-selection";
 import Pagination from "./components/pagination";
 import Screenfull from "./components/screenfull";
+import Skeleton from "./components/skeleton";
 import SvgIcon from "./components/svg-icon";
 import TableColumnTree from "./components/table-column-tree";
 import Time from "./components/time";
@@ -51,6 +52,7 @@ const components = [
   MultipleSelection,
   Pagination,
   Screenfull,
+  Skeleton,
   SvgIcon,
   TableColumnTree,
   Time,

@@ -58,6 +58,16 @@ export function debounce(func, wait, immediate) {
   };
 }
 
+export function getSlot(vm, name = 'default', data, optional) {
+  if (vm.$scopedSlots[name]) {
+    // return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
+    return vm.$scopedSlots[name];
+  } else if (vm.$slots[name] && (!data || optional)) {
+    return vm.$slots[name];
+  }
+  return undefined;
+}
+
 export function deepClone(obj) {
   let _obj = JSON.stringify(obj);
   let objClone = JSON.parse(_obj);
