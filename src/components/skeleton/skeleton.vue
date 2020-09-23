@@ -134,15 +134,14 @@ export default {
       // value after @ in the bone string
       return Array.from({length}).map(generator);
     },
-    // Fix type when this is merged
+    // 修复合并时的类型
     // https://github.com/microsoft/TypeScript/pull/33050
     genStructure(type) {
       let children = [];
       type = type || this.type || '';
       const bone = this.rootTypes[type] || '';
 
-      // End of recursion, do nothing
-      /* eslint-disable-next-line no-empty, brace-style */
+      // TODO
       if (type === bone) {
       }
       // Array of values - e.g. 'heading, paragraph, text@2'
@@ -208,7 +207,7 @@ export default {
       el.style.transition = el._initialStyle.transition;
 
       delete el._initialStyle;
-    },
+    }
   },
 
   render(h) {
