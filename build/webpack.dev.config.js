@@ -1,10 +1,8 @@
 /**
  * 本地预览
  */
-
 const path = require("path");
 const webpack = require("webpack");
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const merge = require("webpack-merge");
 const webpackBaseConfig = require("./webpack.base.config.js");
@@ -31,6 +29,26 @@ module.exports = merge(webpackBaseConfig, {
       vue: "vue/dist/vue.esm.js"
       // vue: 'vue/dist/vue.runtime.js'
     }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              compilerOptions: {
+                preserveWhitespace: false
+              }
+            }
+          },
+          {
+            loader: path.resolve(__dirname, './md-loader/index.js')
+          }
+        ]
+      },
+    ]
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

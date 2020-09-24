@@ -1,0 +1,142 @@
+{
+  "zh-CN": [
+    {
+      "name": "开发指南",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "安装"
+        }
+      ]
+    },
+    {
+      "name": "组件",
+      "groups": [
+        {
+          "groupName": "基础",
+          "list": [
+            {
+              "path": "/svg-icon",
+              "title": "SvgIcon 图片"
+            }
+          ]
+        },
+        {
+          "groupName": "布局",
+          "list": [
+            {
+              "path": "/list",
+              "title": "List 列表"
+            }
+          ]
+        },
+        {
+          "groupName": "导航",
+          "list": [
+            {
+              "path": "/pagination",
+              "title": "Pagination 分页"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb 面包屑"
+            },
+            {
+              "path": "/anchor",
+              "title": "Anchor 锚点"
+            }
+          ]
+        },
+        {
+          "groupName": "表单",
+          "list": [
+            {
+              "path": "/select",
+              "title": "Select 选择器全选"
+            },
+            {
+              "path": "/calendar",
+              "title": "Calendar 日历（选择单日）"
+            },
+            {
+              "path": "/table-tree",
+              "title": "TableTree 表格树"
+            }
+          ]
+        },
+        {
+          "groupName": "视图",
+          "list": [
+            {
+              "path": "/tip",
+              "title": "Tip 小贴士"
+            },
+            {
+              "path": "/screenfull",
+              "title": "Screenfull 全屏"
+            },
+            {
+              "path": "/skeleton",
+              "title": "Skeleton 骨架屏"
+            },
+            {
+              "path": "/empty",
+              "title": "Empty 空状态"
+            },
+            {
+              "path": "/error",
+              "title": "Error 错误提示页面"
+            }
+          ]
+        },
+        {
+          "groupName": "业务",
+          "list": [
+            {
+              "path": "/area",
+              "title": "Area 选择地域"
+            },
+            {
+              "path": "/duration",
+              "title": "Duration 时段折扣"
+            },
+            {
+              "path": "/hour",
+              "title": "Hour 时段选择"
+            },
+            {
+              "path": "/indics",
+              "title": "Indics 指标默认配置及选择排序"
+            }
+          ]
+        },
+        {
+          "groupName": "图表",
+          "list": [
+            {
+              "path": "/charts-entrance",
+              "title": "ChartsEntrance 图表"
+            }
+          ]
+        },
+        {
+          "groupName": "其它",
+          "list": [
+            {
+              "path": "/affix",
+              "title": "Affix 图钉"
+            },
+            {
+              "path": "/backtop",
+              "title": "Backtop 返回顶部"
+            },
+            {
+              "path": "/time",
+              "title": "Time 相对时间"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
