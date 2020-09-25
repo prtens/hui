@@ -1,6 +1,6 @@
 {
   "name": "huonu-ui",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "A UI components Library with Vue.js",
   "main": "dist/hui.js",
   "typings": "types/index.d.ts",
