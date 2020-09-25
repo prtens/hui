@@ -66,6 +66,9 @@
         <li>
           <router-link to="/skeleton">skeleton</router-link>
         </li>
+        <li>
+          <router-link to="/clipboard">clipboard</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

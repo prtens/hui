@@ -110,6 +110,10 @@ const router = new VueRouter({
       component: resolve => require(['./routers/skeleton.vue'], resolve)
     },
     {
+      path: '/clipboard',
+      component: resolve => require(['./routers/clipboard.vue'], resolve)
+    },
+    {
       path: '/hour',
       component: resolve =>
         require(['./routers/hour.vue'], resolve)
