@@ -118,6 +118,10 @@ const router = new VueRouter({
       component: resolve => require(['./routers/mixin.vue'], resolve)
     },
     {
+      path: '/excel-export',
+      component: resolve => require(['./routers/excel-export.vue'], resolve)
+    },
+    {
       path: '/hour',
       component: resolve =>
         require(['./routers/hour.vue'], resolve)

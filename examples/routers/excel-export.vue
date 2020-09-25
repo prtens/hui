@@ -1,0 +1,105 @@
+<template>
+  <div>
+    <div>
+      <h-tip>
+        导出单表头，也可导出 <code>多级表头</code>
+      </h-tip>
+      <el-radio-group v-model="autoWidth">
+        <el-radio :label="true">true</el-radio>
+        <el-radio :label="false">false</el-radio>
+      </el-radio-group>
+      <el-select v-model="bookType" placeholder="请选择">
+        <el-option label="xlsx" value="xlsx"></el-option>
+        <el-option label="csv" value="csv"></el-option>
+        <el-option label="txt" value="txt"></el-option>
+      </el-select>
+      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">
+        导出
+      </el-button>
+    </div>
+
+    <el-table v-loading="listLoading" :data="list" element-loading-text="Loading..." border fit highlight-current-row>
+      <el-table-column align="center" label="Id" width="95">
+        <template slot-scope="scope">
+          {{ scope.$index }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Title">
+        <template slot-scope="scope">
+          {{ scope.row.title }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Author" width="110" align="center">
+        <template slot-scope="scope">
+          <el-tag>{{ scope.row.author }}</el-tag>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ExportExcel',
+  data() {
+    return {
+      list: null,
+      listLoading: true,
+      downloadLoading: false,
+      filename: 'test',
+      autoWidth: true,
+      bookType: 'xlsx'
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      let list = []
+      this.listLoading = true
+      for (let i = 0; i < 10; i++) {
+        list.push({
+          id: i,
+          title: `title${i}`,
+          author: `author${i}`
+        })
+      }
+      this.list = list
+      this.listLoading = false
+    },
+    handleDownload() {
+      this.downloadLoading = true
+      // 懒加载
+      import('../../src/vendor/Export2Excel').then(excel => {
+        const tHeader = ['Id', 'Title', 'Author']
+        const filterVal = ['id', 'title', 'author']
+        const list = this.list
+        const data = this.formatJson(filterVal, list)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: this.filename,
+          autoWidth: this.autoWidth,
+          bookType: this.bookType
+        })
+        this.downloadLoading = false
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        if (j === 'timestamp') {
+          // 处理时间
+          return v[j]
+        } else {
+          return v[j]
+        }
+      }))
+    }
+  }
+}
+</script>
+
+<style>
+
+</style>

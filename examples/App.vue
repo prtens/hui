@@ -72,6 +72,9 @@
         <li>
           <router-link to="/mixin">Mixin 小组件</router-link>
         </li>
+        <li>
+          <router-link to="/excel-export">Excel 导出</router-link>
+        </li>
       </ul>
       <p>业务组件</p>
       <ul>

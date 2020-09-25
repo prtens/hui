@@ -35,13 +35,15 @@
     "clipboard": "^2.0.6",
     "echarts": "^4.8.0",
     "element-ui": "^2.13.2",
+    "file-saver": "^2.0.2",
     "jquery": "^3.5.1",
     "path-to-regexp": "^6.1.0",
     "screenfull": "^5.0.2",
     "svg-sprite-loader": "^5.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuedraggable": "^2.24.1"
+    "vuedraggable": "^2.24.1",
+    "xlsx": "^0.16.7"
   },
   "peerDependencies": {
     "vue": "^2.5.2"
