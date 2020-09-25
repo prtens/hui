@@ -30,26 +30,6 @@ module.exports = merge(webpackBaseConfig, {
       // vue: 'vue/dist/vue.runtime.js'
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.md$/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              compilerOptions: {
-                preserveWhitespace: false
-              }
-            }
-          },
-          {
-            loader: path.resolve(__dirname, './md-loader/index.js')
-          }
-        ]
-      },
-    ]
-  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendors",
