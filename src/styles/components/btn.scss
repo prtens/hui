@@ -1,0 +1,108 @@
+/* btn
+-------------------------- */
+.btn {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 0 10px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  outline: none;
+  border-radius: $--border-radius-base;
+  border: 1px solid $--color-primary;
+  background-color: $--color-primary-light-9;
+  background-image: none;
+  color: $--color-text-3;
+  transition: border-color $--transition-time, background-color $--transition-time,
+  color $--transition-time;
+  @include utils-user-select(none);
+
+  &:hover,
+  &.hover,
+  &:active {
+    background-color: $--color-primary-light-8;
+    background-image: none;
+    color: $--color-text-3;
+  }
+}
+
+.btn-primary {
+  background-color: $--color-primary;
+  background-image: linear-gradient(90deg, transparent, $--color-primary);
+  color: $--color-white;
+}
+
+.btn-small {
+  height: 24px;
+  line-height: 24px;
+}
+
+/* btn
+-------------------------- */
+.pan-btn {
+  color: $--color-white;
+  border: none;
+  outline: none;
+  transition: 600ms ease all;
+  position: relative;
+  display: inline-block;
+  @include utils-user-select(none);
+  & + & {
+    margin-left: 10px;
+  }
+
+  @include button-color($--color-primary);
+  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
+
+  &:hover {
+    background: $--color-white;
+
+    &:before,
+    &:after {
+      width: 100%;
+      transition: 600ms ease all;
+    }
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    transition: 400ms ease all;
+  }
+
+  &::after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+
+  @include m(danger) {
+    @include button-color($--color-danger);
+  }
+
+  @include m(medium) {
+    @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
+  }
+  @include m(small) {
+    @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius);
+  }
+  @include m(mini) {
+    @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
+  }
+
+  //@each $type in (primary, danger) {
+  //  .pan-btn--#{$type} {
+  //    @include button-color($--color-#{$type})
+  //  }
+  //}
+}

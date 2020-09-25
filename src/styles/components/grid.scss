@@ -1,0 +1,20 @@
+/* 卡片样式
+-------------------------- */
+.grid {
+  background: $--color-white;
+  border-radius: $--border-radius-base;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s ease-out;
+
+  &:hover {
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.08);
+  }
+}
+
+.grid-title {
+  font-size: $--font-size-large;
+
+  & > * {
+    max-height: 32px;
+  }
+}

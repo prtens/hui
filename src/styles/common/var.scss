@@ -84,3 +84,25 @@ $--calendar-range-input-width: 100px;
 $--indics-right-width: 240px;
 $--indics-header-height: 60px;
 $--indics-content-name-width: 90px;
+
+/* Button
+-------------------------- */
+$--button-font-size: $--font-size-base !default;
+$--button-border-radius: $--border-radius-base !default;
+$--button-padding-vertical: 12px !default; // 上 下
+$--button-padding-horizontal: 20px !default; // 左右
+
+$--button-medium-font-size: $--font-size-base !default;
+$--button-medium-border-radius: $--border-radius-base !default;
+$--button-medium-padding-vertical: 10px !default;
+$--button-medium-padding-horizontal: 20px !default;
+
+$--button-small-font-size: 12px !default;
+$--button-small-border-radius: #{$--border-radius-base - 1} !default;
+$--button-small-padding-vertical: 9px !default;
+$--button-small-padding-horizontal: 15px !default;
+
+$--button-mini-font-size: 12px !default;
+$--button-mini-border-radius: #{$--border-radius-base - 1} !default;
+$--button-mini-padding-vertical: 7px !default;
+$--button-mini-padding-horizontal: 15px !default;

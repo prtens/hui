@@ -1,6 +1,11 @@
 @import "./base";
 @import "./mixins/mixins";
+@import "./mixins/button";
 @import "./mixins/utils";
+@import "./components/btn";
+@import "./components/grid";
+@import "./components/output-shadow";
+@import "./components/trigger";
 @import "./components/affix";
 @import "./components/anchor";
 @import "./components/area";

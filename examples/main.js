@@ -114,6 +114,10 @@ const router = new VueRouter({
       component: resolve => require(['./routers/clipboard.vue'], resolve)
     },
     {
+      path: '/mixin',
+      component: resolve => require(['./routers/mixin.vue'], resolve)
+    },
+    {
       path: '/hour',
       component: resolve =>
         require(['./routers/hour.vue'], resolve)
