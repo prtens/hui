@@ -5,11 +5,14 @@
       <el-button v-waves type="primary">
         水波纹效果
       </el-button>
+      <el-button v-waves size="mini" type="primary">
+        水波纹效果
+      </el-button>
     </el-row>
 
     <el-row>
       <p>Buttons</p>
-      <div class="pan-btn pan-btn--danger pan-btn--mini">水波纹</div>
+      <span v-waves class="pan-btn pan-btn--danger pan-btn--mini">水波纹</span>
       <span class="pan-btn pan-btn--danger pan-btn--small">水波纹</span>
       <span class="pan-btn pan-btn--danger pan-btn--medium">水波纹</span>
       <span class="pan-btn pan-btn--danger pan-btn--default">水波纹</span>

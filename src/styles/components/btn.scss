@@ -49,7 +49,9 @@
   outline: none;
   transition: 600ms ease all;
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  cursor: pointer;
+  line-height: 1;
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;
