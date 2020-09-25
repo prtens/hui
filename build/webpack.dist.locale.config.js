@@ -4,8 +4,6 @@ const webpack = require("webpack");
 const entry = require("./locale");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-process.env.NODE_ENV = "production";
-
 module.exports = {
   devtool: "source-map",
   entry,
@@ -39,9 +37,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: '"production"'
-      }
+      "process.env.NODE_ENV": '"production"'
     }),
     new UglifyJsPlugin({
       parallel: true,
