@@ -9,7 +9,7 @@ export declare class HnAffix extends UIComponent {
   offsetBottom: Number
 
   /** addEventListener 原生的 useCapture 选项 */
-  useCapture: string
+  useCapture: Boolean
 
   /** 在固定状态发生改变时触发 */
   $emit(eventName: 'on-change', value: boolean): this
