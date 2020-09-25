@@ -1,4 +1,4 @@
-import './waves.css'
+import '../../styles/components/waves.scss'
 
 const context = '@@wavesContext'
 
@@ -17,14 +17,14 @@ function handleClick(el, binding) {
       target.style.position = 'relative'
       target.style.overflow = 'hidden'
       const rect = target.getBoundingClientRect()
-      let ripple = target.querySelector('.waves-ripple')
+      let ripple = target.querySelector('.hn-waves-ripple')
       if (!ripple) {
         ripple = document.createElement('span')
-        ripple.className = 'waves-ripple'
+        ripple.className = 'hn-waves-ripple'
         ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px'
         target.appendChild(ripple)
       } else {
-        ripple.className = 'waves-ripple'
+        ripple.className = 'hn-waves-ripple'
       }
       switch (opts.type) {
         case 'center':
@@ -40,7 +40,7 @@ function handleClick(el, binding) {
               document.body.scrollLeft) + 'px'
       }
       ripple.style.backgroundColor = opts.color
-      ripple.className = 'waves-ripple z-active'
+      ripple.className = 'hn-waves-ripple hn-waves-ripple--active'
       return false
     }
   }
