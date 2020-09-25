@@ -48,6 +48,7 @@ export default {
       type: Boolean,
       default: true
     },
+    // 分页之后是否自动滚动到顶部
     autoScroll: {
       type: Boolean,
       default: true
