@@ -7,10 +7,10 @@
     </div>
     <div class="hn-degree__on">
       <span
-        v-for="i in degree"
+        v-for="i in getDegree"
         :key="i"
         :class="classes"
-        :style="{ opacity: (opacity + i * (1 - opacity) / 9), 'background-color': color}"></span>
+        :style="styles(i)"></span>
     </div>
   </div>
 </template>
@@ -58,13 +58,8 @@ export default {
           [`hn-degree--${this.type}`]: !this.color
         }
       ]
-    }
-  },
-  mounted() {
-    this.assign()
-  },
-  methods: {
-    assign() {
+    },
+    getDegree() {
       let num = +this.num;
       if (num < 0) {
         num = 0;
@@ -74,7 +69,19 @@ export default {
         num = 100;
       }
 
-      this.degree = Math.round(num / 10)
+      return Math.round(num / 10)
+    }
+  },
+  methods: {
+    styles(i) {
+      let opacity = this.opacity
+      if (i > 1) {
+        opacity = opacity + i * (1 - opacity) / 9
+      }
+      return {
+        opacity: opacity,
+        'background-color': this.color
+      }
     }
   }
 };
