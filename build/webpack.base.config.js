@@ -43,7 +43,7 @@ module.exports = {
         loader: "svg-sprite-loader",
         include: [resolve("src/icons")],
         options: {
-          symbolId: "hn-icon-[name]"
+          symbolId: "icon-[name]"
         }
       },
       {

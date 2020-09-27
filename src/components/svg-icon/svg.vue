@@ -2,7 +2,7 @@
   <div
     v-if="isExternal"
     :style="styleExternalIcon"
-    class="svg-external-icon svg-icon"
+    class="hn-svg-icon hn-svg-icon--external"
     v-on="$listeners"
   />
   <svg
@@ -35,13 +35,13 @@ export default {
       return isExternal(this.iconClass);
     },
     iconName() {
-      return `#hn-icon-${this.iconClass}`;
+      return `#icon-${this.iconClass}`;
     },
     svgClass() {
       if (this.className) {
-        return "svg-icon " + this.className;
+        return "hn-svg-icon " + this.className;
       } else {
-        return "svg-icon";
+        return "hn-svg-icon";
       }
     },
     styleExternalIcon() {
@@ -54,18 +54,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.svg-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
-
-.svg-external-icon {
-  background-color: currentColor;
-  mask-size: cover!important;
-  display: inline-block;
-}
-</style>
+<style scoped></style>
