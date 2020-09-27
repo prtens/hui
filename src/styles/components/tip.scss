@@ -16,13 +16,23 @@
     border-radius: $--border-radius-base;
   }
 
-  @include m(default) {
+  @include m(primary) {
     background-color: $--color-primary-light-9;
     border-left: 5px solid $--color-primary;
   }
 
   @include m(danger) {
-    background-color: $--color-danger-lighter;
+    background-color: $--color-danger-light-9;
     border-left: 5px solid $--color-danger;
+  }
+
+  @include m(warning) {
+    background-color: $--color-warning-light-9;
+    border-left: 5px solid $--color-warning;
+  }
+
+  @include m(success) {
+    background-color: $--color-success-light-9;
+    border-left: 5px solid $--color-success;
   }
 }

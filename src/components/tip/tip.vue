@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/babel">
-const types = ["default", "danger"]
+const types = ["primary", "danger", "warning", "success"]
 
 export default {
   name: "HTip",
@@ -18,7 +18,7 @@ export default {
       validator: function (value) {
         return types.indexOf(value) !== -1;
       },
-      default: "default"
+      default: "primary"
     },
     description: {
       type: String,
