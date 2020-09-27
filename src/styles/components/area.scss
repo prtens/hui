@@ -70,9 +70,13 @@
           float: left;
           min-width: 100px;
           padding-right: 16px;
-          line-height: $--area-height;
           white-space: nowrap;
-          cursor: pointer;
+
+          & label {
+            cursor: pointer;
+            line-height: $--area-height;
+            display: inline-block;
+          }
 
           .hn-area--arrow {
             position: absolute;

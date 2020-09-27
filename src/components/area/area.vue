@@ -50,19 +50,21 @@
                   :style="{'min-width': (!type.half ? (100/lineNumber)*(province.lineNumberMulti || 1) : '' )}"
                 >
                   <div class="hn-area__label">
-                    <el-checkbox
-                      v-model="province.checked"
-                      @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
-                    ></el-checkbox>
-                    <span :class="`hn-area__label-name ${province.highlight ? 'hn-area__highlight' : ''}`">{{
-                        province.name
-                      }}
-                      <span
-                        class="hn-area__count"
-                        v-if="province.hasCity && (province.count > 0)"
-                      >
-                        ({{ province.count }})</span>
-                    </span>
+                    <label>
+                      <el-checkbox
+                        v-model="province.checked"
+                        @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
+                      ></el-checkbox>
+                      <span :class="`hn-area__label-name ${province.highlight ? 'hn-area__highlight' : ''}`">{{
+                          province.name
+                        }}
+                        <span
+                          class="hn-area__count"
+                          v-if="province.hasCity && (province.count > 0)"
+                        >
+                          ({{ province.count }})</span>
+                      </span>
+                    </label>
                     <template v-if="province.hasCity">
                       <i
                         :class="`el-icon-arrow-down hn-area--arrow ${province.hasCity && (province.id == showProvinceId) ? 'hn-area--expand' : ''}`"
