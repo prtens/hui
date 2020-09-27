@@ -1,10 +1,10 @@
 import Calendars from "./calendars.vue";
-import Datepicker from "./datepicker.vue";
-import Range from "./range.vue";
-import Rangepicker from "./rangepicker.vue";
+import DatePicker from "./datepicker.vue";
+import DateRange from "./range.vue";
+import DateRangePicker from "./rangepicker.vue";
 
-Calendars.Datepicker = Datepicker
-Calendars.Range = Range
-Calendars.Rangepicker = Rangepicker
+Calendars.DatePicker = DatePicker
+Calendars.DateRange = DateRange
+Calendars.DateRangePicker = DateRangePicker
 
 export default Calendars;

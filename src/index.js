@@ -23,9 +23,9 @@ import Time from './components/time';
 import Tip from './components/tip';
 import locale from './locale/index';
 
-const CalendarsDatepicker = Calendars.Datepicker;
-const CalendarsRange = Calendars.Range;
-const CalendarsRangepicker = Calendars.Rangepicker;
+const DatePicker = Calendars.DatePicker
+const DateRange = Calendars.DateRange
+const DateRangePicker = Calendars.DateRangePicker
 
 const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
@@ -38,9 +38,9 @@ const components = [
   BackTop,
   Breadcrumb,
   Calendars,
-  CalendarsDatepicker,
-  CalendarsRange,
-  CalendarsRangepicker,
+  DatePicker,
+  DateRange,
+  DateRangePicker,
   ChartsEntrance,
   Duration,
   Empty,

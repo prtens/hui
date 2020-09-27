@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hn-rangepicker"
+    class="hn-date-range-picker"
     v-clickoutside:calendarsRangePicker="hideDiv"
   >
     <div
@@ -69,7 +69,7 @@ const {
 } = util;
 
 export default {
-  name: 'HCalendarsRangepicker',
+  name: 'HDateRangePicker',
   components: {
     CalendarsRange
   },

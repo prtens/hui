@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="`hn-range-datepicker ${timeType ? 'time' : ''}`">
+    <div :class="`hn-date-range ${timeType ? 'time' : ''}`">
       <div class="range">
         <div class="title clearfix">
           <span class="fl">{{ title }}：</span>
@@ -97,7 +97,7 @@ const {
 } = util;
 
 export default {
-  name: 'HCalendarsRange',
+  name: 'HDateRange',
   mixins: [Locale],
   components: {
     CalendarsDatepicker

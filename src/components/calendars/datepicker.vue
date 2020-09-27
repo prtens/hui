@@ -44,7 +44,7 @@ import $ from "jquery"
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 
 export default {
-  name: 'HCalendarsDatepicker',
+  name: 'HDatePicker',
   components: {
     Calendars
   },
@@ -54,7 +54,7 @@ export default {
   props: {
     viewId: {
       type: String,
-      default: 'calendars-datepicker'
+      default: 'date-picker'
     },
     // 最小可选的日期
     min: {

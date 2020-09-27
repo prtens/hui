@@ -1,8 +1,8 @@
-@include b(rangepicker) {
+@include b(date-range-picker) {
   position: relative;
 }
 
-@include b(range-datepicker) {
+@include b(date-range) {
   --calendar-range-input-width: 100px;
   position: relative;
   z-index: $--index-calendar;

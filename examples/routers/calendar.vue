@@ -13,7 +13,7 @@
       </el-col>
       <el-col :span="5">
         <p style="height: 50px; line-height: 50px">=====datepicker=====</p>
-        <h-calendars-datepicker
+        <h-date-picker
           :min="datepicker.start"
           :max="datepicker.end"
           :selected.sync="datepicker.selected"
@@ -28,7 +28,7 @@
       </el-col>
       <el-col :span="6">
         <p style="height: 50px; line-height: 50px">=====range=====</p>
-        <h-calendars-range
+        <h-date-range
           :start.sync="range.start"
           :end.sync="range.end"
           :startDisabled="range.startDisabled"
@@ -54,7 +54,7 @@
       <el-col :span="8">
         <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
         <div style="width: 250px">
-          <h-calendars-rangepicker
+          <h-date-range-picker
             :start.sync="rangeDatepicker.start"
             :end.sync="rangeDatepicker.end"
             :startDisabled="rangeDatepicker.startDisabled"
@@ -83,7 +83,13 @@
 </template>
 
 <script>
+import HCalendars from "../../src/components/calendars/calendars";
+import HDatePicker from "../../src/components/calendars/datepicker";
+import HDateRange from "../../src/components/calendars/range";
+import HDateRangePicker from "../../src/components/calendars/rangepicker";
+
 export default {
+  components: {HDateRangePicker, HDateRange, HDatePicker, HCalendars},
   data() {
     return {
       calendars: {
