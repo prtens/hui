@@ -6,6 +6,7 @@ import BackTop from './components/back-top';
 import Breadcrumb from './components/breadcrumb';
 import Calendars from './components/calendars';
 import ChartsEntrance from './components/charts-entrance';
+import Degree from './components/degree';
 import Duration from './components/duration';
 import Empty from './components/empty';
 import Error from './components/error';
@@ -42,6 +43,7 @@ const components = [
   DateRange,
   DateRangePicker,
   ChartsEntrance,
+  Degree,
   Duration,
   Empty,
   Error,

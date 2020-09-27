@@ -1,0 +1,39 @@
+@include b(degree) {
+  position: relative;
+  line-height: 0;
+  @include m(box) {
+    display: inline-block;
+    width: 4px;
+    height: 14px;
+    margin-right: 3px;
+    border-radius: 2px;
+    background-color: $--color-primary;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.hn-degree--danger {
+      background-color: $--color-danger;
+    }
+
+    &.hn-degree--warning {
+      background-color: $--color-warning;
+    }
+
+    &.hn-degree--success {
+      background-color: $--color-success;
+    }
+  }
+
+  @include e(bg) {
+    .hn-degree--box {
+      background-color: #f0f0f0;
+    }
+  }
+  @include e(on) {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

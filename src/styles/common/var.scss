@@ -21,6 +21,10 @@ $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default;
 $--color-danger: #f56c6c !default;
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 
+$--color-warning: #ffb400 !default;
+
+$--color-success: #30ab66 !default;
+
 $--color-bg: #fafafa;
 
 /* Font family

@@ -8,6 +8,7 @@ import {HnBackTop} from './back-top'
 import {HnBreadcrumb} from './breadcrumb'
 import {HnCalendars, HnCalendarsDatepicker, HnCalendarsRange, HnCalendarsRangepicker} from './calendars'
 import {HnChartsEntrance} from './charts-entrance'
+import {HnDegree} from './degree'
 import {HnDuration} from './duration'
 import {HnEmpty} from './empty'
 import {HnError} from './error'
@@ -81,6 +82,10 @@ export class CalendarsRangepicker extends HnCalendarsRangepicker {
 
 /** Charts Entrance Component */
 export class ChartsEntrance extends HnChartsEntrance {
+}
+
+/** Degree Component */
+export class Degree extends HnDegree {
 }
 
 /** Duration Component */
