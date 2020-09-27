@@ -1,0 +1,14 @@
+@include b(hamburger) {
+  padding: 0 15px;
+
+  @include m(svg) {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+
+    &.is-active {
+      transform: rotate(180deg);
+    }
+  }
+}

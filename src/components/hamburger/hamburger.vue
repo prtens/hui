@@ -1,10 +1,10 @@
 <template>
   <div
-    style="padding: 0 15px;"
+    class="hn-hamburger"
     @click="toggleClick"
   >
     <svg
-      class="hn-hamburger"
+      class="hn-hamburger--svg"
       :class="{ 'is-active': isActive }"
       viewBox="0 0 1024 1024"
       xmlns="http://www.w3.org/2000/svg"

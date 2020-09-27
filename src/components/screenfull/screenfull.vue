@@ -38,12 +38,12 @@ export default {
       this.isFullscreen = screenfull.isFullscreen;
     },
     init() {
-      if (screenfull.enabled) {
+      if (screenfull.isEnabled) {
         screenfull.on("change", this.change);
       }
     },
     destroy() {
-      if (screenfull.enabled) {
+      if (screenfull.isEnabled) {
         screenfull.off("change", this.change);
       }
     }
