@@ -13,7 +13,8 @@
 
     <h-degree
       type="success"
-      :num="80"/>
+      :num="80"
+      color="red"/>
   </div>
 </template>
 

@@ -17,5 +17,8 @@ export declare class HnDegree extends UIComponent {
    * 表示第一个格子的透明度，后续计算为 opacity = base + i * (1 - base) / 9
    */
   opacity?: Number
+
+  // 自定义颜色
+  color?: String
 }
 

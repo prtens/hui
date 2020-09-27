@@ -20,7 +20,10 @@ export default {
   name: "HDegree",
   props: {
     // 当前进度，0 ~ 100之间的数字，传入几位小数展示几位小数，最多保留两位小数
-    num: Number,
+    num: {
+      type: Number | String,
+      required: true
+    },
     // 展示类型
     // error：红色错误类型提示
     // warn：黄色警告类型提示
@@ -38,20 +41,23 @@ export default {
     opacity: {
       type: Number,
       default: 0.08
-    }
+    },
+    // 自定义颜色
+    color: String
   },
   data() {
     return {
-      degree: null,
-      color: ''
+      degree: null
     };
   },
   computed: {
     classes() {
       return [
-        `hn-degree--box`,
-        `hn-degree--${this.type}`
-      ];
+        'hn-degree--box',
+        {
+          [`hn-degree--${this.type}`]: !this.color
+        }
+      ]
     }
   },
   mounted() {
@@ -59,21 +65,7 @@ export default {
   },
   methods: {
     assign() {
-      let that = this;
-
-      let num = +that.num || 0;
-      let s = num + '';
-      let i = s.indexOf('.');
-      if (i >= 0) {
-        i = s.slice(i + 1).length;
-      } else {
-        i = 0;
-      }
-      // 最多保留两位小数
-      if (i > 2) {
-        i = 2;
-      }
-
+      let num = +this.num;
       if (num < 0) {
         num = 0;
       }
@@ -82,7 +74,7 @@ export default {
         num = 100;
       }
 
-      that.degree = Math.round(num / 10)
+      this.degree = Math.round(num / 10)
     }
   }
 };
