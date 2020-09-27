@@ -17,4 +17,19 @@
       background: $color;
     }
   }
+
+  &.is-plainly {
+    color: $color;
+    background: mix($--color-white, $color, 90%);
+
+    &:hover {
+      background: $--color-white;
+
+      &:before,
+      &:after {
+        width: 100%;
+        transition: 600ms ease all;
+      }
+    }
+  }
 }

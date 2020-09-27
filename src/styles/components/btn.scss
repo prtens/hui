@@ -52,6 +52,8 @@
   display: inline-flex;
   cursor: pointer;
   line-height: 1;
+  text-align: center;
+  justify-content: center;
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;

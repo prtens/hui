@@ -27,7 +27,7 @@
         <li class="hn-hour__all">
           <span class="hn-hour__all-tip">时间段</span>
           <span
-            :class="`btn btn-small hn-hour__all-btn ${p.selected ? 'btn-primary' : ''}`"
+            :class="`pan-btn pan-btn--small hn-hour__all-btn ${p.selected ? 'hn-hour--selected' : 'is-plainly'}`"
             @click="toggleAll({pIndex: pIndex})"
           >{{p.name}}</span>
         </li>
@@ -66,7 +66,7 @@
 
     <div class="hn-hour__operates">
       <span
-        class="btn btn-small hn-hour__btn"
+        class="pan-btn pan-btn--small hn-hour__btn"
         @click="clearAll"
       >
         清空
