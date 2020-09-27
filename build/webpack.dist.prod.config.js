@@ -5,7 +5,6 @@ const merge = require("webpack-merge");
 const webpackBaseConfig = require("./webpack.base.config.js");
 const CompressionPlugin = require("compression-webpack-plugin"); // Gzip压缩
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 压缩优化 js文件
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(webpackBaseConfig, {
   devtool: "source-map",
@@ -33,7 +32,6 @@ module.exports = merge(webpackBaseConfig, {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": '"production"'
     }),
-    new BundleAnalyzerPlugin(),
     new UglifyJsPlugin({
       parallel: true,
       sourceMap: true

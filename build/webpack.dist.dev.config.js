@@ -3,6 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const webpackBaseConfig = require("./webpack.base.config.js");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(webpackBaseConfig, {
   devtool: "source-map",
@@ -29,7 +30,8 @@ module.exports = merge(webpackBaseConfig, {
   plugins: [
     // @todo DefinePlugin 创建编译时 "配置的全局常量"  以方便进行 环境转换
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": '"production"'
-    })
+      "process.env.NODE_ENV": '"development"'
+    }),
+    new BundleAnalyzerPlugin(),
   ]
 });
