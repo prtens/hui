@@ -1,20 +1,20 @@
 <template>
   <div>
     <h-degree
-      :num="40" style="margin-bottom: 20px"/>
+      :num="40"/>
 
     <h-degree
       type="danger"
-      :num="60.25" style="margin-bottom: 20px"/>
+      :num="60.25"/>
 
     <h-degree
       type="warning"
-      :num="80" style="margin-bottom: 20px"/>
+      :num="80"/>
 
     <h-degree
       type="success"
       :num="80"
-      color="red"/>
+      color="rgb(81, 163, 0)"/>
   </div>
 </template>
 
@@ -29,3 +29,11 @@ export default {
   methods: {}
 }
 </script>
+
+<style lang="scss" scoped>
+.hn-degree {
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+</style>

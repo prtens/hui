@@ -1,6 +1,8 @@
 @include b(degree) {
   position: relative;
   line-height: 0;
+  display: inline-block;
+
   @include m(box) {
     display: inline-block;
     width: 4px;
