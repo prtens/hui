@@ -12,11 +12,9 @@
 
     <el-row>
       <p>Buttons</p>
-      <span class="pan-btn pan-btn--small">水波纹</span>
-      <span v-waves class="pan-btn pan-btn--danger pan-btn--mini">水波纹</span>
-      <span class="pan-btn pan-btn--danger pan-btn--small">水波纹</span>
-      <span class="pan-btn pan-btn--danger pan-btn--medium">水波纹</span>
-      <span class="pan-btn pan-btn--danger is-plainly">水波纹</span>
+      <span class="btn">水波纹</span>
+      <span class="btn is-plainly" v-waves>水波纹</span>
+      <span class="btn btn--danger is-plainly">水波纹</span>
     </el-row>
   </div>
 </template>
