@@ -1,46 +1,5 @@
 @include b(indics) {
   font-size: $--font-size-base;
-  @include e(show) {
-    display: inline-block;
-    width: 40px;
-    padding: 0;
-    margin-right: 10px;
-    text-align: center;
-
-    @include m(icon) {
-      position: relative;
-      top: 2px;
-      font-size: $--font-size-large;
-    }
-  }
-
-  @include e(switch) {
-    display: inline-block;
-    width: auto;
-  }
-
-  &:hover {
-    .hn-indics__show {
-      border-color: $--border-color-base;
-      color: $--color-text-3;
-    }
-
-    .hn-indics__switch {
-      border-color: $--border-color-base;
-      color: $--color-text-3;
-
-      .hn-indics--icon {
-        color: $--color-text-3;
-      }
-    }
-  }
-
-  .hn-indics__drawer {
-    .el-drawer__body {
-      padding: 0px !important;
-      background-color: $--color-white !important;;
-    }
-  }
 
   @include e(setting) {
     position: relative;
@@ -192,6 +151,48 @@
       }
 
       cursor: pointer;
+    }
+  }
+
+  & .hn-indics__show {
+    display: inline-block;
+    width: 40px;
+    padding: 0;
+    margin-right: 10px;
+    text-align: center;
+
+    @include m(icon) {
+      position: relative;
+      top: 2px;
+      font-size: $--font-size-large;
+    }
+  }
+
+  & .hn-indics__switch {
+    display: inline-block;
+    width: auto;
+  }
+
+  &:hover {
+    .hn-indics__show {
+      border-color: $--border-color-light;
+      color: $--color-text-3;
+    }
+
+    .hn-indics__switch {
+      border-color: $--border-color-light;
+      color: $--color-text-3;
+
+      .hn-indics--icon {
+        color: $--color-text-3;
+      }
+    }
+  }
+
+  .hn-indics__drawer {
+    .el-drawer__body {
+      padding: 0px !important;
+      background-color: $--color-white !important;;
     }
   }
 

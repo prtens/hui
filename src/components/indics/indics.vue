@@ -1,14 +1,12 @@
 <template>
   <div class="hn-indics">
     <span
-      href="javascript:;"
       class="hn-trigger hn-indics__show"
       @click="show"
     >
       <i class="el-icon-setting"></i>
     </span>
     <span
-      href="javascript:;"
       class="hn-trigger hn-indics__switch"
       @click="toggleDefault"
     >
@@ -22,7 +20,6 @@
       class="hn-indics__drawer"
       size="50%"
     >
-
       <div
         class="hn-indics__setting"
         :class="{'hn-indics--sortable': sortable, 'hn-indics--parent': hasParent}"
