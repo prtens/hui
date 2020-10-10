@@ -92,7 +92,7 @@
         </li>
       </ul>
     </nav>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -120,6 +120,7 @@ nav {
 
   li {
     display: inline-block;
+
     a {
       color: #333;
       text-decoration: none;
