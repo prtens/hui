@@ -18,13 +18,15 @@ module.exports = merge(webpackBaseConfig, {
     libraryTarget: "umd",
     umdNamedDefine: true
   },
+  // 打包排除 vue、Element-UI
   externals: {
     vue: {
       root: "Vue",
       commonjs: "vue",
       commonjs2: "vue",
       amd: "vue"
-    }
+    },
+    'element-ui': 'ELEMENT'
   },
   plugins: [
     // @todo DefinePlugin 创建编译时 "配置的全局常量"  以方便进行 环境转换
