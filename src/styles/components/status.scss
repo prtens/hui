@@ -1,5 +1,6 @@
 @include b(status) {
   position: relative;
+  font-size: $--font-size-small;
   .status-icon > *{
     font-size: 20px;
     line-height: $--input-small-height;
@@ -26,7 +27,7 @@
         float: right;
         color: #999;
         font-weight: bold;
-        font-size: 20px;
+        // font-size: 20px;
     }
     .status-oper {
         height: $--input-small-height;

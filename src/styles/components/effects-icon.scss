@@ -1,10 +1,10 @@
 @include b(tag) {
   display: inline-block;
   height: $--icon-height;
+  line-height: $--icon-height;
   padding: 0 4px;
   border-radius: $--icon-height / 2;
   text-align: center;
-  line-height: $--icon-height - 2;
   font-size: 0;
   border: 1px solid $--color-primary;
   background-color: $--color-primary;

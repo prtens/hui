@@ -10,7 +10,7 @@
       @input="change"
     ></el-input>
     <div class="editor-content">
-      {{content}}
+      {{getContent}}
       <!-- operations 表格hover展示样式 -->
       <i
         class="el-icon-edit operations editor-oper"
@@ -28,6 +28,11 @@ export default {
     content: {
       type: String,
       required: true,
+      default: ""
+    },
+    // 编辑内容不是纯文本，需要有html片段的，配置展示模板，使用${content}当占位符显示编辑内容
+    tmpl: {
+      type: String,
       default: ""
     },
     // 校验规则
@@ -62,8 +67,6 @@ export default {
     }
   },
   methods: {
-    init() {
-    },
     show() {
       this.editing = true
       this.$nextTick(() => {
