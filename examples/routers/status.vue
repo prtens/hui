@@ -35,6 +35,15 @@
         @change="change"
       />
     </div>
+
+    <p>纯提示信息，无操作项</p>
+    <div class="aaaa">
+      <h-status :info="tipInfo" />
+    </div>
+    <p>纯提示信息，无操作项 -- 自定义提示view</p>
+    <div class="aaaa">
+      <h-status :info="viewInfo" />
+    </div>
   </div>
 </template>
 <script>
@@ -97,6 +106,24 @@ export default {
         text: '故障',
         icon: '<i class="el-icon-video-pause"></i>',
         color: '#a40100'
+      },
+      tipInfo: {
+        value: 1,
+        text: '正在投放',
+        icon: '<i class="el-icon-eleme"></i>',
+        tip: '当前正在投放中<br/>换一行',
+        color: '#51a300'
+      },
+      viewInfo: {
+        value: 1,
+        text: '正在投放',
+        icon: '<i class="el-icon-eleme"></i>',
+        tipView: '@./tip',
+        tipData: {
+          tag: '预算过低',
+          tip: '建议修改预算至10000（+15%），相比当前展现量+35%，点击量+20%'
+        },
+        color: '#51a300'
       }
     };
   },

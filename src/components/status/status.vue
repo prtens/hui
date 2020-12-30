@@ -39,10 +39,27 @@
             <span class="status-name">{{info.text}}</span>
           </li>
           <template v-if="info.tip">
-            <li class="status-tip">{{info.tip}}</li>
+            <li
+              class="status-tip"
+              v-html="info.tip"
+            ></li>
           </template>
           <template v-if="info.tipView">
-            <li class="status-tip"></li>
+            <li class="status-tip">
+              <div class="status-tip-tag">
+                <h-effects-icon
+                  type="warn"
+                  :content="info.tipData.tag"
+                />
+              </div>
+              <div>{{info.tipData.tip}}</div>
+              <div>
+                <a
+                  href="javascript:;"
+                  class="color-brand"
+                >去优化&gt;</a>
+              </div>
+            </li>
           </template>
           <template v-if="opers.length > 0">
             <li class="status-line"></li>
@@ -69,9 +86,13 @@
 </template>
 
 <script type="text/babel">
+import HEffectsIcon from "../effects-icon"
 
 export default {
   name: "HStatus",
+  components: {
+    HEffectsIcon
+  },
   props: {
     opers: {
       type: Array,
