@@ -49,15 +49,6 @@
           <router-link to="/Error">Error 错误提示页面</router-link>
         </li>
         <li>
-          <router-link to="/Empty">Empty 空状态</router-link>
-        </li>
-        <li>
-          <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
-        </li>
-        <li>
-          <router-link to="/indics">Indics 指标默认配置及选择排序</router-link>
-        </li>
-        <li>
           <router-link to="/drawer">drawer</router-link>
         </li>
         <li>
@@ -75,8 +66,35 @@
         <li>
           <router-link to="/excel-export">Excel 导出</router-link>
         </li>
+      </ul>
+      <p>数据交互</p>
+      <ul>
+        <li>
+          <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
+        </li>
+        <li>
+          <router-link to="/indics">Indics 指标默认配置及选择排序</router-link>
+        </li>
+        <li>
+          <router-link to="/status">status icon状态切换与显示</router-link>
+        </li>
+        <li>
+          <router-link to="/editor">editor 可编辑内容</router-link>
+        </li>
+        <li>
+          <router-link to="/addinputtag">addtaginput 添加标签</router-link>
+        </li>
+      </ul>
+      <p>样式</p>
+      <ul>
         <li>
           <router-link to="/degree">Degree 刻度型进度比例</router-link>
+        </li>
+        <li>
+          <router-link to="/effectsicon">effects icon 打标</router-link>
+        </li>
+        <li>
+          <router-link to="/Empty">Empty 空状态</router-link>
         </li>
       </ul>
       <p>业务组件</p>
@@ -92,7 +110,7 @@
         </li>
       </ul>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 

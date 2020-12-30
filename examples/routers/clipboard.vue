@@ -2,17 +2,33 @@
   <div>
     <el-row>
       <p>直接使用剪贴板</p>
-      <el-input v-model="inputData" placeholder="Please input" style="width:400px;max-width:100%;"/>
-      <el-button type="primary" icon="el-icon-document" @click="handleCopy(inputData,$event)">
+      <el-input
+        v-model="inputData"
+        placeholder="Please input"
+        style="width:400px;max-width:100%;"
+      />
+      <el-button
+        type="primary"
+        icon="el-icon-document"
+        @click="handleCopy(inputData,$event)"
+      >
         复制
       </el-button>
     </el-row>
 
     <el-row>
       <p>通过指令使用剪贴板</p>
-      <el-input v-model="inputData" placeholder="Please input" style="width:400px;max-width:100%;"/>
-      <el-button v-clipboard:copy="inputData" v-clipboard:success="clipboardSuccess" type="primary"
-                 icon="el-icon-document">
+      <el-input
+        v-model="inputData"
+        placeholder="Please input"
+        style="width:400px;max-width:100%;"
+      />
+      <el-button
+        v-clipboard:copy="inputData"
+        v-clipboard:success="clipboardSuccess"
+        type="primary"
+        icon="el-icon-document"
+      >
         复制
       </el-button>
     </el-row>

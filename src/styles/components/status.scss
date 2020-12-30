@@ -1,0 +1,90 @@
+@include b(status) {
+  position: relative;
+  .status-icon > *{
+    font-size: 20px;
+    line-height: $--input-small-height;
+  }
+
+  .status-info {
+    display: block;
+    min-width: calc((#{$--font-size-small} * 6) + 60px);
+    max-width: none;
+    top: -11px;
+    left: -11px;
+    
+    .status-icon,
+    .status-name,
+    .oper-icon {
+        float: left;
+        height: $--input-small-height;
+        line-height: $--input-small-height;
+    }
+    .status-name {
+        margin-left: 8px;
+    }
+    .oper-icon{
+        float: right;
+        color: #999;
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .status-oper {
+        height: $--input-small-height;
+        line-height: $--input-small-height;
+        padding: 10px;
+        cursor: pointer;
+        .oper-icon {
+            display: none;
+        }
+        &:hover {
+            background-color: #eeeeee;
+        }
+        &.status-oper-cur {
+            cursor: default;
+            .oper-icon {
+                display: block;
+            }
+        }
+    }
+    .status-desc {
+        min-width: 140px;
+        height: $--input-small-height;
+        line-height: $--input-small-height;
+        padding: 10px;
+    }
+    .status-tip {
+        width: 212px;
+        font-size: 12px;
+        padding: 0 10px 10px 10px;
+        line-height: 18px;
+    }
+    &.status-info-dd {
+        top: 0;
+        left: 0;
+    }
+  }
+
+  .status-handle-icon {
+    position: relative;
+    height: $--input-small-height;
+    line-height: $--input-small-height;
+    .status-arrow {
+        position: absolute;
+        top: calc((#{$--input-small-height} - 4px) / 2);
+        right: 0;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+        border-style: solid;
+        border-width: 3px 3px 0 3px;
+        border-color: #999 transparent transparent transparent;
+    }
+  }
+  
+  .status-line{
+    height: 0;
+    border-top: 1px solid $--border-color-base;
+  }
+}

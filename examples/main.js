@@ -127,6 +127,26 @@ const router = new VueRouter({
         require(['./routers/degree.vue'], resolve)
     },
     {
+      path: '/status',
+      component: resolve =>
+        require(['./routers/status.vue'], resolve)
+    },
+    {
+      path: '/effectsicon',
+      component: resolve =>
+        require(['./routers/effectsicon.vue'], resolve)
+    },
+    {
+      path: '/editor',
+      component: resolve =>
+        require(['./routers/editor.vue'], resolve)
+    },
+    {
+      path: '/addinputtag',
+      component: resolve =>
+        require(['./routers/addinputtag.vue'], resolve)
+    },
+    {
       path: '/hour',
       component: resolve =>
         require(['./routers/hour.vue'], resolve)
@@ -147,6 +167,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 });

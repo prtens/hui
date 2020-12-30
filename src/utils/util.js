@@ -2,6 +2,10 @@ export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path);
 }
 
+export function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
 /**
  * 递归添加层级
  * @param {*} array

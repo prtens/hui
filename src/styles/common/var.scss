@@ -28,6 +28,7 @@ $--color-success: #30ab66 !default;
 $--color-success-light-9: mix($--color-white, $--color-success, 90%) !default;
 
 $--color-bg: #fafafa;
+$--color-bg-hover: #eee;
 
 /* Font family
 -------------------------- */
@@ -46,12 +47,17 @@ $--font-size-base: 14px !default;
 $--font-size-small: 12px !default;
 $--font-size-large: 16px !default;
 
+/* Input height
+-------------------------- */
+$--input-small-height: #{$--font-size-small + 20} !default;
+
 /* Border
     $--border-color-lighter
     $--border-color-extra-light
 -------------------------- */
 $--border-color-base: #e6e6e6 !default;
 $--border-color-light: $--border-color-base !default;
+$--border-color-highlight-hover: $--color-text-c !default;
 
 $--border-radius-base: 4px !default;
 
@@ -116,3 +122,24 @@ $--button-mini-padding-horizontal: 15px !default;
 /* degree
 -------------------------- */
 $--degree-bg: #f0f0f0;
+
+/* effects icon
+-------------------------- */
+$--icon-height: 16px;
+
+/* Input tags
+-------------------------- */
+$--tag-gap: 2px;
+$--tag-left-padding: 10px;
+$--tag-height: calc(#{$--input-small-height} - (#{$--tag-gap} * 4) - 2px);
+
+// 主要的一步：
+:export {
+  color_white: $--color-white;
+  color_primary: $--color-primary;
+  color_danger: $--color-danger;
+  color_warning: $--color-warning;
+  color_success: $--color-success;
+  color_text_c: $--color-text-c;
+  color_text_9: $--color-text-9;
+}
