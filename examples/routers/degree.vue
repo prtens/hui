@@ -1,20 +1,32 @@
 <template>
   <div>
-    <h-degree
-      :num="40"/>
+    <p>刻度型展示值取整</p>
+    <h-degree :num="100" />
 
     <h-degree
       type="danger"
-      :num="60.25"/>
+      :num="60.25"
+    />
+
+    <p>自定义颜色</p>
+    <h-degree
+      num="60"
+      color="#fb8c0a"
+    />
 
     <h-degree
-      type="warning"
-      :num="80"/>
+      num="80"
+      color="rgb(81, 163, 0)"
+    />
 
+    <p>默认的基础透明度：</p>
+    <h-degree num="80" />
+
+    <p>自定义基础透明度：</p>
     <h-degree
-      type="success"
-      :num="80"
-      color="rgb(81, 163, 0)"/>
+      opacity="0.3"
+      num="80"
+    />
   </div>
 </template>
 
@@ -22,7 +34,7 @@
 import HDegree from "../../src/components/degree/degree";
 
 export default {
-  components: {HDegree},
+  components: { HDegree },
   data() {
     return {}
   },

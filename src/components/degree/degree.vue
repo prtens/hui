@@ -1,16 +1,19 @@
 <template>
   <div class="hn-degree">
     <div class="hn-degree__bg">
-      <span class="hn-degree--box"
-            v-for="i in 10"
-            :key="i"></span>
+      <span
+        class="hn-degree--box"
+        v-for="i in 10"
+        :key="i"
+      ></span>
     </div>
     <div class="hn-degree__on">
       <span
         v-for="i in getDegree"
         :key="i"
         :class="classes"
-        :style="styles(i)"></span>
+        :style="styles(i)"
+      ></span>
     </div>
   </div>
 </template>
@@ -39,7 +42,7 @@ export default {
     // 基础透明度，<1 的数值，
     // 表示第一个格子的透明度，后续计算为 opacity = base + i * (1 - base) / 9
     opacity: {
-      type: Number,
+      type: Number | String,
       default: 0.08
     },
     // 自定义颜色
@@ -69,15 +72,17 @@ export default {
         num = 100;
       }
 
-      return Math.round(num / 10)
+      return Math.round(num / 10);
     }
   },
   methods: {
     styles(i) {
-      let opacity = this.opacity
+      let base = +this.opacity;
+      let opacity = base;
       if (i > 1) {
-        opacity = opacity + i * (1 - opacity) / 9
+        opacity = base + i * (1 - base) / 9;
       }
+
       return {
         opacity: opacity,
         'background-color': this.color
