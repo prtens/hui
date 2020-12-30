@@ -79,7 +79,7 @@ export default {
     styles(i) {
       let base = +this.opacity;
       let opacity = base;
-      if (i > 1) {
+      if (i < 1) {
         opacity = base + i * (1 - base) / 9;
       }
 
