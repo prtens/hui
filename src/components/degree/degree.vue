@@ -78,8 +78,12 @@ export default {
   methods: {
     styles(i) {
       let base = +this.opacity;
+      let opacity = base;
+      if (i >= 1) {
+        opacity = base + i * (1 - base) / 9
+      }
       return {
-        opacity: base + i * (1 - base) / 9,
+        opacity: opacity,
         'background-color': this.color
       }
     }
