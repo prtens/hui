@@ -13,13 +13,13 @@
   transition: border-color 0.25s;
   font-size: $--font-size-small;
   display: inline-block;
-  
+
   &:hover {
     border-color: $--border-color-highlight-hover;
   }
 
   .new-tag,
-  .input-tag{
+  .input-tag {
     float: left;
     height: $--tag-height;
     line-height: $--tag-height;
@@ -56,7 +56,7 @@
       border-left: 1px solid #fff;
 
       &:hover {
-          color: #999;
+        color: $--color-text-9;
       }
 
       &:empty::before {

@@ -12,7 +12,7 @@
         v-for="i in getDegree"
         :key="i"
         :class="classes"
-        :style="styles(i)"
+        :style="styles(i - 1)"
       ></span>
     </div>
   </div>
@@ -28,10 +28,10 @@ export default {
       required: true
     },
     // 展示类型
-    // error：红色错误类型提示
-    // warn：黄色警告类型提示
-    // pass：绿色通过类型提示
-    // highlight：品牌色图标强调提示（默认）
+    // danger：红色错误类型提示
+    // warning：黄色警告类型提示
+    // success：绿色通过类型提示
+    // primary：品牌色图标强调提示（默认）
     type: {
       type: String,
       validator(value) {
@@ -79,6 +79,7 @@ export default {
     styles(i) {
       let base = +this.opacity;
       let opacity = base;
+      console.log(i)
       if (i >= 1) {
         opacity = base + i * (1 - base) / 9
       }

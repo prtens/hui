@@ -49,7 +49,7 @@ $--font-size-large: 16px !default;
 
 /* Input height
 -------------------------- */
-$--input-small-height: #{$--font-size-small + 14} !default;
+$--input-small-height: #{$--font-size-small + 20} !default;
 
 /* Border
     $--border-color-lighter
@@ -84,10 +84,19 @@ $--hour-height: 42px !default;
 $--calendar-bg: #eeeeee !default;
 $--calendar-item-gap: 2px;
 $--calendar-item-size: 24px;
-$--calendar-width: calc((#{$--calendar-item-size} + #{$--calendar-item-gap} * 2) * 7 + 20px);
-$--calendar-height: calc((#{$--calendar-item-size} + #{$--calendar-item-gap} * 2) * 8 + 20px);
+$--calendar-width: calc(
+  (#{$--calendar-item-size} + #{$--calendar-item-gap} * 2) * 7 + 20px
+);
+$--calendar-height: calc(
+  (#{$--calendar-item-size} + #{$--calendar-item-gap} * 2) * 8 + 20px
+);
 $--calendar-ym-width: calc((#{$--calendar-width} - 60px) / 3);
-$--calendar-ym-height: calc((#{$--calendar-height} - #{$--calendar-item-size} - #{$--calendar-item-gap} * 2 - 80px) / 4);
+$--calendar-ym-height: calc(
+  (
+      #{$--calendar-height} - #{$--calendar-item-size} - #{$--calendar-item-gap} *
+        2 - 80px
+    ) / 4
+);
 $--calendar-time-width: calc(#{$--calendar-item-size} * 2 + 6px);
 $--calendar-range-input-width: 100px;
 

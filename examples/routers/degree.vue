@@ -7,6 +7,14 @@
       type="danger"
       :num="60.25"
     />
+    <h-degree
+      type="warning"
+      :num="60.25"
+    />
+    <h-degree
+      type="success"
+      :num="60.25"
+    />
 
     <p>自定义颜色</p>
     <h-degree
@@ -24,7 +32,7 @@
 
     <p>自定义基础透明度：</p>
     <h-degree
-      opacity="0.3"
+      opacity="0.4"
       num="80"
     />
   </div>

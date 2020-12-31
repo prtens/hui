@@ -101,7 +101,7 @@ export default {
       }
     },
     selected: {
-      type: String,
+      type: Number | String,
       default: ''
     },
     info: {
@@ -121,10 +121,10 @@ export default {
   computed: {
   },
   mounted() {
-    this.init()
+    this.update();
   },
   methods: {
-    init() {
+    update() {
       let that = this;
       let { opers, selected, info } = that;
 
@@ -148,6 +148,7 @@ export default {
         showInfo = true;
       }
       that.showInfo = showInfo
+      that.out()
     },
     out() {
       this.show = false
@@ -163,9 +164,10 @@ export default {
       }
 
       let enterCallback = () => {
-        that.out()
-        that.cur = item
         that.$emit("change", item)
+        that.$nextTick(() => {
+          that.update();
+        })
       }
 
       if (item.confirmTitle && item.confirmContent) {

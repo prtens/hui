@@ -10,7 +10,7 @@
       @input="change"
     ></el-input>
     <div class="editor-content">
-      {{getContent}}
+      {{ getContent }}
       <!-- operations 表格hover展示样式 -->
       <i
         class="el-icon-edit operations editor-oper"
@@ -61,24 +61,24 @@ export default {
         return this.content;
       },
       set(val) {
-        console.log(val)
+        console.log(val);
         this.$emit("update:content", val);
       }
     }
   },
   methods: {
     show() {
-      this.editing = true
+      this.editing = true;
       this.$nextTick(() => {
         this.$refs.editorInput.focus();
-      })
+      });
     },
     out() {
-      this.editing = false
+      this.editing = false;
     },
     change(val) {
-      console.log(this.rules)
-      console.log(val)
+      console.log(this.rules);
+      console.log(val);
       //
       // this.$emit("update:content", val);
     }

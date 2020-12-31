@@ -21,9 +21,9 @@
     <div class="aaaa">
       <h-status
         :opers="opers1"
-        :selected.sync="selected"
+        :selected.sync="selected1"
         :info="info"
-        @change="change"
+        @change="change1"
       />
     </div>
 
@@ -31,8 +31,8 @@
     <div class="aaaa">
       <h-status
         :opers="opers2"
-        :selected.sync="selected"
-        @change="change"
+        :selected.sync="selected2"
+        @change="change2"
       />
     </div>
 
@@ -51,6 +51,8 @@ export default {
   data() {
     return {
       selected: "9",
+      selected1: "9",
+      selected2: "9",
       opers: [
         {
           value: 0,
@@ -130,7 +132,15 @@ export default {
   methods: {
     change(item) {
       this.selected = `${item.value}`
-      console.log(this.selected)
+      console.log("======selected", this.selected)
+    },
+    change1(item) {
+      this.selected1 = `${item.value}`
+      console.log("======selected1", this.selected)
+    },
+    change2(item) {
+      this.selected2 = `${item.value}`
+      console.log("======selected2", this.selected)
     }
   }
 };

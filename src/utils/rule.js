@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { isArray } from './util'
 
 let ByteLen = (str) => {
@@ -41,11 +42,8 @@ let IsLandline = (str) => {
 
 // 不能有空格
 // trim: true
-// trim: [true, '不能包含空格']
+// trim: [true, '不能包含空格或者 自定义提示']
 export function trim(val, rule) {
-  // 两端是否有空格
-  // required: [true, '自定义']
-  // required: true
   let valid = true,
     tip = '不能包含空格' // form.check.trim;
   if (isArray(rule)) {
@@ -66,11 +64,10 @@ export function trim(val, rule) {
   };
 }
 
-// 邮箱校验
+// 邮箱校验：名称@域名
 // email: true
 // email: [true, '自定义提示（可选）', 'domains[array]（指定邮箱，可选）']
 export function email(val, rule) {
-  // 邮箱：名称@域名
   let valid = true,
     tip = '请输入正确的邮箱地址' // form.check.email
   val = trim(val);
@@ -119,7 +116,6 @@ export function email(val, rule) {
 // url: true
 // url: [true, 自定义提示]
 export function url(val, rule) {
-  // 中文
   let valid = true,
     tip = 'url格式不正确'; // form.check.url
   val = trim(val);
@@ -148,7 +144,6 @@ export function url(val, rule) {
 // english: true
 // english: [true, 自定义提示]
 export function english(val, rule) {
-  // 英文
   let valid = true,
     tip = '请输入英文'; // form.check.english
   val = trim(val);
@@ -177,7 +172,6 @@ export function english(val, rule) {
 // chinese: true
 // chinese: [true, 自定义提示]
 export function chinese(val, rule) {
-  // 中文
   let valid = true,
     tip = '请输入中文'; // form.check.chinese
   val = trim(val);
@@ -206,7 +200,6 @@ export function chinese(val, rule) {
 // mobile: true
 // mobile: [true, 自定义提示]
 export function mobile(val, rule) {
-  // 手机号码
   let valid = true,
     tip = '请输入正确的手机号码'; // form.check.mobile
   val = trim(val);
@@ -234,7 +227,6 @@ export function mobile(val, rule) {
 // landline: true
 // landline: [true, 自定义提示]
 export function landline(val, rule) {
-  // 固定电话
   let valid = true,
     tip = '请输入正确的固定电话号码'; // form.check.landline
   val = trim(val);
@@ -262,7 +254,6 @@ export function landline(val, rule) {
 // phone: true
 // phone: [true, 自定义提示]
 export function phone(val, rule) {
-  // 手机或者固定电话
   let valid = true,
     tip = '请输入正确的手机号码或者固定电话号码'; // form.check.phone
   val = trim(val);
@@ -286,11 +277,10 @@ export function phone(val, rule) {
   };
 }
 
-// 金额
+// 金额，最多保留两位小数
 // currency: true
 // currency: [true, 自定义提示]
 export function currency(val, rule) {
-  // 金额，最多保留两位小数
   let valid = true,
     tip = '请输入金额，精确到小数点后两位'; // form.check.currency
   val = trim(val);
@@ -315,13 +305,10 @@ export function currency(val, rule) {
   };
 }
 
-// 必填
+// 是否必填
 // required: true
-// required: [true, '必选']
+// required: [true, '自定义']
 export function required(val, rule) {
-  // 是否必填
-  // required: [true, '自定义']
-  // required: true
   let valid = true,
     tip = '必填'; // form.check.required
   val = trim(val)
@@ -347,8 +334,6 @@ export function required(val, rule) {
 // number: true
 // number: [true, '自定义提示']
 export function number(val, rule) {
-  // 是否为数字
-  // number: true
   let valid = true,
     tip = '请输入数字'; // form.check.number
 
@@ -379,8 +364,6 @@ export function number(val, rule) {
 // int: true
 // int: [true, '自定义提示']
 export function int(val, rule) {
-  // 是否为整数
-  // int: true
   let valid = true,
     tip = '请输入整数'; // form.check.int
 
@@ -406,13 +389,10 @@ export function int(val, rule) {
   };
 }
 
-// 正整数
+// 是否为正整数
 // posint: true
 // posint: [true, '自定义提示']
 export function posint(val, rule) {
-  // 是否为正整数
-  // posint: true
-  // posint: [true, 自定义]
   let valid = true,
     tip = '请输入正整数'; // form.check.posint
   val = trim(val);
@@ -437,13 +417,10 @@ export function posint(val, rule) {
   };
 }
 
-// 负整数
+// 是否为负整数
 // negint: true
 // negint: [true, '自定义提示']
 export function negint(val, rule) {
-  // 是否为负整数
-  // negint: true
-  // negint: [true, 自定义]
   let valid = true,
     tip = '请输入负整数'; // form.check.negint
   val = trim(val);
@@ -471,8 +448,6 @@ export function negint(val, rule) {
 // 字个数范围
 // length: [2, 8]
 export function length(val, rule) {
-  // 字个数
-  // length: [4,8]
   let valid = true,
     tip = '{min} ~ {max} 个字之间，当前：{current} 个字'; // form.word.between
 
@@ -495,9 +470,6 @@ export function length(val, rule) {
 // minlength: 2
 // minlength: [2, 自定义提示文案]
 export function minlength(val, rule) {
-  // 最少字个数
-  // minlength: 10
-  // minlength: [10, '自定义提示']
   let valid = true,
     tip = ['最少', rule, '个字'].join(' '); // form.less form.word
   val = trim(val);
@@ -521,9 +493,6 @@ export function minlength(val, rule) {
 // maxlength: 8
 // maxlength: [8, 自定义提示文案]
 export function maxlength(val, rule) {
-  // 最多字个数
-  // maxlength: 10
-  // maxlength: [10, '自定义提示']
   let valid = true,
     tip = ['最多', rule, '个字'].join(' '); // form.more
 
@@ -547,8 +516,6 @@ export function maxlength(val, rule) {
 // 字符个数范围，一个汉字两个字符
 // blength: [2, 8]
 export function blength(val, rule) {
-  // 字符长度：一个汉字两个字符
-  // blength: [10, 20]
   let valid = true,
     tip = '{min} ~ {max} 个字符之间，当前：{current}'; // form.char.between
 
@@ -571,9 +538,6 @@ export function blength(val, rule) {
 // bminlength: 2
 // bminlength: [2, 自定义提示文案]
 export function bminlength(val, rule) {
-  // 字符最小长度：一个汉字两个字符
-  // bminlength: 10
-  // bminlength: [10, 自定义]
   val = trim(val);
   let len = ByteLen(val);
 
@@ -600,9 +564,6 @@ export function bminlength(val, rule) {
 // bmaxlength: 8
 // bmaxlength: [8, 自定义提示文案]
 export function bmaxlength(val, rule) {
-  // 字符最大长度：一个汉字两个字符
-  // bmaxlength: 10
-  // bmaxlength: [10, 自定义]
   val = trim(val);
   let len = ByteLen(val);
 
@@ -688,9 +649,6 @@ export function unequalto(val, rule) {
 // pattern: ^[a-zA-Z0-9_\u4e00-\u9fa5]+$
 // pattern: ['^[a-zA-Z0-9_\u4e00-\u9fa5]+$', '自定义错误提示']
 export function pattern(val, rule) {
-  // 正则
-  // pattern [reg, 自定义]
-  // pattern reg
   let valid = true,
     tip = '格式有误'; // form.check.pattern
   val = trim(val);
@@ -744,8 +702,6 @@ export function json(val, rule) {
 // 数字范围，包含边界，range: [a,b]， a <= x <= b
 // range: [2, 8, 自定义提示文案（可选）]
 export function range(val, rule) {
-  // 数字范围，包括边界
-  // range: [2,10,自定义提示]
   let valid = true;
   let min = rule[0],
     max = rule[1];
@@ -764,8 +720,6 @@ export function range(val, rule) {
 // 数字范围，不包含边界，rangeborder: [a,b]， a < x < b
 // rangeborder: [2, 8, 自定义提示文案（可选）]
 export function rangeborder(val, rule) {
-  // 数字范围，不包括边界
-  // range: [2,10,自定义提示]
   let valid = true;
   let min = rule[0],
     max = rule[1];
@@ -781,13 +735,10 @@ export function rangeborder(val, rule) {
   };
 }
 
-// 小于等于某个数字，max: b，x <= b
+// 数字最大值，小于等于某个数字，max: b，x <= b
 // max: 8
 // max: [8, 自定义提示文案]
 export function max(val, rule) {
-  // 数字最大值
-  // max: [10,自定义]
-  // max: 10
   let valid = true,
     max,
     tip = '请输入小于等于 {max} 的数字'; // form.max
@@ -812,13 +763,10 @@ export function max(val, rule) {
   };
 }
 
-// 小于某个数字，maxborder: b，x < b
+// 数字最大值，不包含边界，小于某个数字，maxborder: b，x < b
 // maxborder: 8
 // maxborder: [8, 自定义提示文案]
 export function maxborder(val, rule) {
-  // 数字最大值，不包含边界
-  // max: [10,自定义]
-  // max: 10
   let valid = true,
     max,
     tip = '请输入小于 {max} 的数字'; // form.max.border
@@ -843,13 +791,10 @@ export function maxborder(val, rule) {
   };
 }
 
-// 大于等于某个数字，min: a，a <= x
+// 数字最小值，包含边界，大于等于某个数字，min: a，a <= x
 // min: 2
 // min: [2, 自定义提示文案]
 export function min(val, rule) {
-  // 数字最小值，包含边界
-  // min: [10,自定义]
-  // min: 10
   let valid = true,
     min,
     tip = '请输入大于等于 {min} 的数字'; // form.min
@@ -874,13 +819,10 @@ export function min(val, rule) {
   };
 }
 
-// 大于某个数字，minborder: a，a < x
+// 数字最小值，不包含边界，大于某个数字，minborder: a，a < x
 // minborder: 2
 // minborder: [2, 自定义提示文案]
 export function minborder(val, rule) {
-  // 数字最小值，不包含边界
-  // min: [10,自定义]
-  // min: 10
   let valid = true,
     min,
     tip = '请输入大于 {min} 的数字'; // form.min.border
