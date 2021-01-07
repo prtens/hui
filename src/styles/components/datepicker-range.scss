@@ -17,14 +17,13 @@
     position: relative;
     line-height: 26px;
 
-    .title {
+    .rtitle {
+      display: flex;
+      align-items: center;;
       margin-bottom: 5px;
       color: $--color-text-9;
-      .fl {
-        float: left;
-      }
-      .fr {
-        float: right;
+      .rtitle-span {
+        flex-grow: 1;;
       }
     }
 
@@ -58,7 +57,7 @@
 
     .range-gap {
       position: absolute;
-      top: 0;
+      // top: 0;
       left: 50%;
       width: 18px;
       height: 26px;

@@ -2,13 +2,10 @@
   <div>
     <div :class="`hn-date-range ${timeType ? 'time' : ''}`">
       <div class="range">
-        <div class="title clearfix">
-          <span class="fl">{{ title }}：</span>
+        <div class="rtitle clearfix">
+          <span class="rtitle-span">{{ title }}：</span>
           <template v-if="vsenable">
-            <el-switch
-              class="fr"
-              v-model="currentVs"
-            ></el-switch>
+            <el-switch v-model="currentVs"></el-switch>
           </template>
         </div>
         <div class="clearfix">
@@ -18,11 +15,11 @@
               :class="`${currentVs ? 'vs1' : ''}`"
               :min="min"
               :max="endDisabled?dates.endStr:max"
-              :selected.sync="dates.startStr"
-              :dateType="dateType"
-              :timeType="timeType"
               :formatter="formatter"
               :disabledWeeks="disabledWeeks"
+              :timeType="timeType"
+              :dateType="dateType"
+              :selected.sync="dates.startStr"
               :weekStart="weekStart"
               :disabled="startDisabled"
               @change="syncDate($event, 'start')"
@@ -35,12 +32,12 @@
               :class="`${currentVs ? 'vs2' : ''}`"
               :min="!currentVs?endMinFn(dates.startStr,min):min"
               :max="max"
-              :selected.sync="dates.endStr"
-              :dateType="dateType"
-              :timeType="timeType"
               :formatter="formatter"
-              :align="align"
               :disabledWeeks="disabledWeeks"
+              :timeType="timeType"
+              :dateType="dateType"
+              :align="align"
+              :selected.sync="dates.endStr"
               :disabled="(!currentVs&&vsSingle) || endDisabled ? true : false"
               @change="syncDate($event, 'end')"
             />
@@ -65,20 +62,6 @@
           </div>
         </div>
       </template>
-    </div>
-    <div class="hn-output__footer">
-      <el-button
-        class="mr10"
-        type="primary"
-        @click="datePicked"
-      >{{ submitText }}</el-button>
-      <el-button
-        class="mr10"
-        type="primary"
-        plain
-        @click="cancel"
-      >{{ cancelText }}</el-button>
-      <span class="color-red">{{ errorMsg }}</span>
     </div>
   </div>
 </template>
@@ -146,26 +129,39 @@ export default {
       type: Boolean,
       default: true
     },
+    // 自定义快捷方式，格式如下
+    // [{
+    //   key: '', //唯一key
+    //   text: '', //显示文案
+    //   tip: '', //快捷方式说明，没有为空即可
+    //   start: '2019-06-21', //对应的开始时间
+    //   end: '2019-06-24' //对应的结束时间
+    // }]
+    // 配置备选快捷方式key值
+    // "today", // 今日
+    // "yesterday", // 昨日
+    // "beforeYesterday", // 前天
+    // "preMonth", // 上月
+    // "preWeekSun", // 上周（周日至周六）
+    // "preWeekMon", // 上周（周一至周日）
+    // "lastestWeekSun", // 本周（周日开始，包含今日）
+    // "lastestWeekMon", // 本周（周一开始，包含今日）
+    // "passedThisMonth", // 本月（昨日开始算）
+    // "lastestThisMonth", // 本月（今日开始算）
+    // "passed{n}", // 过去 n 天（昨日开始算），n可为任意整数，passed1，passed15...
+    // "lastest{n}", // 最近 n 天（今日开始算），n可为任意整数，lastest1，lastest15...
+    // "dynamicStart{n}", // n天后结束（以开始时间为准动态计算），n可为任意整数，dynamicStart1，dynamicStart15...
+    // "dynamicEndThisMonth", // 开始时间到开始时间所在月月底
+    // "dynamicEndNextMonth", // 开始时间到开始时间次月月底
+    // "forever" //有开始时间，结束时间不限
     shortkeys: {
       type: Array,
       default() {
         return [
-          // "today", // 今日
-          // "yesterday", // 昨日
-          // "beforeYesterday", // 前天
-          // "preMonth", // 上月
-          // "preWeekSun", // 上周（周日至周六）
-          // "preWeekMon", // 上周（周一至周日）
-          // "lastestWeekSun", // 本周（周日开始，包含今日）
-          // "lastestWeekMon", // 本周（周一开始，包含今日）
-          // "passedThisMonth", // 本月（昨日开始算）
-          // "lastestThisMonth", // 本月（今日开始算）
-          // "passed{n}", // 过去 n 天（昨日开始算），n可为任意整数，passed1，passed15...
-          // "lastest{n}", // 最近 n 天（今日开始算），n可为任意整数，lastest1，lastest15...
-          // "dynamicStart{n}", // n天后结束（以开始时间为准动态计算），n可为任意整数，dynamicStart1，dynamicStart15...
-          // "dynamicEndThisMonth", // 开始时间到开始时间所在月月底
-          // "dynamicEndNextMonth", // 开始时间到开始时间次月月底
-          // "forever" //有开始时间，结束时间不限
+          "today",
+          "yesterday",
+          "beforeYesterday",
+          "forever"
         ];
       }
     },
@@ -192,7 +188,7 @@ export default {
     // 此外"all" = "year,month,day" = ""，不设置的时候默认年月日都显示
     dateType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // 时分秒选择类型：
     // 1.设置该值后会出现时间选择组件
@@ -201,7 +197,7 @@ export default {
     // 2.不设置无时分秒选择
     timeType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // date格式
     formatter: {
@@ -238,12 +234,10 @@ export default {
   },
   data() {
     return {
-      title: '选择日期',
+      title: '',
       quickInfos: [],
       quickGap: '',
-      quickTip: '快捷日期',
-      submitText: '确定',
-      cancelText: '取消',
+      quickTip: '',
       dates: {
         start: '',
         end: '',
@@ -252,8 +246,7 @@ export default {
         quickDateText: '',
         quickDateKey: ''
       },
-      vsSingle: false,
-      errorMsg: ''
+      vsSingle: false
     };
   },
   mounted() {
@@ -265,7 +258,6 @@ export default {
         return this.vs;
       },
       set(val) {
-        console.log(val)
         this.$emit("update:vs", val);
       }
     }
@@ -325,7 +317,10 @@ export default {
         }
       }
       that.quickInfos = quickInfos;
+      console.log(that.quickInfos)
       that.quickGap = that.quickGap || 7;
+      that.quickTip = '快捷日期';
+      that.title = '选择日期';
     },
     syncDate(e, trigger) {
       let that = this;
@@ -479,8 +474,6 @@ export default {
         startStr: DateFormat(that.dates.startStr, that.formatter),
         endStr: that.dates.endStr === '不限' ? that.dates.endStr : DateFormat(that.dates.endStr, that.formatter)
       })
-    },
-    cancel() {
     }
   }
 };

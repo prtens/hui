@@ -2,79 +2,42 @@
   <div class="calendar-wrapper">
     <el-row :gutter="20">
       <el-col :span="5">
-        <p style="height: 50px; line-height: 50px">=====calendars=====</p>
+        <p>直接使用日历面板</p>
         <h-calendars
-          :selected.sync="calendars.selected"
+          :selected="calendars.selected"
           :min="calendars.min"
           :max="calendars.max"
-          :formatter="calendars.formatter"
-          :disabledWeeks="calendars.disabledWeeks"
+          @change="calendarsChange"
         />
       </el-col>
       <el-col :span="5">
-        <p style="height: 50px; line-height: 50px">=====datepicker=====</p>
+        <p>限制最大最小值 + 右对齐 + 提示文案前缀 + 事件处理</p>
         <h-date-picker
-          :min="datepicker.start"
-          :max="datepicker.end"
-          :selected.sync="datepicker.selected"
-          :dateType="datepicker.dateType"
-          :formatter="datepicker.formatter"
+          :min="datepicker.min"
+          :max="datepicker.max"
+          :selected="datepicker.selected"
           :align="datepicker.align"
           :prefix="datepicker.prefix"
-          :disabledWeeks="datepicker.disabledWeeks"
-          :weekStart="datepicker.weekStart"
-          :disabled="datepicker.disabled"
+          @change="datePickerChange"
         />
       </el-col>
       <el-col :span="6">
-        <p style="height: 50px; line-height: 50px">=====range=====</p>
+        <p>自定义快捷日期，至少选择3天，至多选择10天</p>
         <h-date-range
           :start.sync="range.start"
           :end.sync="range.end"
-          :startDisabled="range.startDisabled"
-          :endDisabled="range.endDisabled"
           :vsenable="range.vsenable"
           :vs.sync="range.vs"
-          :single="range.single"
-          :shortcuts="range.shortcuts"
-          :shortkeys="range.shortkeys"
-          :min="range.min"
-          :max="range.max"
-          :maxGap="range.maxGap"
-          :minGap="range.minGap"
-          :dateType="range.dateType"
-          :formatter="range.formatter"
-          :align="range.align"
-          :textAlign="range.textAlign"
-          :disabledWeeks="range.disabledWeeks"
-          :weekStart="range.weekStart"
-          :disabled="range.disabled"
         />
       </el-col>
       <el-col :span="8">
-        <p style="height: 50px; line-height: 50px">=====rangepicker=====</p>
+        <p>rangepicker 日历面板右对齐</p>
         <div style="width: 250px">
           <h-date-range-picker
             :start.sync="rangeDatepicker.start"
             :end.sync="rangeDatepicker.end"
-            :startDisabled="rangeDatepicker.startDisabled"
-            :endDisabled="rangeDatepicker.endDisabled"
             :vsenable.sync="rangeDatepicker.vsenable"
             :vs.sync="rangeDatepicker.vs"
-            :single="rangeDatepicker.single"
-            :shortcuts="rangeDatepicker.shortcuts"
-            :shortkeys="rangeDatepicker.shortkeys"
-            :min="rangeDatepicker.min"
-            :max="rangeDatepicker.max"
-            :maxGap="rangeDatepicker.maxGap"
-            :minGap="rangeDatepicker.minGap"
-            :dateType="rangeDatepicker.dateType"
-            :formatter="rangeDatepicker.formatter"
-            :align="rangeDatepicker.align"
-            :textAlign="rangeDatepicker.textAlign"
-            :disabledWeeks="rangeDatepicker.disabledWeeks"
-            :weekStart="rangeDatepicker.weekStart"
-            :disabled="rangeDatepicker.disabled"
           />
         </div>
       </el-col>
@@ -89,139 +52,46 @@ import HDateRange from "../../src/components/calendars/range";
 import HDateRangePicker from "../../src/components/calendars/rangepicker";
 
 export default {
-  components: {HDateRangePicker, HDateRange, HDatePicker, HCalendars},
+  components: { HDateRangePicker, HDateRange, HDatePicker, HCalendars },
   data() {
     return {
       calendars: {
-        min: '2020-09-01',
-        max: '2020-12-01',
-        selected: '2020-10-01',
-        dateType: '',
-        formatter: 'YYYY/MM/DD hh:mm:ss',
-        disabledWeeks: [],
-        weekStart: 0
+        min: '2020-12-05',
+        max: '2025-1-19',
+        selected: '2021-1-8'
       },
       datepicker: {
-        min: '2020-09-01',
-        max: '2020-12-01',
-        selected: '2020-09-01',
-        dateType: '',
-        formatter: 'YYYY/MM/DD',
+        min: '2020-12-05',
+        max: '2025-1-19',
+        selected: '2021-1-8',
         align: 'left',
-        prefix: '截止至',
-        disabledWeeks: [],
-        weekStart: 0,
-        disabled: false
+        prefix: '截止至'
       },
       range: {
         start: '2020-09-01',
         end: '2020-10-01',
-        startDisabled: false,
-        endDisabled: false,
         vsenable: true,
-        vs: false,
-        single: false,
-        shortcuts: true,
-        shortkeys: [
-          "today",
-          "yesterday",
-          "beforeYesterday",
-          "preMonth",
-          "preWeekSun",
-          "preWeekMon",
-          "lastestWeekSun",
-          "lastestWeekMon",
-          "passedThisMonth",
-          "lastestThisMonth",
-          "passed7",
-          "passed15",
-          "passed30",
-          "lastest7",
-          "lastest15",
-          "lastest30",
-          "dynamicStart7",
-          "dynamicStart15",
-          "dynamicStart30",
-          "dynamicEndThisMonth",
-          "dynamicEndNextMonth",
-          "forever"
-        ],
-        min: '',
-        max: '',
-        maxGap: 0,
-        minGap: 0,
-        dateType: '',
-        formatter: '',
-        align: 'left',
-        textAlign: 'left',
-        disabledWeeks: [],
-        weekStart: 0,
-        disabled: false
+        vs: false
       },
       rangeDatepicker: {
         start: '2020-09-01',
         end: '2020-10-01',
-        startDisabled: false,
-        endDisabled: false,
         vsenable: true,
-        vs: false,
-        single: false,
-        shortcuts: true,
-        shortkeys: [
-          "today",
-          "passed7",
-          "yesterday",
-          "passed15",
-          "preWeekMon",
-          "passed30",
-          "preMonth",
-          "forever"
-        ],
-        min: '2020-05-01',
-        max: '2020-12-01',
-        maxGap: 0,
-        minGap: 0,
-        dateType: '',
-        formatter: '',
-        align: 'left',
-        textAlign: 'left',
-        disabledWeeks: [],
-        weekStart: 0,
-        disabled: false
+        vs: false
       }
     };
-  },
-  watch: {
-    'calendars.selected': {
-      immediate: true,
-      handler(val) {
-        console.log('==========calendars', val)
-      }
-    },
-    'datepicker.selected': {
-      immediate: true,
-      handler(val) {
-        console.log('==========datepicker', val)
-      }
-    },
-    range: {
-      deep: true,
-      immediate: true,
-      handler(val) {
-        console.log('==========range', val)
-      }
-    },
-    rangeDatepicker: {
-      deep: true,
-      immediate: true,
-      handler(val) {
-        console.log('==========rangeDatepicker', val)
-      }
-    }
   },
   methods: {
     init() {
       let that = this;
+    },
+    calendarsChange(row) {
+      this.calendars.selected = row.date
+      console.log(row)
+    },
+    datePickerChange(row) {
+      this.datepicker.selected = row.date
+      console.log(row)
     }
   }
 };

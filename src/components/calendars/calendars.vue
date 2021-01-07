@@ -54,16 +54,6 @@
           </span>
         </div>
       </div>
-
-      <template v-if="timeType">
-        <div class="hn-output__footer">
-          <el-button
-            type="primary"
-            plain
-          >确定</el-button>
-          <el-button type="primary">取消</el-button>
-        </div>
-      </template>
     </div>
 
     <template v-if="types.month">
@@ -139,21 +129,21 @@
 </template>
 
 <script type="text/babel">
-import util from './util'
 import Locale from "../../mixins/locale";
+import util from './util'
 
 const {
   today: Today,
   foreverStr: ForeverStr,
   dateFormat: DateFormat,
-  dateParse: DateParse,
   getDefaultDate: GetDefaultDate,
+  dateParse: DateParse,
   parseDateType: ParseDateType,
   getWeekText: GetWeekText,
-  getNumOfDays: GetNumOfDays,
-  dateDisabled: DateDisabled,
+  yearDisabled: YearDisabled,
   monthDisabled: MonthDisabled,
-  yearDisabled: YearDisabled
+  getNumOfDays: GetNumOfDays,
+  dateDisabled: DateDisabled
 } = util;
 
 export default {
@@ -171,24 +161,22 @@ export default {
       default: ''
     },
     // 默认选中的日期
+    // 1. 今天小于min，默认为min
+    // 2. 今天大于max，默认为max
+    // 3. 今天在可选范围之内，默认为今天
     selected: {
       type: String,
       default: ''
     },
-    // 默认选中的日期
-    value: {
-      type: String,
-      default: ''
-    },
-    // 年月日选择类型 year,month,day
+    // 年月日选择类型 all,year,month,day
     dateType: {
       type: String,
-      default: ''
+      default: 'all'
     },
-    // 时分秒选择类型 hour,minute,second
+    // 时分秒选择类型 all,hour,minute,second
     timeType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // date格式
     formatter: {
@@ -204,108 +192,106 @@ export default {
     },
     // 从周几开，0-6，0表示周日
     weekStart: {
-      type: Number,
+      type: Number | String,
       default: 0
     }
   },
   data() {
     return {
-      currentMin: '',
-      currentMax: '',
-      forever: false,
-      types: {},
+      year: '',
+      month: '',
+      selectedYear: '',
+      selectedMonth: '',
+      tselected: '',
       timeValue: '',
       dateValue: '',
-      weekText: [],
-      year: '',
-      years: [],
-      month: '',
-      months: [],
-      days: [],
       showYear: 0,
-      selectedYear: '',
+      showMonth: 0,
+      types: {},
+      tdisabledWeeks: [],
+      weekText: '',
       startYear: '',
       endYear: '',
-      showMonth: 0,
-      selectedMonth: ''
+      years: [],
+      months: [],
+      days: []
+    }
+  },
+  computed: {
+    // 最大不关心时分秒，时分秒的大小不限制
+    getMax: function () {
+      let me = this;
+      return me.max ? new Date(DateFormat(me.max, 'YYYY/MM/DD') + ' 23:59:59') : me.max;
+    },
+    // 最小不关心时分秒，时分秒的大小不限制
+    getMix: function () {
+      let me = this;
+      return me.min ? new Date(DateFormat(me.min, 'YYYY/MM/DD') + ' 00:00:00') : me.min;
     }
   },
   mounted() {
     this.init()
   },
   watch: {
-    selected(val) {
-      this.init()
+    selected: {
+      immediate: true,
+      handler(val) {
+        this.init()
+      }
     }
   },
   methods: {
     init() {
       let me = this;
-
       let forever = (me.selected === ForeverStr);
-      let formatter = me.formatter;
 
-      // 最大最小不关心时分秒，时分秒的大小不限制
-      let max, min;
-      // Safari不支持YYYY-MM-DD，使用YYYY/MM/DD
-      if (me.max) {
-        max = new Date(DateFormat(me.max, 'YYYY/MM/DD') + ' 23:59:59');
-      }
-      if (me.min) {
-        min = new Date(DateFormat(me.min, 'YYYY/MM/DD') + ' 00:00:00');
-      }
-
-      let selected
+      let tselected = '';
       if (!me.selected || forever) {
-        selected = GetDefaultDate(me.min, me.max, me.formatter);
+        tselected = GetDefaultDate(me.getMix, me.getMax, me.formatter);
       } else {
-        selected = DateParse(me.selected);
+        tselected = DateParse(me.selected);
       }
 
-      let timeValue = DateFormat(selected, 'hh:mm:ss');
-      let dateValue = DateFormat(selected, formatter.slice(0, 10));
+      let timeValue = DateFormat(tselected, 'hh:mm:ss');
+      let dateValue = DateFormat(tselected, me.formatter.slice(0, 10));
       let types = ParseDateType(me.dateType);
 
-      let weekText = GetWeekText(me.weekStart);
-      let days = GetNumOfDays(types.year, types.month)
+      let tdisabledWeeks = (me.disabledWeeks || []).map(w => {
+        return +w;
+      });
 
-      me.types = types
-      me.timeValue = timeValue
-      me.dateValue = dateValue
-      me.weekText = weekText
-      me.currentMin = min
-      me.currentMax = max
-      me.days = days
+      me.timeValue = timeValue;
+      me.dateValue = dateValue;
+      me.types = types;
+      me.tdisabledWeeks = tdisabledWeeks;
+      me.weekText = GetWeekText(me.weekStart)
 
       // 不限的情况特殊处理，不设置选中值
-      me.updateSelected(selected, forever);
+      me.updateSelected(tselected, forever);
       me.updateYears();
       me.updateMonths();
       me.updateDays();
     },
-    updateSelected(odlSelected, forever) {
-      let me = this,
-        selected = DateParse(odlSelected);
-
+    updateSelected(selected, forever) {
+      let me = this
+      selected = DateParse(selected);
       let formatter = me.formatter;
       if (selected) {
-        me.year = selected.getFullYear()
-        me.month = selected.getMonth() + 1
-        me.selectedYear = selected.getFullYear()
-        me.selectedMonth = selected.getMonth() + 1
-        // TODO
-        this.$emit('update:selected', forever ? '' : DateFormat(selected, formatter))
+        me.year = selected.getFullYear();
+        me.month = selected.getMonth() + 1;
+        me.selectedYear = selected.getFullYear();
+        me.selectedMonth = selected.getMonth() + 1;
+        me.tselected = forever ? '' : DateFormat(selected, formatter);
       }
     },
     updateYears() {
       let me = this;
       let year = me.year;
-      let min = me.currentMin;
-      let max = me.currentMax;
+      let min = me.getMix;
+      let max = me.getMax;
       let startYear = year - year % 10 - 1;
       let endYear = startYear + 11;
       let rows = [];
-
       for (let i = startYear; i <= endYear; i++) {
         rows.push({
           year: i,
@@ -313,16 +299,16 @@ export default {
           disabled: YearDisabled(i, min, max)
         });
       }
-      me.startYear = startYear
-      me.endYear = endYear
-      me.years = rows
+      me.startYear = startYear;
+      me.endYear = endYear;
+      me.years = rows;
     },
     updateMonths() {
-      let rows = [],
-        me = this,
+      let me = this,
+        rows = [],
         year = me.year,
-        min = me.currentMin,
-        max = me.currentMax;
+        min = me.getMix,
+        max = me.getMax;
       for (let i = 1; i <= 12; i++) {
         rows.push({
           month: i,
@@ -330,31 +316,30 @@ export default {
           disabled: MonthDisabled(year, i - 1, min, max)
         });
       }
-      me.months = rows
+      me.months = rows;
     },
     updateDays() {
       let me = this;
       let trs = [];
       let weekStart = me.weekStart;
-      let disabledWeeks = me.disabledWeeks;
-
+      let disabledWeeks = me.tdisabledWeeks;
       let year = me.year;
       let month = me.month;
       let startOffset = (7 - weekStart + new Date(year, month - 1, 1).getDay()) % 7;
       let tds = [];
       let days = GetNumOfDays(year, month),
         i;
+
       let preDays = GetNumOfDays(year, month - 1);
-      let max = me.currentMax
-      let min = me.currentMin
+      let max = me.getMax;
+      let min = me.getMix;
 
       let day, date, formatDay;
-
       // 日期不关注时分秒
-      let formatter = me.formatter
+      let formatter = me.formatter;
       formatter = formatter.slice(0, 10);
 
-      let selected = me.selected
+      let selected = me.selected;
       if (selected) {
         // 不限的情况下，selected = ''
         selected = DateFormat(selected, formatter);
@@ -406,7 +391,7 @@ export default {
           if (trs.length === 6) break;
         }
       }
-      me.days = trs
+      me.days = trs;
     },
     changeMonth(params) {
       let me = this,
@@ -425,37 +410,9 @@ export default {
           year--;
         }
       }
-      me.year = year
-      me.month = month
+      me.year = year;
+      me.month = month;
       me.updateDays();
-    },
-    choose(params) {
-      let me = this;
-      let month = me.month;
-      let turnMonth = params.toMonth !== month;
-      me.updateSelected(params.date);
-
-      if (turnMonth) {
-        me.updateYears();
-        me.updateMonths();
-      }
-      me.dateValue = params.date
-
-      me.updateDays();
-      this.$emit('change', {
-        date: me.dateValue,
-        time: me.timeValue
-      })
-    },
-    showMonths() {
-      let me = this;
-      me.showMonth = 1
-      me.updateMonths();
-    },
-    showYears() {
-      let me = this;
-      me.showYear = 1
-      me.updateYears();
     },
     changeYear(params) {
       let me = this;
@@ -465,20 +422,30 @@ export default {
       } else {
         year = year + (params.next ? 1 : -1);
       }
-      me.year = year
+      me.year = year;
       if (params.range) {
-        me.updateYears(true);
+        me.updateYears();
       } else {
-        me.updateMonths(true);
+        me.updateMonths();
       }
+    },
+    showMonths() {
+      let me = this;
+      me.showMonth = 1;
+      me.updateMonths();
+    },
+    showYears() {
+      let me = this;
+      me.showYear = 1;
+      me.updateYears();
     },
     pickYear(params) {
       let year = params.year;
       let me = this;
       let types = me.types;
       if (types.day || types.month) {
-        me.showYear = 0,
-          me.year = +year
+        me.showYear = 0;
+        me.year = +year;
         if (types.month) {
           me.updateMonths();
         } else {
@@ -487,18 +454,48 @@ export default {
       } else {
         me.updateSelected(year + '-01-01');
         me.updateYears();
+        me.fireEvent();
       }
     },
     pickMonth(params) {
       let month = params.month;
       let me = this;
       if (me.types.day) {
-        me.showMonth = 0
-        me.month = +month
+        me.showMonth = 0;
+        me.month = +month;
         me.updateDays();
       } else {
         me.updateSelected(me.year + '-' + month + '-01');
-        me.updateMonths(true);
+        me.updateMonths();
+        me.fireEvent();
+      }
+    },
+    choose(params) {
+      let me = this;
+      let month = me.month;
+      let turnMonth = params.toMonth !== month;
+      me.updateSelected(params.date);
+      if (turnMonth) {
+        me.updateYears();
+        me.updateMonths();
+      }
+      me.dateValue = params.date;
+      me.updateDays();
+      me.fireEvent();
+    },
+    fireEvent() {
+      let me = this;
+      if (me.types.day) {
+        if (me.timeType) {
+          me.$emit('change', {
+            date: me.dateValue,
+            time: me.timeType ? me.timeValue : null
+          })
+        }
+      } else {
+        me.$emit('change', {
+          date: me.selectedYear + (me.types.month ? '-' + ('0' + me.selectedMonth).slice(-2) : '')
+        })
       }
     }
   }

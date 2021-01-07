@@ -129,22 +129,10 @@ export default {
       type: Array,
       default() {
         return [
-          // "today", // 今日
-          // "yesterday", // 昨日
-          // "beforeYesterday", // 前天
-          // "preMonth", // 上月
-          // "preWeekSun", // 上周（周日至周六）
-          // "preWeekMon", // 上周（周一至周日）
-          // "lastestWeekSun", // 本周（周日开始，包含今日）
-          // "lastestWeekMon", // 本周（周一开始，包含今日）
-          // "passedThisMonth", // 本月（昨日开始算）
-          // "lastestThisMonth", // 本月（今日开始算）
-          // "passed{n}", // 过去 n 天（昨日开始算），n可为任意整数，passed1，passed15...
-          // "lastest{n}", // 最近 n 天（今日开始算），n可为任意整数，lastest1，lastest15...
-          // "dynamicStart{n}", // n天后结束（以开始时间为准动态计算），n可为任意整数，dynamicStart1，dynamicStart15...
-          // "dynamicEndThisMonth", // 开始时间到开始时间所在月月底
-          // "dynamicEndNextMonth", // 开始时间到开始时间次月月底
-          // "forever" //有开始时间，结束时间不限
+          "today",
+          "yesterday",
+          "beforeYesterday",
+          "forever"
         ];
       }
     },
@@ -171,7 +159,7 @@ export default {
     // 此外"all" = "year,month,day" = ""，不设置的时候默认年月日都显示
     dateType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // 时分秒选择类型：
     // 1.设置该值后会出现时间选择组件
@@ -180,7 +168,7 @@ export default {
     // 2.不设置无时分秒选择
     timeType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // date格式
     formatter: {

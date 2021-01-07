@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hn-datepicker"
+    :class="classes"
     v-clickoutside:calendars="hideDiv"
   >
     <div
@@ -71,15 +71,15 @@ export default {
       type: String,
       default: ''
     },
-    // 年月日选择类型 year,month,day
+    // 年月日选择类型  all = year,month,day
     dateType: {
       type: String,
-      default: ''
+      default: 'all'
     },
-    // 时分秒选择类型 hour,minute,second
+    // 时分秒选择类型 all = hour,minute,second
     timeType: {
       type: String,
-      default: ''
+      default: 'all'
     },
     // date格式
     formatter: {
@@ -126,7 +126,16 @@ export default {
       show: false
     };
   },
-  computed: {},
+  computed: {
+    classes() {
+      return [
+        'hn-datepicker',
+        {
+          [`hn-degree--disabled`]: this.disabled
+        }
+      ]
+    }
+  },
   mounted() {
   },
   methods: {
@@ -171,7 +180,6 @@ export default {
     },
     choose(params) {
       this.hideDiv()
-      this.$emit('update:selected', params.date)
       this.$emit('change', params)
     }
   }

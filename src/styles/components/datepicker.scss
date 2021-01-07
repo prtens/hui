@@ -14,6 +14,19 @@
       }
     }
   }
+  
+  @at-root .hn-degree--disabled {
+    &:hover,
+    .hn-trigger {
+      border-color: #e6e6e6;
+      background-color: #eee;
+      cursor: not-allowed;
+      color: #999;
+      .hn-trigger-arrow {
+        color: #ccc;
+    }
+    }
+  }
 
   @at-root .result {
     position: relative;
@@ -28,7 +41,7 @@
         left: 6px;
         width: 18px;
         height: 18px;
-        margin-top: -7px;
+        margin-top: -5px;
         color: $--color-text-c;
         text-align: left;
       }
