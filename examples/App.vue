@@ -110,7 +110,9 @@
         </li>
       </ul>
     </nav>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
