@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { isArray } from './util'
+import isArray from "lodash/isArray";
 
 let ByteLen = (str) => {
   // eslint-disable-next-line no-control-regex

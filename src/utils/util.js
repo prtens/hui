@@ -2,10 +2,6 @@ export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path);
 }
 
-export function isArray(val) {
-  return toString.call(val) === '[object Array]';
-}
-
 /**
  * 递归添加层级
  * @param {*} array
@@ -60,26 +56,6 @@ export function debounce(func, wait, immediate) {
 
     return result;
   };
-}
-
-export function getSlot(vm, name = 'default', data, optional) {
-  if (vm.$scopedSlots[name]) {
-    // return vm.$scopedSlots[name]!(data instanceof Function ? data() : data)
-    return vm.$scopedSlots[name];
-  } else if (vm.$slots[name] && (!data || optional)) {
-    return vm.$slots[name];
-  }
-  return undefined;
-}
-
-export function convertToUnit(str, unit = 'px') {
-  if (str == null || str === '') {
-    return undefined;
-  } else if (isNaN(+str)) {
-    return String(str);
-  } else {
-    return `${Number(str)}${unit}`;
-  }
 }
 
 export function deepClone(obj) {
