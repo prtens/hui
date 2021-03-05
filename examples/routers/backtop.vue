@@ -4,7 +4,7 @@
       v-for="(item, index) in arr"
       :key="index"
     >{{ item }}</div>
-    <h-back-top
+    <h-backtop
       :visibility-height="300"
       :back-position="0"
       transition-name="fade"

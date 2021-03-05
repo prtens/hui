@@ -19,6 +19,8 @@
 </template>
 
 <script type="text/babel">
+const types = ["primary", "danger", "warning", "success"]
+
 export default {
   name: "HDegree",
   props: {
@@ -35,7 +37,7 @@ export default {
     type: {
       type: String,
       validator(value) {
-        return ['primary', 'danger', 'warning', 'success'].indexOf(value) !== -1;
+        return types.indexOf(value) !== -1;
       },
       default: 'primary'
     },

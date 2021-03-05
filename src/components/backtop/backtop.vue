@@ -3,17 +3,17 @@
     <div
       v-show="visible"
       :style="customStyle"
-      class="hn-back-top"
+      class="hn-backtop"
       @click="backToTop"
     >
-      <h-svg-icon icon-class="back-top"/>
+      <h-svg-icon icon-class="backtop" />
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
 export default {
-  name: "HBackTop",
+  name: "HBacktop",
   props: {
     visibilityHeight: {
       type: Number,

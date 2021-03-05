@@ -1,29 +1,26 @@
 import Vue from 'vue'
-import {UIComponent} from './component'
+import { UIComponent } from './component'
 
-import {HnAffix} from './affix'
-import {HnAnchor, HnAnchorLink} from './anchor'
-import {HnArea} from './area'
-import {HnBackTop} from './back-top'
-import {HnBreadcrumb} from './breadcrumb'
-import {HnCalendars, HnCalendarsDatepicker, HnCalendarsRange, HnCalendarsRangepicker} from './calendars'
-import {HnChartsEntrance} from './charts-entrance'
-import {HnDegree} from './degree'
-import {HnDuration} from './duration'
-import {HnEmpty} from './empty'
-import {HnError} from './error'
-import {HnHamburger} from './hamburger'
-import {HnHour} from './hour'
-import {HnIndics} from './indics'
-import {HnList, HnListItem, HnListItemMeta} from './list'
-import {HnPagination} from './pagination'
-import {HnScreenfull} from './screenfull'
-import {HnSelect} from './select'
-import {HnSkeleton} from './skeleton'
-import {HnSvgIcon} from './svg-icon'
-import {HnTableTree} from './table-tree'
-import {HnTime} from './time'
-import {HnTip} from './tip'
+import { HnAnchor, HnAnchorLink } from './anchor'
+import { HnArea } from './area'
+import { HnBacktop } from './backtop'
+import { HnBreadcrumb } from './breadcrumb'
+import { HnChartsEntrance } from './charts-entrance'
+import { HnDegree } from './degree'
+import { HnDuration } from './duration'
+import { HnEmpty } from './empty'
+import { HnError } from './error'
+import { HnHamburger } from './hamburger'
+import { HnHour } from './hour'
+import { HnIndics } from './indics'
+import { HnList, HnListItem, HnListItemMeta } from './list'
+import { HnPagination } from './pagination'
+import { HnScreenfull } from './screenfull'
+import { HnSelect } from './select'
+import { HnSvgIcon } from './svg-icon'
+import { HnTableTree } from './table-tree'
+import { HnTime } from './time'
+import { HnTip } from './tip'
 
 export interface InstallationOptions {
   locale: any,
@@ -41,10 +38,6 @@ export function install(vue: typeof Vue, options: InstallationOptions): void
 export type Component = UIComponent
 
 /** Alert Component */
-export class Affix extends HnAffix {
-}
-
-/** Alert Component */
 export class Anchor extends HnAnchor {
 }
 
@@ -57,27 +50,11 @@ export class Area extends HnArea {
 }
 
 /** Back Top Component */
-export class BackTop extends HnBackTop {
+export class Backtop extends HnBacktop {
 }
 
 /** Breadcrumb Component */
 export class Breadcrumb extends HnBreadcrumb {
-}
-
-/** Calendars Component */
-export class Calendars extends HnCalendars {
-}
-
-/** Calendars Datepicker Component */
-export class CalendarsDatepicker extends HnCalendarsDatepicker {
-}
-
-/** Calendars Range Component */
-export class CalendarsRange extends HnCalendarsRange {
-}
-
-/** Calendars Rangepicker Component */
-export class CalendarsRangepicker extends HnCalendarsRangepicker {
 }
 
 /** Charts Entrance Component */
@@ -134,10 +111,6 @@ export class Screenfull extends HnScreenfull {
 
 /** Select Component */
 export class HSelect extends HnSelect {
-}
-
-/** Skeleton Component */
-export class Skeleton extends HnSkeleton {
 }
 
 /** Svg Icon Component */

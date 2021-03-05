@@ -1,4 +1,4 @@
-import {UIComponent} from './component'
+import { UIComponent } from './component'
 
 /** Multiple Selection Component */
 export declare class HnSelect extends UIComponent {
@@ -15,5 +15,5 @@ export declare class HnSelect extends UIComponent {
   props?: Object
 
   /***/
-  $emit(eventName: 'on-change', value: Array<any>): this
+  $emit(eventName: 'change', value: Array<any>): this
 }

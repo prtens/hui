@@ -28,7 +28,7 @@ import {
   scrollTop,
   findComponentsDownward,
   sharpMatcherRegx
-} from "../../utils/assist";
+} from "../../utils/anchor";
 import { on, off } from "../../utils/dom";
 
 export default {

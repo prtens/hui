@@ -47,6 +47,16 @@
       min="2"
       @change="changeSelected3"
     ></h-indics>
+
+    <p>只支持自定义数据，未操作过的情况下显示默认数据</p>
+    <h-indics
+      mode="custom"
+      :parents="tmp4.parents"
+      :fields="tmp4.fields"
+      :defaults="tmp4.defaults"
+      :customs="tmp4.customs"
+      @change="changeSelected4"
+    ></h-indics>
   </div>
 </template>
 
@@ -171,6 +181,61 @@ export default {
         custom: false, // 当前是为默认数据
         customs: [2, 3, 4, 5],
         defaults: [2, 3]
+      },
+      tmp4: {
+        fields: [{
+          text: '消耗',
+          value: 1,
+          pValue: 1,
+          tip: '消耗提示文案'
+        }, {
+          text: '展现量',
+          value: 2,
+          pValue: 1
+        }, {
+          text: '点击量',
+          value: 3,
+          pValue: 1
+        }, {
+          text: '点击率',
+          value: 4,
+          pValue: 1
+        }, {
+          text: '平均点击单价',
+          value: 5,
+          pValue: 1,
+          tip: '平均点击单价提示文案'
+        }, {
+          text: '点击转化率',
+          value: 6,
+          pValue: 2
+        }, {
+          text: '成交笔数',
+          value: 7,
+          pValue: 2
+        }, {
+          text: '淘积木平均时长',
+          value: 8,
+          tip: '淘积木页面平均停留时长提示文案',
+          pValue: 2
+        }, {
+          text: '投资回报率',
+          value: 9,
+          pValue: 2
+        }, {
+          text: '访问页面数',
+          value: 10,
+          pValue: 2
+        }],
+        parents: [{
+          text: '淘积木互动',
+          value: 1
+        }, {
+          text: '粉丝获取',
+          value: 2
+        }],
+        customs: [2, 3, 4, 5],
+        defaults: [2, 3]
       }
     };
   },
@@ -186,7 +251,11 @@ export default {
     },
     changeSelected3(val) {
       console.log("=========限制指标选择上限4（max=4） + 选择指标下限2（min=2） + 指标可排序，选择指标超过上限的时候，未选择指标禁止选择，每行展现指标个数（line-number=3）", val)
+    },
+    changeSelected4(val) {
+      console.log("只支持自定义数据，未操作过的情况下显示默认数据", val)
     }
+
   }
 };
 </script>

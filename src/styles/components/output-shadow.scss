@@ -80,10 +80,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &:hover {
-      background-color: $--calendar-bg;
-    }
-
     &.hn-output__link-active,
     &.hn-output__link-active:hover,
     &.hn-output__link-active:active,

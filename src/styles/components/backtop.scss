@@ -1,0 +1,20 @@
+@include b(backtop) {
+  position: fixed;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  z-index: $--index-backtop;
+  background: $--color-bg;
+  border-radius: $--border-radius-base;
+  box-shadow: 0 1px 3px rgba(18, 18, 18, .1);
+  color: #8590a6;
+
+  &:hover {
+    background: #d3d3d3;
+  }
+
+  .hn-svg-icon {
+    vertical-align: 0;
+  }
+}
+

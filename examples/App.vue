@@ -4,13 +4,19 @@
       <p>基础组件</p>
       <ul>
         <li>
-          <router-link to="/affix">Affix 图钉</router-link>
+          <router-link to="/Select">Select 选择器全选</router-link>
+        </li>
+        <li>
+          <router-link to="/tip">Tip 小贴士</router-link>
+        </li>
+        <li>
+          <router-link to="/drawer">drawer</router-link>
+        </li>
+        <li>
+          <router-link to="/dialog">dialog</router-link>
         </li>
         <li>
           <router-link to="/anchor">Anchor 锚点</router-link>
-        </li>
-        <li>
-          <router-link to="/backtop">Backtop 返回顶部</router-link>
         </li>
         <li>
           <router-link to="/breadcrumb">Breadcrumb 面包屑</router-link>
@@ -25,9 +31,6 @@
           <router-link to="/list">List 列表</router-link>
         </li>
         <li>
-          <router-link to="/Select">Select 选择器全选</router-link>
-        </li>
-        <li>
           <router-link to="/pagination">Pagination 分页</router-link>
         </li>
         <li>
@@ -40,22 +43,10 @@
           <router-link to="/table-tree">TableTree 表格树</router-link>
         </li>
         <li>
-          <router-link to="/tip">Tip 小贴士</router-link>
-        </li>
-        <li>
           <router-link to="/time">Time 相对时间</router-link>
         </li>
         <li>
           <router-link to="/Error">Error 错误提示页面</router-link>
-        </li>
-        <li>
-          <router-link to="/drawer">drawer</router-link>
-        </li>
-        <li>
-          <router-link to="/dialog">dialog</router-link>
-        </li>
-        <li>
-          <router-link to="/skeleton">skeleton</router-link>
         </li>
         <li>
           <router-link to="/clipboard">clipboard</router-link>
@@ -70,9 +61,6 @@
       <p>数据交互</p>
       <ul>
         <li>
-          <router-link to="/calendar">Calendar 日历（选择单日）</router-link>
-        </li>
-        <li>
           <router-link to="/indics">Indics 指标默认配置及选择排序</router-link>
         </li>
         <li>
@@ -85,18 +73,6 @@
           <router-link to="/addinputtag">addtaginput 添加标签</router-link>
         </li>
       </ul>
-      <p>样式</p>
-      <ul>
-        <li>
-          <router-link to="/degree">Degree 刻度型进度比例</router-link>
-        </li>
-        <li>
-          <router-link to="/effectsicon">effects icon 打标</router-link>
-        </li>
-        <li>
-          <router-link to="/Empty">Empty 空状态</router-link>
-        </li>
-      </ul>
       <p>业务组件</p>
       <ul>
         <li>
@@ -107,6 +83,21 @@
         </li>
         <li>
           <router-link to="/hour">hour 时段选择</router-link>
+        </li>
+      </ul>
+      <p>样式</p>
+      <ul>
+        <li>
+          <router-link to="/degree">Degree 刻度型进度比例</router-link>
+        </li>
+        <li>
+          <router-link to="/effectsicon">effects icon 打标</router-link>
+        </li>
+      </ul>
+      <p>其它组件</p>
+      <ul>
+        <li>
+          <router-link to="/backtop">Backtop 返回顶部</router-link>
         </li>
       </ul>
     </nav>

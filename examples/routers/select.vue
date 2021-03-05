@@ -8,7 +8,7 @@
         value: 'id',
         label: 'label'
       }"
-      @on-change="handleChange"
+      @change="handleChange"
     />
   </div>
 </template>
@@ -17,7 +17,7 @@
 import HSelect from '../../src/components/select/select';
 
 export default {
-  components: {HSelect},
+  components: { HSelect },
   data() {
     return {
       options: [],

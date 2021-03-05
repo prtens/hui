@@ -24,16 +24,12 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
-      path: '/affix',
-      component: resolve => require(['./routers/affix.vue'], resolve)
-    },
-    {
       path: '/anchor',
       component: resolve => require(['./routers/anchor.vue'], resolve)
     },
     {
       path: '/backtop',
-      component: resolve => require(['./routers/back-top.vue'], resolve)
+      component: resolve => require(['./routers/backtop.vue'], resolve)
     },
     {
       path: '/breadcrumb',
@@ -86,14 +82,6 @@ const router = new VueRouter({
       component: resolve => require(['./routers/error.vue'], resolve)
     },
     {
-      path: '/Empty',
-      component: resolve => require(['./routers/empty.vue'], resolve)
-    },
-    {
-      path: '/calendar',
-      component: resolve => require(['./routers/calendar.vue'], resolve)
-    },
-    {
       path: '/indics',
       component: resolve => require(['./routers/indics.vue'], resolve)
     },
@@ -104,10 +92,6 @@ const router = new VueRouter({
     {
       path: '/dialog',
       component: resolve => require(['./routers/dialog.vue'], resolve)
-    },
-    {
-      path: '/skeleton',
-      component: resolve => require(['./routers/skeleton.vue'], resolve)
     },
     {
       path: '/clipboard',

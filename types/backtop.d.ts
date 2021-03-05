@@ -1,7 +1,7 @@
 import { UIComponent } from './component'
 
 /** Back Top Component */
-export declare class HnBackTop extends UIComponent {
+export declare class HnBacktop extends UIComponent {
   /**
    *
    */

@@ -98,7 +98,7 @@ export default {
       }
       this.tmpSelects = tmpSelects
 
-      this.$emit('on-change', tmpSelects)
+      this.$emit('change', tmpSelects)
     },
     changeSelect(val) {
       let checked = false
@@ -107,7 +107,7 @@ export default {
       }
       this.checked = checked
 
-      this.$emit('on-change', this.tmpSelects)
+      this.$emit('change', this.tmpSelects)
     }
   }
 };

@@ -20,6 +20,7 @@
         <label class="hn-area__all-inner">
           <el-checkbox
             v-model="type.checked"
+            :indeterminate="(!type.checked && (type.count > 0))"
             @change="changeAll(typeIndex)"
           ></el-checkbox>
           <span class="hn-area__all-checked">全选 - {{ type.name }}</span>
@@ -53,6 +54,7 @@
                     <label>
                       <el-checkbox
                         v-model="province.checked"
+                        :indeterminate="(!province.checked && province.hasCity && (province.count > 0))"
                         @change="changeOne({checked:province.checked,typeIndex:typeIndex,province:province.id})"
                       ></el-checkbox>
                       <span :class="`hn-area__label-name ${province.highlight ? 'hn-area__highlight' : ''}`">{{
@@ -105,6 +107,9 @@ import * as Atds from './data'
 export default {
   name: "HArea",
   props: {
+    // 当前选中值
+    // 每个省份和城市都有各自的id
+    // 若选择了省份，则其所有城市id都不传
     selected: {
       type: Array,
       default() {
@@ -155,19 +160,27 @@ export default {
       if (data.length === 0) {
         let commonAreas = deepClone(Atds.default.commonAreas),
           commonAllChecked = true,
+          commonAllCount = 0,
           lastProvinces = deepClone(Atds.default.lastProvinces),
-          lastAllChecked = true;
+          lastAllChecked = true,
+          lastAllCount = 0
 
         commonAreas.forEach(area => {
           area.provinces.forEach(province => {
             that.initProvince(province, selected, cityVisible);
-            commonAllChecked = commonAllChecked && province.checked;
+            commonAllChecked = commonAllChecked && province.checked
+            if (province.checked || province.count > 0) {
+              commonAllCount++;
+            }
           })
         })
 
         lastProvinces.forEach(province => {
-          that.initProvince(province, selected, cityVisible);
-          lastAllChecked = lastAllChecked && province.checked;
+          that.initProvince(province, selected, cityVisible)
+          lastAllChecked = lastAllChecked && province.checked
+          if (province.checked || province.count > 0) {
+            lastAllCount++;
+          }
         })
 
         types = [
@@ -176,12 +189,14 @@ export default {
             id: 'more',
             half: true,
             checked: commonAllChecked,
+            count: commonAllCount,
             groups: [commonAreas.splice(0, 7), commonAreas]
           },
           {
             name: '非常用地域',
             id: 'less',
             checked: lastAllChecked,
+            count: lastAllCount,
             groups: [
               [{
                 provinces: lastProvinces
@@ -191,8 +206,9 @@ export default {
       } else {
         // 自定义数据
         types = data.map((item, index) => {
-          let allChecked = true;
-          let provinces = item.provinces;
+          let allChecked = true,
+            allCount = 0,
+            provinces = item.provinces;
           provinces.forEach((province, pi) => {
             if (pi === provinces.length - 1) {
               // 可能出现数据超长的情况，最后一个数据特殊处理下
@@ -200,13 +216,15 @@ export default {
               province.lineNumberMulti = (remainder > 0) ? (that.lineNumber - remainder + 1) : 1;
             }
             that.initProvince(province, selected, cityVisible);
-            allChecked = allChecked && province.checked;
+            allChecked = allChecked && province.checked
+            allCount = allCount + province.count
           })
 
           return {
             name: item.name,
             id: index,
             checked: allChecked,
+            count: allCount,
             groups: [
               [{
                 provinces: item.provinces
@@ -215,6 +233,7 @@ export default {
           }
         })
       }
+      console.log(types);
 
       that.types = types
       that.cityVisible = cityVisible
@@ -264,7 +283,8 @@ export default {
       let types = that.types;
       let type = types[typeIndex]
 
-      let allChecked = true;
+      let allChecked = true,
+        allCount = 0
       type.groups.forEach(group => {
         group.forEach(area => {
           area.provinces.forEach(province => {
@@ -293,11 +313,15 @@ export default {
                 })
               }
             }
-            allChecked = allChecked && province.checked;
+            allChecked = allChecked && province.checked
+            if (province.checked || province.count > 0) {
+              allCount++
+            }
           })
         })
       })
-      types[typeIndex].checked = allChecked;
+      types[typeIndex].checked = allChecked
+      types[typeIndex].count = allCount
       that.fire();
     },
 
@@ -333,7 +357,6 @@ export default {
       })
 
       province.count = count;
-
       province.hasCity = (province.cities.length > 0) && cityVisible;
     },
 
