@@ -4,7 +4,7 @@
       :total="page.totalCount"
       :page.sync="page.pageNum"
       :limit.sync="page.pageSize"
-      @pagination="getList"
+      @change="getList"
     />
   </div>
 </template>
