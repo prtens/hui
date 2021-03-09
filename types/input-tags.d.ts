@@ -1,7 +1,7 @@
 import { UIComponent } from './component'
 
-/** Anchor Component */
-export declare class HnAddInputTag extends UIComponent {
+/** InputTag Component */
+export declare class HnInputTag extends UIComponent {
   value?: Array<any>
 
   // 没有标签时显示的占位符
