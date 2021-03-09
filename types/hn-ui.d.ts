@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { UIComponent } from './component'
 
+import { HnInputTag } from './input-tags'
 import { HnAnchor, HnAnchorLink } from './anchor'
 import { HnArea } from './area'
 import { HnBacktop } from './backtop'
@@ -8,7 +9,6 @@ import { HnBreadcrumb } from './breadcrumb'
 import { HnChartsEntrance } from './charts-entrance'
 import { HnDegree } from './degree'
 import { HnDuration } from './duration'
-import { HnEmpty } from './empty'
 import { HnError } from './error'
 import { HnHamburger } from './hamburger'
 import { HnHour } from './hour'
@@ -69,10 +69,6 @@ export class Degree extends HnDegree {
 export class Duration extends HnDuration {
 }
 
-/** Empty Component */
-export class Empty extends HnEmpty {
-}
-
 /** Error Component */
 export class Error extends HnError {
 }
@@ -87,6 +83,10 @@ export class Hour extends HnHour {
 
 /** Indics Component */
 export class Indics extends HnIndics {
+}
+
+/** InputTag Component */
+export class InputTag extends HnInputTag {
 }
 
 /** List Component */

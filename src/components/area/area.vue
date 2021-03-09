@@ -233,7 +233,6 @@ export default {
           }
         })
       }
-      console.log(types);
 
       that.types = types
       that.cityVisible = cityVisible
@@ -329,11 +328,10 @@ export default {
       let that = this;
       let selected = that.getSelected();
       let values = selected.map(item => item.id);
-      let aa = {
+      this.$emit("change", {
         selected,
         values
-      }
-      this.$emit("on-change", selected, values);
+      })
     },
 
     initProvince(province, selected, cityVisible) {

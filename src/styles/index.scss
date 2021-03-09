@@ -1,8 +1,11 @@
-@import "./base";
+@import "./common/var";
+@import "./common/_element";
+@import "./common/transition.scss";
+@import "./common/normalize.scss";
 @import "./mixins/mixins";
 @import "./mixins/button";
 @import "./mixins/utils";
-@import "./components/add-input-tags";
+@import "./components/affix";
 @import "./components/anchor";
 @import "./components/area";
 @import "./components/backtop";
@@ -17,6 +20,7 @@
 @import "./components/hamburger";
 @import "./components/hour";
 @import "./components/indics";
+@import "./components/input-tags";
 @import "./components/list";
 @import "./components/output-shadow";
 @import "./components/select";

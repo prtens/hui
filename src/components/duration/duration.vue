@@ -551,6 +551,7 @@ export default {
 
       // TODO get Value
       console.log(this.val())
+      // this.$emit('change', this.val())
     },
 
     cancelSetting() {

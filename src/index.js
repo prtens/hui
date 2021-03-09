@@ -1,4 +1,4 @@
-import AddInputTag from './components/add-input-tags';
+import Affix from './components/affix';
 import Anchor from './components/anchor';
 import AnchorLink from './components/anchor-link';
 import Area from './components/area';
@@ -13,6 +13,7 @@ import Error from './components/error';
 import Hamburger from './components/hamburger';
 import Hour from './components/hour';
 import Indics from './components/indics';
+import InputTag from './components/input-tags';
 import List from './components/list';
 import Pagination from './components/pagination';
 import Screenfull from './components/screenfull';
@@ -28,7 +29,8 @@ const ListItem = List.Item;
 const ListItemMeta = List.Item.Meta;
 
 const components = [
-  AddInputTag,
+  InputTag,
+  Affix,
   Anchor,
   AnchorLink,
   Area,

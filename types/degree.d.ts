@@ -1,4 +1,4 @@
-import {UIComponent} from './component'
+import { UIComponent } from './component'
 
 /** Degree Component */
 export declare class HnDegree extends UIComponent {

@@ -3,7 +3,7 @@
     :is="wrapperComponent"
     :offset-top="offsetTop"
     :offset-bottom="offsetBottom"
-    @on-change="handleAffixStateChange"
+    @change="handleAffixStateChange"
   >
     <div
       :class="`${prefix}__wrapper`"
@@ -23,7 +23,7 @@
   </component>
 </template>
 
-<script>
+<script type="text/babel">
 import {
   scrollTop,
   findComponentsDownward,
@@ -237,7 +237,7 @@ export default {
       this.init();
     },
     currentLink(newHref, oldHref) {
-      this.$emit("on-change", newHref, oldHref);
+      this.$emit("change", newHref, oldHref);
     }
   },
   mounted() {

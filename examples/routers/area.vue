@@ -2,13 +2,13 @@
   <div>
     <h-area
       :selected.sync="selected"
-      @on-change="change"
+      @change="change"
     />
 
     <h-area
       :selected.sync="selected"
       :city="false"
-      @on-change="change"
+      @change="change"
     />
   </div>
 </template>
@@ -21,9 +21,8 @@ export default {
     };
   },
   methods: {
-    change(selected, values) {
-      console.log(selected)
-      console.log(values)
+    change(areas) {
+      console.log(areas)
     }
   }
 };

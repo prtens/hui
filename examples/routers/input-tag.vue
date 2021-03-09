@@ -3,13 +3,14 @@
 <template>
   <div style="width: 50%">
     <p>taginput 标签选择</p>
-    <h-add-input-tag
+    <h-input-tag
       :limit="limit"
       v-model="tags"
       :placeholder="placeholder"
       :read-only="readOnly"
       :validate="validate"
       :add-tag-on-blur="addTagOnBlur"
+      @input="changeInput"
     />
   </div>
 
@@ -26,12 +27,10 @@ export default {
       validate: ""
     };
   },
-  watch: {
-    tags(val) {
-      console.log(val)
-    }
-  },
   methods: {
+    changeInput(tags) {
+      console.log('========', tags);
+    }
   }
 };
 </script>

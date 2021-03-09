@@ -38,7 +38,6 @@
 </template>
 
 <script type="text/babel">
-
 const validators = {
   email: new RegExp(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -54,24 +53,29 @@ const validators = {
 };
 
 export default {
-  name: "HAddInputTag",
+  name: "HInputTag",
   props: {
+    // 要在输入中呈现的标签
     value: {
       type: Array,
       default: () => []
     },
+    // 没有标签时显示的占位符
     placeholder: {
       type: String,
       default: ""
     },
+    // 将输入设置为只读
     readOnly: {
       type: Boolean,
       default: false
     },
+    // 验证
     validate: {
       type: String | Function | Object,
       default: ""
     },
+    // 添加的 keys
     addTagOnKeys: {
       type: Array,
       default: function () {
@@ -86,10 +90,12 @@ export default {
       type: Boolean,
       default: false
     },
+    // 设置标签数量限制
     limit: {
       type: Number,
       default: -1
     },
+    // 允许重复标签
     allowDuplicates: {
       type: Boolean,
       default: false

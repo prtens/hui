@@ -24,6 +24,10 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
+      path: '/affix',
+      component: resolve => require(['./routers/affix.vue'], resolve)
+    },
+    {
       path: '/anchor',
       component: resolve => require(['./routers/anchor.vue'], resolve)
     },
@@ -126,9 +130,9 @@ const router = new VueRouter({
         require(['./routers/editor.vue'], resolve)
     },
     {
-      path: '/addinputtag',
+      path: '/input-tag',
       component: resolve =>
-        require(['./routers/addinputtag.vue'], resolve)
+        require(['./routers/input-tag.vue'], resolve)
     },
     {
       path: '/hour',

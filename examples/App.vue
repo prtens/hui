@@ -4,6 +4,9 @@
       <p>基础组件</p>
       <ul>
         <li>
+          <router-link to="/affix">Affix 图钉</router-link>
+        </li>
+        <li>
           <router-link to="/Select">Select 选择器全选</router-link>
         </li>
         <li>
@@ -70,7 +73,7 @@
           <router-link to="/editor">editor 可编辑内容</router-link>
         </li>
         <li>
-          <router-link to="/addinputtag">addtaginput 添加标签</router-link>
+          <router-link to="/input-tag">input-tag 添加标签</router-link>
         </li>
       </ul>
       <p>业务组件</p>

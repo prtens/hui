@@ -3,18 +3,18 @@
     <h-hour
       :selected.sync="selected"
       :groups="[1234567]"
-      @on-change="change"
+      @change="change"
     />
 
     <h-hour
       :selected.sync="selected"
-      @on-change="change"
+      @change="change"
     />
 
     <h-hour
       :selected.sync="selected"
       :groups="[1,2,3,4,5,6,7]"
-      @on-change="change"
+      @change="change"
     />
   </div>
 </template>
@@ -36,9 +36,8 @@ export default {
     init() {
       this.selected = converse(this.tmp)
     },
-    change(selected, values) {
-      console.log(selected)
-      console.log(reverse(selected))
+    change(selectedValue) {
+      console.log(selectedValue)
     }
   }
 };

@@ -22,4 +22,6 @@ export declare class HnArea extends UIComponent {
    * default 6
    */
   lineNumber?: Number
+
+  $emit(eventName: 'change', selectedValue: Object): this
 }

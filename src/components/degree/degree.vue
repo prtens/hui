@@ -30,10 +30,6 @@ export default {
       required: true
     },
     // 展示类型
-    // danger：红色错误类型提示
-    // warning：黄色警告类型提示
-    // success：绿色通过类型提示
-    // primary：品牌色图标强调提示（默认）
     type: {
       type: String,
       validator(value) {

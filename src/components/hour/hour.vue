@@ -290,7 +290,7 @@ export default {
       let selected = that.val();
       let values = selected.map(item => item.id);
 
-      this.$emit("on-change", selected, values);
+      this.$emit("change", selected);
     },
 
     /**

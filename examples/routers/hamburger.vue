@@ -2,7 +2,7 @@
   <div>
     <h-hamburger
       :is-active="opened"
-      @toggleClick="toggleSideBar"
+      @change="toggleSideBar"
     />
   </div>
 </template>
@@ -15,9 +15,9 @@ export default {
     };
   },
   methods: {
-    toggleSideBar() {
-      this.opened = !this.opened;
-      console.log(this.opened);
+    toggleSideBar(value) {
+      this.opened = value;
+      console.log(value);
     }
   }
 };

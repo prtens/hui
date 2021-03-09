@@ -3,41 +3,41 @@ import { UIComponent } from './component'
 /** Anchor Component */
 export declare class HnAnchor extends UIComponent {
   /** 固定模式 */
-  affix?: boolean
+  affix?: Boolean
 
   /** 距离窗口顶部达到指定偏移量后触发 */
-  offsetTop?: number
+  offsetTop?: Number
 
   /** 距离窗口底部达到指定偏移量后触发 */
-  offsetBottom?: number
+  offsetBottom?: Number
 
   /** 锚点区域边界，单位：px */
-  bounds?: number
+  bounds?: Number
 
   /** 点击滚动的额外距离 */
-  scrollOffset?: number
+  scrollOffset?: Number
 
   /** 指定滚动的容器 */
-  container?: string | HTMLElement
+  container?: String | HTMLElement
 
   /** 是否显示小圆点  */
-  showInk?: boolean
+  showInk?: Boolean
 
   /** 点击锚点时触发，返回链接 */
-  $emit(eventName: 'on-select', href: string): this
+  $emit(eventName: 'select', href: String): this
 
   /** 链接改变时触发，返回新链接和旧链接 */
-  $emit(eventName: 'on-change', []): this
+  $emit(eventName: 'change', []): this
 }
 
 /** Anchor Link Component */
 export declare class HnAnchorLink extends UIComponent {
   /** 锚点链接 */
-  href?: string
+  href?: String
 
   /** 文字内容  */
-  title?: string
+  title?: String
 
   /** 点击滚动的额外距离  */
-  scrollOffset?: number
+  scrollOffset?: Number
 }

@@ -1,4 +1,4 @@
-import {UIComponent} from './component'
+import { UIComponent } from './component'
 
 /** Hour Component */
 export declare class HnHour extends UIComponent {
@@ -51,4 +51,6 @@ export declare class HnHour extends UIComponent {
    *  右下角提示文案信息
    */
   tip?: String
+
+  $emit(eventName: 'change', selectedValue: Array<any>): this
 }

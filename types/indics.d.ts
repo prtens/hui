@@ -1,4 +1,4 @@
-import {UIComponent} from './component'
+import { UIComponent } from './component'
 
 /** Indics Component */
 export declare class HnIndics extends UIComponent {
@@ -63,4 +63,6 @@ export declare class HnIndics extends UIComponent {
    * 浮层内标题旁提示文案
    */
   tip?: String
+
+  $emit(eventName: 'change', selectedValue: Array<any>): this
 }

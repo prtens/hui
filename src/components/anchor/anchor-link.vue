@@ -7,13 +7,15 @@
       :data-scroll-offset="scrollOffset"
       :data-href="href"
       @click.prevent="goAnchor"
-      :title="title">
+      :title="title"
+    >
       {{ title }}
     </el-link>
     <slot></slot>
   </div>
 </template>
-<script>
+
+<script type="text/babel">
 export default {
   name: 'HAnchorLink',
   inject: ['anchorCom'],
@@ -50,7 +52,7 @@ export default {
       this.currentLink = this.href;
       this.anchorCom.handleHashChange();
       this.anchorCom.handleScrollTo();
-      this.anchorCom.$emit('on-select', this.href);
+      this.anchorCom.$emit('select', this.href);
       const isRoute = this.$router;
       if (isRoute) {
         this.$router.push(this.href, () => {

@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     toggleClick() {
-      this.$emit("toggleClick");
+      this.$emit("change", !this.isActive)
     }
   }
 };
