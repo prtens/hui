@@ -314,12 +314,10 @@ export default {
         let t = $(dragStartEvent.currentTarget);
         that.toggle(t.data('period'), t.data('hour'), selected);
       })
-
       $(document.body).off('mouseup.drag').on('mouseup.drag', (dragEndEvent) => {
         siblings.off('mouseenter.drag');
         that.fire();
       })
-
       event.preventDefault();
       return false;
     },

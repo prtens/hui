@@ -73,22 +73,22 @@
                         @click="toggleCity({province:province.id})"
                       ></i>
                     </template>
-                  </div>
-                  <div
-                    :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
-                    class="hn-area__cities hn-shadow"
-                  >
-                    <label
-                      class="hn-area__city"
-                      v-for="(city, cityIndex) of province.cities"
-                      :key="cityIndex"
+                    <div
+                      class="hn-area__cities hn-shadow"
+                      :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
                     >
-                      <el-checkbox
-                        v-model="city.checked"
-                        @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
-                      ></el-checkbox>
-                      <span :class="`hn-area__label-name ${city.highlight? 'hn-area__highlight' : ''}`">{{ city.name }}</span>
-                    </label>
+                      <label
+                        class="hn-area__city"
+                        v-for="(city, cityIndex) of province.cities"
+                        :key="cityIndex"
+                      >
+                        <el-checkbox
+                          v-model="city.checked"
+                          @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
+                        ></el-checkbox>
+                        <span :class="`hn-area__label-name ${city.highlight? 'hn-area__highlight' : ''}`">{{ city.name }}</span>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -147,6 +147,9 @@ export default {
     this.init()
   },
   methods: {
+    handleClickOutside() {
+      this.showProvinceId = -1
+    },
     init() {
       let that = this
       let selected = (that.selected || []).map(id => {
@@ -243,14 +246,14 @@ export default {
       let that = this;
       let { province: provinceId } = event,
         oldProvince = that.showProvinceId;
+      console.log(event);
+      console.log(oldProvince);
 
       if (provinceId === oldProvince) {
         that.showProvinceId = -1
       } else {
         that.showProvinceId = provinceId
       }
-
-      console.log(that.showProvinceId)
     },
 
     changeAll(typeIndex) {
@@ -258,6 +261,7 @@ export default {
       let { types } = that;
       let type = types[typeIndex];
       let checked = type.checked;
+      let allCount = 0;
       type.groups.forEach(group => {
         group.forEach(area => {
           area.provinces.forEach(province => {
@@ -268,9 +272,13 @@ export default {
             })
 
             province.count = checked ? cities.length : 0;
+            if (province.checked || province.count > 0) {
+              allCount++;
+            }
           })
         })
       })
+      type.count = allCount;
 
       that.fire();
     },
