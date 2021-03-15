@@ -67,28 +67,33 @@
                           ({{ province.count }})</span>
                       </span>
                     </label>
-                    <template v-if="province.hasCity">
-                      <i
-                        :class="`el-icon-arrow-down hn-area--arrow ${province.hasCity && (province.id == showProvinceId) ? 'hn-area--expand' : ''}`"
-                        @click="toggleCity({province:province.id})"
-                      ></i>
-                    </template>
-                    <div
-                      class="hn-area__cities hn-shadow"
-                      :style="`display: ${(province.hasCity && (province.id == showProvinceId)) ? 'block' : 'none'}`"
+                    <el-popover
+                      v-if="province.hasCity"
+                      v-model="province.cityShow"
+                      placement="bottom"
+                      width="240"
+                      trigger="click"
                     >
-                      <label
-                        class="hn-area__city"
-                        v-for="(city, cityIndex) of province.cities"
-                        :key="cityIndex"
-                      >
-                        <el-checkbox
-                          v-model="city.checked"
-                          @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
-                        ></el-checkbox>
-                        <span :class="`hn-area__label-name ${city.highlight? 'hn-area__highlight' : ''}`">{{ city.name }}</span>
-                      </label>
-                    </div>
+                      <div class="hn-area__cities">
+                        <label
+                          class="hn-area__city"
+                          v-for="(city, cityIndex) of province.cities"
+                          :key="cityIndex"
+                        >
+                          <el-checkbox
+                            v-model="city.checked"
+                            @change="changeOne({checked:city.checked,typeIndex:typeIndex,province:province.id,city:city.id})"
+                          ></el-checkbox>
+                          <span :class="`hn-area__label-name ${city.highlight? 'hn-area__highlight' : ''}`">{{ city.name }}</span>
+                        </label>
+                      </div>
+                      <span slot="reference">
+                        <i
+                          :class="`el-icon-arrow-down hn-area--arrow ${province.hasCity && (province.id == showProvinceId) ? 'hn-area--expand' : ''}`"
+                          @click="toggleCity({province:province.id})"
+                        ></i>
+                      </span>
+                    </el-popover>
                   </div>
                 </div>
               </div>
@@ -147,9 +152,6 @@ export default {
     this.init()
   },
   methods: {
-    handleClickOutside() {
-      this.showProvinceId = -1
-    },
     init() {
       let that = this
       let selected = (that.selected || []).map(id => {
@@ -246,8 +248,6 @@ export default {
       let that = this;
       let { province: provinceId } = event,
         oldProvince = that.showProvinceId;
-      console.log(event);
-      console.log(oldProvince);
 
       if (provinceId === oldProvince) {
         that.showProvinceId = -1
@@ -361,9 +361,9 @@ export default {
           count++;
         }
       })
-
       province.count = count;
       province.hasCity = (province.cities.length > 0) && cityVisible;
+      province.cityShow = false;
     },
 
     search() {
@@ -378,6 +378,7 @@ export default {
           group.forEach(area => {
             area.provinces.forEach((province, pk) => {
               province.highlight = false;
+              province.cityShow = false
               if (province.name === searchName) {
                 provinceId = province.id;
                 province.highlight = true;
@@ -391,6 +392,7 @@ export default {
                     provinceId = province.id;
                     isCity = true;
                     city.highlight = true;
+                    province.cityShow = true
                   }
                 })
               }
@@ -398,8 +400,7 @@ export default {
           })
         })
       })
-      // console.log(types)
-
+      console.log(types)
       that.showProvinceId = isCity ? provinceId : -1
     },
 

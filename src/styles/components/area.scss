@@ -38,7 +38,6 @@
     }
   }
 
-
   @include e(group) {
     position: relative;
     padding-left: 25px;
@@ -97,33 +96,22 @@
           }
         }
 
-        .hn-area__cities {
-          position: absolute;
-          top: $--area-height;
-          left: 0; // -72px;
-          z-index: $--index-area;
-          width: 240px;
-          padding: 10px;
-          border-radius: $--border-radius-base;
-          background-color: $--color-white;
-
+        @at-root .hn-area__cities {
+          display: inline-block;
           .hn-area__city {
             float: left;
-            width: 49%;
+            width: 48%;
             height: 32px;
+            margin-right: 2%;
             line-height: 32px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             cursor: pointer;
-
-            &:nth-child(even) {
-              margin-right: 0;
-            }
           }
         }
 
-        .hn-area__highlight {
+        @at-root .hn-area__highlight {
           background-color: $--color-primary-light-9;
         }
 
@@ -131,7 +119,7 @@
           display: inline-block;
           position: relative;
           padding-right: 26px;
-          border-radius: $--border-radius-base;;
+          border-radius: $--border-radius-base;
           transition: all 0.25s;
 
           .hn-area__count {
