@@ -1,7 +1,10 @@
 <template>
   <div>
     <p>刻度型展示值取整</p>
-    <h-degree :num="100" />
+    <h-degree
+      :num="80"
+      color="rgb(81, 163, 0)"
+    />
 
     <h-degree
       type="danger"

@@ -1,23 +1,3 @@
-<template>
-  <div class="hn-degree">
-    <div class="hn-degree__bg">
-      <span
-        class="hn-degree--box"
-        v-for="i in 10"
-        :key="i"
-      ></span>
-    </div>
-    <div class="hn-degree__on">
-      <span
-        v-for="i in getDegree"
-        :key="i"
-        :class="classes"
-        :style="styles(i - 1)"
-      ></span>
-    </div>
-  </div>
-</template>
-
 <script type="text/babel">
 const types = ["primary", "danger", "warning", "success"]
 
@@ -44,20 +24,19 @@ export default {
       default: 0.08
     },
     // 自定义颜色
-    color: String
+    color: {
+      type: String
+    }
   },
   data() {
     return {
-      degree: null
+      degree: 0
     };
   },
   computed: {
     classes() {
       return [
-        'hn-degree--box',
-        {
-          [`hn-degree--${this.type}`]: !this.color
-        }
+        'hn-degree'
       ]
     },
     getDegree() {
@@ -73,11 +52,11 @@ export default {
       return Math.round(num / 10);
     }
   },
+
   methods: {
     styles(i) {
       let base = +this.opacity;
       let opacity = base;
-      console.log(i)
       if (i >= 1) {
         opacity = base + i * (1 - base) / 9
       }
@@ -85,7 +64,49 @@ export default {
         opacity: opacity,
         'background-color': this.color
       }
+    },
+    genSpan() {
+      let spanChild = []
+      const degree = this.getDegree
+
+      for (let i = 0; i < degree; i += 1) {
+        spanChild.push(this.$createElement(
+          'span',
+          {
+            class: [
+              'hn-degree--bg',
+              {
+                [`hn-degree--${this.type}`]: !this.color
+              }
+            ],
+            style: this.styles(i)
+          },
+          this.$slots.default
+        ))
+      }
+
+      for (let i = degree; i < 10; i += 1) {
+        spanChild.push(this.$createElement(
+          'span',
+          {
+            class: 'hn-degree--bg'
+          },
+          this.$slots.default
+        ))
+      }
+
+      return spanChild
     }
+  },
+
+  render(h) {
+    return h(
+      'div',
+      {
+        class: this.classes
+      },
+      [this.genSpan()]
+    )
   }
 };
 </script>

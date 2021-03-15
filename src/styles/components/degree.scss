@@ -3,42 +3,31 @@
   line-height: 0;
   display: inline-block;
 
-  @include m(box) {
-    display: inline-block;
+  @include m(bg) {
+    float: left;
     width: 4px;
     height: 14px;
     margin-right: 3px;
     border-radius: 2px;
-
+    background-color: $--degree-bg;
     &:last-child {
       margin-right: 0;
     }
-
-    &.hn-degree--primary {
-      background-color: $--color-primary;
-    }
-
-    &.hn-degree--danger {
-      background-color: $--color-danger;
-    }
-
-    &.hn-degree--warning {
-      background-color: $--color-warning;
-    }
-
-    &.hn-degree--success {
-      background-color: $--color-success;
-    }
   }
 
-  @include e(bg) {
-    .hn-degree--box {
-      background-color: $--degree-bg;
-    }
+  @include m(primary) {
+    background-color: $--color-primary;
   }
-  @include e(on) {
-    position: absolute;
-    top: 0;
-    left: 0;
+
+  @include m(danger) {
+    background-color: $--color-danger;
+  }
+
+  @include m(warning) {
+    background-color: $--color-warning;
+  }
+
+  @include m(success) {
+    background-color: $--color-success;
   }
 }
