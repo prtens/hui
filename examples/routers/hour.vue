@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { converse, reverse } from '../../src/utils/timeStep'
+import { converse, reverse } from '../../src/utils/hour'
 export default {
   data() {
     return {
