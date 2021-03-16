@@ -1,4 +1,4 @@
-import { deepClone } from "../../utils/util";
+import { deepClone } from 'hn-utils/lib/common'
 
 // 非常用地域，省
 const LastProvinces = [

@@ -52,7 +52,6 @@ export default {
       return Math.round(num / 10);
     }
   },
-
   methods: {
     styles(i) {
       let base = +this.opacity;
@@ -98,7 +97,6 @@ export default {
       return spanChild
     }
   },
-
   render(h) {
     return h(
       'div',

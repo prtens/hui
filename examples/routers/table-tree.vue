@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { addLevel } from "../../src/utils/util";
+import { addLevel } from 'hn-utils/lib/array';
 
 export default {
   data() {

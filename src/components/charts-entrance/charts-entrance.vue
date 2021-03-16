@@ -7,7 +7,7 @@
 
 <script type="text/babel">
 import echarts from "echarts";
-import { debounce } from "../../utils/util";
+import { debounce } from 'hn-utils/lib/common';
 
 export default {
   name: "HChartsEntrance",

@@ -17,7 +17,7 @@
 </template>
 
 <script type="text/babel">
-import { scrollTo } from "../../utils/scrollTo";
+import { scrollTo } from "hn-utils/lib/scrollTo";
 
 export default {
   name: "HPagination",

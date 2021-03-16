@@ -106,7 +106,7 @@
 </template>
 
 <script type="text/babel">
-import { deepClone } from '../../utils/util'
+import { deepClone } from 'hn-utils/lib/common'
 import * as Atds from './data'
 
 export default {

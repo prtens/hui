@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/babel">
-import { isExternal } from "../../utils/util";
+import { isExternal } from 'hn-utils/lib/validates';
 
 export default {
   name: "HSvgIcon",
